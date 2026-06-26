@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Under the Sun · 日光之下</title>
+<meta name="description" content="An honest investigation into the meaning of life — drawn from a 3,000-year-old book written in the voice of a skeptic. 一场关于人生意义的诚实调查。">
+<style>
+  :root{
+    --bg:#14161a;
+    --bg2:#1b1e24;
+    --bg3:#22262e;
+    --ink:#ece7dd;
+    --muted:#9a948a;
+    --faint:#6f6a62;
+    --sun:#d9a441;
+    --sun-soft:#e8c77e;
+    --line:rgba(217,164,65,.22);
+    --line-soft:rgba(236,231,221,.10);
+    --warn:#e0855b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased;
+  }
+  /* language visibility */
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 26px}
+  h1,h2,h3{font-weight:600;letter-spacing:.01em}
+  p{color:var(--ink)}
+  .muted{color:var(--muted)}
+  a{color:var(--sun-soft);text-decoration:none;border-bottom:1px solid rgba(232,199,126,.35)}
+  a:hover{color:var(--sun)}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:16px 26px;font-size:13px;letter-spacing:.18em;
+    background:linear-gradient(var(--bg),rgba(20,22,26,.6),transparent);
+    color:var(--muted);text-transform:uppercase;
+  }
+  .topbar .mark{color:var(--sun-soft);border:none}
+  .lang-toggle{
+    border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;
+    font-family:inherit;
+  }
+  .lang-toggle button{
+    background:transparent;border:none;color:var(--muted);cursor:pointer;
+    padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s;
+  }
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+
+  /* ---- hero ---- */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 26px 90px;max-width:860px;margin:0 auto;position:relative;
+  }
+  .hero .kicker{color:var(--sun);font-size:13px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:30px}
+  .hero h1{
+    font-size:clamp(34px,6.5vw,62px);line-height:1.22;font-weight:600;
+  }
+  .hero .q2{margin-top:20px;font-size:clamp(20px,3.2vw,28px);color:var(--muted);font-style:italic;line-height:1.5}
+  .hero .sub{margin-top:40px;font-size:18px;color:var(--ink);max-width:620px;opacity:.92}
+  .hero .enter{margin-top:46px}
+  .hero .scrollcue{margin-top:60px;font-size:12px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
+
+  .btn{
+    display:inline-block;cursor:pointer;font-family:inherit;font-size:15px;letter-spacing:.04em;
+    padding:13px 30px;border-radius:2px;transition:all .2s;border:1px solid var(--sun);
+    background:transparent;color:var(--sun-soft);
+  }
+  .btn:hover{background:rgba(217,164,65,.12);color:var(--sun)}
+  .btn-solid{background:var(--sun);color:#14161a;font-weight:600;border-color:var(--sun)}
+  .btn-solid:hover{background:var(--sun-soft);color:#14161a}
+
+  /* ---- sections ---- */
+  section{padding:84px 0;border-top:1px solid var(--line-soft)}
+  .eyebrow{color:var(--sun);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
+  h2.head{font-size:clamp(26px,4vw,38px);line-height:1.3;margin-bottom:8px}
+  .lead{font-size:18px;color:var(--ink);margin-top:22px;opacity:.92}
+  .narr p{margin-top:20px;font-size:17.5px}
+  .ref{color:var(--sun-soft);font-size:14px;letter-spacing:.04em;font-style:italic}
+
+  /* ---- hevel word lens ---- */
+  .lens{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:34px 30px;margin-top:30px}
+  .lens .word{font-size:42px;color:var(--sun-soft);letter-spacing:.04em;text-align:center}
+  .lens .heb{text-align:center;color:var(--muted);font-size:15px;margin-top:6px;font-style:italic}
+  .lens .renders{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+  .render{border:1px solid var(--line-soft);border-radius:5px;padding:16px 18px;background:var(--bg3)}
+  .render .t{font-size:13px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+  .render .v{font-size:19px;color:var(--ink);margin-top:4px}
+  .render.real{border-color:var(--line)}
+  .render.real .v{color:var(--sun-soft)}
+  .lens .note{margin-top:24px;font-size:15.5px;color:var(--muted);line-height:1.8}
+  @media(max-width:540px){.lens .renders{grid-template-columns:1fr}}
+
+  /* ---- two-setting compare (Joshua Bell) ---- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .compare .col{background:var(--bg2);border:1px solid var(--line-soft);border-radius:8px;padding:26px 24px}
+  .compare .col .label{font-size:13px;letter-spacing:.1em;color:var(--sun);text-transform:uppercase;margin-bottom:10px}
+  .compare .col h3{font-size:20px;margin-bottom:8px}
+  .compare .col p{font-size:15px;color:var(--muted);line-height:1.7}
+  .compare .col.dim{opacity:.78}
+  .pull{margin-top:24px;font-size:17px;background:var(--bg3);border-left:2px solid var(--sun);border-radius:0 6px 6px 0;padding:18px 22px;line-height:1.85}
+  @media(max-width:540px){.compare{grid-template-columns:1fr}}
+
+  /* ---- slide figure (from the deck) ---- */
+  figure.slidefig{margin:30px 0 0}
+  figure.slidefig img{width:100%;display:block;border:1px solid var(--line);border-radius:8px}
+  figure.slidefig figcaption{margin-top:10px;font-size:12px;color:var(--faint);letter-spacing:.06em;text-align:center}
+
+  /* ---- passage reader ---- */
+  .reader{background:var(--bg2);border:1px solid var(--line);border-radius:8px;margin-top:26px;overflow:hidden}
+  .reader .tabs{display:flex;border-bottom:1px solid var(--line-soft)}
+  .reader .tabs button{
+    flex:1;background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:inherit;
+    padding:14px;font-size:14px;letter-spacing:.05em;transition:all .2s;border-bottom:2px solid transparent;
+  }
+  .reader .tabs button.active{color:var(--sun-soft);border-bottom-color:var(--sun)}
+  .reader .body{padding:28px 30px;max-height:420px;overflow-y:auto}
+  .reader .body .v{display:flex;gap:12px;margin-bottom:12px;font-size:16.5px;line-height:1.75}
+  .reader .body .v .n{color:var(--sun);font-size:12px;min-width:20px;padding-top:5px;font-style:italic}
+  .reader .body .pane{display:none}
+  .reader .body .pane.active{display:block}
+  .reader .body em.h{color:var(--sun-soft);font-style:normal;border-bottom:1px dotted var(--sun)}
+  .reader .src{padding:12px 30px;font-size:12px;color:var(--faint);border-top:1px solid var(--line-soft);letter-spacing:.04em}
+
+  /* ---- Q&A ---- */
+  .qa{background:var(--bg2);border:1px solid var(--line);border-radius:8px;margin-top:26px;padding:26px 28px}
+  .qa .scope{font-size:13px;color:var(--muted);background:var(--bg3);border-radius:5px;padding:10px 14px;margin-bottom:18px;line-height:1.6}
+  .qa .log{display:flex;flex-direction:column;gap:16px;margin-bottom:18px}
+  .qa .msg{padding:14px 16px;border-radius:8px;font-size:15.5px;line-height:1.75;max-width:90%}
+  .qa .msg.you{align-self:flex-end;background:var(--bg3);color:var(--ink)}
+  .qa .msg.bot{align-self:flex-start;background:rgba(217,164,65,.07);border:1px solid var(--line-soft)}
+  .qa .msg.crisis{align-self:stretch;max-width:100%;background:rgba(224,133,91,.10);border:1px solid rgba(224,133,91,.5)}
+  .qa .msg .cite{display:inline-block;margin-top:8px;font-size:13px;color:var(--sun-soft);font-style:italic}
+  .qa .ask{display:flex;gap:10px}
+  .qa input{
+    flex:1;background:var(--bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);
+    font-family:inherit;font-size:15px;padding:12px 14px;
+  }
+  .qa input:focus{outline:none;border-color:var(--sun)}
+  .qa .send{background:var(--sun);color:#14161a;border:none;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:600;padding:0 22px;font-size:15px}
+  .qa .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+  .qa .chip{font-size:13px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:6px 14px;cursor:pointer;background:transparent;font-family:inherit;transition:all .2s}
+  .qa .chip:hover{border-color:var(--sun);color:var(--sun-soft)}
+  .qa .demo{font-size:12px;color:var(--faint);margin-top:14px;line-height:1.6}
+
+  /* ---- going deeper (opt-in) ---- */
+  details.deeper{margin-top:26px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);overflow:hidden}
+  details.deeper summary{
+    cursor:pointer;list-style:none;padding:22px 26px;font-size:17px;color:var(--sun-soft);
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  details.deeper summary::-webkit-details-marker{display:none}
+  details.deeper summary .opt{font-size:12px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+  details.deeper .inner{padding:0 26px 28px;border-top:1px solid var(--line-soft)}
+  details.deeper .inner p{margin-top:18px;font-size:16.5px}
+
+  /* ---- off-ramp ---- */
+  .offramp{background:var(--bg2);border:1px solid var(--line-soft);border-radius:8px;padding:30px;margin-top:26px}
+  .offramp h3{font-size:18px;color:var(--ink);margin-bottom:6px}
+  .offramp .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:18px}
+  .offramp .card{border:1px solid var(--line-soft);border-radius:6px;padding:18px 20px}
+  .offramp .card .ic{font-size:22px;margin-bottom:8px}
+  .offramp .card .t{font-size:15.5px;color:var(--ink);font-weight:600}
+  .offramp .card p{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.65}
+  .crisis-box{border:1px solid rgba(224,133,91,.5);background:rgba(224,133,91,.08);border-radius:6px;padding:20px 22px;margin-top:18px}
+  .crisis-box .t{color:var(--warn);font-weight:600;font-size:15.5px;margin-bottom:8px}
+  .crisis-box p{font-size:14.5px;color:var(--ink);line-height:1.7}
+  .crisis-box a{color:var(--sun-soft)}
+
+  footer{padding:60px 26px;text-align:center;color:var(--faint);font-size:13px;line-height:1.9;border-top:1px solid var(--line-soft)}
+  footer .mark{color:var(--muted);letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <span class="mark">日光之下 · under the sun</span>
+  <div class="lang-toggle">
+    <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+    <button id="btnZh" onclick="setLang('zh')">中文</button>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="kicker"><span class="en">An honest investigation</span><span class="zh">一场诚实的调查</span></div>
+  <h1>
+    <span class="en">You got everything.<br>Why isn't it enough?</span>
+    <span class="zh">你什么都得到了。<br>为什么还是不够?</span>
+  </h1>
+  <div class="q2">
+    <span class="en">Three thousand years ago, someone with more success than you will ever have asked the same question — and refused to lie about the answer.</span>
+    <span class="zh">三千年前,一个比你我都更成功的人,问了同样的问题——而且拒绝在答案上撒谎。</span>
+  </div>
+  <p class="sub">
+    <span class="en">This isn't religious content. It's a book that takes your worldview seriously, stands where you stand, and walks that road more honestly than most people dare to.</span>
+    <span class="zh">这不是宗教内容。这是一本认真对待你世界观的书——它先站到你的位置上,比大多数人更诚实地把那条路走到底。</span>
+  </p>
+  <div class="enter">
+    <a href="#violin" class="btn"><span class="en">Begin →</span><span class="zh">开始 →</span></a>
+  </div>
+  <div class="scrollcue"><span class="en">scroll</span><span class="zh">向下</span></div>
+</header>
+
+<!-- ============ THE SAME VIOLIN (Joshua Bell) ============ -->
+<section id="violin">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Before we begin · a true story</span><span class="zh">开始之前 · 一个真实的故事</span></div>
+    <h2 class="head">
+      <span class="en">The same violin. The same player. A different room.</span>
+      <span class="zh">同一把琴。同一个人。换了个房间。</span>
+    </h2>
+    <div class="compare">
+      <div class="col">
+        <div class="label"><span class="en">Boston Symphony Hall</span><span class="zh">波士顿交响音乐厅</span></div>
+        <h3><span class="en">A full house</span><span class="zh">座无虚席</span></h3>
+        <p><span class="en">World-class violinist Joshua Bell plays to a packed hall. Tickets are premium. Attention is absolute.</span><span class="zh">世界级小提琴家约书亚·贝尔登台演出,门票昂贵,全场屏息,无一分心。</span></p>
+      </div>
+      <div class="col dim">
+        <div class="label"><span class="en">A subway station · two days later</span><span class="zh">地铁站 · 两天后</span></div>
+        <h3><span class="en">Almost no one stops</span><span class="zh">几乎无人驻足</span></h3>
+        <p><span class="en">The same man plays the same music on the same violin, in a transit station. Almost nobody slows down.</span><span class="zh">同一个人,同一把琴,同一首曲子,换到地铁站。几乎没人放慢脚步。</span></p>
+      </div>
+    </div>
+    <p class="pull">
+      <span class="en">Nothing about the music changed. Only the setting did — and the setting decided what people thought it was worth. That should unsettle you: how much of what you chase is valued for what it <em>is</em> — and how much for the room you're standing in?</span>
+      <span class="zh">音乐本身一分一毫没变。变的只是场景——而场景,决定了人们觉得它"值多少"。这该让你有点不安:你拼命追逐的东西,有多少是因为它<em>本身</em>的价值,又有多少,只是因为你此刻站的那个房间?</span>
+    </p>
+    <p class="lead muted">
+      <span class="en">This book asks that question about your whole life — and it does it with one strange little word.</span>
+      <span class="zh">这本书,把这个问题问向你的整个人生——而它,只用了一个奇怪的小词。</span>
+    </p>
+    <figure class="slidefig">
+      <img src="images/en/violin.png" alt="Boston Symphony Hall vs a subway station">
+      <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ THE WORD (hevel) ============ -->
+<section id="hevel">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The word you misread</span><span class="zh">你读错的那个词</span></div>
+    <h2 class="head">
+      <span class="en">"Vanity of vanities… all is vanity."</span>
+      <span class="zh">"虚空的虚空,凡事都是虚空。"</span>
+    </h2>
+    <p class="ref">Ecclesiastes 1:2 · 传道书 1:2</p>
+    <p class="lead">
+      <span class="en">You think you know this line. You don't. The word translated "vanity" is the Hebrew <strong>hevel</strong> — and it does not mean "worthless."</span>
+      <span class="zh">你以为你懂这句话。其实没有。被译成"虚空"的那个词,是希伯来文 <strong>hevel</strong>——它的意思<strong>不是</strong>"没有价值"。</span>
+    </p>
+
+    <div class="lens">
+      <div class="word">hevel · הֶבֶל</div>
+      <div class="heb"><span class="en">literally: vapor · breath · mist</span><span class="zh">字面意思:蒸汽 · 一口气 · 薄雾</span></div>
+      <div class="renders">
+        <div class="render">
+          <div class="t"><span class="en">What you read (KJV)</span><span class="zh">你读到的(和合本)</span></div>
+          <div class="v"><span class="en">"vanity" — worthless</span><span class="zh">"虚空" — 像是没价值</span></div>
+        </div>
+        <div class="render real">
+          <div class="t"><span class="en">What it says (Hebrew)</span><span class="zh">原文在说什么</span></div>
+          <div class="v"><span class="en">vapor — ungraspable</span><span class="zh">一口气 — 抓不住</span></div>
+        </div>
+        <div class="render">
+          <div class="t"><span class="en">Modern (CSB)</span><span class="zh">现代译本(CSB)</span></div>
+          <div class="v"><span class="en">"futile / fleeting"</span><span class="zh">"短暂 / 徒然"</span></div>
+        </div>
+        <div class="render real">
+          <div class="t"><span class="en">The recurring image</span><span class="zh">反复出现的意象</span></div>
+          <div class="v"><span class="en">"chasing the wind"</span><span class="zh">"捕风"</span></div>
+        </div>
+      </div>
+      <p class="note">
+        <span class="en">The point isn't that life is <em>worthless</em>. It's that life is <em>unkeepable</em> — a breath you cannot hold, mist you cannot grip. Everything good is real, and slips through your fingers anyway. That is a far more uncomfortable, and far more honest, idea.</span>
+        <span class="zh">重点不是人生<em>没有价值</em>,而是人生<em>留不住</em>——像一口呼出的气,握不住;像薄雾,抓不牢。一切美好都是真实的,却照样从指缝里溜走。这是一个远更扎心、也远更诚实的想法。</span>
+      </p>
+    </div>
+
+    <p class="lead">
+      <span class="en">The book has another key phrase that appears nearly 30 times: <strong>"under the sun."</strong> It means life seen from a purely earthly angle — no God, no eternity, just this. The whole book honestly follows that worldview all the way to its end.</span>
+      <span class="zh">全书还有另一个关键词组,出现了将近 30 次:<strong>"日光之下"</strong>。它指的是纯粹从地上、从世俗的角度看人生——没有神、没有永恒,就只有眼前这些。整卷书,就是诚实地把这个世界观走到底。</span>
+    </p>
+    <figure class="slidefig">
+      <img src="images/en/hevel.png" alt="HEVEL — time, wealth, youth, achievement">
+      <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ THEME: emptiness of success ============ -->
+<section id="theme">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Theme · the first doorway</span><span class="zh">主题 · 第一道门</span></div>
+    <h2 class="head">
+      <span class="en">The emptiness of success</span>
+      <span class="zh">成功的空洞</span>
+    </h2>
+    <p class="lead">
+      <span class="en">This is a first-person experiment report. The author had unlimited money, talent, and freedom — and he ran the experiment you're quietly running on yourself. Here is his lab notebook.</span>
+      <span class="zh">这是一份第一人称的实验报告。作者拥有无限的金钱、才干和自由——他亲手做了那个你正在悄悄拿自己做的实验。下面是他的实验记录。</span>
+    </p>
+
+    <div class="narr">
+      <p><span class="en">"I tried <strong>pleasure</strong> — I told myself, go ahead, enjoy. And it was vapor."</span><span class="zh">"我试了<strong>享乐</strong>——我对自己说:来吧,尽情享受。结果是一口气。"</span> <span class="ref">2:1</span></p>
+      <p><span class="en">"I tried <strong>building</strong> — houses, vineyards, gardens, pools, an estate greater than anyone before me."</span><span class="zh">"我试了<strong>建造</strong>——房屋、葡萄园、园囿、水池,一份胜过前人的家业。"</span> <span class="ref">2:4–6</span></p>
+      <p><span class="en">"I tried <strong>wealth</strong> — silver, gold, the treasure of kings. I withheld from myself nothing my eyes desired."</span><span class="zh">"我试了<strong>财富</strong>——金银、君王的财宝。凡我眼所求的,我没有一样留下不给自己。"</span> <span class="ref">2:8,10</span></p>
+      <p><span class="en">"Then I looked at everything my hands had done… and it was all vapor, all chasing the wind, and there was no gain under the sun."</span><span class="zh">"后来我察看我手所做的一切……谁知都是一口气,都是捕风,在日光之下毫无益处。"</span> <span class="ref">2:11</span></p>
+    </div>
+
+    <p class="lead">
+      <span class="en">He didn't fail to get the things. He got <em>all</em> of them. That's what makes this land: it removes the excuse "I'd be satisfied if I just had a little more." He had immeasurably more — and named the feeling out loud.</span>
+      <span class="zh">他不是没得到那些东西。他<em>全</em>得到了。正因如此才扎心:它拿掉了那句"只要我再多一点就满足了"的借口。他多得无法计量——然后把那种感觉说了出来。</span>
+    </p>
+
+    <p class="lead muted">
+      <span class="en">Read the actual passage below, in the original wording, and decide for yourself.</span>
+      <span class="zh">下面读一读真正的经文,用它本来的措辞,自己判断。</span>
+    </p>
+
+    <!-- passage reader -->
+    <div class="reader">
+      <div class="tabs">
+        <button id="tabKjv" class="active" onclick="setPane('kjv')">KJV (English)</button>
+        <button id="tabCuv" onclick="setPane('cuv')">和合本 (中文)</button>
+      </div>
+      <div class="body">
+        <div class="pane active" id="paneKjv">
+          <div class="v"><span class="n">1</span><span>I said in mine heart, Go to now, I will prove thee with mirth, therefore enjoy pleasure: and, behold, this also is <em class="h">vanity</em>.</span></div>
+          <div class="v"><span class="n">2</span><span>I said of laughter, It is mad: and of mirth, What doeth it?</span></div>
+          <div class="v"><span class="n">4</span><span>I made me great works; I builded me houses; I planted me vineyards:</span></div>
+          <div class="v"><span class="n">5</span><span>I made me gardens and orchards, and I planted trees in them of all kind of fruits:</span></div>
+          <div class="v"><span class="n">8</span><span>I gathered me also silver and gold, and the peculiar treasure of kings and of the provinces…</span></div>
+          <div class="v"><span class="n">10</span><span>And whatsoever mine eyes desired I kept not from them, I withheld not my heart from any joy… and this was my portion of all my labour.</span></div>
+          <div class="v"><span class="n">11</span><span>Then I looked on all the works that my hands had wrought… and, behold, all was <em class="h">vanity</em> and vexation of spirit, and there was no profit <em class="h">under the sun</em>.</span></div>
+        </div>
+        <div class="pane" id="paneCuv">
+          <div class="v"><span class="n">1</span><span>我心里说:来吧,我以喜乐试试你,你好享福!谁知,这也是<em class="h">虚空</em>。</span></div>
+          <div class="v"><span class="n">2</span><span>我指嬉笑说:这是狂妄。论喜乐说:有何功效呢?</span></div>
+          <div class="v"><span class="n">4</span><span>我为自己动大工程,建造房屋,栽种葡萄园,</span></div>
+          <div class="v"><span class="n">5</span><span>修造园囿,在其中栽种各样果木树;</span></div>
+          <div class="v"><span class="n">8</span><span>我又为自己积蓄金银和君王的财宝,并各省的财宝……</span></div>
+          <div class="v"><span class="n">10</span><span>凡我眼所求的,我没有留下不给它的;我心所乐的,我没有禁止不享受的……这就是我从劳碌中所得的分。</span></div>
+          <div class="v"><span class="n">11</span><span>我察看我手所经营的一切事和我劳碌所成的功。谁知都是<em class="h">虚空</em>,都是<em class="h">捕风</em>;在<em class="h">日光之下</em>毫无益处。</span></div>
+        </div>
+      </div>
+      <div class="src">
+        <span class="en">Text: KJV (public domain) & Chinese Union Version (和合本). Verses 3, 6–7, 9 omitted for length — the full chapter is one click away in a finished build.</span>
+        <span class="zh">经文:KJV(公有领域)与和合本。为篇幅略去第 3、6–7、9 节——完整章节在正式版本中一键可读。</span>
+      </div>
+    </div>
+
+    <p class="lead muted">
+      <span class="en">Other doorways a finished site would open, ranked by how hard they hit: money never satisfies (5:10) · endless toil — for whom? (2:18–23) · death, the great leveler (3:19–20) · a time for everything (3:1–8) · receiving the present as a gift (2:24) · eternity set in the human heart (3:11).</span>
+      <span class="zh">完整网站还会打开的其他门(按杀伤力排序):钱永远不够(5:10)· 没完没了的劳碌——为谁?(2:18–23)· 死亡这个大平等器(3:19–20)· 凡事都有定期(3:1–8)· 把当下作为礼物领受(2:24)· 神把永恒放在人心里(3:11)。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ AND THEN WHAT (unapplied knowledge) ============ -->
+<section id="thenwhat">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">A modern trap</span><span class="zh">一个现代的陷阱</span></div>
+    <h2 class="head">
+      <span class="en">"And then what?"</span>
+      <span class="zh">"然后呢?"</span>
+    </h2>
+    <p class="lead">
+      <span class="en">The book saw it coming three thousand years early: <em>"Of making many books there is no end."</em> Today the feed has no end either. You can scroll, binge, and absorb forever — and feel emptier the more you take in. Information without a place to land is just another kind of vapor.</span>
+      <span class="zh">这本书三千年前就看见了:<em>"著书多,没有穷尽。"</em> 今天的信息流也一样没有尽头。你可以无限刷、无限看、无限吸收——却越吸收越空。没有落点的信息,只是另一种"一口气"。</span>
+    </p>
+    <p class="ref">Ecclesiastes 12:12 · 传道书 12:12</p>
+    <div class="compare">
+      <div class="col dim">
+        <div class="label"><span class="en">The endless feed</span><span class="zh">没有尽头的信息流</span></div>
+        <h3><span class="en">No conclusion, no rest</span><span class="zh">没有结论,没有安歇</span></h3>
+        <p><span class="en">Social media, the next series, the next build — it never reaches a final stopping point, and offers no final rest.</span><span class="zh">社交媒体、下一部剧、下一个项目——永远到不了终点,也给不了真正的安歇。</span></p>
+      </div>
+      <div class="col">
+        <div class="label"><span class="en">A book with an ending</span><span class="zh">一本有结尾的书</span></div>
+        <h3><span class="en">It actually concludes</span><span class="zh">它真的会收束</span></h3>
+        <p><span class="en">This one is twelve short chapters with a beginning, a middle, and a deliberate end — it stops, and asks you to as well.</span><span class="zh">这一本,十二个短章,有始、有中、有刻意的结尾——它会停下来,也请你停下来。</span></p>
+      </div>
+    </div>
+    <p class="pull">
+      <span class="en">Knowledge you never live out doesn't fill you — it hollows you. The book's last move isn't "learn more." It's "now do something with it."</span>
+      <span class="zh">你从不去活出来的知识,不会填满你——只会把你掏空。这本书最后那一步,不是"再多学一点",而是"现在,拿它去做点什么"。</span>
+    </p>
+    <figure class="slidefig">
+      <img src="images/en/thenwhat.png" alt="The modern trap of unapplied knowledge — and then what?">
+      <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ ASK ANYTHING ============ -->
+<section id="ask">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Ask anything</span><span class="zh">随便问</span></div>
+    <h2 class="head">
+      <span class="en">Ask the doubts you'd be ashamed to say out loud</span>
+      <span class="zh">问出那些你羞于说出口的疑问</span>
+    </h2>
+    <p class="lead">
+      <span class="en">This is where a screen beats a person. Be hostile, be skeptical — that's welcome here.</span>
+      <span class="zh">这正是屏幕胜过真人的地方。带着敌意、带着怀疑来问——这里欢迎。</span>
+    </p>
+
+    <div class="qa">
+      <div class="scope">
+        <span class="en">🔒 This assistant only answers from the book of Ecclesiastes and its links to the wider Bible. It cites chapter-and-verse for every claim, and never asserts a verse it hasn't retrieved.</span>
+        <span class="zh">🔒 这个助手只从传道书、以及它与全本圣经的关联来回答。每条主张都标出章节,绝不凭记忆断言未检索的经文。</span>
+      </div>
+
+      <div class="chips" id="chips"></div>
+
+      <div class="log" id="log"></div>
+
+      <div class="ask">
+        <input id="qInput" type="text" placeholder="">
+        <button class="send" onclick="askQuestion()"><span class="en">Ask</span><span class="zh">问</span></button>
+      </div>
+      <p class="demo">
+        <span class="en">⚙️ Demo note: answers below are drawn from a small built-in, verse-grounded set to show the experience. In the real build this is a retrieval-augmented model constrained to the Ecclesiastes corpus — the buildable piece your system prompt enforces ("never assert an unretrieved verse").</span>
+        <span class="zh">⚙️ 演示说明:下面的回答取自一个内置的、扎根经文的小型集合,用来展示体验。正式版本中,这里是一个被约束在传道书语料内的检索增强模型——也就是你的系统提示词所强制的那块("绝不断言未检索的经文")。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GOING DEEPER (opt-in) ============ -->
+<section id="deeper">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">If you want to go further</span><span class="zh">如果你想再走一步</span></div>
+    <h2 class="head">
+      <span class="en">The book diagnoses. It doesn't prescribe.</span>
+      <span class="zh">传道书负责诊断,不负责开药。</span>
+    </h2>
+    <p class="lead">
+      <span class="en">Ecclesiastes pushes the closed system of "under the sun" to its limit, digs out the human longing for permanence — and then stops, honestly, without a final answer. What's below is opt-in. Open it only if you want to.</span>
+      <span class="zh">传道书把"日光之下"这个封闭系统逼到极限,挖出人对"永恒"的渴望——然后诚实地停在那里,不给最终答案。下面的内容是<strong>自选</strong>的,只有你想看,才打开。</span>
+    </p>
+
+    <details class="deeper">
+      <summary>
+        <span><span class="en">Read the bridge from emptiness toward an answer</span><span class="zh">读一读:从虚空通向答案的那座桥</span></span>
+        <span class="opt"><span class="en">optional</span><span class="zh">自选</span></span>
+      </summary>
+      <div class="inner">
+        <p>
+          <span class="en">One verse is the pier of the bridge: <em>"He has set eternity in the human heart"</em> (3:11). Interestingly, KJV renders the same Hebrew word <em>olam</em> as "the world," and 和合本 as "永生 / 永远." The book admits we carry a sense of forever we can't satisfy from inside this system.</span>
+          <span class="zh">有一节经文是这座桥的桥墩:<em>"神将永恒安置在世人心里"</em>(3:11)。有意思的是,同一个希伯来词 <em>olam</em>,KJV 译成"世界",和合本译成"永生/永远"。这本书承认:我们心里揣着一种"永远"的感觉,却无法在这个系统内部把它填满。</span>
+        </p>
+        <p>
+          <span class="en">The honest bridge: Ecclesiastes excavates the longing; the New Testament claims the answer comes from <em>above</em> the sun — from outside the closed system. The book admits death zeroes everything out (9:5–6). The New Testament's reply is precisely something beyond death. In 1 Corinthians 15, Paul nearly quotes Ecclesiastes' "eat and drink, for tomorrow we die" — and flips it entirely.</span>
+          <span class="zh">这座桥是这样搭的:传道书把渴望挖出来;新约宣称,答案来自"日光<em>之上</em>"——来自这个封闭系统之外。传道书诚实承认死亡让一切归零(9:5–6);而新约的回应,恰恰是死亡之外的东西。在哥林多前书 15 章,保罗几乎直接引用了传道书"吃喝吧,因为明天要死"那句话——却把它整个翻转过来。</span>
+        </p>
+        <p class="muted">
+          <span class="en">No bait-and-switch. Ecclesiastes is not secretly about Jesus, and we won't pretend it is. This is simply where the road, followed honestly, arrives.</span>
+          <span class="zh">不偷换概念。传道书并不是暗地里在讲耶稣,我们也不假装它是。这只是那条路,诚实地走下去,所抵达的地方。</span>
+        </p>
+        <figure class="slidefig">
+          <img src="images/en/bridge.png" alt="Jesus solves the ultimate crisis of Ecclesiastes">
+          <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
+        </figure>
+        <p>
+          <a href="#offramp"><span class="en">See where to go next →</span><span class="zh">看看下一步可以去哪里 →</span></a>
+        </p>
+      </div>
+    </details>
+
+    <details class="deeper">
+      <summary>
+        <span><span class="en">Two images from the book's last chapter: the goad &amp; the nail</span><span class="zh">书末两个意象:赶牛的刺 &amp; 钉牢的钉子</span></span>
+        <span class="opt"><span class="en">optional</span><span class="zh">自选</span></span>
+      </summary>
+      <div class="inner">
+        <p>
+          <span class="en">Ecclesiastes 12:11 calls wise words <em>"goads"</em> and <em>"firmly embedded nails."</em> A goad is a sharp stick that prods cattle in the right direction — it's <em>meant</em> to sting. The book's honesty about money, youth and death isn't there to comfort you; it's there to correct your course before you waste the whole trip.</span>
+          <span class="zh">传道书 12:11 把智慧之言称为<em>"刺棒(赶牛的刺)"</em>和<em>"钉稳的钉子"</em>。刺棒是赶牲口、纠正方向用的——它<em>本就</em>该刺痛。这本书对金钱、青春、死亡的诚实,不是来安慰你的,而是趁你还没把整趟路走废之前,纠正你的方向。</span>
+        </p>
+        <p>
+          <span class="en">A driven nail is hidden, but it holds the structure together. A life built on "vapor" looks impressive and collapses in the first real storm; a life built on something solid stays standing when the weather turns. The question the book leaves you with isn't "are you successful?" — it's "what is your house actually nailed to?"</span>
+          <span class="zh">钉稳的钉子是隐藏的,却把整个结构撑住。建在"一口气"上的人生,外表光鲜,第一场真正的风暴就塌;建在坚固之物上的人生,天气变了仍然站立。这本书留给你的问题不是"你成功了吗?"——而是"你的房子,究竟钉在什么上面?"</span>
+        </p>
+        <figure class="slidefig">
+          <img src="images/en/goadnail.png" alt="The goad and the driven nail">
+          <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
+        </figure>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ============ FULL DECK CALLOUT ============ -->
+<section id="fulldeck">
+  <div class="wrap" style="text-align:center">
+    <div class="eyebrow" style="text-align:center"><span class="en">The full visual summary</span><span class="zh">完整图解</span></div>
+    <h2 class="head"><span class="en">See the whole thing, slide by slide</span><span class="zh">一页一页,看完整套图解</span></h2>
+    <p class="lead" style="margin-left:auto;margin-right:auto;max-width:600px"><span class="en">This site draws on a designed visual summary of the Ecclesiastes 12 sermon. You can view the complete deck — every slide, in order.</span><span class="zh">本站取材于《传道书》12 章讲道的视觉总结。你可以浏览完整的一套幻灯片——每一页,依序呈现。</span></p>
+    <p style="margin-top:30px">
+      <a class="btn" href="deck-en.html"><span class="en">View the full deck (English) →</span><span class="zh">查看完整图解(英文)→</span></a>
+    </p>
+    <p style="margin-top:14px">
+      <a href="deck-zh.html" style="font-size:14px"><span class="en">或查看中文图解 →</span><span class="zh">中文完整图解 →</span></a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ OFF-RAMP ============ -->
+<section id="offramp">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Next steps · no pressure</span><span class="zh">下一步 · 不施压</span></div>
+    <h2 class="head">
+      <span class="en">Wherever you are, here are real doors</span>
+      <span class="zh">无论你在哪一步,这里有真实的出口</span>
+    </h2>
+
+    <!-- crisis first -->
+    <div class="crisis-box">
+      <div class="t"><span class="en">If this has stirred up something heavy</span><span class="zh">如果这唤起了某种沉重的东西</span></div>
+      <p>
+        <span class="en">A book about emptiness and death can surface real pain. If you're thinking about harming yourself or feel you can't go on, please reach a person now — not a verse. In the US, call or text <strong>988</strong> (Suicide & Crisis Lifeline, 24/7, free, confidential), or text <strong>HOME</strong> to <strong>741741</strong>. If you're in immediate danger, call <strong>911</strong>. You deserve to talk to someone real.</span>
+        <span class="zh">一本关于空虚与死亡的书,可能会勾起真实的痛苦。如果你有伤害自己的念头,或觉得撑不下去了,请<strong>现在</strong>去找一个人——而不是一节经文。在美国,可拨打或发短信至 <strong>988</strong>(自杀与危机生命热线,全天候、免费、保密),或发送 <strong>HOME</strong> 到 <strong>741741</strong>。若有即时危险,请拨打 <strong>911</strong>。你值得和一个真实的人说说话。</span>
+      </p>
+    </div>
+
+    <div class="offramp">
+      <div class="row">
+        <div class="card">
+          <div class="ic">📖</div>
+          <div class="t"><span class="en">Keep reading</span><span class="zh">继续读下去</span></div>
+          <p><span class="en">Read the whole of Ecclesiastes — 12 short chapters. No account, no sign-up.</span><span class="zh">读完整卷传道书——12 个短章。不用注册,不用账号。</span></p>
+        </div>
+        <div class="card">
+          <div class="ic">💬</div>
+          <div class="t"><span class="en">Talk to a person</span><span class="zh">找一个真人聊聊</span></div>
+          <p><span class="en">A real human, no obligation — to think out loud with, not to be sold anything.</span><span class="zh">一个真实的人,没有义务——只是一起把心里话想出来,不是来推销什么。</span></p>
+        </div>
+        <div class="card">
+          <div class="ic">📍</div>
+          <div class="t"><span class="en">Find a church</span><span class="zh">找一间教会</span></div>
+          <p><span class="en">If and only if you want to. Browse quietly; go at your own pace.</span><span class="zh">仅当你愿意时。安静地看看,按自己的节奏来。</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="mark">日光之下 · under the sun</div>
+  <p style="margin-top:14px">
+    <span class="en">An honest investigation into the meaning of life, drawn from the book of Ecclesiastes. · MVP demo.</span>
+    <span class="zh">一场关于人生意义的诚实调查,文本来自传道书。· MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+  /* ---------- language ---------- */
+  function setLang(l){
+    document.body.classList.toggle('lang-zh', l==='zh');
+    document.getElementById('btnEn').classList.toggle('active', l==='en');
+    document.getElementById('btnZh').classList.toggle('active', l==='zh');
+    renderChips();
+    setInputPlaceholder();
+  }
+  function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+
+  /* ---------- passage reader ---------- */
+  function setPane(p){
+    var kjv = p==='kjv';
+    document.getElementById('paneKjv').classList.toggle('active', kjv);
+    document.getElementById('paneCuv').classList.toggle('active', !kjv);
+    document.getElementById('tabKjv').classList.toggle('active', kjv);
+    document.getElementById('tabCuv').classList.toggle('active', !kjv);
+  }
+
+  /* ---------- Q&A (grounded demo) ---------- */
+  var CRISIS = ['suicide','kill myself','kill me','end my life','want to die','wanna die',
+    "don't want to live",'dont want to live','no reason to live','end it all','hurt myself',
+    'self harm','self-harm','harm myself','give up on life',
+    '自杀','不想活','活不下去','结束生命','想死','轻生','活着没意思','没意思活','伤害自己','撑不下去','不想活了'];
+
+  var TOPICS = [
+    { id:'success', kw:['success','successful','achieve','achievement','enough','成功','成就','不够','够'],
+      label:{en:'Why is success never enough?',zh:'为什么成功永远不够?'},
+      a:{ en:'The author got all of it — pleasure, building, wealth, more than anyone before him — and called it "vapor and chasing the wind, no gain under the sun." The problem isn\'t that you haven\'t achieved enough; it\'s that achievement, by its nature, can\'t be kept. That\'s why "a little more" never lands.',
+          zh:'作者全得到了——享乐、建造、财富,胜过前人所有——然后称之为"一口气,都是捕风,在日光之下毫无益处"。问题不在于你成就得不够,而在于成就本身、按其本质,是留不住的。这就是为什么"再多一点"永远填不满。' },
+      cite:'Ecclesiastes 2:10–11 · 传道书 2:10–11' },
+    { id:'money', kw:['money','rich','wealth','silver','salary','钱','财','银子','薪水','富'],
+      label:{en:'Will more money fix it?',zh:'更多钱能解决吗?'},
+      a:{ en:'"Whoever loves money is never satisfied with money, and whoever loves wealth is never satisfied with income." The text names the exact illusion: the satisfaction is always one raise away — and stays one raise away.',
+          zh:'"贪爱银子的,不因得银子知足;贪爱丰富的,也不因得利益知足。"经文点破了那个幻觉:满足永远在下一次加薪之后——而它会一直停在那里。' },
+      cite:'Ecclesiastes 5:10 · 传道书 5:10' },
+    { id:'work', kw:['work','toil','labor','labour','tired','exhausted','工作','劳碌','累','辛苦'],
+      label:{en:'Who am I working for?',zh:'我到底为谁在拼?'},
+      a:{ en:'The author hated all his toil because he had to leave it to whoever came after him — and who knows whether they\'d be wise or foolish. The treadmill question — "for whom?" — is right there in the text.',
+          zh:'作者恨自己一切的劳碌,因为他必须把成果留给后来的人——而谁知道那人是智慧还是愚昧。"为谁辛苦?"这个跑步机式的问题,经文里就摆着。' },
+      cite:'Ecclesiastes 2:18–21 · 传道书 2:18–21' },
+    { id:'death', kw:['death','die','dying','mortal','死','死亡'],
+      label:{en:'Does death erase all of it?',zh:'死亡会把一切抹掉吗?'},
+      a:{ en:'The book refuses to flinch: the wise and the foolish meet the same end, and "the dead know nothing." Under the sun, death levels everyone. The book states this plainly — and it\'s exactly the wall the rest of the Bible answers from the other side.',
+          zh:'这本书拒绝回避:智慧人和愚昧人结局一样,"死了的人毫无所知"。在日光之下,死亡使所有人归于平等。传道书把这话直说了——而这正是圣经其余部分从另一边来回应的那堵墙。' },
+      cite:'Ecclesiastes 9:5; 2:16 · 传道书 9:5;2:16' },
+    { id:'meaning', kw:['meaning','point','purpose','why','eternity','意义','目的','为什么','永恒','永生'],
+      label:{en:'So what\'s the point?',zh:'那意义到底是什么?'},
+      a:{ en:'The book doesn\'t hand you a slogan. Its pivot is 3:11 — "He has set eternity in the human heart" — naming a longing for permanence you can\'t satisfy from inside "under the sun." It diagnoses the ache honestly and stops there. The answer it points beyond itself for is opt-in, in the section above.',
+          zh:'这本书不会塞给你一句口号。它的转折点是 3:11——"神将永恒安置在世人心里"——它说出了一种你在"日光之下"内部无法满足的、对永恒的渴望。它诚实地诊断这份疼痛,然后停下。它所指向的、在自身之外的答案,是自选的,在上面那一节里。' },
+      cite:'Ecclesiastes 3:11 · 传道书 3:11' },
+    { id:'gift', kw:['joy','happy','enjoy','gift','present','simple','快乐','享受','礼物','当下','简单'],
+      label:{en:'Is it all just hopeless then?',zh:'那岂不是全无指望?'},
+      a:{ en:'No — and this surprises people. Ecclesiastes is not nihilist. Precisely because you can\'t keep anything, it tells you to receive the simple goods — food, work, a meal with people you love — as a gift from God\'s hand, today.',
+          zh:'不——而且这会让人意外。传道书不是虚无主义。正因为你什么都抓不住,它反而告诉你:把那些简单的好——吃饭、工作、和所爱的人吃一顿饭——当作神手中的礼物,在今天领受。' },
+      cite:'Ecclesiastes 2:24; 3:13 · 传道书 2:24;3:13' }
+  ];
+
+  function renderChips(){
+    var box = document.getElementById('chips');
+    box.innerHTML = '';
+    TOPICS.forEach(function(t){
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.textContent = t.label[curLang()];
+      b.onclick = function(){ document.getElementById('qInput').value = t.label[curLang()]; askQuestion(); };
+      box.appendChild(b);
+    });
+  }
+  function setInputPlaceholder(){
+    document.getElementById('qInput').placeholder = curLang()==='zh'
+      ? '例如:为什么我什么都有了还是空?'
+      : "e.g. Why do I feel empty even though I have everything?";
+  }
+
+  function addMsg(cls, html){
+    var log = document.getElementById('log');
+    var d = document.createElement('div');
+    d.className = 'msg ' + cls;
+    d.innerHTML = html;
+    log.appendChild(d);
+    d.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  function askQuestion(){
+    var inp = document.getElementById('qInput');
+    var q = (inp.value || '').trim();
+    if(!q) return;
+    addMsg('you', escapeHtml(q));
+    inp.value = '';
+    var lc = q.toLowerCase();
+
+    // 1) crisis check FIRST — never answer with a verse
+    for(var i=0;i<CRISIS.length;i++){
+      if(lc.indexOf(CRISIS[i]) !== -1){
+        var c = curLang()==='zh'
+          ? '<strong>谢谢你把这件事说出来。</strong>此刻你听起来正承受着真实而沉重的痛苦,这件事比这本书里的任何一节经文都重要。请现在去找一个真实的人:在美国可拨打或发短信至 <strong>988</strong>(全天候、免费、保密),或发送 HOME 到 741741;若有即时危险请拨 <strong>911</strong>。你并不孤单,你值得有人陪你一起面对。'
+          : '<strong>Thank you for saying that out loud.</strong> It sounds like you\'re carrying something real and heavy right now, and that matters more than any verse in this book. Please reach a real person now: in the US, call or text <strong>988</strong> (24/7, free, confidential), or text HOME to 741741. If you\'re in immediate danger, call <strong>911</strong>. You are not alone, and you deserve someone alongside you.';
+        addMsg('crisis', c);
+        return;
+      }
+    }
+
+    // 2) topic match
+    var hit = null;
+    for(var t=0;t<TOPICS.length;t++){
+      for(var k=0;k<TOPICS[t].kw.length;k++){
+        if(lc.indexOf(TOPICS[t].kw[k].toLowerCase()) !== -1){ hit = TOPICS[t]; break; }
+      }
+      if(hit) break;
+    }
+    if(hit){
+      addMsg('bot', escapeHtml(hit.a[curLang()]) + '<span class="cite">— ' + hit.cite + '</span>');
+      return;
+    }
+
+    // 3) honest fallback (no fabricated verse)
+    var fb = curLang()==='zh'
+      ? '这是个演示版本,内置的扎根经文回答还有限,我不能凭记忆替传道书"编"一节经文出来——那正是这个产品要守住的底线。在正式版本里,这个问题会触发对传道书全文的检索,并只根据检索到的经文作答、标注章节。你可以试试上面的几个问题,或换种问法。'
+      : "This is a demo with a limited built-in, verse-grounded set, and I won\'t invent a verse from memory for Ecclesiastes — that\'s the exact line this product holds. In the full build, your question would trigger retrieval over the whole text and answer only from what\'s retrieved, with citations. Try one of the prompts above, or rephrase.";
+    addMsg('bot', fb);
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  document.getElementById('qInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') askQuestion();
+  });
+
+  // init
+  renderChips();
+  setInputPlaceholder();
+</script>
+</body>
+</html>

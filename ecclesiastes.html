@@ -221,6 +221,21 @@
   .quotecard .q::before{content:"“";opacity:.5}
   .quotecard .q::after{content:"”";opacity:.5}
 
+  /* ---- hymns ---- */
+  .hymns{margin-top:30px;display:grid;gap:20px}
+  .hymn{border:1px solid var(--line-soft);border-radius:10px;background:var(--bg2);padding:28px 30px}
+  .hymn .htop{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .hymn .hname{font-size:22px;color:var(--sun-soft);font-weight:600;letter-spacing:.01em}
+  .hymn .hmeta{font-size:12px;color:var(--faint);letter-spacing:.06em;font-style:italic;white-space:nowrap}
+  .hymn .lyrics{margin-top:18px;font-size:16.5px;line-height:1.95;color:var(--ink);white-space:pre-line}
+  .hymn .lyrics .refrain{color:var(--sun-soft);font-style:italic}
+  .hymn .listen{
+    margin-top:20px;display:inline-flex;align-items:center;gap:8px;
+    font-size:13.5px;letter-spacing:.08em;color:var(--sun-soft);
+    border:1px solid var(--line);border-radius:30px;padding:9px 20px;transition:all .2s;
+  }
+  .hymn .listen:hover{border-color:var(--sun);background:rgba(217,164,65,.08);color:var(--sun)}
+
   /* ---- going deeper (opt-in) ---- */
   .bridge-intro{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:26px 28px;margin-top:28px;line-height:1.85}
   .bridge-intro p{font-size:16.5px}
@@ -734,6 +749,148 @@
 <div class="quotecard">
   <p class="q"><span class="en">Ecclesiastes does not ask you to give up on life; it asks you to stop making life your god.</span><span class="zh">《传道书》不是要你放弃人生,而是要你停止把人生当成神。</span></p>
 </div>
+
+<!-- ============ HYMNS ============ -->
+<section id="hymns">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">A song to sit with · optional</span><span class="zh">一首可以静静听的歌 · 自选</span></div>
+    <h2 class="head">
+      <span class="en">A few old hymns</span>
+      <span class="zh">几首老诗歌</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">If the book has left something unsettled in you, these songs — most of them centuries old — sit in the same honest place: everything slips away, and yet peace and grace are still offered. Read the words, or listen.</span>
+      <span class="zh">如果这本书在你心里搅动了什么,这几首诗歌——大多已流传上百年——正落在同一个诚实的位置上:一切都在流逝,而平安与恩典,仍然被赐下。读一读歌词,或听一听。</span>
+    </p>
+
+    <div class="hymns">
+      <!-- Amazing Grace -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">Amazing Grace<span class="zh"> · 奇异恩典</span></div>
+          <div class="hmeta"><span class="en">John Newton, 1779 · public domain</span><span class="zh">约翰·牛顿,1779 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">Amazing grace! how sweet the sound,
+That saved a wretch like me!
+I once was lost, but now am found,
+Was blind, but now I see.
+
+'Twas grace that taught my heart to fear,
+And grace my fears relieved;
+How precious did that grace appear
+The hour I first believed.</span><span class="zh">奇异恩典,何等甘甜,
+我罪已得赦免;
+前我失丧,今被寻回,
+瞎眼今得看见。
+
+如此恩典,使我敬畏,
+使我心得安慰;
+初信之时,即蒙恩惠,
+真是何等宝贵。</span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=Amazing+Grace+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+
+      <!-- It Is Well With My Soul -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">It Is Well With My Soul<span class="zh"> · 我心灵得安宁</span></div>
+          <div class="hmeta"><span class="en">Horatio Spafford, 1873 · public domain</span><span class="zh">霍雷肖·斯帕福德,1873 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">When peace, like a river, attendeth my way,
+When sorrows like sea billows roll;
+Whatever my lot, Thou hast taught me to say,
+It is well, it is well with my soul.
+
+<span class="refrain">It is well (it is well),
+with my soul (with my soul),
+It is well, it is well with my soul.</span></span><span class="zh">有时享平安,如江河平又稳,
+有时忧伤,来似浪滚;
+但无论何环境,主已教导我说:
+我心灵得安宁,得安宁。
+
+<span class="refrain">我心灵得安宁,
+我心灵得安宁,
+得安宁,我心灵得安宁。</span></span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=It+Is+Well+With+My+Soul+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+
+      <!-- Rock of Ages -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">Rock of Ages<span class="zh"> · 万古磐石</span></div>
+          <div class="hmeta"><span class="en">Augustus Toplady, 1763 · public domain</span><span class="zh">托普雷迪,1763 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">Rock of Ages, cleft for me,
+Let me hide myself in Thee;
+Let the water and the blood,
+From Thy wounded side which flowed,
+Be of sin the double cure;
+Save from wrath and make me pure.</span><span class="zh">万古磐石,为我开辟,
+容我藏身,在主怀里;
+主肋所流,宝血与水,
+替我解决,罪的双罪:
+救我脱离,罪的刑罚,
+洗我一切,罪的污秽。</span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=Rock+of+Ages+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+
+      <!-- Abide With Me -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">Abide With Me<span class="zh"> · 求主同住</span></div>
+          <div class="hmeta"><span class="en">Henry F. Lyte, 1847 · public domain</span><span class="zh">莱特,1847 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">Swift to its close ebbs out life's little day;
+Earth's joys grow dim, its glories pass away;
+Change and decay in all around I see;
+O Thou who changest not, abide with me.</span><span class="zh">求主同住,骄阳西沉,
+黑暗渐深,求主同住;
+浮生若梦,渐近黄昏,
+盛衰无常,惟主永存;
+四顾变迁,朽坏相寻,
+永不改变,求主同住。</span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=Abide+With+Me+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+
+      <!-- What a Friend We Have in Jesus -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">What a Friend We Have in Jesus<span class="zh"> · 耶稣恩友</span></div>
+          <div class="hmeta"><span class="en">Joseph M. Scriven, 1855 · public domain</span><span class="zh">斯克利文,1855 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">What a friend we have in Jesus,
+All our sins and griefs to bear!
+What a privilege to carry
+Everything to God in prayer!</span><span class="zh">耶稣恩友,何等甘甜!
+担当我罪,背我忧愁!
+何等权利,能将万事,
+来到耶稣座前求!</span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=What+a+Friend+We+Have+in+Jesus+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+
+      <!-- When I Survey the Wondrous Cross -->
+      <div class="hymn">
+        <div class="htop">
+          <div class="hname">When I Survey the Wondrous Cross<span class="zh"> · 我每静念那十字架</span></div>
+          <div class="hmeta"><span class="en">Isaac Watts, 1707 · public domain</span><span class="zh">以撒·华兹,1707 · 公有领域</span></div>
+        </div>
+        <div class="lyrics"><span class="en">When I survey the wondrous cross
+On which the Prince of glory died,
+My richest gain I count but loss,
+And pour contempt on all my pride.</span><span class="zh">我每静念那十字架,
+并主如何为我受挂,
+我就不禁将万事看轻,
+鄙视从前所自夸。</span></div>
+        <a class="listen" href="https://www.youtube.com/results?search_query=When+I+Survey+the+Wondrous+Cross+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">聆听</span></a>
+      </div>
+    </div>
+
+    <p class="lead muted" style="font-size:14px;margin-top:24px">
+      <span class="en">All lyrics are public-domain hymns; Chinese renderings follow common hymnal versions and may vary slightly between hymnals. The "Listen" links open a search so you can choose a version you like. Want a specific hymn, translation, or recording? Just say so.</span>
+      <span class="zh">以上歌词均为公有领域圣诗;中文歌词依常见诗歌本,不同版本用词或略有出入。「聆听」链接会打开搜索,方便你挑喜欢的版本。想加某首歌、换某个译本或指定录音,告诉我即可。</span>
+    </p>
+  </div>
+</section>
 
 <!-- ============ FULL DECK CALLOUT ============ -->
 <section id="fulldeck">

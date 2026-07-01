@@ -9,3 +9,6 @@ Desktop.ini
 .idea/
 *.swp
 *~
+
+# Local preview helpers (not for deploy)
+.claude/

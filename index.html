@@ -1,68 +1,186 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Under the Sun · 日光之下</title>
-<meta name="description" content="An honest investigation into the meaning of life, drawn from the book of Ecclesiastes. 一场关于人生意义的诚实调查。">
+<title>日光之上 · 传道书 · Under / Beyond the Sun</title>
+<meta name="description" content="在虚空的世界里，寻找不虚空的永恒。一份来自《传道书》的邀请，带你从日光之下的空虚，望向日光之上的永恒指望。">
+
+<!-- Fonts: Playfair Display (serif) · Noto Serif SC (中文衬线) · Inter / Noto Sans SC (无衬线) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Tailwind Play CDN (zero-build, matches the original tsx utility classes) -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          serif: ['"Playfair Display"', '"Noto Serif SC"', 'Georgia', 'serif'],
+          sans:  ['Inter', '"Noto Sans SC"', 'system-ui', 'sans-serif'],
+          mono:  ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+        animation: {
+          'spin-slow': 'spin 9s linear infinite',
+        },
+      },
+    },
+  };
+</script>
+
+<!-- lucide icons (replaces lucide-react) -->
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
 <style>
-  :root{
-    --bg:#14161a; --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
-    --sun:#d9a441; --sun-soft:#e8c77e; --line:rgba(217,164,65,.3);
-  }
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    background:
-      radial-gradient(circle at 50% 0%, rgba(217,164,65,.10), transparent 60%),
-      var(--bg);
-    color:var(--ink);min-height:100vh;
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    text-align:center;padding:40px 24px;
-    font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.8;
-  }
-  .mark{color:var(--sun);font-size:13px;letter-spacing:.34em;text-transform:uppercase;margin-bottom:34px}
-  h1{font-size:clamp(34px,7vw,60px);font-weight:600;line-height:1.2}
-  h1 .zh{display:block;font-size:.62em;color:var(--sun-soft);margin-top:10px;letter-spacing:.04em}
-  p.tag{color:var(--muted);margin-top:26px;font-size:17px;max-width:520px;font-style:italic}
-  .choose{margin-top:48px;display:flex;gap:18px;flex-wrap:wrap;justify-content:center}
-  .choose a{
-    display:block;min-width:210px;padding:22px 30px;border:1px solid var(--line);border-radius:6px;
-    color:var(--ink);text-decoration:none;transition:all .2s;background:rgba(255,255,255,.02);
-  }
-  .choose a:hover{border-color:var(--sun);background:rgba(217,164,65,.08);transform:translateY(-3px)}
-  .choose a .lang{font-size:13px;letter-spacing:.2em;color:var(--sun);text-transform:uppercase}
-  .choose a .title{font-size:22px;margin-top:8px;color:var(--sun-soft)}
-  .choose a .q{font-size:14px;color:var(--muted);margin-top:8px}
-  .decks{margin-top:40px;font-size:14px;color:var(--faint)}
-  .decks a{color:var(--muted);border-bottom:1px solid rgba(154,148,138,.4);text-decoration:none;margin:0 8px}
-  .decks a:hover{color:var(--sun-soft)}
-  footer{margin-top:56px;font-size:12px;color:var(--faint);letter-spacing:.06em;line-height:1.8}
+  html { scroll-behavior: smooth; }
+  body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
+  /* graceful cross-fade when the scripture content swaps */
+  .reflect-fade { animation: reflectIn .5s ease both; }
+  @keyframes reflectIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 </style>
 </head>
-<body>
-  <div class="mark">日光之下 · under the sun</div>
-  <h1>You got everything.<br>Why isn't it enough?<span class="zh">你什么都得到了,为什么还是不够?</span></h1>
-  <p class="tag">An honest investigation into the meaning of life, drawn from a 3,000-year-old book. · 一场关于人生意义的诚实调查。</p>
 
-  <div class="choose">
-    <a href="ecclesiastes.html">
-      <div class="lang">English</div>
-      <div class="title">Enter →</div>
-      <div class="q">with EN / 中文 toggle</div>
-    </a>
-    <a href="ecclesiastes-zh.html">
-      <div class="lang">中文</div>
-      <div class="title">进入 →</div>
-      <div class="q">含「虚空 ≠ 空」辨析</div>
-    </a>
-  </div>
+<body class="min-h-screen bg-[#12161A] text-[#F4F1EA] font-sans antialiased selection:bg-[#D4AF37]/30">
 
-  <div class="decks">
-    完整图解 / Full visual summary:
-    <a href="deck-en.html">English deck</a> ·
-    <a href="deck-zh.html">中文图解</a>
-  </div>
+  <!-- Header -->
+  <header class="border-b border-gray-800 bg-[#12161A]/90 backdrop-blur-md px-6 md:px-8 py-5 flex justify-between items-center sticky top-0 z-50">
+    <div class="flex items-center space-x-2">
+      <i data-lucide="sun" class="h-5 w-5 text-[#D4AF37] animate-spin-slow"></i>
+      <span class="font-serif text-lg tracking-widest uppercase font-bold text-[#D4AF37]">日光之上 <span class="text-gray-400 font-sans font-light">| 传道书</span></span>
+    </div>
+    <nav class="hidden md:flex space-x-8 text-xs tracking-wider text-gray-400 font-medium">
+      <button data-verse="vanity" class="nav-btn hover:text-[#D4AF37] transition-colors">人生虚空</button>
+      <button data-verse="timing" class="nav-btn hover:text-[#D4AF37] transition-colors">万物定时</button>
+      <button data-verse="conclusion" class="nav-btn hover:text-[#D4AF37] transition-colors">永恒指望</button>
+    </nav>
+  </header>
 
-  <footer>An MVP demo · Scripture quoted from the KJV &amp; the Chinese Union Version (和合本)</footer>
+  <!-- Hero / Spiritual Prologue -->
+  <section class="max-w-4xl mx-auto text-center py-20 px-6 relative">
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+    <span class="text-xs font-mono tracking-[0.3em] text-[#D4AF37] uppercase mb-4 block">WISDOM OF ECCLESIASTES</span>
+    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-6 tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#F4F1EA] to-gray-400">
+      在虚空的世界里，寻找不虚空的永恒
+    </h1>
+    <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light">
+      日光之下，我们都在奔波劳碌，却常在深夜感到灵魂无处安放。这是一份来自远古智慧书的邀请，带你击碎幻象，寻得生命真正的锚。
+    </p>
+  </section>
+
+  <!-- Dynamic Scripture Reflection Board -->
+  <section class="max-w-3xl mx-auto px-6 pb-20">
+    <div class="bg-[#1A1D20]/60 border border-gray-800/80 rounded-2xl p-6 md:p-8 backdrop-blur-md shadow-2xl">
+      <!-- Tab Selection Switch -->
+      <div class="flex border-b border-gray-800 pb-4 mb-8 justify-around text-xs tracking-wider">
+        <button data-verse="vanity"     class="tab-btn pb-2 px-2 transition-all">1. 审视当下（虚空）</button>
+        <button data-verse="timing"     class="tab-btn pb-2 px-2 transition-all">2. 拥抱秩序（定时）</button>
+        <button data-verse="conclusion" class="tab-btn pb-2 px-2 transition-all">3. 望向永恒（归宿）</button>
+      </div>
+
+      <!-- Core Text Rendering -->
+      <div id="reflect" class="space-y-6">
+        <div class="inline-flex items-center space-x-2 text-[#D4AF37] text-xs font-mono bg-[#D4AF37]/10 px-2.5 py-1 rounded border border-[#D4AF37]/20">
+          <i data-lucide="compass" class="h-3 w-3"></i>
+          <span id="verse-ch"></span>
+        </div>
+
+        <blockquote id="verse-text" class="font-serif text-xl md:text-2xl italic text-[#F4F1EA] leading-relaxed tracking-wide border-l-2 border-[#D4AF37]/40 pl-4 py-1"></blockquote>
+
+        <p id="verse-reflection" class="text-gray-400 text-xs md:text-sm leading-relaxed font-light pt-2"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soul Call-to-Action -->
+  <section class="bg-gradient-to-t from-[#0F1215] to-[#12161A] border-t border-gray-900 py-16 px-6 text-center">
+    <div class="max-w-xl mx-auto space-y-6">
+      <i data-lucide="heart" class="h-5 w-5 text-[#D4AF37] mx-auto"></i>
+      <h3 class="font-serif text-xl font-semibold">「日光之上的真光，已经来到。」</h3>
+      <p class="text-gray-500 text-xs leading-relaxed font-light">
+        传道书指出了问题，而主耶稣基督给出了答案。如果你也想进一步了解福音、探讨生命的意义，或者需要代祷支持，欢迎通过下方按钮与我们随时连通。
+      </p>
+      <a href="ecclesiastes.html?lang=zh"
+         class="bg-[#D4AF37] hover:bg-[#C5A059] text-[#12161A] font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all shadow-lg inline-flex items-center space-x-2">
+        <span>探讨信仰 / 开启对话</span>
+        <i data-lucide="chevron-right" class="h-3 w-3"></i>
+      </a>
+      <div class="pt-2 text-[11px] text-gray-600 tracking-wide">
+        或阅读完整版：
+        <a href="ecclesiastes.html?lang=zh" class="text-gray-400 hover:text-[#D4AF37] underline underline-offset-4 decoration-gray-700 transition-colors">中文全站</a>
+        <span class="mx-1 text-gray-700">·</span>
+        <a href="ecclesiastes.html" class="text-gray-400 hover:text-[#D4AF37] underline underline-offset-4 decoration-gray-700 transition-colors">English</a>
+        <span class="mx-1 text-gray-700">·</span>
+        <a href="deck-zh.html" class="text-gray-400 hover:text-[#D4AF37] underline underline-offset-4 decoration-gray-700 transition-colors">图解</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-8 text-center text-[10px] text-gray-600 tracking-widest uppercase border-t border-gray-950 px-6 leading-relaxed">
+    “He has made everything beautiful in its time. He has also set eternity in the human heart.” &copy; 2026
+  </footer>
+
+<script>
+  const verses = {
+    vanity: {
+      ch: '传道书 1:14',
+      text: '“我见日光之下所行的一切事，都是虚空，都是捕风。”',
+      reflection: '内卷的尽头、名利的消逝、物质的满足之后，那挥之不去的空虚感，正是圣经在三千年前写下的断言。日光之下的劳碌，若没有永恒的锚，终归是捕风。'
+    },
+    timing: {
+      ch: '传道书 3:1-2',
+      text: '“凡事都有定期，天下万务都有定时。生有时，死有时；栽种有时，拔出所栽种的也有时。”',
+      reflection: '生命有其神圣的节奏与主权。当我们无法掌控未来的迷茫时，这段话带给我们极大的释放——接受人的有限，因为万事背后有一位超越时间的掌管者。'
+    },
+    conclusion: {
+      ch: '传道书 12:13',
+      text: '“这些事都已听见了，总意就是：敬畏神，谨守他的诫命，这是人所当尽的本分。”',
+      reflection: '传道书的终局不是虚无主义，而是破局的曙光。它击碎了我们在世界上的虚妄幻想，是为了带我们抬头，望向日光之上那永不改变、赐下独生子救赎我们的永恒源头。'
+    }
+  };
+
+  const tabActive   = ['border-b-2', 'border-[#D4AF37]', 'text-[#D4AF37]', 'font-bold'];
+  const tabInactive = ['text-gray-500'];
+
+  const chEl  = document.getElementById('verse-ch');
+  const txtEl = document.getElementById('verse-text');
+  const refEl = document.getElementById('verse-reflection');
+  const reflectBox = document.getElementById('reflect');
+
+  function setVerse(key) {
+    const v = verses[key];
+    if (!v) return;
+
+    chEl.textContent  = v.ch;
+    txtEl.textContent = v.text;
+    refEl.textContent = v.reflection;
+
+    // graceful fade on swap
+    reflectBox.classList.remove('reflect-fade');
+    void reflectBox.offsetWidth; // reflow to restart animation
+    reflectBox.classList.add('reflect-fade');
+
+    // tab active styling
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      const on = btn.dataset.verse === key;
+      btn.classList.remove(...tabActive, ...tabInactive);
+      btn.classList.add(...(on ? tabActive : tabInactive));
+    });
+  }
+
+  // wire up both the header nav and the tab row
+  document.querySelectorAll('.nav-btn, .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => setVerse(btn.dataset.verse));
+  });
+
+  // initial state
+  setVerse('vanity');
+
+  // render lucide icons
+  lucide.createIcons();
+</script>
 </body>
 </html>

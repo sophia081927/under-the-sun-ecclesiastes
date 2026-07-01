@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Under the Sun · 日光之下</title>
-<meta name="description" content="An honest investigation into the meaning of life — drawn from a 3,000-year-old book written in the voice of a skeptic. 一场关于人生意义的诚实调查。">
+<meta name="description" content="An honest investigation into meaning, success, death, and the ache beneath modern life — guided by Ecclesiastes. 一场关于人生意义的诚实调查,来自《传道书》。">
 <style>
   :root{
     --bg:#14161a;
@@ -18,6 +18,7 @@
     --line:rgba(217,164,65,.22);
     --line-soft:rgba(236,231,221,.10);
     --warn:#e0855b;
+    --jade:#7fae9b;
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
@@ -26,6 +27,8 @@
     font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
     line-height:1.85;-webkit-font-smoothing:antialiased;
   }
+  section,header,.quotecard{scroll-margin-top:72px}
+
   /* language visibility */
   .zh{display:none}
   body.lang-zh .en{display:none}
@@ -45,21 +48,31 @@
   /* ---- top bar ---- */
   .topbar{
     position:fixed;top:0;left:0;right:0;z-index:50;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:16px 26px;font-size:13px;letter-spacing:.18em;
-    background:linear-gradient(var(--bg),rgba(20,22,26,.6),transparent);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;
+    background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
     color:var(--muted);text-transform:uppercase;
   }
-  .topbar .mark{color:var(--sun-soft);border:none}
+  .topbar .mark{color:var(--sun-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.asklink{
+    border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;
+  }
+  .topbar a.asklink:hover{color:var(--sun-soft)}
   .lang-toggle{
     border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;
-    font-family:inherit;
+    font-family:inherit;flex:none;
   }
   .lang-toggle button{
     background:transparent;border:none;color:var(--muted);cursor:pointer;
     padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s;
   }
   .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  @media(max-width:540px){
+    .topbar{letter-spacing:.1em;padding:12px 16px}
+    .topbar .asklink{display:none}
+    .topbar .mark{font-size:11px}
+  }
 
   /* ---- hero ---- */
   .hero{
@@ -71,8 +84,8 @@
     font-size:clamp(34px,6.5vw,62px);line-height:1.22;font-weight:600;
   }
   .hero .q2{margin-top:20px;font-size:clamp(20px,3.2vw,28px);color:var(--muted);font-style:italic;line-height:1.5}
-  .hero .sub{margin-top:40px;font-size:18px;color:var(--ink);max-width:620px;opacity:.92}
-  .hero .enter{margin-top:46px}
+  .hero .sub{margin-top:40px;font-size:18px;color:var(--ink);max-width:640px;opacity:.92}
+  .hero .enter{margin-top:46px;display:flex;gap:14px;flex-wrap:wrap}
   .hero .scrollcue{margin-top:60px;font-size:12px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
 
   .btn{
@@ -81,6 +94,8 @@
     background:transparent;color:var(--sun-soft);
   }
   .btn:hover{background:rgba(217,164,65,.12);color:var(--sun)}
+  .btn-ghost{border-color:var(--line);color:var(--muted)}
+  .btn-ghost:hover{border-color:var(--sun);color:var(--sun-soft);background:transparent}
   .btn-solid{background:var(--sun);color:#14161a;font-weight:600;border-color:var(--sun)}
   .btn-solid:hover{background:var(--sun-soft);color:#14161a}
 
@@ -91,6 +106,20 @@
   .lead{font-size:18px;color:var(--ink);margin-top:22px;opacity:.92}
   .narr p{margin-top:20px;font-size:17.5px}
   .ref{color:var(--sun-soft);font-size:14px;letter-spacing:.04em;font-style:italic}
+
+  /* ---- how to use ---- */
+  .howto{margin-top:30px;display:grid;gap:12px}
+  .howto .item{
+    display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    border:1px solid var(--line-soft);border-radius:9px;background:var(--bg2);padding:18px 22px;transition:all .2s;
+  }
+  .howto .item:hover{border-color:var(--line);background:var(--bg3)}
+  .howto .item .cond{font-size:16px;color:var(--muted);flex:1;min-width:200px}
+  .howto .item a{
+    font-size:14.5px;color:var(--sun-soft);border:none;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .howto .item a:hover{color:var(--sun)}
 
   /* ---- hevel word lens ---- */
   .lens{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:34px 30px;margin-top:30px}
@@ -115,6 +144,32 @@
   .pull{margin-top:24px;font-size:17px;background:var(--bg3);border-left:2px solid var(--sun);border-radius:0 6px 6px 0;padding:18px 22px;line-height:1.85}
   @media(max-width:540px){.compare{grid-template-columns:1fr}}
 
+  /* ---- 虚空 vs 空 (the gentle distinction) ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .vs .col{border:1px solid var(--line-soft);border-radius:8px;padding:26px 24px;background:var(--bg2)}
+  .vs .col.kong{border-color:rgba(127,174,155,.4)}
+  .vs .col.xu{border-color:var(--line)}
+  .vs .col .tag{font-size:13px;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+  .vs .col.kong .tag{color:var(--jade)}
+  .vs .col.xu .tag{color:var(--sun-soft)}
+  .vs .col .big{font-size:26px;margin-bottom:14px;line-height:1.3}
+  .vs .col.kong .big{color:var(--jade)}
+  .vs .col.xu .big{color:var(--sun-soft)}
+  .vs .col ul{list-style:none}
+  .vs .col li{font-size:15px;padding:8px 0;border-bottom:1px dashed var(--line-soft);color:var(--ink);line-height:1.6}
+  .vs .col li:last-child{border-bottom:none}
+  @media(max-width:540px){.vs{grid-template-columns:1fr}}
+  .vs-note{margin-top:24px;font-size:16px;background:var(--bg3);border-left:2px solid var(--sun);border-radius:0 5px 5px 0;padding:18px 22px;line-height:1.85}
+  .vs-caveat{margin-top:16px;font-size:13.5px;color:var(--faint);line-height:1.75;font-style:italic}
+
+  /* ---- roadmap ---- */
+  .roadmap{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}
+  .roadmap .ch{border:1px solid var(--line-soft);border-radius:8px;background:var(--bg2);padding:18px 20px;transition:all .2s}
+  .roadmap .ch:hover{border-color:var(--line);background:var(--bg3)}
+  .roadmap .ch .num{color:var(--sun);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-style:italic}
+  .roadmap .ch .desc{font-size:15px;color:var(--ink);margin-top:8px;line-height:1.6}
+  .roadmap-note{margin-top:22px;font-size:15px;color:var(--muted);line-height:1.8}
+
   /* ---- slide figure (from the deck) ---- */
   figure.slidefig{margin:30px 0 0}
   figure.slidefig img{width:100%;display:block;border:1px solid var(--line);border-radius:8px}
@@ -136,9 +191,11 @@
   .reader .body em.h{color:var(--sun-soft);font-style:normal;border-bottom:1px dotted var(--sun)}
   .reader .src{padding:12px 30px;font-size:12px;color:var(--faint);border-top:1px solid var(--line-soft);letter-spacing:.04em}
 
-  /* ---- Q&A ---- */
-  .qa{background:var(--bg2);border:1px solid var(--line);border-radius:8px;margin-top:26px;padding:26px 28px}
-  .qa .scope{font-size:13px;color:var(--muted);background:var(--bg3);border-radius:5px;padding:10px 14px;margin-bottom:18px;line-height:1.6}
+  /* ---- Q&A (core feature) ---- */
+  #ask{background:radial-gradient(120% 60% at 50% 0%,rgba(217,164,65,.05),transparent 70%)}
+  .qa{background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin-top:26px;padding:28px 28px;box-shadow:0 14px 40px rgba(0,0,0,.28)}
+  .qa .scope{font-size:13px;color:var(--muted);background:var(--bg3);border-radius:5px;padding:10px 14px;margin-bottom:16px;line-height:1.6}
+  .qa .prompt-hint{font-size:13px;color:var(--faint);letter-spacing:.04em;margin-bottom:12px}
   .qa .log{display:flex;flex-direction:column;gap:16px;margin-bottom:18px}
   .qa .msg{padding:14px 16px;border-radius:8px;font-size:15.5px;line-height:1.75;max-width:90%}
   .qa .msg.you{align-self:flex-end;background:var(--bg3);color:var(--ink)}
@@ -148,55 +205,76 @@
   .qa .ask{display:flex;gap:10px}
   .qa input{
     flex:1;background:var(--bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);
-    font-family:inherit;font-size:15px;padding:12px 14px;
+    font-family:inherit;font-size:15px;padding:13px 14px;
   }
   .qa input:focus{outline:none;border-color:var(--sun)}
-  .qa .send{background:var(--sun);color:#14161a;border:none;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:600;padding:0 22px;font-size:15px}
-  .qa .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
-  .qa .chip{font-size:13px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:6px 14px;cursor:pointer;background:transparent;font-family:inherit;transition:all .2s}
-  .qa .chip:hover{border-color:var(--sun);color:var(--sun-soft)}
+  .qa .send{background:var(--sun);color:#14161a;border:none;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:600;padding:0 24px;font-size:15px}
+  .qa .send:hover{background:var(--sun-soft)}
+  .qa .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .qa .chip{font-size:13.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:8px 15px;cursor:pointer;background:var(--bg);font-family:inherit;transition:all .2s;line-height:1.4}
+  .qa .chip:hover{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
   .qa .demo{font-size:12px;color:var(--faint);margin-top:14px;line-height:1.6}
 
+  /* ---- quote / reflection cards ---- */
+  .quotecard{max-width:700px;margin:0 auto;padding:56px 30px;text-align:center}
+  .quotecard .q{font-size:clamp(21px,3.5vw,30px);line-height:1.6;color:var(--sun-soft);font-style:italic;letter-spacing:.01em}
+  .quotecard .q::before{content:"“";opacity:.5}
+  .quotecard .q::after{content:"”";opacity:.5}
+
   /* ---- going deeper (opt-in) ---- */
-  details.deeper{margin-top:26px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);overflow:hidden}
+  .bridge-intro{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:26px 28px;margin-top:28px;line-height:1.85}
+  .bridge-intro p{font-size:16.5px}
+  .bridge-intro .lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);margin-bottom:10px}
+  details.deeper{margin-top:20px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);overflow:hidden}
   details.deeper summary{
     cursor:pointer;list-style:none;padding:22px 26px;font-size:17px;color:var(--sun-soft);
-    display:flex;justify-content:space-between;align-items:center;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
   }
   details.deeper summary::-webkit-details-marker{display:none}
-  details.deeper summary .opt{font-size:12px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+  details.deeper summary .opt{font-size:12px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
   details.deeper .inner{padding:0 26px 28px;border-top:1px solid var(--line-soft)}
   details.deeper .inner p{margin-top:18px;font-size:16.5px}
 
-  /* ---- off-ramp ---- */
-  .offramp{background:var(--bg2);border:1px solid var(--line-soft);border-radius:8px;padding:30px;margin-top:26px}
-  .offramp h3{font-size:18px;color:var(--ink);margin-bottom:6px}
-  .offramp .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:18px}
-  .offramp .card{border:1px solid var(--line-soft);border-radius:6px;padding:18px 20px}
-  .offramp .card .ic{font-size:22px;margin-bottom:8px}
-  .offramp .card .t{font-size:15.5px;color:var(--ink);font-weight:600}
-  .offramp .card p{font-size:14px;color:var(--muted);margin-top:6px;line-height:1.65}
-  .crisis-box{border:1px solid rgba(224,133,91,.5);background:rgba(224,133,91,.08);border-radius:6px;padding:20px 22px;margin-top:18px}
+  /* ---- who this helps ---- */
+  .audience{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .audience .who{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:7px;background:var(--bg2);padding:16px 18px;font-size:15.5px;color:var(--ink);line-height:1.65}
+  .audience .who .dot{color:var(--sun);flex:none;line-height:1.65}
+  @media(max-width:540px){.audience{grid-template-columns:1fr}}
+  .share-line{margin-top:24px;font-size:15px;color:var(--muted);line-height:1.8}
+
+  /* ---- next steps ---- */
+  .steps{margin-top:26px;display:grid;gap:12px}
+  .steps .step{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;background:var(--bg2);padding:20px 22px}
+  .steps .step .k{color:var(--sun);font-size:15px;font-style:italic;letter-spacing:.1em;min-width:52px;padding-top:2px;text-transform:uppercase}
+  .steps .step .b .t{font-size:17px;color:var(--ink);font-weight:600}
+  .steps .step .b p{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.75}
+
+  /* ---- off-ramp / crisis ---- */
+  .crisis-box{border:1px solid rgba(224,133,91,.5);background:rgba(224,133,91,.08);border-radius:8px;padding:22px 24px;margin-top:26px}
   .crisis-box .t{color:var(--warn);font-weight:600;font-size:15.5px;margin-bottom:8px}
   .crisis-box p{font-size:14.5px;color:var(--ink);line-height:1.7}
   .crisis-box a{color:var(--sun-soft)}
 
   footer{padding:60px 26px;text-align:center;color:var(--faint);font-size:13px;line-height:1.9;border-top:1px solid var(--line-soft)}
   footer .mark{color:var(--muted);letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+  footer a{color:var(--muted)}
 </style>
 </head>
 <body class="lang-en">
 
 <div class="topbar">
   <span class="mark">日光之下 · under the sun</span>
-  <div class="lang-toggle">
-    <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
-    <button id="btnZh" onclick="setLang('zh')">中文</button>
+  <div class="right">
+    <a class="asklink" href="#ask"><span class="en">Ask →</span><span class="zh">随便问 →</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
   </div>
 </div>
 
 <!-- ============ HERO ============ -->
-<header class="hero">
+<header class="hero" id="top">
   <div class="kicker"><span class="en">An honest investigation</span><span class="zh">一场诚实的调查</span></div>
   <h1>
     <span class="en">You got everything.<br>Why isn't it enough?</span>
@@ -207,14 +285,53 @@
     <span class="zh">三千年前,一个比你我都更成功的人,问了同样的问题——而且拒绝在答案上撒谎。</span>
   </div>
   <p class="sub">
-    <span class="en">This isn't religious content. It's a book that takes your worldview seriously, stands where you stand, and walks that road more honestly than most people dare to.</span>
-    <span class="zh">这不是宗教内容。这是一本认真对待你世界观的书——它先站到你的位置上,比大多数人更诚实地把那条路走到底。</span>
+    <span class="en">This is not a pressure-based religious pitch. It is an honest investigation into meaning, success, death, and the ache beneath modern life — guided by Ecclesiastes. You can come with your doubt, your exhaustion, your success, your disappointment, and simply hear what the book says first.</span>
+    <span class="zh">这不是一篇劝你立刻相信的宗教文章,而是一场关于人生意义的诚实调查。你可以带着怀疑、疲惫、成功、失望,先听听《传道书》怎么说。</span>
   </p>
   <div class="enter">
-    <a href="#violin" class="btn"><span class="en">Begin →</span><span class="zh">开始 →</span></a>
+    <a href="#howto" class="btn"><span class="en">Where do I start? →</span><span class="zh">我从哪里开始? →</span></a>
+    <a href="#ask" class="btn btn-ghost"><span class="en">Ask a question</span><span class="zh">直接提问</span></a>
   </div>
   <div class="scrollcue"><span class="en">scroll</span><span class="zh">向下</span></div>
 </header>
+
+<!-- ============ HOW TO USE THIS SITE ============ -->
+<section id="howto">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Start anywhere</span><span class="zh">从哪里开始都可以</span></div>
+    <h2 class="head">
+      <span class="en">How to use this site</span>
+      <span class="zh">你可以这样使用这个网站</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">There's no single right order. Come in wherever you actually are.</span>
+      <span class="zh">没有唯一正确的读法。你此刻在哪里,就从哪里进来。</span>
+    </p>
+
+    <div class="howto">
+      <div class="item">
+        <div class="cond"><span class="en">If you're simply curious about meaning</span><span class="zh">如果你只是好奇人生意义</span></div>
+        <a href="#top"><span class="en">“You got everything. Why isn't it enough?” →</span><span class="zh">先读「你什么都得到了,为什么还是不够?」 →</span></a>
+      </div>
+      <div class="item">
+        <div class="cond"><span class="en">If you feel cautious about religion</span><span class="zh">如果你对宗教有防备</span></div>
+        <a href="#hevel"><span class="en">“Vanity is not nothingness” →</span><span class="zh">先读「虚空不是空,也不是没有价值」 →</span></a>
+      </div>
+      <div class="item">
+        <div class="cond"><span class="en">If you feel tired, anxious, or empty after success</span><span class="zh">如果你正在经历疲惫、焦虑、成功后的空心感</span></div>
+        <a href="#theme"><span class="en">“The Emptiness of Success” →</span><span class="zh">读「成功的空洞」 →</span></a>
+      </div>
+      <div class="item">
+        <div class="cond"><span class="en">If you want to explore faith more deeply</span><span class="zh">如果你愿意继续探索信仰</span></div>
+        <a href="#deeper"><span class="en">“The Bridge Beyond the Sun” →</span><span class="zh">打开「从虚空通向答案的桥」 →</span></a>
+      </div>
+      <div class="item">
+        <div class="cond"><span class="en">If you have a specific question</span><span class="zh">如果你有具体问题</span></div>
+        <a href="#ask"><span class="en">Use the Ask section →</span><span class="zh">使用 Ask 提问功能 →</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ============ THE SAME VIOLIN (Joshua Bell) ============ -->
 <section id="violin">
@@ -303,6 +420,58 @@
   </div>
 </section>
 
+<!-- ============ 虚空 vs 空 (the gentle distinction) ============ -->
+<section id="kong">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">A note for readers of Chinese</span><span class="zh">给中文读者的一点辨析</span></div>
+    <h2 class="head">
+      <span class="en">"Vanity" is not the "emptiness" (空) of Eastern philosophy</span>
+      <span class="zh">《传道书》的「虚空」,不等于东方哲学里的「空」</span>
+    </h2>
+    <p class="lead">
+      <span class="en">Many Chinese readers naturally hear echoes of the Buddhist or Eastern idea of "emptiness" (空) in the word "vanity." Buddhist thought is itself rich and varied, and different traditions understand 空 in different ways. The point here is not to judge Buddhism, but to clarify one thing: the <em>hevel</em> of Ecclesiastes does not say the world is an illusion, nor does it tell you to escape reality. It says something closer to this — the world is real and good, yet fleeting, ungraspable, and never finally in our control.</span>
+      <span class="zh">很多中文读者容易把"虚空"联想到佛教或东方哲学里的"空"。当然,佛教传统本身很复杂,不同宗派对"空"的理解也不完全相同。这里不是要评判佛教,而是要说明:《传道书》的 <em>hevel</em> 不是说世界本质为幻,也不是叫人逃离现实;它更像是在说:世界真实、美好,却短暂、易逝、不能被人最终掌控。</span>
+    </p>
+
+    <div class="vs">
+      <div class="col kong">
+        <div class="tag"><span class="en">One common reading of 空</span><span class="zh">"空"常被理解成</span></div>
+        <div class="big"><span class="en">tends toward: illusion, letting go</span><span class="zh">倾向:看空、放下、出世</span></div>
+        <ul>
+          <li><span class="en">the world is, in essence, illusory</span><span class="zh">世界在本质上是虚妄、是幻象</span></li>
+          <li><span class="en">peace comes by seeing through and releasing</span><span class="zh">安顿之道在于看破、放下</span></li>
+          <li><span class="en">desire itself is a root of suffering</span><span class="zh">欲望本身是苦的根源</span></li>
+          <li><span class="en">freedom is found by stepping away from it all</span><span class="zh">解脱在于离开这一切</span></li>
+        </ul>
+      </div>
+      <div class="col xu">
+        <div class="tag"><span class="en">Ecclesiastes' "vanity" (hevel)</span><span class="zh">《传道书》的「虚空」(hevel)</span></div>
+        <div class="big"><span class="en">real, yet unkeepable</span><span class="zh">真实,却留不住</span></div>
+        <ul>
+          <li><span class="en">the world is real, and originally good</span><span class="zh">世界是真实的,且本是好的</span></li>
+          <li><span class="en">not withdrawal, but receiving life as it is</span><span class="zh">不出世,反而要入世去领受</span></li>
+          <li><span class="en">eating, working, family — these are good gifts</span><span class="zh">吃喝、劳作、家庭都是好的</span></li>
+          <li><span class="en">the ache isn't "having" — it's "cannot keep"</span><span class="zh">问题不在"有",而在"抓不住"</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="vs-note">
+      <span class="en">Ecclesiastes does not negate the world or urge you to withdraw from it. It does the opposite — it affirms that created things are good, and tells you to receive your food, your work, and your people as gifts from God's hand (2:24). It doesn't say "all is illusion, so let go"; it says "all is real, yet cannot be held — so receive today all the more tenderly."</span>
+      <span class="zh">传道书<strong>不否定世界,也不叫人出世</strong>。它反过来肯定:受造之物是好的,要人把吃饭、工作、家人,当作神的礼物来领受(2:24)。它说的不是"一切是幻、所以放下",而是"一切是真、却抓不住,所以更要珍惜地领受当下"。</span>
+    </p>
+    <p class="vs-caveat">
+      <span class="en">This is a broad sketch, offered with respect — not a full account of any tradition. If you come from a Buddhist background, read it as an invitation to compare honestly, not as a verdict on your path.</span>
+      <span class="zh">以上只是怀着尊重画的一个粗略轮廓,并不能代表任何一个传统的完整面貌。如果你有佛教背景,请把它当作一次诚实的对照邀请,而不是对你所走之路的评判。</span>
+    </p>
+  </div>
+</section>
+
+<!-- quote card 1 -->
+<div class="quotecard">
+  <p class="q"><span class="en">What you cannot hold is not necessarily unreal; perhaps it was never meant to be possessed.</span><span class="zh">你抓不住的,不一定是假的;也许它本来就不是让你占有的。</span></p>
+</div>
+
 <!-- ============ THEME: emptiness of success ============ -->
 <section id="theme">
   <div class="wrap">
@@ -326,6 +495,11 @@
     <p class="lead">
       <span class="en">He didn't fail to get the things. He got <em>all</em> of them. That's what makes this land: it removes the excuse "I'd be satisfied if I just had a little more." He had immeasurably more — and named the feeling out loud.</span>
       <span class="zh">他不是没得到那些东西。他<em>全</em>得到了。正因如此才扎心:它拿掉了那句"只要我再多一点就满足了"的借口。他多得无法计量——然后把那种感觉说了出来。</span>
+    </p>
+
+    <p class="lead muted">
+      <span class="en">If you're a Chinese parent building a life in the US — on the immigrant "treadmill of achievement," giving your children everything, and still quietly tired, still sensing it isn't enough — this book isn't preaching at you. It's <strong>saying out loud the sentence you never let yourself say.</strong></span>
+      <span class="zh">如果你是在美打拼的华人父母——移民式的"成就跑步机",为下一代拼,什么都给到了,却隐隐觉得还是累、还是不够——这本书不是在说教,它是在<strong>替你把那句没说出口的话说出来</strong>。</span>
     </p>
 
     <p class="lead muted">
@@ -364,13 +538,13 @@
         <span class="zh">经文:KJV(公有领域)与和合本。为篇幅略去第 3、6–7、9 节——完整章节在正式版本中一键可读。</span>
       </div>
     </div>
-
-    <p class="lead muted">
-      <span class="en">Other doorways a finished site would open, ranked by how hard they hit: money never satisfies (5:10) · endless toil — for whom? (2:18–23) · death, the great leveler (3:19–20) · a time for everything (3:1–8) · receiving the present as a gift (2:24) · eternity set in the human heart (3:11).</span>
-      <span class="zh">完整网站还会打开的其他门(按杀伤力排序):钱永远不够(5:10)· 没完没了的劳碌——为谁?(2:18–23)· 死亡这个大平等器(3:19–20)· 凡事都有定期(3:1–8)· 把当下作为礼物领受(2:24)· 神把永恒放在人心里(3:11)。</span>
-    </p>
   </div>
 </section>
+
+<!-- quote card 2 -->
+<div class="quotecard">
+  <p class="q"><span class="en">Success can fill your calendar and empty your soul.</span><span class="zh">成功可以填满日程,却掏空灵魂。</span></p>
+</div>
 
 <!-- ============ AND THEN WHAT (unapplied knowledge) ============ -->
 <section id="thenwhat">
@@ -408,17 +582,57 @@
   </div>
 </section>
 
-<!-- ============ ASK ANYTHING ============ -->
+<!-- ============ 12-CHAPTER ROADMAP ============ -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The whole book at a glance</span><span class="zh">整卷书一眼看懂</span></div>
+    <h2 class="head">
+      <span class="en">A 12-chapter roadmap through Ecclesiastes</span>
+      <span class="zh">《传道书》12 章人生路线图</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">Twelve short chapters. You could read one a day and finish the whole book in twelve days.</span>
+      <span class="zh">十二个短章。你可以每天读一章,12 天读完整卷书。</span>
+    </p>
+
+    <div class="roadmap">
+      <div class="ch"><div class="num"><span class="en">Chapter 1</span><span class="zh">第 1 章</span></div><div class="desc"><span class="en">Cycles of life, and the search for what is truly new</span><span class="zh">一切循环,人找不到终极的新意</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 2</span><span class="zh">第 2 章</span></div><div class="desc"><span class="en">Pleasure, achievement, and wealth cannot be held</span><span class="zh">享乐、事业、财富都抓不住</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 3</span><span class="zh">第 3 章</span></div><div class="desc"><span class="en">A time for everything, and eternity in the human heart</span><span class="zh">凡事有时,永恒在人心里</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 4</span><span class="zh">第 4 章</span></div><div class="desc"><span class="en">Competition, loneliness, and oppression</span><span class="zh">竞争、孤独、压迫</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 5</span><span class="zh">第 5 章</span></div><div class="desc"><span class="en">Money cannot satisfy the soul</span><span class="zh">钱不能满足人</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 6</span><span class="zh">第 6 章</span></div><div class="desc"><span class="en">Possession is not the same as enjoyment</span><span class="zh">拥有不等于享受</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 7</span><span class="zh">第 7 章</span></div><div class="desc"><span class="en">Wisdom learns to face death</span><span class="zh">智慧面对死亡</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 8</span><span class="zh">第 8 章</span></div><div class="desc"><span class="en">Delayed justice and human confusion</span><span class="zh">公义延迟,人心困惑</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 9</span><span class="zh">第 9 章</span></div><div class="desc"><span class="en">Death comes to all</span><span class="zh">死亡临到众人</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 10</span><span class="zh">第 10 章</span></div><div class="desc"><span class="en">How folly damages life</span><span class="zh">愚昧如何破坏人生</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 11</span><span class="zh">第 11 章</span></div><div class="desc"><span class="en">Acting faithfully amid uncertainty</span><span class="zh">在不确定中仍然行动</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 12</span><span class="zh">第 12 章</span></div><div class="desc"><span class="en">Remember your Creator while you are young</span><span class="zh">趁年轻记念造你的主</span></div></div>
+    </div>
+
+    <p class="roadmap-note">
+      <span class="en">Notice the shape: it doesn't end in despair. It moves through everything that can't be kept — and lands on "remember your Creator." The honesty is the road; it isn't the destination.</span>
+      <span class="zh">留意它的形状:它不是终于绝望,而是走过一切留不住的东西之后,落在"记念造你的主"。诚实是那条路,却不是终点。</span>
+    </p>
+  </div>
+</section>
+
+<!-- quote card 3 -->
+<div class="quotecard">
+  <p class="q"><span class="en">The ache is not the enemy. It may be the doorway.</span><span class="zh">那种空,不一定是敌人;它可能是一扇门。</span></p>
+</div>
+
+<!-- ============ ASK ANYTHING (core feature) ============ -->
 <section id="ask">
   <div class="wrap">
-    <div class="eyebrow"><span class="en">Ask anything</span><span class="zh">随便问</span></div>
+    <div class="eyebrow"><span class="en">Ask anything · the heart of this site</span><span class="zh">随便问 · 本站的核心</span></div>
     <h2 class="head">
       <span class="en">Ask the doubts you'd be ashamed to say out loud</span>
       <span class="zh">问出那些你羞于说出口的疑问</span>
     </h2>
     <p class="lead">
-      <span class="en">This is where a screen beats a person. Be hostile, be skeptical — that's welcome here.</span>
-      <span class="zh">这正是屏幕胜过真人的地方。带着敌意、带着怀疑来问——这里欢迎。</span>
+      <span class="en">This is where a screen beats a person. Be hostile, be skeptical — that's welcome here. Tap a question to begin, or type your own.</span>
+      <span class="zh">这正是屏幕胜过真人的地方。带着敌意、带着怀疑来问——这里欢迎。点一个问题开始,或者自己输入。</span>
     </p>
 
     <div class="qa">
@@ -427,6 +641,7 @@
         <span class="zh">🔒 这个助手只从传道书、以及它与全本圣经的关联来回答。每条主张都标出章节,绝不凭记忆断言未检索的经文。</span>
       </div>
 
+      <div class="prompt-hint"><span class="en">Common questions people actually ask:</span><span class="zh">大家真正会问的问题:</span></div>
       <div class="chips" id="chips"></div>
 
       <div class="log" id="log"></div>
@@ -443,7 +658,7 @@
   </div>
 </section>
 
-<!-- ============ GOING DEEPER (opt-in) ============ -->
+<!-- ============ GOING DEEPER (opt-in bridge) ============ -->
 <section id="deeper">
   <div class="wrap">
     <div class="eyebrow"><span class="en">If you want to go further</span><span class="zh">如果你想再走一步</span></div>
@@ -455,6 +670,14 @@
       <span class="en">Ecclesiastes pushes the closed system of "under the sun" to its limit, digs out the human longing for permanence — and then stops, honestly, without a final answer. What's below is opt-in. Open it only if you want to.</span>
       <span class="zh">传道书把"日光之下"这个封闭系统逼到极限,挖出人对"永恒"的渴望——然后诚实地停在那里,不给最终答案。下面的内容是<strong>自选</strong>的,只有你想看,才打开。</span>
     </p>
+
+    <div class="bridge-intro">
+      <div class="lbl"><span class="en">The bridge, said carefully</span><span class="zh">这座桥,说得稳妥一点</span></div>
+      <p>
+        <span class="en">Ecclesiastes is not a book that speaks directly about Jesus in every line. It first exposes the honest dilemma of life "under the sun." But within the whole story of Scripture, the questions Ecclesiastes raises find their deepest answer in Christ: death is not the final word, human labor is not the final destination, and the longing for eternity placed in the human heart is not a cruel joke.</span>
+        <span class="zh">《传道书》本身不是直接讲耶稣的书;它先诚实地揭开"日光之下"的困境。但从整本圣经来看,它提出的问题,最终在基督里得到回应:死亡不是最后一句话,人的劳苦不是最终归宿,神放在人心里的永恒渴望不是一个残酷的玩笑。</span>
+      </p>
+    </div>
 
     <details class="deeper">
       <summary>
@@ -479,7 +702,7 @@
           <figcaption><span class="en">From the sermon deck · Beyond the Vapor</span><span class="zh">取自讲道幻灯片 · Beyond the Vapor</span></figcaption>
         </figure>
         <p>
-          <a href="#offramp"><span class="en">See where to go next →</span><span class="zh">看看下一步可以去哪里 →</span></a>
+          <a href="#nextsteps"><span class="en">See where to go next →</span><span class="zh">看看下一步可以去哪里 →</span></a>
         </p>
       </div>
     </details>
@@ -507,6 +730,11 @@
   </div>
 </section>
 
+<!-- quote card 4 -->
+<div class="quotecard">
+  <p class="q"><span class="en">Ecclesiastes does not ask you to give up on life; it asks you to stop making life your god.</span><span class="zh">《传道书》不是要你放弃人生,而是要你停止把人生当成神。</span></p>
+</div>
+
 <!-- ============ FULL DECK CALLOUT ============ -->
 <section id="fulldeck">
   <div class="wrap" style="text-align:center">
@@ -522,45 +750,97 @@
   </div>
 </section>
 
-<!-- ============ OFF-RAMP ============ -->
-<section id="offramp">
+<!-- ============ WHO THIS MIGHT HELP (shareable) ============ -->
+<section id="whofor">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Pass it on</span><span class="zh">也许可以转发</span></div>
+    <h2 class="head">
+      <span class="en">Who might this site help?</span>
+      <span class="zh">这个网站适合发给谁?</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">If a face came to mind while you read, this last part is for them.</span>
+      <span class="zh">如果你读的时候,脑海里浮现了某张脸——最后这部分,是为他/她准备的。</span>
+    </p>
+
+    <div class="audience">
+      <div class="who"><span class="dot">·</span><span><span class="en">People who look successful but feel tired inside</span><span class="zh">事业成功但内心疲惫的人</span></span></div>
+      <div class="who"><span class="dot">·</span><span><span class="en">Parents anxious about children, housing, identity, and the future</span><span class="zh">为孩子、房子、身份、未来一直焦虑的父母</span></span></div>
+      <div class="who"><span class="dot">·</span><span><span class="en">Skeptics who are not ready for religion but willing to think about meaning</span><span class="zh">对宗教有防备,但愿意思考人生意义的人</span></span></div>
+      <div class="who"><span class="dot">·</span><span><span class="en">People facing midlife questions, loss, or emptiness</span><span class="zh">正在经历中年危机、失落、空虚的人</span></span></div>
+      <div class="who"><span class="dot">·</span><span><span class="en">People who want to read the Bible but don't know where to begin</span><span class="zh">想读圣经,但不知道从哪里开始的人</span></span></div>
+      <div class="who"><span class="dot">·</span><span><span class="en">Chinese-speaking families living, working, and raising children in the United States</span><span class="zh">在美国生活、打拼、养育孩子,却常常感到心累的华人家庭</span></span></div>
+    </div>
+
+    <p class="share-line">
+      <span class="en">If this helped you even a little, you're welcome to send the link to one person — no message required. Sometimes a quiet door is the kindest thing you can hand someone.</span>
+      <span class="zh">如果这里对你哪怕有一点帮助,欢迎把链接发给一个人——不用配什么话。有时候,递给别人一扇安静的门,已经是最温柔的事。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ NEXT STEPS + OFF-RAMP ============ -->
+<section id="nextsteps">
   <div class="wrap">
     <div class="eyebrow"><span class="en">Next steps · no pressure</span><span class="zh">下一步 · 不施压</span></div>
     <h2 class="head">
-      <span class="en">Wherever you are, here are real doors</span>
-      <span class="zh">无论你在哪一步,这里有真实的出口</span>
+      <span class="en">If you want to take one more step</span>
+      <span class="zh">如果你愿意继续走一步</span>
     </h2>
 
-    <!-- crisis first -->
-    <div class="crisis-box">
-      <div class="t"><span class="en">If this has stirred up something heavy</span><span class="zh">如果这唤起了某种沉重的东西</span></div>
-      <p>
-        <span class="en">A book about emptiness and death can surface real pain. If you're thinking about harming yourself or feel you can't go on, please reach a person now — not a verse. In the US, call or text <strong>988</strong> (Suicide & Crisis Lifeline, 24/7, free, confidential), or text <strong>HOME</strong> to <strong>741741</strong>. If you're in immediate danger, call <strong>911</strong>. You deserve to talk to someone real.</span>
-        <span class="zh">一本关于空虚与死亡的书,可能会勾起真实的痛苦。如果你有伤害自己的念头,或觉得撑不下去了,请<strong>现在</strong>去找一个人——而不是一节经文。在美国,可拨打或发短信至 <strong>988</strong>(自杀与危机生命热线,全天候、免费、保密),或发送 <strong>HOME</strong> 到 <strong>741741</strong>。若有即时危险,请拨打 <strong>911</strong>。你值得和一个真实的人说说话。</span>
-      </p>
-    </div>
-
-    <div class="offramp">
-      <div class="row">
-        <div class="card">
-          <div class="ic">📖</div>
-          <div class="t"><span class="en">Keep reading</span><span class="zh">继续读下去</span></div>
-          <p><span class="en">Read the whole of Ecclesiastes — 12 short chapters. No account, no sign-up.</span><span class="zh">读完整卷传道书——12 个短章。不用注册,不用账号。</span></p>
+    <div class="steps">
+      <div class="step">
+        <div class="k"><span class="en">Read</span><span class="zh">读</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Read one chapter</span><span class="zh">读一章</span></div>
+          <p><span class="en">Start with Ecclesiastes chapter 1 and read one chapter a day — twelve days for the whole book.</span><span class="zh">从《传道书》第 1 章开始,每天读一章,12 天读完整卷书。</span></p>
         </div>
-        <div class="card">
-          <div class="ic">💬</div>
-          <div class="t"><span class="en">Talk to a person</span><span class="zh">找一个真人聊聊</span></div>
-          <p><span class="en">A real human, no obligation — to think out loud with, not to be sold anything.</span><span class="zh">一个真实的人,没有义务——只是一起把心里话想出来,不是来推销什么。</span></p>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Ask</span><span class="zh">问</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Ask one honest question</span><span class="zh">问一个问题</span></div>
+          <p><span class="en">Write down the question you actually carry inside. It doesn't need to be dressed up in spiritual language.</span><span class="zh">把你心里最真实的问题写下来,不需要包装得很属灵。</span></p>
         </div>
-        <div class="card">
-          <div class="ic">📍</div>
-          <div class="t"><span class="en">Find a church</span><span class="zh">找一间教会</span></div>
-          <p><span class="en">If and only if you want to. Browse quietly; go at your own pace.</span><span class="zh">仅当你愿意时。安静地看看,按自己的节奏来。</span></p>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Talk</span><span class="zh">聊</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Talk to someone</span><span class="zh">找一个人聊聊</span></div>
+          <p><span class="en">Send this site to a Christian friend you trust and ask, "What do you think about this?"</span><span class="zh">你可以把这个网站发给一个你信任的基督徒朋友,问:"你怎么看这个问题?"</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Visit</span><span class="zh">走进</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Visit a church</span><span class="zh">走进一间教会</span></div>
+          <p><span class="en">If you're in Orange County, you might consider visiting <a href="https://www.marinerschurch.org" target="_blank" rel="noopener">Mariners Church</a> — or simply look for a Bible-based church near you. Go quietly, at your own pace.</span><span class="zh">如果你在 Orange County,可以了解 <a href="https://www.marinerschurch.org" target="_blank" rel="noopener">Mariners Church</a>,也可以寻找附近以圣经为根基的教会。安静地去,按自己的节奏。</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Rest</span><span class="zh">缓</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Don't rush the conclusion</span><span class="zh">先不用急着下结论</span></div>
+          <p><span class="en">You can begin with questions, doubts, and tiredness. You don't owe anyone an answer today.</span><span class="zh">你可以带着问题、怀疑和疲惫,慢慢开始。今天不欠任何人一个答案。</span></p>
         </div>
       </div>
     </div>
+
+    <!-- crisis off-ramp -->
+    <div class="crisis-box">
+      <div class="t"><span class="en">If this has stirred up something heavy</span><span class="zh">如果这唤起了某种沉重的东西</span></div>
+      <p>
+        <span class="en">A book about emptiness and death can surface real pain. If you're thinking about harming yourself or feel you can't go on, please reach a person now — not a verse. In the US, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline, 24/7, free, confidential), or text <strong>HOME</strong> to <strong>741741</strong>. If you're in immediate danger, call <strong>911</strong>. You deserve to talk to someone real.</span>
+        <span class="zh">一本关于空虚与死亡的书,可能会勾起真实的痛苦。如果你有伤害自己的念头,或觉得撑不下去了,请<strong>现在</strong>去找一个人——而不是一节经文。在美国,可拨打或发短信至 <strong>988</strong>(自杀与危机生命热线,全天候、免费、保密),或发送 <strong>HOME</strong> 到 <strong>741741</strong>。若有即时危险,请拨打 <strong>911</strong>。你值得和一个真实的人说说话。</span>
+      </p>
+    </div>
   </div>
 </section>
+
+<!-- quote card 5 (closing) -->
+<div class="quotecard">
+  <p class="q"><span class="en">Under the sun, we cannot hold eternity; yet within the heart, we still long for it.</span><span class="zh">日光之下,人抓不住永恒;但人心里,仍然渴望永恒。</span></p>
+</div>
 
 <footer>
   <div class="mark">日光之下 · under the sun</div>
@@ -596,37 +876,68 @@
     'self harm','self-harm','harm myself','give up on life',
     '自杀','不想活','活不下去','结束生命','想死','轻生','活着没意思','没意思活','伤害自己','撑不下去','不想活了'];
 
+  /* The 10 preset questions double as the answer set. Chips bind directly to the
+     matching topic; free-typed questions fall back to keyword matching. */
   var TOPICS = [
-    { id:'success', kw:['success','successful','achieve','achievement','enough','成功','成就','不够','够'],
-      label:{en:'Why is success never enough?',zh:'为什么成功永远不够?'},
-      a:{ en:'The author got all of it — pleasure, building, wealth, more than anyone before him — and called it "vapor and chasing the wind, no gain under the sun." The problem isn\'t that you haven\'t achieved enough; it\'s that achievement, by its nature, can\'t be kept. That\'s why "a little more" never lands.',
-          zh:'作者全得到了——享乐、建造、财富,胜过前人所有——然后称之为"一口气,都是捕风,在日光之下毫无益处"。问题不在于你成就得不够,而在于成就本身、按其本质,是留不住的。这就是为什么"再多一点"永远填不满。' },
-      cite:'Ecclesiastes 2:10–11 · 传道书 2:10–11' },
-    { id:'money', kw:['money','rich','wealth','silver','salary','钱','财','银子','薪水','富'],
-      label:{en:'Will more money fix it?',zh:'更多钱能解决吗?'},
-      a:{ en:'"Whoever loves money is never satisfied with money, and whoever loves wealth is never satisfied with income." The text names the exact illusion: the satisfaction is always one raise away — and stays one raise away.',
-          zh:'"贪爱银子的,不因得银子知足;贪爱丰富的,也不因得利益知足。"经文点破了那个幻觉:满足永远在下一次加薪之后——而它会一直停在那里。' },
+    { id:'effort', kw:['努力','不快乐','累','effort','work hard','still empty','achiev'],
+      label:{en:'Why do I still feel empty after achieving so much?',zh:'我已经很努力了,为什么还是不快乐?'},
+      a:{ en:'The author worked harder and achieved more than anyone before him, and still wrote: "When I surveyed all my hands had done… everything was vapor, a chasing after wind, and there was no gain under the sun." Effort isn\'t the problem. The book\'s honest claim is that no achievement, kept "under the sun," can finally hold the weight we place on it.',
+          zh:'作者比前人更努力、成就更大,却写下:"我察看我手所做的一切……谁知都是一口气,都是捕风,在日光之下毫无益处。"问题不在于你不够努力。这本书诚实地说:任何成就,只放在"日光之下",都撑不住我们压在它身上的分量。' },
+      cite:'Ecclesiastes 2:11 · 传道书 2:11' },
+
+    { id:'money', kw:['钱','财','银子','薪水','富','安全感','money','security','rich','wealth'],
+      label:{en:'Can money really fail to bring security?',zh:'钱真的不能带来安全感吗?'},
+      a:{ en:'"Whoever loves money is never satisfied with money, and whoever loves wealth is never satisfied with income." The text doesn\'t call money evil — it says money makes a poor foundation for security, because the appetite it feeds keeps moving. Security that rests on a number is always one number away.',
+          zh:'"贪爱银子的,不因得银子知足;贪爱丰富的,也不因得利益知足。"经文没有说钱是恶的——它说的是:钱撑不起真正的安全感,因为它喂养的那种胃口一直在往前挪。建立在一个数字上的安全感,永远差一个数字。' },
       cite:'Ecclesiastes 5:10 · 传道书 5:10' },
-    { id:'work', kw:['work','toil','labor','labour','tired','exhausted','工作','劳碌','累','辛苦'],
-      label:{en:'Who am I working for?',zh:'我到底为谁在拼?'},
-      a:{ en:'The author hated all his toil because he had to leave it to whoever came after him — and who knows whether they\'d be wise or foolish. The treadmill question — "for whom?" — is right there in the text.',
-          zh:'作者恨自己一切的劳碌,因为他必须把成果留给后来的人——而谁知道那人是智慧还是愚昧。"为谁辛苦?"这个跑步机式的问题,经文里就摆着。' },
-      cite:'Ecclesiastes 2:18–21 · 传道书 2:18–21' },
-    { id:'death', kw:['death','die','dying','mortal','死','死亡'],
-      label:{en:'Does death erase all of it?',zh:'死亡会把一切抹掉吗?'},
-      a:{ en:'The book refuses to flinch: the wise and the foolish meet the same end, and "the dead know nothing." Under the sun, death levels everyone. The book states this plainly — and it\'s exactly the wall the rest of the Bible answers from the other side.',
-          zh:'这本书拒绝回避:智慧人和愚昧人结局一样,"死了的人毫无所知"。在日光之下,死亡使所有人归于平等。传道书把这话直说了——而这正是圣经其余部分从另一边来回应的那堵墙。' },
+
+    { id:'success', kw:['成功','成就','不够','空洞','success','after success'],
+      label:{en:'Why do I feel empty after success?',zh:'为什么成功之后还是空?'},
+      a:{ en:'Because success, by its nature, can\'t be kept. The author got all of it — pleasure, building, wealth, more than anyone before him — and called it "vapor and chasing the wind, no gain under the sun." That\'s why "a little more" never lands: the problem was never the amount.',
+          zh:'因为成功按其本质,是留不住的。作者全得到了——享乐、建造、财富,胜过前人所有——然后称之为"一口气,都是捕风,在日光之下毫无益处"。这就是为什么"再多一点"永远填不满:问题从来不在数量。' },
+      cite:'Ecclesiastes 2:10–11 · 传道书 2:10–11' },
+
+    { id:'death', kw:['死','死亡','离世','努力还有意义','death','die','matter'],
+      label:{en:'If everyone dies, why does anything matter?',zh:'如果人都会死,那努力还有意义吗?'},
+      a:{ en:'Ecclesiastes refuses to look away: the wise and the foolish share one fate, and "the dead know nothing." Under the sun, death levels everyone — and the book lets that land instead of softening it. It doesn\'t answer the wall from inside the system; it presses you against it honestly. (The rest of the Bible answers from the other side — that\'s the opt-in bridge above.)',
+          zh:'传道书拒绝回避:智慧人和愚昧人结局一样,"死了的人毫无所知。"在日光之下,死亡使所有人归于平等——这本书不粉饰,让这话直接落地。它不在系统内部回答这堵墙,而是诚实地把你推到墙前。(圣经其余部分从另一边回应——就是上面那座自选的桥。)' },
       cite:'Ecclesiastes 9:5; 2:16 · 传道书 9:5;2:16' },
-    { id:'meaning', kw:['meaning','point','purpose','why','eternity','意义','目的','为什么','永恒','永生'],
-      label:{en:'So what\'s the point?',zh:'那意义到底是什么?'},
-      a:{ en:'The book doesn\'t hand you a slogan. Its pivot is 3:11 — "He has set eternity in the human heart" — naming a longing for permanence you can\'t satisfy from inside "under the sun." It diagnoses the ache honestly and stops there. The answer it points beyond itself for is opt-in, in the section above.',
-          zh:'这本书不会塞给你一句口号。它的转折点是 3:11——"神将永恒安置在世人心里"——它说出了一种你在"日光之下"内部无法满足的、对永恒的渴望。它诚实地诊断这份疼痛,然后停下。它所指向的、在自身之外的答案,是自选的,在上面那一节里。' },
-      cite:'Ecclesiastes 3:11 · 传道书 3:11' },
-    { id:'gift', kw:['joy','happy','enjoy','gift','present','simple','快乐','享受','礼物','当下','简单'],
-      label:{en:'Is it all just hopeless then?',zh:'那岂不是全无指望?'},
-      a:{ en:'No — and this surprises people. Ecclesiastes is not nihilist. Precisely because you can\'t keep anything, it tells you to receive the simple goods — food, work, a meal with people you love — as a gift from God\'s hand, today.',
-          zh:'不——而且这会让人意外。传道书不是虚无主义。正因为你什么都抓不住,它反而告诉你:把那些简单的好——吃饭、工作、和所爱的人吃一顿饭——当作神手中的礼物,在今天领受。' },
-      cite:'Ecclesiastes 2:24; 3:13 · 传道书 2:24;3:13' }
+
+    { id:'pessimism', kw:['悲观','消极','pessim','negative','hopeless','nihil'],
+      label:{en:'Is Ecclesiastes a pessimistic book?',zh:'《传道书》是不是很悲观?'},
+      a:{ en:'It\'s bleak in its honesty, but it isn\'t nihilist. Again and again it turns from "all is vapor" to a quiet instruction: eat your bread, enjoy your work, share a meal with someone you love — receive these as gifts from God\'s hand, today. It refuses both denial and despair. Clear-eyed, not hopeless.',
+          zh:'它诚实得发冷,但不是虚无主义。它一次次从"凡事都是虚空"转向一句安静的嘱咐:吃你的饭,享受你的工,和所爱的人吃一顿饭——把这些当作神手中的礼物,今天就领受。它既不否认,也不绝望。清醒,而非无望。' },
+      cite:'Ecclesiastes 2:24; 3:12–13 · 传道书 2:24;3:12–13' },
+
+    { id:'unbeliever', kw:['不信','无神','信神','believe','god','atheist','skeptic','可以读'],
+      label:{en:'Can I read this even if I don\'t believe in God?',zh:'我不信神,也可以读这卷书吗?'},
+      a:{ en:'Yes — and it may be the book in the Bible most written for you. Its recurring phrase "under the sun" means life viewed with no God and no eternity assumed: just this world, honestly examined. You can read the whole thing as a skeptic taking the skeptic\'s premises seriously. No belief is required to start — only honesty.',
+          zh:'可以——而且它可能是圣经里最为你而写的一卷。它反复出现的"日光之下",意思正是:不预设神、不预设永恒,只诚实地看眼前这个世界。你完全可以作为一个怀疑者来读它——它自己就是从怀疑者的前提出发的。开始不需要信什么,只需要诚实。' },
+      cite:'Ecclesiastes 1:3; 1:14 · 传道书 1:3;1:14' },
+
+    { id:'jesus', kw:['耶稣','基督','答案','jesus','christ','christian'],
+      label:{en:'Why does Christianity say the answer is found in Jesus?',zh:'为什么基督教说答案在耶稣?'},
+      a:{ en:'Fair question — and Ecclesiastes itself doesn\'t say it. The book raises the questions; it doesn\'t name Jesus. The Christian claim is that the ache it exposes — death as the final word, labor without lasting gain, an eternity we can\'t reach from inside — is answered from "above the sun," outside the closed system. Paul even echoes Ecclesiastes\' "eat and drink, for tomorrow we die," and turns it over (1 Corinthians 15). You can weigh that claim without accepting it yet.',
+          zh:'这是个公道的问题——而传道书自己并没有这么说。这本书提出问题,却没有点耶稣的名。基督信仰主张的是:它揭出的那份疼痛——死亡是最后一句话、劳苦没有存留的益处、我们从系统内部够不着的永恒——在"日光之上"、在这个封闭系统之外得到了回应。保罗甚至呼应了传道书"吃喝吧,因为明天要死"那句话,又把它整个翻转(哥林多前书 15 章)。你可以先掂量这个主张,而不必现在就接受。' },
+      cite:'1 Corinthians 15:32,54–55 · 哥林多前书 15:32,54–55' },
+
+    { id:'resistant', kw:['反感','排斥','抵触','宗教','resist','religion','where to start','from where'],
+      label:{en:'Where should I begin if I feel resistant to religion?',zh:'如果我对宗教反感,可以从哪里开始?'},
+      a:{ en:'Start where the resistance doesn\'t apply. Read Ecclesiastes 1–2 as plain observation about work, pleasure, and success — no doctrine, no altar call. Notice whether it names something true about your own experience. That\'s the only "first step" this site asks for. Everything about faith here is opt-in, and clearly labeled.',
+          zh:'从反感够不着的地方开始。把传道书 1–2 章当作对工作、享乐、成功的普通观察来读——没有教义,没有呼召。看看它有没有说中你自己经历里某个真实的东西。这就是本站请你走的唯一"第一步"。这里所有和信仰有关的内容都是自选的,而且清楚标注。' },
+      cite:'Ecclesiastes 1–2 · 传道书 1–2 章' },
+
+    { id:'underthesun', kw:['日光之下','under the sun','什么意思'],
+      label:{en:'What does "under the sun" really mean?',zh:'"日光之下"到底是什么意思?'},
+      a:{ en:'"Under the sun" appears nearly 30 times. It\'s the book\'s way of saying: life measured on the horizontal plane alone — no God, no afterlife, no view from above, just what happens here between birth and death. The author deliberately stays inside that frame for most of the book, to show honestly where it leads. It isn\'t a throwaway phrase; it\'s the boundary line of the whole experiment.',
+          zh:'"日光之下"出现了将近 30 次。它是这本书的说法,意思是:只在水平面上衡量人生——不算神、不算来世、不从上面看,就只看生与死之间、这里发生的一切。作者在全书大部分时间里故意留在这个框架里,好诚实地呈现它会把人带到哪。它不是一句随口的话,而是整个实验的边界线。' },
+      cite:'Ecclesiastes 1:3,9 · 传道书 1:3,9' },
+
+    { id:'vanity', kw:['虚空','vanity','hevel','什么是空'],
+      label:{en:'What does "vanity" mean in Ecclesiastes?',zh:'什么是圣经里的"虚空"?'},
+      a:{ en:'The word is the Hebrew hevel — literally vapor, breath, mist. Not "worthless," but "ungraspable." The point isn\'t that life is meaningless; it\'s that life won\'t hold still — good things are real and still slip through your fingers. That\'s why the recurring image is "chasing the wind": you can run at it forever and never close your hand on it.',
+          zh:'这个词是希伯来文 hevel——字面意思是蒸汽、一口气、薄雾。不是"没有价值",而是"抓不住"。重点不是人生没有意义,而是人生停不住——美好的东西是真实的,却照样从指缝溜走。所以反复出现的意象是"捕风":你可以永远追着它跑,却永远合不拢手掌。' },
+      cite:'Ecclesiastes 1:2,14 · 传道书 1:2,14' }
   ];
 
   function renderChips(){
@@ -636,7 +947,7 @@
       var b = document.createElement('button');
       b.className = 'chip';
       b.textContent = t.label[curLang()];
-      b.onclick = function(){ document.getElementById('qInput').value = t.label[curLang()]; askQuestion(); };
+      b.onclick = function(){ askTopic(t); };
       box.appendChild(b);
     });
   }
@@ -653,6 +964,12 @@
     d.innerHTML = html;
     log.appendChild(d);
     d.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  /* chip → deterministic answer (no keyword guessing) */
+  function askTopic(t){
+    addMsg('you', escapeHtml(t.label[curLang()]));
+    addMsg('bot', escapeHtml(t.a[curLang()]) + '<span class="cite">— ' + t.cite + '</span>');
   }
 
   function askQuestion(){
@@ -689,7 +1006,7 @@
 
     // 3) honest fallback (no fabricated verse)
     var fb = curLang()==='zh'
-      ? '这是个演示版本,内置的扎根经文回答还有限,我不能凭记忆替传道书"编"一节经文出来——那正是这个产品要守住的底线。在正式版本里,这个问题会触发对传道书全文的检索,并只根据检索到的经文作答、标注章节。你可以试试上面的几个问题,或换种问法。'
+      ? '这是个演示版本,内置的扎根经文回答还有限,我不能凭记忆替传道书"编"一节经文出来——那正是这个产品要守住的底线。在正式版本里,这个问题会触发对传道书全文的检索,并只根据检索到的经文作答、标注章节。你可以点上面的几个问题,或换种问法。'
       : "This is a demo with a limited built-in, verse-grounded set, and I won\'t invent a verse from memory for Ecclesiastes — that\'s the exact line this product holds. In the full build, your question would trigger retrieval over the whole text and answer only from what\'s retrieved, with citations. Try one of the prompts above, or rephrase.";
     addMsg('bot', fb);
   }
@@ -704,9 +1021,12 @@
     if(e.key === 'Enter') askQuestion();
   });
 
-  // init
-  renderChips();
-  setInputPlaceholder();
+  // init — honor ?lang=zh (used by the Chinese entry link)
+  (function(){
+    var p = new URLSearchParams(location.search);
+    if(p.get('lang') === 'zh'){ setLang('zh'); }
+    else { renderChips(); setInputPlaceholder(); }
+  })();
 </script>
 </body>
 </html>

@@ -12,3 +12,8 @@ Desktop.ini
 
 # Local preview helpers (not for deploy)
 .claude/
+
+# Node deps (image tooling only)
+node_modules/
+package.json
+package-lock.json

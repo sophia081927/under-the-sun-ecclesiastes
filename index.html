@@ -81,7 +81,7 @@
   </footer>
 
 <script type="module">
-  import { bibleRegistry } from './data/bibleRegistry.js';
+  import { bibleRegistry, featureLabels } from './data/bibleRegistry.js';
 
   const UI = {
     zh: { kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
@@ -111,12 +111,23 @@
       ? `<span class="text-[10px] font-mono tracking-[0.2em] uppercase" style="color:${accent}">No. ${b.order}</span>`
       : `<span class="text-[10px] font-mono tracking-[0.18em] uppercase text-gray-500 border border-gray-700 rounded-full px-2.5 py-1">${esc(t.soon)}</span>`;
 
+    // feature chips (from feature flags) — everything the book offers beyond "Read/Enter"
+    const chipFor = (f) => {
+      const meta = featureLabels[f];
+      const href = f === 'ask' ? (b.page + '#ask') : (meta.key ? b[meta.key] : null);
+      if (!href) return '';
+      return `<a href="${href}" class="text-[11px] tracking-wider uppercase text-gray-400 hover:text-[#D4AF37] border border-gray-700/70 hover:border-[#D4AF37]/50 rounded-full px-3 min-h-[36px] inline-flex items-center transition-colors">${esc(meta[lang])}</a>`;
+    };
+    const chips = active
+      ? ['listen', 'study', 'deck', 'ask'].filter(f => b.features && b.features[f]).map(chipFor).join('')
+      : '';
+
     const foot = active
-      ? `<div class="mt-6 flex items-center gap-3 flex-wrap text-sm">
-           <a href="${b.page}" class="font-semibold text-xs tracking-wider uppercase px-5 py-2.5 rounded-full transition-all inline-flex items-center gap-1.5 min-h-[44px]"
+      ? `<div class="mt-6">
+           <a href="${b.page}" class="font-semibold text-xs tracking-wider uppercase px-6 py-3 rounded-full transition-all inline-flex items-center gap-1.5 min-h-[46px]"
               style="background:${accent};color:#12161A">${esc(t.enter)} <i data-lucide="chevron-right" class="h-3 w-3"></i></a>
-           ${b.audioEnabled && b.listen ? `<a href="${b.listen}" class="text-gray-400 hover:text-[#D4AF37] text-xs tracking-wider uppercase transition-colors inline-flex items-center gap-1 min-h-[44px] py-2">♪ ${esc(t.listen)}</a>` : ''}
-         </div>`
+         </div>
+         ${chips ? `<div class="mt-3 flex flex-wrap gap-2">${chips}</div>` : ''}`
       : `<div class="mt-6 text-xs tracking-wider uppercase text-gray-500 min-h-[44px] flex items-center">${esc(t.comingType)} ·  ${esc(t.soon)}</div>`;
 
     return `

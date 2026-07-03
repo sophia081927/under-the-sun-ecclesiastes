@@ -1,22 +1,28 @@
 /**
- * Central multilingual Bible-book registry.
+ * Central multilingual Bible-book registry — the single source of truth.
  *
- * To add a new book: append one object below. Nothing else needs to change —
- * the home page (index.html) renders every entry automatically.
+ * To add a new book: append one object below and add its content file(s).
+ * Nothing else needs to change — the home page (index.html) renders every
+ * entry automatically from this data.
  *
  * Fields:
  *   id            unique slug
  *   order         display order on the home page
  *   status        'active'  -> clickable card (page must exist)
  *                 'upcoming'-> elegant "Coming soon" card (not clickable)
- *   page          actual file to open for an active book (e.g. 'john.html')
- *   listen        optional Listening-Mode page (e.g. 'listen.html'); null if none
  *   route         clean route for a future router (informational for now)
- *   bookType, theme*, tagline*, description*  bilingual copy
+ *   page          main reading page for an active book (e.g. 'john.html')
+ *   listen        Listening-Mode page, or null
+ *   study         guided-study page, or null
+ *   deck          visual-deck page, or null
+ *   bookType(+Zh) category
+ *   theme*, tagline*, description*   bilingual copy
  *   bgColor       Tailwind gradient utility classes (used by index.html)
  *   accentColor   hex accent for the card
  *   audioEnabled  whether an Audio Bible / Listening Mode exists yet
  *   languages     supported languages
+ *   features      feature flags — future-proof capability map per book.
+ *                 Turn a flag on once its content file exists.
  */
 export const bibleRegistry = [
   {
@@ -28,6 +34,8 @@ export const bibleRegistry = [
     route: '/ecclesiastes',
     page: 'ecclesiastes.html',
     listen: 'listen.html',
+    study: null,
+    deck: 'deck-en.html',
     bookType: 'Wisdom Literature',
     bookTypeZh: '智慧书',
     themeZh: '虚空、智慧、时间、死亡、永恒、敬畏神',
@@ -39,7 +47,8 @@ export const bibleRegistry = [
     bgColor: 'from-[#4A0E17] to-[#12161A]',
     accentColor: '#D4AF37',
     audioEnabled: true,
-    languages: ['zh', 'en']
+    languages: ['zh', 'en'],
+    features: { read: true, listen: true, study: false, deck: true, ask: true }
   },
   {
     id: 'job',
@@ -50,6 +59,8 @@ export const bibleRegistry = [
     route: '/job',
     page: null,
     listen: null,
+    study: null,
+    deck: null,
     bookType: 'Wisdom Literature',
     bookTypeZh: '智慧书',
     themeZh: '苦难、沉默、信心、神的主权、疗愈',
@@ -61,7 +72,8 @@ export const bibleRegistry = [
     bgColor: 'from-[#1A2A3A] to-[#12161A]',
     accentColor: '#B8C7D9',
     audioEnabled: false,
-    languages: ['zh', 'en']
+    languages: ['zh', 'en'],
+    features: { read: false, listen: false, study: false, deck: false, ask: false }
   },
   {
     id: 'john',
@@ -72,6 +84,8 @@ export const bibleRegistry = [
     route: '/john',
     page: 'john.html',
     listen: null,
+    study: 'john-study.html',
+    deck: 'john-deck-en.html',
     bookType: 'Gospel',
     bookTypeZh: '福音书',
     themeZh: '道成肉身、生命、真光、信、永生',
@@ -83,7 +97,8 @@ export const bibleRegistry = [
     bgColor: 'from-[#2D1A3A] to-[#12161A]',
     accentColor: '#E8D7FF',
     audioEnabled: false,
-    languages: ['zh', 'en']
+    languages: ['zh', 'en'],
+    features: { read: true, listen: false, study: true, deck: true, ask: true }
   },
   {
     id: 'matthew',
@@ -94,6 +109,8 @@ export const bibleRegistry = [
     route: '/matthew',
     page: null,
     listen: null,
+    study: null,
+    deck: null,
     bookType: 'Gospel',
     bookTypeZh: '福音书',
     themeZh: '天国、君王、应验、门徒、大使命',
@@ -105,9 +122,19 @@ export const bibleRegistry = [
     bgColor: 'from-[#2A2410] to-[#12161A]',
     accentColor: '#D9C89A',
     audioEnabled: false,
-    languages: ['zh', 'en']
+    languages: ['zh', 'en'],
+    features: { read: false, listen: false, study: false, deck: false, ask: false }
   }
 ];
+
+/** Feature labels (bilingual) — used by the home page to show what each book offers. */
+export const featureLabels = {
+  read:   { zh: '阅读', en: 'Read',   key: 'page'   },
+  listen: { zh: '聆听', en: 'Listen', key: 'listen' },
+  study:  { zh: '导览', en: 'Study',  key: 'study'  },
+  deck:   { zh: '图解', en: 'Deck',   key: 'deck'   },
+  ask:    { zh: '提问', en: 'Ask',    key: null     },
+};
 
 /** Convenience helpers (optional, for future pages). */
 export const activeBooks = () => bibleRegistry.filter(b => b.status === 'active');

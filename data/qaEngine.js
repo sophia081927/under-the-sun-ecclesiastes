@@ -7,15 +7,27 @@
    Public API:
      qaRegistry                       — array of topics (ordered by priority)
      getBiblicalResponse(input, lang) — main entry; returns a response object
-     getFallbackResponse(lang)        — gentle "into the light" fallback
+     getFallbackResponse(lang)        — warm, Scripture-centered fallback
      detectCrisis(input, lang)        — returns crisis response or null
 
    A response object has:
      { id, title, verse, explanation, reflection, nextStep, prayer,
        relatedBooks? }
 
-   Content is Scripture-centered and drawn only from Ecclesiastes & John
-   (plus Psalm 34:18 for the crisis card). We never invent a verse.
+   SCRIPTURE PRINCIPLE (whole Bible): answers may cite ANY book of the
+   Bible where it best serves the question — Psalms, Proverbs, Isaiah,
+   Matthew, John, Romans, Philippians, 1 Peter, Hebrews, Revelation, etc.
+   The Scripture itself is NOT restricted to Ecclesiastes & John; only
+   `relatedBooks` (the on-site "keep reading" links) points back to the
+   books we currently host. We never invent a verse.
+
+   TRANSLATION ATTRIBUTION: Chinese verses use 和合本 (public domain — no
+   attribution needed). English verses append their translation
+   abbreviation after the quote, e.g. "(NIV)", consistently everywhere.
+
+   MATCHING ORDER: (1) crisis → (2) priority-ordered keyword match →
+   (3) warm fallback. Priorities are ascending (lower number wins); on a
+   tie the earlier registry entry wins (stable sort).
    ============================================================ */
 
 export const qaRegistry = [
@@ -34,7 +46,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Empty',
-      verse: '【Ecclesiastes 1:14】“I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.”',
+      verse: '【Ecclesiastes 1:14】“I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.” (NIV)',
       explanation: 'The Bible honestly shows that life “under the sun” cannot fully satisfy the human soul. Achievement, money, relationships, or status may still leave us empty. This emptiness does not simply mean you have failed; it may be a reminder that your soul was made for eternity and for God Himself — Ecclesiastes 3:11 says God “has set eternity in the human heart.”',
       reflection: 'What is one thing you have chased recently that still left you feeling empty after you received it?',
       nextStep: 'You may continue reading Ecclesiastes chapters 1 and 3, and then read John to encounter Jesus, the true light and life.',
@@ -57,7 +69,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Anxious',
-      verse: '【John 14:27】“Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.”',
+      verse: '【John 14:27】“Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.” (NIV)',
       explanation: 'The peace of the world often depends on circumstances: money, grades, relationships, health, and a controllable future. But the peace Jesus gives is deeper. It is rooted in His presence and His authority over tomorrow. He did not say “don’t worry, it’s nothing,” but “in this world you will have trouble. But take heart! I have overcome the world” (John 16:33).',
       reflection: 'What is the biggest worry weighing on your heart today? Are you willing to bring it to Jesus in prayer?',
       nextStep: 'You may read John chapter 14 slowly and reflect on the peace Jesus promises. You can also open the Listen page and let these words be read gently to you.',
@@ -80,7 +92,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Doubt God Loves You',
-      verse: '【John 15:9】“As the Father has loved me, so have I loved you. Now remain in my love.”',
+      verse: '【John 15:9】“As the Father has loved me, so have I loved you. Now remain in my love.” (NIV)',
       explanation: 'The Bible answers “does God really love me?” not with an empty reassurance but with a costly action: God gave His one and only Son (John 3:16). And notice the word — “the world.” Not “the good enough,” but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
       reflection: 'Do you often feel you must first become better, or do certain things, before you can be loved by God?',
       nextStep: 'Begin with John chapter 3, then read John 15. You will see this love is not a distant idea, but Jesus stepping personally into the human situation.',
@@ -103,11 +115,40 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Want to Know Jesus',
-      verse: '【John 3:16】“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.”',
+      verse: '【John 3:16】“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.” (NIV)',
       explanation: 'The Gospel of John shows that God is not distant or indifferent. Through Jesus Christ, God entered our world to bring life, light, forgiveness, and eternal hope. Knowing Jesus does not begin with passing a test — it begins with looking, at who this person is. You do not need to resolve every doubt before you begin.',
       reflection: 'If Jesus truly is the light and life from God, where would you like to begin knowing Him?',
       nextStep: 'You may begin with John chapter 1 and discover who Jesus is. The Library also has a John study guide that walks you through it.',
       prayer: 'Lord Jesus, if You are truly the light of life, help me know You and draw near to God step by step. Amen.'
+    }
+  },
+
+  {
+    /* insecurity — priority 4: intentionally BEATS marriage(6) so that the
+       specific phrases 孤单无助 / "feel alone" resolve here, while generic
+       loneliness (孤单/孤独/lonely/alone) still resolves to marriage. It sits
+       AFTER anxiety(2), so 不安全 / 害怕失去 / "afraid of ..." keep resolving to
+       anxiety exactly as before (those inputs also match anxiety's 不安/害怕/
+       afraid) — no existing question silently changes topic. */
+    id: 'insecurity', priority: 4,
+    keywordsZh: ['没有安全感','不安全','害怕失去','没人保护','缺乏安全感','心里不踏实','怕被抛弃','孤单无助'],
+    keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
+    relatedBooks: ['john'],
+    zh: {
+      title: '当你没有安全感',
+      verse: '【诗篇 46:1】“神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。”',
+      explanation: '没有安全感,常常不是因为你不够坚强,而是因为人的心本来就需要一个比环境、关系、金钱和自我能力更稳固的依靠。圣经告诉我们,神不是遥远的旁观者,祂是人的避难所和力量。真正的安全感,不是所有事情都在我们的掌控中,而是在不可控的人生里,知道有一位永不改变的神托住我们。',
+      reflection: '你现在最害怕失去的是什么?这件事是否已经变成了你安全感的来源?',
+      nextStep: '你可以慢慢读诗篇46篇,也可以继续读《约翰福音》第10章,思想耶稣如何像好牧人一样认识、保护和带领属祂的人。',
+      prayer: '主啊,我承认我里面有很多不安和害怕。求你让我知道,你是我的避难所和力量。即使环境不稳定,求你帮助我把安全感建立在你不改变的爱和同在里面。阿们。'
+    },
+    en: {
+      title: 'When You Feel Insecure',
+      verse: '【Psalm 46:1】“God is our refuge and strength, an ever-present help in trouble.” (NIV)',
+      explanation: 'Insecurity does not simply mean you are weak. It often reveals that the human heart needs a refuge stronger than circumstances, relationships, money, or self-control. Scripture tells us that God is not a distant observer; He is our refuge and strength. True security does not mean everything is under our control. It means we are held by the unchanging God even when life feels uncertain.',
+      reflection: 'What are you most afraid of losing right now? Has that thing become the foundation of your security?',
+      nextStep: 'You may slowly read Psalm 46, and then read John chapter 10 to reflect on Jesus as the Good Shepherd who knows, protects, and leads His people.',
+      prayer: 'Lord, I confess that my heart feels insecure and afraid. Help me know You as my refuge and strength. Even when life feels unstable, teach me to rest in Your unchanging love and presence. Amen.'
     }
   },
 
@@ -126,7 +167,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Success Still Leaves You Empty',
-      verse: '【Ecclesiastes 2:11】“Yet when I surveyed all that my hands had done and what I had toiled to achieve, everything was meaningless, a chasing after the wind; nothing was gained under the sun.”',
+      verse: '【Ecclesiastes 2:11】“Yet when I surveyed all that my hands had done and what I had toiled to achieve, everything was meaningless, a chasing after the wind; nothing was gained under the sun.” (NIV)',
       explanation: 'The man who wrote these words worked harder and achieved more than you or I — he got all of it, and found that “a little more” never lands. The problem was never that you tried too little. Achievement, by its nature, cannot be kept; it was never built to carry the full weight you rest on it. You are not a failure — you have reached the ceiling every success shares “under the sun.”',
       reflection: 'Have you been waiting for some achievement, believing that “once I get there” you will finally feel satisfied? Did that moment ever truly arrive?',
       nextStep: 'Read Ecclesiastes 2 and watch the author walk the road you are on. If you want to go a step further, pause on John 4: “Whoever drinks the water I give them will never thirst.”',
@@ -149,7 +190,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Your Relationships Hurt',
-      verse: '【Ecclesiastes 4:9-10】“Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up.”',
+      verse: '【Ecclesiastes 4:9-10】“Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up.” (NIV)',
       explanation: 'Ecclesiastes speaks of “two being better than one,” but never a fairy-tale marriage — it describes real companionship, where people fall and need to be lifted. Pain in a relationship often hurts so much precisely because we were made for deep connection. Scripture offers no simple “just do this” formula, but it honors that your pain is real, and points to a God willing to enter your burden with you.',
       reflection: 'In this relationship, what is the part of you that most longs to be understood, and lifted back up?',
       nextStep: 'This kind of pain usually also needs real people alongside you — a pastor, counselor, or mature spiritual friend. If you are willing, bring the weight to God in prayer first, then take a step toward seeking help.',
@@ -172,7 +213,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Suffering',
-      verse: '【John 16:33】“I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.”',
+      verse: '【John 16:33】“I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.” (NIV)',
       explanation: 'Scripture never makes light of your pain. Ecclesiastes says there is “a time to mourn” (Ecc 3:4) — it does not rush you to feel better. And Jesus did not go around suffering: he wept, he was abandoned, he died. To those in pain he does not say “it’s nothing,” but names the truth first, then adds: “I have overcome the world.” You do not have to pretend to be strong to come to him.',
       reflection: 'If you could say one completely honest thing to God, with nothing hidden, what would you most want to say right now?',
       nextStep: 'Read John 11 and watch Jesus weep at the grave of his friend — he knows what loss is. (A Job module is planned for the Library, for suffering and unexplained pain.)',
@@ -195,7 +236,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Face the Question of Death',
-      verse: '【John 11:25】“Jesus said to her, ‘I am the resurrection and the life. The one who believes in me will live, even though they die.’”',
+      verse: '【John 11:25】“Jesus said to her, ‘I am the resurrection and the life. The one who believes in me will live, even though they die.’” (NIV)',
       explanation: 'Ecclesiastes is honest to the point of chill: “under the sun,” death levels everyone, and it does not soften that wall. Yet it leaves a crack — “the spirit returns to God who gave it” (Ecc 12:7). And John answers from the other side: Jesus does not say he has a teaching about resurrection — he says, “I am the resurrection.” In the face of death, what he offers is not an explanation, but himself.',
       reflection: 'When you think about death, what exactly is your deepest fear or question?',
       nextStep: 'Read Ecclesiastes 12 first and let it bring you honestly to the wall; then read John 11 and see how Jesus stands before death and the grave.',
@@ -218,7 +259,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Always Thirsty for More',
-      verse: '【John 4:14】“Whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.”',
+      verse: '【John 4:14】“Whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.” (NIV)',
       explanation: 'Ecclesiastes diagnoses the loop of “thirsty again” — you chase something, get it, and soon you are empty once more. John responds: the problem is not that you drank too little, but which water you drank. Jesus says the water he gives becomes “a spring” inside you — not something you keep scooping from outside, but something welling up from within. Real satisfaction is not getting more; it is being connected to the Source.',
       reflection: 'Is there something you got, only to feel thirsty again soon after? What might that repeated thirst be pointing to?',
       nextStep: 'Read the well-side conversation in John 4, then John 6. You will watch Jesus turn people, again and again, from “just a little more” toward “come to me.”',
@@ -241,7 +282,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Not Sure You Believe',
-      verse: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.”',
+      verse: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)',
       explanation: 'Yes, you can read it — Ecclesiastes may be the book in the Bible most written for you. Its recurring phrase “under the sun” means exactly this: life examined honestly, with no God and no afterlife assumed. You can read it as a skeptic, because it argues from the skeptic’s own premises. Reading the Bible does not require you to “believe” something first; it only asks for honesty.',
       reflection: 'Setting aside the conclusion of “believe or not” for a moment — is there a faint longing for something eternal in you that this world has not filled?',
       nextStep: 'Start with Ecclesiastes 1, reading it as plain observation about work, pleasure, and success — and notice whether it names something true about your life. Everything about faith here is opt-in and clearly labeled.',
@@ -264,7 +305,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Lost in the Dark',
-      verse: '【John 8:12】“I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.”',
+      verse: '【John 8:12】“I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.” (NIV)',
       explanation: 'In the dark, what a person needs most is often not more information, but light — something that lets you see the one step in front of you. Jesus did not say “I will point you a direction”; he said “I am the way” (John 14:6). Following the light does not mean the whole road becomes clear at once; it means that in the step you are taking now, you are no longer feeling through the dark alone.',
       reflection: 'What is the one thing, or the one decision, you most want to “see clearly” right now?',
       nextStep: 'Read John 8 and John 14. If you feel lost right now, try seeking to know the Light first — you do not have to see the whole road at once.',
@@ -296,7 +337,7 @@ export function detectCrisis(input, lang) {
     en: {
       id: 'crisis',
       title: 'Please Seek Help Immediately',
-      verse: '【Psalm 34:18】“The Lord is close to the brokenhearted and saves those who are crushed in spirit.”',
+      verse: '【Psalm 34:18】“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” (NIV)',
       explanation: 'What you are going through matters deeply, and you should not carry it alone. Scripture tells us that God is near to the brokenhearted. Please also contact a trusted family member, friend, pastor, counselor, or local emergency service immediately — this matters more than any single verse.',
       reflection: 'Can you reach out to a trusted person right now?',
       nextStep: 'If you are in immediate danger, contact local emergency services. In the United States, call or text 988 (Suicide & Crisis Lifeline, 24/7, free, confidential), or text HOME to 741741; if you are in immediate danger, call 911.',
@@ -306,25 +347,29 @@ export function detectCrisis(input, lang) {
   return crisis[lang === 'en' ? 'en' : 'zh'];
 }
 
+/* Warm, Scripture-centered fallback — shown ONLY when nothing else matches.
+   It must never read like a database/FAQ error: no "out of scope / no match /
+   please rephrase / database" language. An unmatched question is treated as a
+   real question worth bringing to God (Matthew 11:28). */
 export function getFallbackResponse(lang) {
   const fallback = {
     zh: {
       id: 'fallback',
-      title: '把问题带到光中',
-      verse: '【约翰福音 1:5】“光照在黑暗里,黑暗却不接受光。”',
-      explanation: '你提出的问题可能超出了目前这个本地问答库的范围,但圣经的核心应许仍然真实:主耶稣是照进黑暗的真光。你生命中的迷茫、痛苦和疑问,祂都看见。你可以换一种说法再问一次(例如“我很空虚”“神真的爱我吗”“我很焦虑”)。',
-      reflection: '你愿意把这个问题继续带到神面前,求祂一步一步光照你吗?',
-      nextStep: '你可以先阅读《约翰福音》第 1 章,或继续浏览《传道书》中关于人生意义的内容。',
-      prayer: '主耶稣,求你用你的光照进我的问题和困惑中,带领我认识真理和生命。阿们。'
+      title: '把真实的问题带到神面前',
+      verse: '【马太福音 11:28】“凡劳苦担重担的人,可以到我这里来,我就使你们得安息。”',
+      explanation: '谢谢你把这个问题带到这里。圣经很看重人内心真实的惧怕、不安、孤单、挣扎和寻找。耶稣没有要求人先把自己整理好才来到祂面前,祂邀请劳苦担重担的人到祂这里来。你现在的问题,也可以成为你开始靠近神的地方。',
+      reflection: '如果你可以诚实地把心里最重的一句话告诉神,那会是什么?',
+      nextStep: '你可以先安静读《马太福音》11:28,也可以继续阅读《约翰福音》第 1 章,认识那位愿意进入人黑暗与重担中的耶稣。',
+      prayer: '主耶稣,我带着真实的问题来到你面前。求你在我的重担中赐下安息,在我的不明白中赐下光,在我的寻找中带领我更认识你。阿们。'
     },
     en: {
       id: 'fallback',
-      title: 'Bring Your Question Into the Light',
-      verse: '【John 1:5】“The light shines in the darkness, and the darkness has not overcome it.”',
-      explanation: 'Your question may be beyond this first, local response database, but the central promise of Scripture remains true: Jesus is the true light who shines into darkness. He sees your confusion, pain, and questions. You might try rephrasing (for example, “I feel empty,” “does God really love me,” “I feel anxious”).',
-      reflection: 'Are you willing to bring this question before God and ask Him to guide you step by step?',
-      nextStep: 'You may begin with John chapter 1, or continue exploring Ecclesiastes on the meaning of life.',
-      prayer: 'Lord Jesus, shine Your light into my questions and confusion. Lead me toward truth and life. Amen.'
+      title: 'Bring Your Real Question Before God',
+      verse: '【Matthew 11:28】“Come to me, all you who are weary and burdened, and I will give you rest.” (NIV)',
+      explanation: 'Thank you for bringing this question here. Scripture takes seriously the real fears, burdens, loneliness, struggles, and searching of the human heart. Jesus does not ask people to fix themselves before coming to Him. He invites the weary and burdened to come. Your question may become the very place where you begin drawing near to God.',
+      reflection: 'If you could honestly bring one sentence from your heart to God, what would it be?',
+      nextStep: 'You may sit quietly with Matthew 11:28, and then continue with John chapter 1 to encounter Jesus, who enters our darkness and carries our burdens.',
+      prayer: 'Lord Jesus, I bring my real question before You. Give me rest in my burden, light in my confusion, and lead me to know You more deeply. Amen.'
     }
   };
   return fallback[lang === 'en' ? 'en' : 'zh'];

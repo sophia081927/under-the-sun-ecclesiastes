@@ -252,10 +252,13 @@ export function mountBiblicalQA(container, opts) {
 
   // re-render on page language toggle (works for both the Tailwind homepage
   // which sets <html lang>, and the book pages which toggle <body class>)
-  let raf = 0;
+  // Debounce with setTimeout (not requestAnimationFrame): rAF is suspended in
+  // background/hidden tabs, which would defer a language re-render; setTimeout
+  // still fires, so switching language always updates the visible answer.
+  let deb = 0;
   const obs = new MutationObserver(() => {
-    cancelAnimationFrame(raf);
-    raf = requestAnimationFrame(renderChrome);
+    clearTimeout(deb);
+    deb = setTimeout(renderChrome, 0);
   });
   obs.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   obs.observe(document.body, { attributes: true, attributeFilter: ['class'] });

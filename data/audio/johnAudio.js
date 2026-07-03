@@ -4,7 +4,7 @@
  * Structure parallels data/books/ecclesiastes.js so the same Listening engine
  * can drive John once audio (or TTS) is turned on.
  *
- *   audio/john/chapter-01-cn.mp3 … chapter-21-cn.mp3   (Chinese)
+ *   audio/john/chapter-01-zh.mp3 … chapter-21-zh.mp3   (Chinese)
  *   audio/john/chapter-01-en.mp3 … chapter-21-en.mp3   (English)
  */
 export const johnAudio = {
@@ -36,7 +36,7 @@ export const johnAudio = {
   ].map((c) => ({
     ...c,
     audio: {
-      zh: `audio/john/chapter-${String(c.num).padStart(2, '0')}-cn.mp3`,
+      zh: `audio/john/chapter-${String(c.num).padStart(2, '0')}-zh.mp3`,
       en: `audio/john/chapter-${String(c.num).padStart(2, '0')}-en.mp3`
     }
   }))

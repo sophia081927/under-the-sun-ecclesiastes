@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>约翰福音 · 敬拜 · John Worship</title>
+<meta name="description" content="约翰福音敬拜模式 — 按生命之光、活水、复活等主题聆听敬拜。John worship, gathered by the themes of the Gospel.">
+<style>
+  :root{--bg:#14161a;--bg2:#1b1e24;--ink:#ece7dd;--muted:#9a948a;--faint:#6f6a62;--sun:#d9a441;--sun-soft:#e8c77e;--line:rgba(217,164,65,.22);--line-soft:rgba(236,231,221,.10)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:radial-gradient(120% 55% at 50% -8%, rgba(217,164,65,.06), transparent 60%),var(--bg);color:var(--ink);
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.85;-webkit-font-smoothing:antialiased;padding-bottom:88px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  a{color:var(--sun-soft);text-decoration:none}
+  .top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 18px;background:linear-gradient(var(--bg),rgba(20,22,26,.82),transparent);font-size:13px}
+  .top .back{color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);font-family:inherit;font-size:12px;padding:7px 13px;cursor:pointer;min-height:34px}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  .hero{text-align:center;padding:44px 20px 8px}
+  .hero .ky{color:var(--sun);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:16px}
+  .hero h1{font-size:clamp(28px,7vw,40px);font-weight:600;line-height:1.2}
+  .hero p{color:var(--muted);margin-top:16px;font-size:15.5px;max-width:520px;margin-left:auto;margin-right:auto}
+  section.blk{padding:26px 0}
+  h2.sec{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin:26px 0 4px}
+  footer{text-align:center;color:var(--faint);font-size:12px;padding:36px 20px 10px;border-top:1px solid var(--line-soft)}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;background:rgba(24,27,32,.94);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a{flex:1;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;padding:5px 2px;min-height:50px}
+  .tabbar a:hover{color:var(--sun-soft)} .tabbar .ic{font-size:18px}
+  @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:70px}}
+</style>
+</head>
+<body class="lang-zh" data-book="john">
+  <div class="top">
+    <a class="back" href="john.html">‹ <span class="lz">约翰福音</span><span class="le" style="display:none">John</span></a>
+    <div class="lang-toggle"><button id="bz" class="active" onclick="setLang('zh')">中文</button><button id="be" onclick="setLang('en')">EN</button></div>
+  </div>
+  <div class="hero">
+    <div class="ky" id="ky"></div>
+    <h1 id="h1"></h1>
+    <p id="intro"></p>
+  </div>
+  <div class="wrap">
+    <section class="blk"><div id="media"></div></section>
+    <h2 class="sec" id="tracksHead"></h2>
+    <section class="blk"><div id="tracks"></div></section>
+  </div>
+  <footer>生命之光 · the light of life · <a href="index.html" id="lib"></a></footer>
+  <nav class="tabbar">
+    <a href="john.html"><span class="ic">📖</span><span id="tb1"></span></a>
+    <a href="john-listen.html"><span class="ic">♪</span><span id="tb2"></span></a>
+    <a href="john-study.html"><span class="ic">✦</span><span id="tb3"></span></a>
+    <a href="index.html"><span class="ic">☰</span><span id="tb4"></span></a>
+  </nav>
+
+<script type="module">
+  import { getBookById } from './data/bibleRegistry.js';
+  import { renderBookMediaPanel } from './components/bookMediaPanel.js';
+  import { renderWorshipTracks } from './components/worshipPanel.js';
+  import { johnWorship } from './data/worship/johnWorship.js';
+
+  const BOOK = 'john';
+  const book = getBookById(BOOK);
+  const T = { zh:{ ky:'敬拜模式', worship:'敬拜', tracks:'按主题聆听', lib:'圣经书阁', tb:['阅读','聆听','导览','书阁'] },
+              en:{ ky:'Worship mode', worship:'Worship', tracks:'Listen by theme', lib:'Bible Library', tb:['Read','Listen','Study','Library'] } };
+  let lang='zh';
+  function render(){
+    const t=T[lang], acc=book.accentColor||'#D4AF37';
+    document.documentElement.lang = lang==='zh'?'zh-CN':'en';
+    document.body.classList.toggle('lang-zh', lang==='zh');
+    document.getElementById('bz').classList.toggle('active',lang==='zh');
+    document.getElementById('be').classList.toggle('active',lang==='en');
+    document.querySelector('.lz').style.display = lang==='zh'?'inline':'none';
+    document.querySelector('.le').style.display = lang==='zh'?'none':'inline';
+    document.getElementById('ky').textContent=t.ky;
+    document.getElementById('h1').textContent=(lang==='zh'?book.titleZh:book.titleEn)+' · '+t.worship;
+    document.getElementById('intro').textContent = johnWorship.intro[lang]||'';
+    document.getElementById('tracksHead').textContent=t.tracks;
+    document.getElementById('lib').textContent=t.lib;
+    ['tb1','tb2','tb3','tb4'].forEach((id,i)=>document.getElementById(id).textContent=t.tb[i]);
+    document.title=(lang==='zh'?book.titleZh:book.titleEn)+' · '+t.worship;
+    renderBookMediaPanel(document.getElementById('media'), BOOK, lang);
+    renderWorshipTracks(document.getElementById('tracks'), johnWorship, lang, acc);
+  }
+  window.setLang=(l)=>{lang=l;try{localStorage.setItem('bible_lang',l);}catch(e){}render();};
+  let saved=null;try{saved=localStorage.getItem('bible_lang');}catch(e){}
+  const nl=(navigator.language||'').toLowerCase(); lang=saved||(nl.indexOf('zh')===0?'zh':'en'); render();
+</script>
+</body>
+</html>

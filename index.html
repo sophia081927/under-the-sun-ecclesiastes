@@ -119,7 +119,7 @@
       return `<a href="${href}" class="text-[11px] tracking-wider uppercase text-gray-400 hover:text-[#D4AF37] border border-gray-700/70 hover:border-[#D4AF37]/50 rounded-full px-3 min-h-[36px] inline-flex items-center transition-colors">${esc(meta[lang])}</a>`;
     };
     const chips = active
-      ? ['listen', 'study', 'deck', 'ask'].filter(f => b.features && b.features[f]).map(chipFor).join('')
+      ? ['listen', 'worship', 'study', 'deck', 'ask'].filter(f => b.features && b.features[f]).map(chipFor).join('')
       : '';
 
     // Uniform per-book button logic:

@@ -31,8 +31,10 @@ export const bibleRegistry = [
     status: 'active',
     route: '/ecclesiastes',
     listenRoute: '/ecclesiastes/listen',
+    worshipRoute: '/ecclesiastes/worship',
     page: 'ecclesiastes.html',
     listen: 'listen.html',
+    worship: 'ecclesiastes-worship.html',
     study: null,
     deck: 'deck-en.html',
     bookType: 'Wisdom Literature',
@@ -47,6 +49,24 @@ export const bibleRegistry = [
       zh: { reference: '传道书 1:14', text: '我见日光之下所行的一切事，都是虚空，都是捕风。' },
       en: { reference: 'Ecclesiastes 1:14', text: 'I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.' }
     },
+    mediaHub: {
+      zh: {
+        audioTitle: '传道书 · 深度听书解经',
+        audioGuide: '🎧 点击聆听：在虚空、劳碌与捕风中寻找永恒的锚',
+        worshipTitle: '《一生一世》',
+        worshipGuide: '🎵 当一切繁华落尽，转眼仰望耶稣。',
+        spotifyLink: 'https://open.spotify.com/search/一生一世+赞美诗',
+        youtubeLink: 'https://www.youtube.com/results?search_query=一生一世+赞美诗'
+      },
+      en: {
+        audioTitle: 'Ecclesiastes · Audio Commentary',
+        audioGuide: '🎧 Click to listen: finding eternity and purpose in a fleeting world under the sun.',
+        worshipTitle: 'Turn Your Eyes Upon Jesus',
+        worshipGuide: '🎵 When the noise of the world fades, turn your eyes upon Jesus.',
+        spotifyLink: 'https://open.spotify.com/search/Turn+Your+Eyes+Upon+Jesus',
+        youtubeLink: 'https://www.youtube.com/results?search_query=Turn+Your+Eyes+Upon+Jesus+worship'
+      }
+    },
     bgColor: 'from-[#4A0E17] to-[#12161A]',
     accentColor: '#D4AF37',
     languages: ['zh', 'en'],
@@ -60,9 +80,11 @@ export const bibleRegistry = [
     titleEn: 'John',
     status: 'active',
     route: '/john',
-    listenRoute: null,
+    listenRoute: '/john/listen',
+    worshipRoute: '/john/worship',
     page: 'john.html',
-    listen: null,
+    listen: 'john-listen.html',
+    worship: 'john-worship.html',
     study: 'john-study.html',
     deck: 'john-deck-en.html',
     bookType: 'Gospel',
@@ -77,11 +99,29 @@ export const bibleRegistry = [
       zh: { reference: '约翰福音 1:4-5', text: '生命在他里头，这生命就是人的光。光照在黑暗里，黑暗却不接受光。' },
       en: { reference: 'John 1:4-5', text: 'In him was life, and that life was the light of all mankind. The light shines in the darkness, and the darkness has not overcome it.' }
     },
+    mediaHub: {
+      zh: {
+        audioTitle: '约翰福音第一章 · 深度听书解经',
+        audioGuide: '🎧 点击聆听：太初有道与生命真光的属灵奥秘',
+        worshipTitle: '《主耶稣我是真光》',
+        worshipGuide: '🎵 走出日光之下的捕风，合一沉浸于真光的救赎。',
+        spotifyLink: 'https://open.spotify.com/search/主耶稣我是真光',
+        youtubeLink: 'https://www.youtube.com/results?search_query=主耶稣我是真光+赞美诗'
+      },
+      en: {
+        audioTitle: 'Gospel of John Chapter 1 · Audio Commentary',
+        audioGuide: '🎧 Click to listen: the Logos, eternal life, and the true Light beyond the sun.',
+        worshipTitle: 'Way Maker',
+        worshipGuide: '🎵 Step out of the fleeting wind and walk into the marvelous light.',
+        spotifyLink: 'https://open.spotify.com/search/Way+Maker',
+        youtubeLink: 'https://www.youtube.com/results?search_query=Way+Maker+worship'
+      }
+    },
     bgColor: 'from-[#2D1A3A] to-[#12161A]',
     accentColor: '#E8D7FF',
     languages: ['zh', 'en'],
-    audioEnabled: false,
-    features: { read: true, listen: false, ask: true, reflection: true, worship: true, bilingual: true, study: true, deck: true }
+    audioEnabled: true,
+    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: true, deck: true }
   },
   {
     id: 'job',
@@ -147,11 +187,12 @@ export const bibleRegistry = [
 
 /** Feature labels (bilingual) — used by the home page to show what a book offers. */
 export const featureLabels = {
-  read:   { zh: '阅读', en: 'Read',   key: 'page'   },
-  listen: { zh: '聆听', en: 'Listen', key: 'listen' },
-  study:  { zh: '导览', en: 'Study',  key: 'study'  },
-  deck:   { zh: '图解', en: 'Deck',   key: 'deck'   },
-  ask:    { zh: '提问', en: 'Ask',    key: null     },
+  read:    { zh: '阅读', en: 'Read',    key: 'page'    },
+  listen:  { zh: '聆听', en: 'Listen',  key: 'listen'  },
+  worship: { zh: '敬拜', en: 'Worship', key: 'worship' },
+  study:   { zh: '导览', en: 'Study',   key: 'study'   },
+  deck:    { zh: '图解', en: 'Deck',    key: 'deck'    },
+  ask:     { zh: '提问', en: 'Ask',     key: null      },
 };
 
 export const getBookById = (id) => bibleRegistry.find((book) => book.id === id);

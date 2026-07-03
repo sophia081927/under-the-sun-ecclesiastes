@@ -81,7 +81,17 @@
   </footer>
 
 <script type="module">
-  import { bibleRegistry, featureLabels } from './data/bibleRegistry.js';
+  import { bibleRegistry, featureLabels, resolveHash } from './data/bibleRegistry.js';
+
+  // GitHub-Pages-safe hash routing: #/john/listen → john-listen.html (refresh-safe).
+  function gotoHash() {
+    if (location.hash && location.hash.indexOf('#/') === 0) {
+      const file = resolveHash(location.hash);
+      if (file) { location.replace(file); return true; }
+    }
+    return false;
+  }
+  window.addEventListener('hashchange', gotoHash);
 
   const UI = {
     zh: { kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
@@ -167,11 +177,13 @@
     render();
   };
 
-  // init: saved preference > browser language
-  let saved = null; try { saved = localStorage.getItem('bible_lang'); } catch (e) {}
-  const nl = (navigator.language || '').toLowerCase();
-  lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
-  render();
+  // init: if arriving on a #/book/view deep link, redirect; else render the library
+  if (!gotoHash()) {
+    let saved = null; try { saved = localStorage.getItem('bible_lang'); } catch (e) {}
+    const nl = (navigator.language || '').toLowerCase();
+    lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
+    render();
+  }
 </script>
 </body>
 </html>

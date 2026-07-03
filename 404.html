@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>圣经书阁 · Bible Library</title>
+<meta name="robots" content="noindex">
+<!--
+  GitHub Pages static-hosting fallback.
+  Any unknown path (e.g. a folder-style /john/listen, or a mistyped link) is
+  translated into a safe hash on the home page, which then resolves to the
+  correct flat .html file. This means refreshing folder-style routes never
+  dead-ends in a raw 404.
+-->
+<script>
+  (function () {
+    var segs = location.pathname.split('/').filter(Boolean); // [repo, ...rest]
+    var repo = segs.length ? segs[0] : '';
+    var rest = segs.slice(1).join('/');                       // e.g. "john/listen"
+    var base = '/' + (repo ? repo + '/' : '');
+    var target = base + 'index.html' + (rest ? '#/' + rest : '') + location.search;
+    location.replace(target);
+  })();
+</script>
+<style>body{background:#14161a;color:#9a948a;font-family:Georgia,"Songti SC",serif;text-align:center;padding:80px 24px}a{color:#e8c77e}</style>
+</head>
+<body>
+  正在前往圣经书阁…… · Taking you to the Bible Library…
+  <p style="margin-top:16px"><a href="index.html">index.html</a></p>
+</body>
+</html>

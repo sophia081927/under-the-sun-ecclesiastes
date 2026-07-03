@@ -1,34 +1,27 @@
 /**
  * Central multilingual Bible-book registry — the single source of truth.
  *
- * Keep this file LIGHTWEIGHT: identity, routing, labels, colors, status, and
- * feature flags only. Long content (chapters, reflections, worship, audio)
- * lives in per-book files under data/books/<id>.js.
+ * GitHub-Pages-safe navigation: the platform ships flat .html files (refresh-safe,
+ * never 404). This registry also exposes hash routes (safeHash/listenHash/
+ * worshipHash) that index.html resolves to those flat files, so shareable
+ * #/<book>/<view> links work and survive refresh. `page`/`listen`/`worship`
+ * hold the actual static file each hash resolves to.
  *
- * To add a book: append one entry here + add its content/pages. The home page
- * (index.html) renders every entry automatically.
- *
- * Fields:
- *   id, order, status('active'|'upcoming')
- *   titleZh/En, bookType(+Zh)
- *   route         clean route (informational; static host also serves <page>)
- *   page          reading page for active books; Coming-Soon page for upcoming
- *   listen/study/deck   capability page paths (or null)
- *   listenRoute   clean listen route (informational)
- *   theme*, tagline*, description*   bilingual copy
- *   keyVerse      { zh:{reference,text}, en:{reference,text} }
- *   bgColor       Tailwind gradient classes; accentColor hex
- *   languages, audioEnabled
- *   features      capability flags: read/listen/ask/reflection/worship/bilingual
- *                 (+ study/deck used by the home page). Flip on when a file exists.
+ * Keep this file LIGHTWEIGHT. Long content lives in data/books, data/worship,
+ * data/audio, data/media.
  */
 export const bibleRegistry = [
   {
     id: 'ecclesiastes',
     order: 1,
+    slug: 'ecclesiastes',
     titleZh: '传道书',
     titleEn: 'Ecclesiastes',
     status: 'active',
+    // GitHub-Pages-safe hash routes + the static files they resolve to
+    safeHash: '#/ecclesiastes',
+    listenHash: '#/ecclesiastes/listen',
+    worshipHash: '#/ecclesiastes/worship',
     route: '/ecclesiastes',
     listenRoute: '/ecclesiastes/listen',
     worshipRoute: '/ecclesiastes/worship',
@@ -69,6 +62,7 @@ export const bibleRegistry = [
     },
     bgColor: 'from-[#4A0E17] to-[#12161A]',
     accentColor: '#D4AF37',
+    audioPathBase: 'audio/ecclesiastes/',
     languages: ['zh', 'en'],
     audioEnabled: true,
     features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: true }
@@ -76,9 +70,13 @@ export const bibleRegistry = [
   {
     id: 'john',
     order: 2,
+    slug: 'john',
     titleZh: '约翰福音',
     titleEn: 'John',
     status: 'active',
+    safeHash: '#/john',
+    listenHash: '#/john/listen',
+    worshipHash: '#/john/worship',
     route: '/john',
     listenRoute: '/john/listen',
     worshipRoute: '/john/worship',
@@ -119,6 +117,7 @@ export const bibleRegistry = [
     },
     bgColor: 'from-[#2D1A3A] to-[#12161A]',
     accentColor: '#E8D7FF',
+    audioPathBase: 'audio/john/',
     languages: ['zh', 'en'],
     audioEnabled: true,
     features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: true, deck: true }
@@ -126,13 +125,19 @@ export const bibleRegistry = [
   {
     id: 'job',
     order: 3,
+    slug: 'job',
     titleZh: '约伯记',
     titleEn: 'Job',
     status: 'upcoming',
+    safeHash: '#/job',
+    listenHash: null,
+    worshipHash: null,
     route: '/job',
     listenRoute: null,
+    worshipRoute: null,
     page: 'job.html',
     listen: null,
+    worship: null,
     study: null,
     deck: null,
     bookType: 'Wisdom Literature',
@@ -149,6 +154,7 @@ export const bibleRegistry = [
     },
     bgColor: 'from-[#1A2A3A] to-[#12161A]',
     accentColor: '#B8C7D9',
+    audioPathBase: 'audio/job/',
     languages: ['zh', 'en'],
     audioEnabled: false,
     features: { read: false, listen: false, ask: false, reflection: false, worship: false, bilingual: true, study: false, deck: false }
@@ -156,13 +162,19 @@ export const bibleRegistry = [
   {
     id: 'matthew',
     order: 4,
+    slug: 'matthew',
     titleZh: '马太福音',
     titleEn: 'Matthew',
     status: 'upcoming',
+    safeHash: '#/matthew',
+    listenHash: null,
+    worshipHash: null,
     route: '/matthew',
     listenRoute: null,
+    worshipRoute: null,
     page: 'matthew.html',
     listen: null,
+    worship: null,
     study: null,
     deck: null,
     bookType: 'Gospel',
@@ -179,6 +191,7 @@ export const bibleRegistry = [
     },
     bgColor: 'from-[#2B2615] to-[#12161A]',
     accentColor: '#D8C27A',
+    audioPathBase: 'audio/matthew/',
     languages: ['zh', 'en'],
     audioEnabled: false,
     features: { read: false, listen: false, ask: false, reflection: false, worship: false, bilingual: true, study: false, deck: false }
@@ -195,7 +208,23 @@ export const featureLabels = {
   ask:     { zh: '提问', en: 'Ask',     key: null      },
 };
 
+/**
+ * Resolve a GitHub-Pages-safe hash (e.g. '#/john/listen') to its static file.
+ * Returns a filename string, or null if it can't be resolved.
+ */
+export const resolveHash = (hash) => {
+  const clean = String(hash || '').replace(/^#\/?/, '').replace(/\/+$/, '');
+  if (!clean) return null;
+  const [slug, view] = clean.split('/');
+  const book = getBookBySlug(slug);
+  if (!book) return null;
+  if (view === 'listen') return book.listen || book.page || null;
+  if (view === 'worship') return book.worship || book.page || null;
+  return book.page || null;
+};
+
 export const getBookById = (id) => bibleRegistry.find((book) => book.id === id);
+export const getBookBySlug = (slug) => bibleRegistry.find((book) => book.slug === slug);
 export const getActiveBooks = () =>
   bibleRegistry.filter((b) => b.status === 'active').sort((a, b) => a.order - b.order);
 export const getUpcomingBooks = () =>

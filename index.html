@@ -44,7 +44,7 @@
   body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
   .book { transition: border-color .25s, transform .25s, box-shadow .25s; }
   .book.active:hover { border-color: rgba(212,175,55,.5); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
-  .book.upcoming { opacity: .62; }
+  .book.upcoming { opacity: .62; cursor: not-allowed; }
 </style>
 </head>
 
@@ -106,14 +106,14 @@
           askEyebrow: '本站核心 · 随便问', askTitle: '用圣经回应我的问题',
           askSub: '带着你真实的问题、疑惑与挣扎而来——关于空虚、焦虑、爱、苦难,或如何开始认识神——从传道书与约翰福音得到温柔、扎根圣经的回应。',
           askBtn: '开始提问',
-          enter: '进入', listen: '聆听', soon: '敬请期待', comingType: '书卷筹备中' },
+          enter: '进入', listen: '聆听', soon: '译注校准中', comingType: '书卷筹备中' },
     en: { kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
           sub: 'A calm, growing bilingual space for reading Scripture. No pressure to believe — only an invitation to read honestly.',
           more: 'More books are on the way · just append one entry to the registry',
           askEyebrow: 'The heart of this site · Ask', askTitle: 'Ask from Scripture',
           askSub: 'Bring your real questions, doubts, and struggles — about emptiness, anxiety, love, suffering, or how to begin knowing God — and receive gentle, Scripture-centered guidance from Ecclesiastes and John.',
           askBtn: 'Start asking',
-          enter: 'Enter', listen: 'Listen', soon: 'Coming soon', comingType: 'In preparation' },
+          enter: 'Enter', listen: 'Listen', soon: 'Coming Soon', comingType: 'In preparation' },
   };
 
   let lang = 'zh';
@@ -159,12 +159,12 @@
               style="border-color:${accent}66;color:${accent}">English <i data-lucide="chevron-right" class="h-3 w-3"></i></a>
          </div>
          ${chips ? `<div class="mt-3 flex flex-wrap gap-2">${chips}</div>` : ''}`
-      : `<a href="${b.page || '#'}" class="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase text-gray-400 hover:text-[#D4AF37] border border-gray-700/70 hover:border-[#D4AF37]/50 rounded-full px-4 py-2.5 min-h-[44px] transition-colors">
+      : `<span class="mt-6 inline-flex items-center gap-2 text-xs tracking-[0.16em] uppercase text-gray-500 border border-gray-800 rounded-full px-4 py-2.5 min-h-[44px] cursor-not-allowed" role="note" aria-disabled="true" tabindex="-1">
            <i data-lucide="clock" class="h-3.5 w-3.5"></i> ${esc(t.soon)}
-         </a>`;
+         </span>`;
 
     return `
-      <article class="book ${active ? 'active' : 'upcoming'} border border-gray-800/80 rounded-2xl p-6 md:p-7 flex flex-col bg-gradient-to-br ${b.bgColor}">
+      <article class="book ${active ? 'active' : 'upcoming'} border border-gray-800/80 rounded-2xl p-6 md:p-7 flex flex-col bg-gradient-to-br ${b.bgColor}" ${active ? '' : 'aria-disabled="true"'}>
         <div class="flex items-center justify-between mb-4">
           <span class="text-[10px] font-mono tracking-[0.22em] uppercase" style="color:${accent}">${esc(type)}</span>
           ${badge}

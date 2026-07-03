@@ -71,9 +71,16 @@ const CSS = `
 .bqa-sub{margin-top:12px;font-size:15px;color:var(--bqa-muted);line-height:1.7}
 .bqa-box{background:var(--bqa-bg);border:1px solid var(--bqa-line);border-radius:12px;padding:24px 22px;box-shadow:0 14px 40px rgba(0,0,0,.22)}
 .bqa-label{font-size:14.5px;color:var(--bqa-sun2);letter-spacing:.02em;margin-bottom:11px}
+.bqa-inputwrap{position:relative}
 .bqa-input{width:100%;background:#14161a;border:1px solid var(--bqa-line);border-radius:8px;color:var(--bqa-ink);
-  font-family:inherit;font-size:16px;line-height:1.6;padding:13px 14px;resize:vertical;min-height:76px;display:block}
+  font-family:inherit;font-size:16px;line-height:1.6;padding:13px 44px 13px 14px;resize:vertical;min-height:76px;display:block}
 .bqa-input:focus{outline:none;border-color:var(--bqa-sun)}
+.bqa-clear{position:absolute;top:6px;right:6px;display:none;align-items:center;justify-content:center;
+  width:22px;height:22px;padding:9px;box-sizing:content-box;background:transparent;border:none;border-radius:50%;
+  color:var(--bqa-muted);font-size:19px;line-height:1;cursor:pointer;font-family:inherit;transition:color .2s}
+.bqa-clear.show{display:inline-flex}
+.bqa-clear:hover{color:var(--bqa-sun2)}
+.bqa-clear:focus-visible{outline:2px solid var(--bqa-sun);outline-offset:1px}
 .bqa-go{margin-top:13px;display:flex;justify-content:flex-end}
 .bqa-btn{background:var(--bqa-sun);color:#14161a;border:none;border-radius:30px;cursor:pointer;font-family:inherit;
   font-weight:700;padding:12px 28px;font-size:15px;letter-spacing:.03em;transition:background .2s}
@@ -160,7 +167,10 @@ export function mountBiblicalQA(container, opts) {
     </div>
     <div class="bqa-box">
       <div class="bqa-label" data-k="inputLabel"></div>
-      <textarea class="bqa-input" data-el="input" rows="3"></textarea>
+      <div class="bqa-inputwrap">
+        <textarea class="bqa-input" data-el="input" rows="3"></textarea>
+        <button type="button" class="bqa-clear" data-el="clear" aria-label="Clear question">×</button>
+      </div>
       <div class="bqa-go"><button class="bqa-btn" data-el="btn"></button></div>
       <div class="bqa-guided">
         <div class="g-hint" data-k="guided"></div>
@@ -172,7 +182,18 @@ export function mountBiblicalQA(container, opts) {
   `;
 
   const el = (n) => container.querySelector(`[data-el="${n}"]`);
-  const input = el('input'), btn = el('btn'), chips = el('chips'), answer = el('answer');
+  const input = el('input'), btn = el('btn'), chips = el('chips'), answer = el('answer'), clearBtn = el('clear');
+
+  // Smooth-scroll a node into view, honoring the reduced-motion preference.
+  function smoothScroll(node){
+    if(!node) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    node.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'nearest' });
+  }
+  // Clear button: visible only when the field is non-empty.
+  function updateClear(){ clearBtn.classList.toggle('show', !!(input.value && input.value.trim())); }
+  input.addEventListener('input', updateClear);
+  clearBtn.addEventListener('click', function(){ input.value = ''; updateClear(); input.focus(); });
 
   function renderCard(q, r, lang) {
     const t = UI[lang];
@@ -196,7 +217,7 @@ export function mountBiblicalQA(container, opts) {
         <div class="bqa-sect pray"><div class="bqa-slabel">${esc(t.lPray)}</div><div class="bqa-body">${esc(r.prayer)}</div></div>
         ${links}
       </div>`;
-    answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    smoothScroll(answer.querySelector('.bqa-card'));
   }
 
   let loadTimer = 0;
@@ -205,7 +226,7 @@ export function mountBiblicalQA(container, opts) {
     answer.innerHTML =
       `<div class="bqa-loading"><span>${esc(t.loading)}</span>` +
       `<span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
-    answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    smoothScroll(answer.querySelector('.bqa-loading') || answer);
   }
   function ask(q) {
     const lang = detectLang(opts);
@@ -242,6 +263,8 @@ export function mountBiblicalQA(container, opts) {
     if (eb) eb.textContent = lang === 'zh' ? '本站核心 · 随便问' : 'The heart of this site · Ask';
     input.placeholder = t.placeholder;
     btn.textContent = t.button;
+    clearBtn.setAttribute('aria-label', lang === 'zh' ? '清除问题' : 'Clear question');
+    updateClear();
     // guided chips
     chips.innerHTML = '';
     GUIDED.forEach((g) => {
@@ -249,7 +272,7 @@ export function mountBiblicalQA(container, opts) {
       b.className = 'bqa-chip';
       b.type = 'button';
       b.textContent = lang === 'zh' ? g.zh : g.en;
-      b.addEventListener('click', () => { input.value = b.textContent; ask(b.textContent); });
+      b.addEventListener('click', () => { input.value = b.textContent; updateClear(); ask(b.textContent); });
       chips.appendChild(b);
     });
     // re-render the last answer in the new language (same verse, no re-rotation)

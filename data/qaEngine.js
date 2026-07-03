@@ -42,6 +42,10 @@ export const qaRegistry = [
     keywordsZh: ['空虚','虚空','没意义','没有意义','毫无意义','无聊','不满足','捕风','空洞','迷茫'],
     keywordsEn: ['empty','emptiness','meaningless','no meaning','pointless','vanity','not satisfied','unsatisfied','chasing the wind'],
     relatedBooks: ['ecclesiastes','john'],
+    variants: [
+      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)' } },
+      { verse: { zh: '【约翰福音 4:13-14】“凡喝这水的还要再渴;人若喝我所赐的水就永远不渴。我所赐的水要在他里头成为泉源,直涌到永生。”', en: '【John 4:13-14】“Everyone who drinks this water will be thirsty again, but whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.” (NIV)' } }
+    ],
     zh: {
       title: '当你感到空虚',
       verse: '【传道书 1:14】“我见日光之下所行的一切事,都是虚空,都是捕风。”',
@@ -65,6 +69,10 @@ export const qaRegistry = [
     keywordsZh: ['焦虑','害怕','压力','担心','忧愁','忧虑','睡不着','恐惧','不安','紧张','惊慌','放不下'],
     keywordsEn: ['anxious','anxiety','fear','afraid','fearful','stress','stressed','worry','worried','cannot sleep',"can't sleep",'nervous','panic','overwhelmed'],
     relatedBooks: ['john'],
+    variants: [
+      { verse: { zh: '【腓立比书 4:6-7】“应当一无挂虑,只要凡事借着祷告、祈求和感谢,将你们所要的告诉神。神所赐出人意外的平安,必在基督耶稣里保守你们的心怀意念。”', en: '【Philippians 4:6-7】“Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.” (NIV)' } },
+      { verse: { zh: '【马太福音 6:34】“所以,不要为明天忧虑,因为明天自有明天的忧虑;一天的难处一天当就够了。”', en: '【Matthew 6:34】“Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.” (NIV)' } }
+    ],
     zh: {
       title: '当你焦虑害怕',
       verse: '【约翰福音 14:27】“我留下平安给你们;我将我的平安赐给你们。我所赐的,不像世人所赐的。你们心里不要忧愁,也不要胆怯。”',
@@ -88,6 +96,10 @@ export const qaRegistry = [
     keywordsZh: ['神爱我','神爱','神真的爱','神真的爱我吗','神爱我吗','神在乎','神在意','被爱','没有人爱','没有人爱我','值得被爱','我值得被爱吗','神还爱我吗','爱我吗','配不配'],
     keywordsEn: ['god love','does god love','does god love me','god really love','loved by god','god care','am i loved','no one loves','no one loves me','worth loving','worthy of love','unlovable','god still love'],
     relatedBooks: ['john'],
+    variants: [
+      { verse: { zh: '【罗马书 5:8】“惟有基督在我们还作罪人的时候为我们死,神的爱就在此向我们显明了。”', en: '【Romans 5:8】“But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.” (NIV)' } },
+      { verse: { zh: '【约翰一书 4:9-10】“神差他独生子到世间来,使我们借着他得生,神爱我们的心在此就显明了。不是我们爱神,乃是神爱我们,差他的儿子为我们的罪作了挽回祭,这就是爱了。”', en: '【1 John 4:9-10】“This is how God showed his love among us: He sent his one and only Son into the world that we might live through him. This is love: not that we loved God, but that he loved us and sent his Son as an atoning sacrifice for our sins.” (NIV)' } }
+    ],
     zh: {
       title: '当你怀疑神是否爱你',
       verse: '【约翰福音 15:9】“我爱你们,正如父爱我一样;你们要常在我的爱里。”',
@@ -137,6 +149,10 @@ export const qaRegistry = [
     keywordsZh: ['没有安全感','不安全','害怕失去','没人保护','缺乏安全感','心里不踏实','怕被抛弃','孤单无助'],
     keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
     relatedBooks: ['john'],
+    variants: [
+      { verse: { zh: '【以赛亚书 41:10】“你不要害怕,因为我与你同在;不要惊惶,因为我是你的神。我必坚固你,我必帮助你;我必用我公义的右手扶持你。”', en: '【Isaiah 41:10】“So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.” (NIV)' } },
+      { verse: { zh: '【约翰福音 10:27-29】“我的羊听我的声音,我也认识他们,他们也跟着我。我又赐给他们永生;他们永不灭亡,谁也不能从我手里把他们夺去。”', en: '【John 10:27-29】“My sheep listen to my voice; I know them, and they follow me. I give them eternal life, and they shall never perish; no one will snatch them out of my hand.” (NIV)' } }
+    ],
     zh: {
       title: '当你没有安全感',
       verse: '【诗篇 46:1】“神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。”',
@@ -160,6 +176,10 @@ export const qaRegistry = [
     keywordsZh: ['人生的意义','生命的意义','活着的意义','为什么活着','人生目的','人生的目的','我为什么活着','意义是什么'],
     keywordsEn: ['meaning of life','purpose of life','why am i here','why am i alive','why do i exist','life purpose','what is the meaning','reason to live'],
     relatedBooks: ['ecclesiastes'],
+    variants: [
+      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)' } },
+      { verse: { zh: '【约翰福音 17:3】“认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。”', en: '【John 17:3】“Now this is eternal life: that they know you, the only true God, and Jesus Christ, whom you have sent.” (NIV)' } }
+    ],
     zh: {
       title: '探讨人生的意义',
       verse: '【传道书 12:13】“这些事都已听见了,总意就是:敬畏神,谨守他的诫命,这是人所当尽的本分。”',
@@ -180,9 +200,13 @@ export const qaRegistry = [
 
   {
     id: 'truth', priority: 7,
-    keywordsZh: ['真的有什么','真的有神吗','神存在吗','什么是真理','真理是什么','真的有永恒吗','真的有天堂吗','真实存在','人死后'],
-    keywordsEn: ['is god real','does god exist','what is truth','is there a god','is there anything beyond this life','is heaven real','after death'],
+    keywordsZh: ['真的有什么','真的有神吗','神存在吗','什么是真理','真理是什么','真的有永恒吗','真的有天堂吗','真实存在'],
+    keywordsEn: ['is god real','does god exist','what is truth','is there a god','is there anything beyond this life','is heaven real'],
     relatedBooks: ['john'],
+    variants: [
+      { verse: { zh: '【约翰福音 1:1,4-5】“太初有道,道与神同在,道就是神。……生命在他里头,这生命就是人的光。光照在黑暗里,黑暗却不接受光。”', en: '【John 1:1,4-5】“In the beginning was the Word, and the Word was with God, and the Word was God. … In him was life, and that life was the light of all mankind. The light shines in the darkness, and the darkness has not overcome it.” (NIV)' } },
+      { verse: { zh: '【希伯来书 11:1】“信就是所望之事的实底,是未见之事的确据。”', en: '【Hebrews 11:1】“Now faith is confidence in what we hope for and assurance about what we do not see.” (NIV)' } }
+    ],
     zh: {
       title: '寻找真实的真理',
       verse: '【约翰福音 14:6】“耶稣说:我就是道路、真理、生命;若不借着我,没有人能到父那里去。”',
@@ -206,6 +230,9 @@ export const qaRegistry = [
     keywordsZh: ['孤独','孤单','没人懂我','被遗忘','没人陪'],
     keywordsEn: ['lonely','no one understands me','forgotten','feel abandoned'],
     relatedBooks: ['john'],
+    variants: [
+      { verse: { zh: '【马太福音 28:20】“凡我所吩咐你们的,都教训他们遵守,我就常与你们同在,直到世界的末了。”', en: '【Matthew 28:20】“…And surely I am with you always, to the very end of the age.” (NIV)' } }
+    ],
     zh: {
       title: '当你感到孤独',
       verse: '【约翰福音 14:18】“我不撇下你们为孤儿,我必到你们这里来。”',
@@ -295,8 +322,8 @@ export const qaRegistry = [
 
   {
     id: 'death', priority: 12,
-    keywordsZh: ['死','死亡','离世','去世','过世','怕死','死后','人都会死','活着有什么意义','没了'],
-    keywordsEn: ['death','die','dying','mortal','pass away','passed away','afraid to die','everyone dies','what happens when we die'],
+    keywordsZh: ['死','死亡','离世','去世','过世','怕死','死后','人死后','人都会死','活着有什么意义','没了'],
+    keywordsEn: ['death','die','dying','mortal','pass away','passed away','afraid to die','everyone dies','what happens when we die','after death'],
     relatedBooks: ['ecclesiastes','john'],
     zh: {
       title: '当你面对死亡的问题',
@@ -391,32 +418,34 @@ const CRISIS_ZH = ['想死','自杀','不想活','不想活了','伤害自己','
 const CRISIS_EN = ['suicide','kill myself','killing myself','want to die','self harm','self-harm','abuse','domestic violence','assault',
   'end my life','hurt myself','no reason to live','cannot go on','cant go on',"can't go on",'want to disappear'];
 
+/* Crisis card — NEVER gets verse variants; stays byte-for-byte stable. */
+const CRISIS_CARD = {
+  zh: {
+    id: 'crisis',
+    title: '请立刻寻求帮助',
+    verse: '【诗篇 34:18】“耶和华靠近伤心的人,拯救灵性痛悔的人。”',
+    explanation: '你现在经历的痛苦非常重要,不应该一个人承担。圣经告诉我们,神靠近伤心的人;同时,也请你立刻联系可信任的家人、朋友、牧师、辅导员,或当地紧急服务。这比任何一节经文都更紧要。',
+    reflection: '现在,你可以立刻联系一个可信任的人吗?',
+    nextStep: '如果你正处在危险中,请立即联系当地紧急服务。如果你在美国,可以拨打或发短信 988(自杀与危机生命热线,全天候、免费、保密),或发送 HOME 到 741741;若有即时危险请拨 911。',
+    prayer: '主啊,求你保护这个正在痛苦中的人,赐下及时的帮助、保护和陪伴。阿们。'
+  },
+  en: {
+    id: 'crisis',
+    title: 'Please Seek Help Immediately',
+    verse: '【Psalm 34:18】“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” (NIV)',
+    explanation: 'What you are going through matters deeply, and you should not carry it alone. Scripture tells us that God is near to the brokenhearted. Please also contact a trusted family member, friend, pastor, counselor, or local emergency service immediately — this matters more than any single verse.',
+    reflection: 'Can you reach out to a trusted person right now?',
+    nextStep: 'If you are in immediate danger, contact local emergency services. In the United States, call or text 988 (Suicide & Crisis Lifeline, 24/7, free, confidential), or text HOME to 741741; if you are in immediate danger, call 911.',
+    prayer: 'Lord, please protect this person in pain and surround them with timely help, safety, and care. Amen.'
+  }
+};
+export function getCrisisResponse(lang) { return { ...CRISIS_CARD[lang === 'en' ? 'en' : 'zh'] }; }
+
 export function detectCrisis(input, lang) {
   const lc = (input || '').toLowerCase();
   const hit = CRISIS_ZH.some((kw) => lc.includes(kw)) || CRISIS_EN.some((kw) => lc.includes(kw));
   if (!hit) return null;
-
-  const crisis = {
-    zh: {
-      id: 'crisis',
-      title: '请立刻寻求帮助',
-      verse: '【诗篇 34:18】“耶和华靠近伤心的人,拯救灵性痛悔的人。”',
-      explanation: '你现在经历的痛苦非常重要,不应该一个人承担。圣经告诉我们,神靠近伤心的人;同时,也请你立刻联系可信任的家人、朋友、牧师、辅导员,或当地紧急服务。这比任何一节经文都更紧要。',
-      reflection: '现在,你可以立刻联系一个可信任的人吗?',
-      nextStep: '如果你正处在危险中,请立即联系当地紧急服务。如果你在美国,可以拨打或发短信 988(自杀与危机生命热线,全天候、免费、保密),或发送 HOME 到 741741;若有即时危险请拨 911。',
-      prayer: '主啊,求你保护这个正在痛苦中的人,赐下及时的帮助、保护和陪伴。阿们。'
-    },
-    en: {
-      id: 'crisis',
-      title: 'Please Seek Help Immediately',
-      verse: '【Psalm 34:18】“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” (NIV)',
-      explanation: 'What you are going through matters deeply, and you should not carry it alone. Scripture tells us that God is near to the brokenhearted. Please also contact a trusted family member, friend, pastor, counselor, or local emergency service immediately — this matters more than any single verse.',
-      reflection: 'Can you reach out to a trusted person right now?',
-      nextStep: 'If you are in immediate danger, contact local emergency services. In the United States, call or text 988 (Suicide & Crisis Lifeline, 24/7, free, confidential), or text HOME to 741741; if you are in immediate danger, call 911.',
-      prayer: 'Lord, please protect this person in pain and surround them with timely help, safety, and care. Amen.'
-    }
-  };
-  return crisis[lang === 'en' ? 'en' : 'zh'];
+  return getCrisisResponse(lang);
 }
 
 /* Warm, Scripture-centered fallback — shown ONLY when nothing else matches.
@@ -446,11 +475,43 @@ export function getFallbackResponse(lang) {
   return fallback[lang === 'en' ? 'en' : 'zh'];
 }
 
+/* ---- verse-variant rotation ------------------------------------------------
+   Each topic MAY carry an optional `variants: [{ verse:{zh,en}, nextStep?:{zh,en} }]`.
+   The pool of verses is [ primary verse (index 0), ...variants (1..n) ]. A
+   module-level per-topic counter advances the index on each fresh match (0→1→2→0,
+   deterministic — no randomness), so repeated identical questions rotate their
+   cited verse while every other field stays the same. Topics with no `variants`
+   behave exactly as before (fully backward-compatible). */
+const _variantCounter = {};
+function nextVariantIndex(item) {
+  const pool = 1 + ((item.variants && item.variants.length) || 0);
+  const i = (_variantCounter[item.id] || 0) % pool;
+  _variantCounter[item.id] = i + 1;
+  return i;
+}
+
+/* Build a topic response in `lang` at a specific variant index WITHOUT advancing
+   the counter (used for language re-render so a language toggle keeps the same
+   verse). variantIndex 0 = primary verse; 1..n = item.variants[0..n-1]. */
+export function resolveById(id, lang, variantIndex = 0) {
+  const L = lang === 'en' ? 'en' : 'zh';
+  const item = qaRegistry.find((t) => t.id === id);
+  if (!item) return getFallbackResponse(L);
+  const resp = { id: item.id, relatedBooks: item.relatedBooks, ...item[L], variantIndex };
+  const v = (item.variants && variantIndex > 0) ? item.variants[variantIndex - 1] : null;
+  if (v) {
+    if (v.verse && v.verse[L]) resp.verse = v.verse[L];
+    if (v.nextStep && v.nextStep[L]) resp.nextStep = v.nextStep[L];
+  }
+  return resp;
+}
+
 /* Main entry.
    (1) crisis first. (2) LONGEST matched keyword wins across all topics; a tie
    on matched-keyword length is broken by the topic's unique `priority` (lower
    wins) — deterministic, never array-order dependent. Both keyword lists are
-   matched regardless of UI language (a zh user may type an English word). */
+   matched regardless of UI language (a zh user may type an English word).
+   (3) on a topic match, the cited verse rotates through the topic's variants. */
 export function getBiblicalResponse(userInput, currentLanguage = 'zh') {
   const input = (userInput || '').trim().toLowerCase();
   const lang = currentLanguage === 'en' ? 'en' : 'zh';
@@ -473,6 +534,6 @@ export function getBiblicalResponse(userInput, currentLanguage = 'zh') {
       best = item; bestLen = longest; bestPriority = item.priority;
     }
   }
-  if (best) return { id: best.id, relatedBooks: best.relatedBooks, ...best[lang] };
+  if (best) return resolveById(best.id, lang, nextVariantIndex(best));
   return getFallbackResponse(lang);
 }

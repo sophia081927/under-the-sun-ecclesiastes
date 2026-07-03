@@ -18,7 +18,7 @@
    - Fixed "guided prompt" chips remain, AND users can type freely.
    ============================================================ */
 
-import { getBiblicalResponse } from '../data/qaEngine.js';
+import { getBiblicalResponse, resolveById, getCrisisResponse, getFallbackResponse } from '../data/qaEngine.js';
 
 const UI = {
   zh: {
@@ -140,6 +140,16 @@ export function mountBiblicalQA(container, opts) {
   injectStyles();
 
   let lastQuestion = null; // remember the last asked question to re-render on lang switch
+  let lastResp = null;     // the resolved response (id + variantIndex) — re-rendered on lang switch without re-rotating
+
+  // Re-render the last response in a new language WITHOUT advancing the variant
+  // counter, so a language toggle keeps the same cited verse.
+  function reresolve(prev, lang) {
+    if (!prev) return null;
+    if (prev.id === 'crisis') return getCrisisResponse(lang);
+    if (prev.id === 'fallback') return getFallbackResponse(lang);
+    return resolveById(prev.id, lang, prev.variantIndex || 0);
+  }
 
   container.classList.add('bqa-root');
   container.innerHTML = `
@@ -204,16 +214,19 @@ export function mountBiblicalQA(container, opts) {
     lastQuestion = question;
     if (loadTimer) { clearTimeout(loadTimer); loadTimer = 0; }
 
+    // Resolve ONCE (advances the verse-variant counter exactly once per ask),
+    // then reuse for the delayed render — never call the engine twice per ask.
     const r = getBiblicalResponse(question, lang);
+    lastResp = r;
     // §1.3 — crisis responses bypass the loading animation entirely.
     if (r.id === 'crisis') { renderCard(question, r, lang); return; }
 
-    // normal Q&A: brief loading state, then fade-in the card.
+    // normal Q&A: brief loading state, then fade-in the same resolved card.
     renderLoading(lang);
     loadTimer = setTimeout(() => {
       loadTimer = 0;
       const l = detectLang(opts);
-      renderCard(question, getBiblicalResponse(question, l), l);
+      renderCard(question, reresolve(r, l), l);
     }, LOADING_MS);
   }
 
@@ -239,8 +252,8 @@ export function mountBiblicalQA(container, opts) {
       b.addEventListener('click', () => { input.value = b.textContent; ask(b.textContent); });
       chips.appendChild(b);
     });
-    // re-render the last answer in the new language
-    if (lastQuestion) renderCard(lastQuestion, getBiblicalResponse(lastQuestion, lang), lang);
+    // re-render the last answer in the new language (same verse, no re-rotation)
+    if (lastResp) renderCard(lastQuestion, reresolve(lastResp, lang), lang);
   }
 
   btn.addEventListener('click', () => ask());

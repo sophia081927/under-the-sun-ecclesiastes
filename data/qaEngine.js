@@ -5,7 +5,7 @@
    Bible Library. Bilingual (zh / en). Crisis detection runs FIRST.
 
    Public API:
-     qaRegistry                       — array of topics (ordered by priority)
+     qaRegistry                       — array of topics
      getBiblicalResponse(input, lang) — main entry; returns a response object
      getFallbackResponse(lang)        — warm, Scripture-centered fallback
      detectCrisis(input, lang)        — returns crisis response or null
@@ -14,27 +14,33 @@
      { id, title, verse, explanation, reflection, nextStep, prayer,
        relatedBooks? }
 
-   SCRIPTURE PRINCIPLE (whole Bible): answers may cite ANY book of the
-   Bible where it best serves the question — Psalms, Proverbs, Isaiah,
-   Matthew, John, Romans, Philippians, 1 Peter, Hebrews, Revelation, etc.
-   The Scripture itself is NOT restricted to Ecclesiastes & John; only
-   `relatedBooks` (the on-site "keep reading" links) points back to the
-   books we currently host. We never invent a verse.
+   MATCHING ORDER:
+     (1) crisis (always first, bypasses everything)
+     (2) topic keyword match — LONGEST matched keyword wins; a tie on
+         length is broken by the topic's `priority` (lower wins). Priorities
+         are UNIQUE, so resolution is fully deterministic and never depends
+         on array order.
+     (3) warm fallback — only when nothing matches.
+   Keyword hygiene: keywordsZh holds only Chinese, keywordsEn only English.
+   Overly generic single tokens (bare 意义 / 价值 / meaning / truth / alone …)
+   are avoided in favour of multi-word phrases, so short tokens can't steal
+   a question from a more specific topic.
+
+   SCRIPTURE PRINCIPLE (whole Bible): answers may cite ANY book — Psalms,
+   Proverbs, Isaiah, Matthew, John, Romans, Philippians, 1 Peter, 1 John,
+   Hebrews, Revelation, etc. `relatedBooks` only links to the books we host.
+   We never invent a verse.
 
    TRANSLATION ATTRIBUTION: Chinese verses use 和合本 (public domain — no
-   attribution needed). English verses append their translation
-   abbreviation after the quote, e.g. "(NIV)", consistently everywhere.
-
-   MATCHING ORDER: (1) crisis → (2) priority-ordered keyword match →
-   (3) warm fallback. Priorities are ascending (lower number wins); on a
-   tie the earlier registry entry wins (stable sort).
+   attribution). English verses append their translation abbreviation, e.g.
+   "(NIV)", consistently everywhere.
    ============================================================ */
 
 export const qaRegistry = [
   {
     id: 'emptiness', priority: 1,
-    keywordsZh: ['空虚','虚空','没意义','没有意义','毫无意义','无聊','不满足','人生意义','活着的意义','捕风','空洞','迷茫'],
-    keywordsEn: ['empty','emptiness','meaningless','meaning of life','no meaning','pointless','vanity','not satisfied','unsatisfied','chasing the wind','purpose'],
+    keywordsZh: ['空虚','虚空','没意义','没有意义','毫无意义','无聊','不满足','捕风','空洞','迷茫'],
+    keywordsEn: ['empty','emptiness','meaningless','no meaning','pointless','vanity','not satisfied','unsatisfied','chasing the wind'],
     relatedBooks: ['ecclesiastes','john'],
     zh: {
       title: '当你感到空虚',
@@ -79,23 +85,23 @@ export const qaRegistry = [
 
   {
     id: 'godlove', priority: 3,
-    keywordsZh: ['神爱我','神爱','神真的爱','神在乎','神在意','被爱','没有人爱','值得被爱','神还爱我吗','爱我吗','配不配'],
-    keywordsEn: ['god love','does god love','god really love','loved by god','god care','am i loved','no one loves','worth loving','unlovable','god still love'],
+    keywordsZh: ['神爱我','神爱','神真的爱','神真的爱我吗','神爱我吗','神在乎','神在意','被爱','没有人爱','没有人爱我','值得被爱','我值得被爱吗','神还爱我吗','爱我吗','配不配'],
+    keywordsEn: ['god love','does god love','does god love me','god really love','loved by god','god care','am i loved','no one loves','no one loves me','worth loving','worthy of love','unlovable','god still love'],
     relatedBooks: ['john'],
     zh: {
       title: '当你怀疑神是否爱你',
       verse: '【约翰福音 15:9】“我爱你们,正如父爱我一样;你们要常在我的爱里。”',
-      explanation: '圣经回答“神真的爱我吗”的方式,不是一句空洞的保证,而是一个付出代价的动作:神舍下他的独生子(约 3:16)。而且请注意,这份爱临到的是“世人”——不是“够好的人”“表现好的人”,里面就有此刻正在问这个问题的你。你不需要先变得可爱,才配得这份爱。',
+      explanation: '圣经回答“神真的爱我吗”的方式,不是一句空洞的保证,而是一个付出代价的动作:神舍下他的独生子(约 3:16);“惟有基督在我们还作罪人的时候为我们死,神的爱就在此向我们显明了”(罗马书 5:8)。而且请注意,这份爱临到的是“世人”——不是“够好的人”“表现好的人”,里面就有此刻正在问这个问题的你。你不需要先变得可爱,才配得这份爱。',
       reflection: '你是否常常觉得,要先变好、先做到某些事,才配得被神爱?',
-      nextStep: '从《约翰福音》第 3 章读起,再读第 15 章;你会看到这份爱不是遥远的概念,而是耶稣亲自走进人的处境。',
+      nextStep: '从《约翰福音》第 3 章读起,再读第 15 章;也可以读约翰一书 4:9-10,看神的爱是如何主动临到我们的。',
       prayer: '神啊,我常常怀疑自己是否值得被爱。求你让我真的知道——不只是在道理上,而是在心里——你爱我,爱到舍下你的儿子。求你帮助我住在你的爱里。阿们。'
     },
     en: {
       title: 'When You Doubt God Loves You',
       verse: '【John 15:9】“As the Father has loved me, so have I loved you. Now remain in my love.” (NIV)',
-      explanation: 'The Bible answers “does God really love me?” not with an empty reassurance but with a costly action: God gave His one and only Son (John 3:16). And notice the word — “the world.” Not “the good enough,” but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
+      explanation: 'The Bible answers “does God love me?” not with an empty reassurance but with a costly action: God gave His one and only Son (John 3:16), and “God demonstrates his own love for us in this: While we were still sinners, Christ died for us” (Romans 5:8). Notice the word — “the world.” Not “the good enough,” but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
       reflection: 'Do you often feel you must first become better, or do certain things, before you can be loved by God?',
-      nextStep: 'Begin with John chapter 3, then read John 15. You will see this love is not a distant idea, but Jesus stepping personally into the human situation.',
+      nextStep: 'Begin with John chapter 3, then John 15; you may also read 1 John 4:9–10 to see how God’s love reached us first.',
       prayer: 'God, I so often doubt whether I am worth loving. Help me truly know — not just in my head but in my heart — that You love me, enough to give Your Son. Help me remain in Your love. Amen.'
     }
   },
@@ -124,13 +130,10 @@ export const qaRegistry = [
   },
 
   {
-    /* insecurity — priority 4: intentionally BEATS marriage(6) so that the
-       specific phrases 孤单无助 / "feel alone" resolve here, while generic
-       loneliness (孤单/孤独/lonely/alone) still resolves to marriage. It sits
-       AFTER anxiety(2), so 不安全 / 害怕失去 / "afraid of ..." keep resolving to
-       anxiety exactly as before (those inputs also match anxiety's 不安/害怕/
-       afraid) — no existing question silently changes topic. */
-    id: 'insecurity', priority: 4,
+    /* insecurity — the specific phrases 孤单无助 / "feel alone" / 不安全 / 害怕失去
+       are longer than the bare tokens they overlap, so longest-match keeps them
+       here; generic 孤单/孤独/lonely resolve to `loneliness`. */
+    id: 'insecurity', priority: 5,
     keywordsZh: ['没有安全感','不安全','害怕失去','没人保护','缺乏安全感','心里不踏实','怕被抛弃','孤单无助'],
     keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
     relatedBooks: ['john'],
@@ -153,7 +156,76 @@ export const qaRegistry = [
   },
 
   {
-    id: 'success', priority: 5,
+    id: 'meaning', priority: 6,
+    keywordsZh: ['人生的意义','生命的意义','活着的意义','为什么活着','人生目的','人生的目的','我为什么活着','意义是什么'],
+    keywordsEn: ['meaning of life','purpose of life','why am i here','why am i alive','why do i exist','life purpose','what is the meaning','reason to live'],
+    relatedBooks: ['ecclesiastes'],
+    zh: {
+      title: '探讨人生的意义',
+      verse: '【传道书 12:13】“这些事都已听见了,总意就是:敬畏神,谨守他的诫命,这是人所当尽的本分。”',
+      explanation: '谢谢你提出这个最深刻的问题。传道书的前十一章都在诚实地证明:如果我们把意义建立在“日光之下”的成就、金钱、享乐和短暂的关系上,结果必然是虚空和捕风。神已将永恒安置在人心里(传道书 3:11),生命的终极意义不是由我们自己发明出来的,而是由赋予我们生命的造物主定义的。在敬畏神、与祂连接的秩序里,人才能找回受造的本分与真正的价值。',
+      reflection: '在你过往的经历中,哪一个时刻让你最真实地感受到“活着的价值”?那和永恒有什么连接吗?',
+      nextStep: '你可以直接步入《传道书》第12章去品读所罗门关于生命终局的反思,也可以读《约翰福音》17:3,看耶稣如何定义永生。',
+      prayer: '主耶稣,谢谢你用传道书戳破了我自以为是的虚妄意义。求你带我走出日光之下的虚空迷茫,在敬畏你、顺服你的真理中,找回我受造的真正目的与平安。阿们。'
+    },
+    en: {
+      title: 'Exploring the Meaning of Life',
+      verse: '【Ecclesiastes 12:13】“Now all has been heard; here is the conclusion of the matter: Fear God and keep his commandments, for this is the duty of all mankind.” (NIV)',
+      explanation: 'Thank you for asking the ultimate question. The book of Ecclesiastes honestly proves that if you anchor your purpose in things “under the sun” — wealth, pleasure, or career — it all ends in chasing the wind. Yet God has set eternity in the human heart (Ecclesiastes 3:11). The meaning of life is not something we invent; it is something we discover when we reconnect with our Creator. True purpose is found in revering God and aligning our fleeting days with His eternal design.',
+      reflection: 'When in your life did you feel a true sense of purpose? Was it tied to something temporary or something eternal?',
+      nextStep: 'You may dive into Ecclesiastes chapter 12 for its conclusion on worldly vanity, and John 17:3 to see how Jesus defines eternal life.',
+      prayer: 'Lord Jesus, deliver me from chasing false meanings under the sun. Lift my eyes to Your throne, and let me discover my true identity and destiny in loving and fearing You. Amen.'
+    }
+  },
+
+  {
+    id: 'truth', priority: 7,
+    keywordsZh: ['真的有什么','真的有神吗','神存在吗','什么是真理','真理是什么','真的有永恒吗','真的有天堂吗','真实存在','人死后'],
+    keywordsEn: ['is god real','does god exist','what is truth','is there a god','is there anything beyond this life','is heaven real','after death'],
+    relatedBooks: ['john'],
+    zh: {
+      title: '寻找真实的真理',
+      verse: '【约翰福音 14:6】“耶稣说:我就是道路、真理、生命;若不借着我,没有人能到父那里去。”',
+      explanation: '你这个问题很像是在问:在我们看得见的世界之外,是否真的有神、永恒、真理和盼望。圣经给出了一个震撼的宣告:真理不是一套冷冰冰的哲学理论,也不是一堆道德教条。真理是一个活生生的、有血有肉、带着无尽之爱来到世间寻找你的位格——主耶稣基督。在这个充满面具、转瞬即逝的虚假世界里,唯有祂的爱、祂的十字架和祂的救赎是真实的,永不改变。',
+      reflection: '在这个多变、充满不确定性的时代里,对你而言,目前最“真实、绝对不可动摇”的东西是什么?',
+      nextStep: '建议你步入《约翰福音》第1章,去看那道成肉身、充充满满有恩典有真理的耶稣。',
+      prayer: '主耶稣,这个世界太虚假、太多变,我的心常常感到虚无。如果你真的是那条唯一的道路、绝对的真理和永恒的生命,求你向我显现,撕碎我的怀疑,让我摸到你的真实。阿们。'
+    },
+    en: {
+      title: 'Seeking the Absolute Truth',
+      verse: '【John 14:6】“Jesus answered, ‘I am the way and the truth and the life. No one comes to the Father except through me.’” (NIV)',
+      explanation: 'Your question sounds like a deeper search: Is there truly God, truth, eternity, and hope beyond what we can see? Scripture does not begin with a cold theory; it brings a radical revelation. Truth is not a cold philosophical concept or an abstract moral law. Truth is a Person who loved you and broke into history to find you — Jesus Christ. He is the only solid reality that never shifts.',
+      reflection: 'In this unstable era, what is the single most “real and unshakeable” foundation in your life right now?',
+      nextStep: 'We encourage you to open John chapter 1 to see the Word made flesh, full of grace and truth.',
+      prayer: 'Lord Jesus, the world feels full of masks and shifting illusions. If You truly are the absolute Way, Truth, and Life, reveal Your reality to my heart and guide my steps out of doubt. Amen.'
+    }
+  },
+
+  {
+    id: 'loneliness', priority: 8,
+    keywordsZh: ['孤独','孤单','没人懂我','被遗忘','没人陪'],
+    keywordsEn: ['lonely','no one understands me','forgotten','feel abandoned'],
+    relatedBooks: ['john'],
+    zh: {
+      title: '当你感到孤独',
+      verse: '【约翰福音 14:18】“我不撇下你们为孤儿,我必到你们这里来。”',
+      explanation: '孤独有时不是身边没有人,而是那种“没有人真正懂我”的感觉。圣经从不轻看这种痛。诗篇23篇说,即使走过死荫的幽谷,也有牧者与你同行;耶稣在离世前对门徒说“我不撇下你们为孤儿”,复活后又应许“我就常与你们同在,直到世界的末了”(马太福音 28:20)。你所渴望的那种“被完全认识、又不被离弃”的同在,正是神向你伸出的。',
+      reflection: '在你觉得最孤单的时候,你最想要的是有人做什么——是说话,是陪伴,还是只是知道有人没有走开?',
+      nextStep: '你可以慢慢读诗篇23篇,再读《约翰福音》第14章,听耶稣如何应许那位永不离开的保惠师。',
+      prayer: '主啊,我心里很孤独,常觉得没有人真正懂我。谢谢你应许不撇下我为孤儿。求你让我此刻真实地知道:你与我同在,你认识我,也不离开我。阿们。'
+    },
+    en: {
+      title: 'When You Feel Lonely',
+      verse: '【John 14:18】“I will not leave you as orphans; I will come to you.” (NIV)',
+      explanation: 'Loneliness is often not the absence of people, but the ache that “no one truly knows me.” Scripture never makes light of that pain. Psalm 23 says that even through the darkest valley, a Shepherd walks with you; before He left, Jesus told His disciples, “I will not leave you as orphans,” and after rising He promised, “I am with you always, to the very end of the age” (Matthew 28:20). The presence you long for — to be fully known and never abandoned — is exactly what God holds out to you.',
+      reflection: 'When you feel most alone, what do you most long for someone to do — to speak, to stay, or simply to let you know they have not left?',
+      nextStep: 'You may read Psalm 23 slowly, then John chapter 14, and hear Jesus promise the Comforter who never leaves.',
+      prayer: 'Lord, I feel lonely, as if no one truly knows me. Thank You for promising not to leave me as an orphan. Let me truly know, right now, that You are with me, that You know me, and that You will not leave. Amen.'
+    }
+  },
+
+  {
+    id: 'success', priority: 9,
     keywordsZh: ['成功','成就','努力','奋斗','事业','拼命','升职','赚了很多','什么都有','还是不满足','还是空','为什么还是','明明有','钱','财富'],
     keywordsEn: ['success','successful','achieve','accomplish','career','hard work','worked hard','promotion','have everything','still empty','still not enough','after success','not satisfied even','money','wealth','rich'],
     relatedBooks: ['ecclesiastes','john'],
@@ -176,9 +248,9 @@ export const qaRegistry = [
   },
 
   {
-    id: 'marriage', priority: 6,
-    keywordsZh: ['婚姻','夫妻','老公','老婆','丈夫','妻子','感情','离婚','吵架','孤单','孤独','没人懂','相处','家庭'],
-    keywordsEn: ['marriage','married','spouse','husband','wife','relationship','divorce','lonely','loneliness','alone','no one understands','family'],
+    id: 'marriage', priority: 10,
+    keywordsZh: ['婚姻','夫妻','老公','老婆','丈夫','妻子','感情','离婚','吵架','相处','家庭'],
+    keywordsEn: ['marriage','married','spouse','husband','wife','relationship','divorce','family'],
     relatedBooks: ['ecclesiastes','john'],
     zh: {
       title: '当你的关系里有伤痛',
@@ -199,7 +271,7 @@ export const qaRegistry = [
   },
 
   {
-    id: 'suffering', priority: 7,
+    id: 'suffering', priority: 11,
     keywordsZh: ['痛苦','苦难','受苦','为什么是我','患难','绝望','撑不下去','难熬','折磨','走不出','看不到希望','很苦','熬不住'],
     keywordsEn: ['suffering','suffer','pain','why me','hardship','despair','hopeless','no hope','going through','painful','trial','hurting'],
     relatedBooks: ['john','ecclesiastes'],
@@ -222,9 +294,9 @@ export const qaRegistry = [
   },
 
   {
-    id: 'death', priority: 8,
+    id: 'death', priority: 12,
     keywordsZh: ['死','死亡','离世','去世','过世','怕死','死后','人都会死','活着有什么意义','没了'],
-    keywordsEn: ['death','die','dying','mortal','pass away','passed away','afraid to die','after death','everyone dies','what happens when we die'],
+    keywordsEn: ['death','die','dying','mortal','pass away','passed away','afraid to die','everyone dies','what happens when we die'],
     relatedBooks: ['ecclesiastes','john'],
     zh: {
       title: '当你面对死亡的问题',
@@ -245,7 +317,7 @@ export const qaRegistry = [
   },
 
   {
-    id: 'satisfaction', priority: 9,
+    id: 'satisfaction', priority: 13,
     keywordsZh: ['满足','填满','口渴','永远不渴','活水','生命的粮','喂不饱','填不满','总是想要更多','知足','够了没'],
     keywordsEn: ['satisfy','satisfied','fill me','thirst','thirsty','never thirst','living water','bread of life','always want more','content','contentment'],
     relatedBooks: ['john'],
@@ -268,7 +340,7 @@ export const qaRegistry = [
   },
 
   {
-    id: 'seeker', priority: 10,
+    id: 'seeker', priority: 14,
     keywordsZh: ['不信','无神','无神论','还没信','不是基督徒','可以读圣经','也能读','怀疑神','没有信仰','不信教','将信将疑'],
     keywordsEn: ['not a christian','dont believe',"don't believe",'do not believe','not religious','atheist','agnostic','can i read','skeptic','skeptical','no faith','not sure god'],
     relatedBooks: ['ecclesiastes','john'],
@@ -291,9 +363,9 @@ export const qaRegistry = [
   },
 
   {
-    id: 'light', priority: 11,
-    keywordsZh: ['黑暗','走在黑暗','迷失','迷路','没方向','找不到方向','人生方向','看不清','该往哪','道路','真理'],
-    keywordsEn: ['darkness','in the dark','lost','no direction','which way','the way','direction in life',"can't see",'cannot see','where do i go','truth'],
+    id: 'light', priority: 15,
+    keywordsZh: ['黑暗','走在黑暗','迷失','迷路','没方向','找不到方向','人生方向','看不清','该往哪','道路'],
+    keywordsEn: ['darkness','in the dark','lost','no direction','which way','the way','direction in life',"can't see",'cannot see','where do i go'],
     relatedBooks: ['john'],
     zh: {
       title: '当你在黑暗里找不到方向',
@@ -348,9 +420,8 @@ export function detectCrisis(input, lang) {
 }
 
 /* Warm, Scripture-centered fallback — shown ONLY when nothing else matches.
-   It must never read like a database/FAQ error: no "out of scope / no match /
-   please rephrase / database" language. An unmatched question is treated as a
-   real question worth bringing to God (Matthew 11:28). */
+   Never reads like a database/FAQ error. An unmatched question is treated as
+   a real question worth bringing to God (Matthew 11:28). */
 export function getFallbackResponse(lang) {
   const fallback = {
     zh: {
@@ -375,9 +446,11 @@ export function getFallbackResponse(lang) {
   return fallback[lang === 'en' ? 'en' : 'zh'];
 }
 
-/* Main entry. Crisis check runs first, then priority-ordered keyword match.
-   For robustness we match BOTH language keyword sets regardless of UI language
-   (a Chinese user may type an English word and vice versa). */
+/* Main entry.
+   (1) crisis first. (2) LONGEST matched keyword wins across all topics; a tie
+   on matched-keyword length is broken by the topic's unique `priority` (lower
+   wins) — deterministic, never array-order dependent. Both keyword lists are
+   matched regardless of UI language (a zh user may type an English word). */
 export function getBiblicalResponse(userInput, currentLanguage = 'zh') {
   const input = (userInput || '').trim().toLowerCase();
   const lang = currentLanguage === 'en' ? 'en' : 'zh';
@@ -387,12 +460,19 @@ export function getBiblicalResponse(userInput, currentLanguage = 'zh') {
   const crisisResponse = detectCrisis(input, lang);
   if (crisisResponse) return crisisResponse;
 
-  const sorted = [...qaRegistry].sort((a, b) => a.priority - b.priority);
-  for (const item of sorted) {
+  let best = null, bestLen = 0, bestPriority = Infinity;
+  for (const item of qaRegistry) {
     const keywords = item.keywordsZh.concat(item.keywordsEn);
-    if (keywords.some((kw) => input.includes(kw.toLowerCase()))) {
-      return { id: item.id, relatedBooks: item.relatedBooks, ...item[lang] };
+    let longest = 0;
+    for (const kw of keywords) {
+      const k = kw.toLowerCase();
+      if (k.length > longest && input.includes(k)) longest = k.length;
+    }
+    if (longest === 0) continue;
+    if (longest > bestLen || (longest === bestLen && item.priority < bestPriority)) {
+      best = item; bestLen = longest; bestPriority = item.priority;
     }
   }
+  if (best) return { id: best.id, relatedBooks: best.relatedBooks, ...best[lang] };
   return getFallbackResponse(lang);
 }

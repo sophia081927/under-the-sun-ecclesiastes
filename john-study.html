@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>The Light of Life · 生命之光 · A Guided Journey through John</title>
+<meta name="description" content="A guided, bilingual journey through the Gospel of John — the Word, the Light, the seven signs, the seven I AM sayings, the cross, and the resurrection. 生命之光:《约翰福音》双语导览。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/john-study.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+    --jade:#7fae9b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:radial-gradient(120% 55% at 50% -8%, rgba(217,164,65,.06), transparent 60%),var(--bg);
+    color:var(--ink);font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.9;-webkit-font-smoothing:antialiased;padding-bottom:88px}
+
+  /* language visibility — one language at a time */
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  span.zh,a.zh{display:none} span.en,a.en{display:inline}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  /* optional bilingual compare — verses only */
+  body.compare .verse .en,body.compare .verse .zh{display:block}
+  body.compare .verse .zh{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line-soft)}
+
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+  a{color:var(--sun-soft);text-decoration:none}
+
+  /* topbar */
+  .topbar{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    gap:10px;padding:13px 18px;background:linear-gradient(var(--bg),rgba(20,22,26,.82),transparent);
+    font-size:13px;letter-spacing:.06em}
+  .topbar .mark{color:var(--sun-soft);white-space:nowrap;font-size:13px;letter-spacing:.14em}
+  .topbar .right{display:flex;align-items:center;gap:10px}
+  .topbar .cmp{background:transparent;border:1px solid var(--line-soft);border-radius:30px;color:var(--muted);
+    font-family:inherit;font-size:11.5px;letter-spacing:.04em;padding:7px 12px;cursor:pointer;min-height:34px}
+  .topbar .cmp.on{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);font-family:inherit;
+    font-size:12px;letter-spacing:.06em;padding:7px 13px;cursor:pointer;min-height:34px}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+
+  /* hero */
+  .hero{text-align:center;padding:56px 22px 26px;position:relative}
+  .hero .kicker{color:var(--sun);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:22px}
+  .hero h1{font-size:clamp(32px,8vw,52px);font-weight:600;line-height:1.18}
+  .hero h1 .sub{display:block;font-size:.46em;color:var(--sun-soft);margin-top:12px;letter-spacing:.06em;font-style:italic}
+  .hero p{color:var(--muted);margin-top:22px;font-size:16.5px;max-width:520px;margin-left:auto;margin-right:auto}
+  .hero .emblem{width:clamp(140px,26vw,180px);height:auto;margin:0 auto 26px;display:block;opacity:.9}
+  .hero .cta{margin-top:30px}
+  .hero .cta a{display:inline-block;background:var(--sun);color:#14161a;border-radius:40px;padding:14px 30px;
+    font-size:16px;font-weight:600;letter-spacing:.02em;min-height:52px}
+  .hero .cta a:hover{background:var(--sun-soft)}
+
+  /* modules */
+  section.mod{padding:52px 0;border-top:1px solid var(--line-soft)}
+  .step{color:var(--sun);font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-style:italic}
+  .eyebrow{color:var(--sun);font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;margin:8px 0 12px}
+  h2.head{font-size:clamp(25px,6vw,34px);line-height:1.28;font-weight:600}
+  .lead{font-size:17px;color:var(--ink);opacity:.94;margin-top:18px}
+  .lead.muted{color:var(--muted)}
+
+  /* verse block (supports bilingual compare) */
+  .verse{margin-top:22px;background:var(--bg2);border-left:2px solid var(--sun);border-radius:0 8px 8px 0;
+    padding:20px 22px}
+  .verse .t{font-size:18.5px;font-style:italic;color:var(--sun-soft);line-height:1.75}
+  .verse .ref{display:block;margin-top:10px;font-size:13px;color:var(--faint);font-style:normal;letter-spacing:.04em}
+
+  /* reflection + prayer */
+  .rp{margin-top:22px;display:grid;gap:14px}
+  .rp .box{border:1px solid var(--line-soft);border-radius:9px;background:var(--bg2);padding:16px 18px}
+  .rp .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.85;margin-bottom:6px}
+  .rp .box.pray .lbl{color:var(--sun-soft)}
+  .rp .box p{font-size:15.5px;line-height:1.75}
+  .rp .box.pray p{color:var(--sun-soft);font-style:italic}
+
+  /* option chips (identity question) */
+  .options{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;justify-content:center}
+  .options .op{border:1px solid var(--line-soft);border-radius:30px;padding:11px 18px;font-size:15px;color:var(--muted);background:var(--bg2)}
+  .options .op.key{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.07)}
+
+  /* two-column compare (human condition) */
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+  .twocol .col{border:1px solid var(--line-soft);border-radius:10px;background:var(--bg2);padding:18px 16px}
+  .twocol .col.sun{border-color:var(--line)}
+  .twocol .col .h{font-size:15px;letter-spacing:.02em;margin-bottom:12px;font-weight:600}
+  .twocol .col.dim .h{color:var(--muted)} .twocol .col.sun .h{color:var(--sun-soft)}
+  .twocol .col .it{font-size:13.5px;line-height:1.6;padding:8px 0;border-bottom:1px dashed var(--line-soft);color:var(--ink)}
+  .twocol .col .it:last-child{border-bottom:none}
+  .twocol .col .it b{color:var(--sun);font-weight:600}
+  .twocol .col.dim .it b{color:var(--muted)}
+  @media(max-width:520px){ .twocol{grid-template-columns:1fr} }
+
+  /* signs / rows */
+  .rows{margin-top:22px;display:grid;gap:10px}
+  .rows .r{display:grid;grid-template-columns:1fr auto 1.1fr;gap:12px;align-items:center;
+    border:1px solid var(--line-soft);border-radius:9px;background:var(--bg2);padding:13px 16px}
+  .rows .r .a{font-size:15px;color:var(--ink)} .rows .r .arw{color:var(--sun);font-size:13px}
+  .rows .r .b{font-size:14px;color:var(--muted)}
+  @media(max-width:480px){ .rows .r{grid-template-columns:1fr;gap:3px} .rows .r .arw{display:none} .rows .r .b{color:var(--sun-soft)} }
+
+  /* I AM grid + people + abide */
+  .grid2{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .grid2 .c{border:1px solid var(--line-soft);border-radius:9px;background:var(--bg2);padding:15px 16px}
+  .grid2 .c .n{font-size:15.5px;color:var(--sun-soft);font-weight:600}
+  .grid2 .c .d{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.6}
+  @media(max-width:520px){ .grid2{grid-template-columns:1fr} }
+
+  /* big statement (cross) */
+  .statement{margin-top:24px;text-align:center;padding:22px 10px}
+  .statement .big{font-size:clamp(34px,11vw,58px);color:var(--sun-soft);font-weight:600;letter-spacing:.02em}
+  .statement .sub{margin-top:16px;color:var(--muted);font-size:16px;max-width:520px;margin-left:auto;margin-right:auto}
+
+  /* next steps */
+  .nav-cards{margin-top:24px;display:grid;gap:12px}
+  .nav-cards a{display:flex;align-items:center;justify-content:space-between;gap:14px;
+    border:1px solid var(--line-soft);border-radius:11px;background:var(--bg2);padding:17px 20px;
+    color:var(--ink);min-height:60px;font-size:16px}
+  .nav-cards a:hover{border-color:var(--line)}
+  .nav-cards a .go{color:var(--sun)}
+
+  footer{text-align:center;color:var(--faint);font-size:12px;padding:44px 22px 20px;line-height:1.9;border-top:1px solid var(--line-soft)}
+
+  /* mobile bottom tab bar */
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(24,27,32,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a,.tabbar button{flex:1;background:none;border:none;color:var(--muted);font-family:inherit;
+    cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:10.5px;letter-spacing:.03em;padding:5px 2px;min-height:50px;text-decoration:none}
+  .tabbar a:hover,.tabbar button:hover{color:var(--sun-soft)}
+  .tabbar .ic{font-size:18px;line-height:1}
+  @media(max-width:700px){ .tabbar{display:flex} body{padding-bottom:70px} }
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="topbar">
+  <a class="mark" href="john.html" style="border:none">生命之光 · the light of life</a>
+  <div class="right">
+    <button class="cmp" id="cmpBtn" onclick="toggleCompare()"><span class="en">中/EN verses</span><span class="zh">经文双语</span></button>
+    <div class="lang-toggle">
+      <button id="btnZh" class="active" onclick="setLang('zh')">中文</button>
+      <button id="btnEn" onclick="setLang('en')">EN</button>
+    </div>
+  </div>
+</div>
+
+<div class="hero">
+  <svg class="emblem" viewBox="0 0 200 120" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs><radialGradient id="glow" cx="50%" cy="78%" r="60%">
+      <stop offset="0%" stop-color="#e8c77e" stop-opacity=".55"/><stop offset="55%" stop-color="#d9a441" stop-opacity=".12"/><stop offset="100%" stop-color="#d9a441" stop-opacity="0"/>
+    </radialGradient></defs>
+    <rect width="200" height="120" fill="url(#glow)"/>
+    <g stroke="#e8c77e" stroke-opacity=".6" stroke-width="1.1" stroke-linecap="round">
+      <line x1="100" y1="94" x2="100" y2="30"/><line x1="100" y1="94" x2="66" y2="40"/><line x1="100" y1="94" x2="134" y2="40"/>
+      <line x1="100" y1="94" x2="42" y2="58"/><line x1="100" y1="94" x2="158" y2="58"/><line x1="100" y1="94" x2="26" y2="78"/><line x1="100" y1="94" x2="174" y2="78"/>
+    </g>
+    <line x1="18" y1="94" x2="182" y2="94" stroke="#d9a441" stroke-opacity=".45" stroke-width="1"/>
+    <path d="M74 94 a26 26 0 0 1 52 0" fill="none" stroke="#e8c77e" stroke-width="1.6"/>
+  </svg>
+  <div class="kicker"><span class="en">A guided journey · The Gospel of John</span><span class="zh">一次导览 · 约翰福音</span></div>
+  <h1><span class="en">The Light of Life</span><span class="zh">生命之光</span>
+    <span class="sub"><span class="en">An exploration of the Gospel of John</span><span class="zh">《约翰福音》的一次探索</span></span>
+  </h1>
+  <p><span class="en">Fourteen quiet steps — the Word, the Light, the signs, the seven "I AM", the cross, the empty tomb. Read one, or read them all.</span><span class="zh">十四个安静的段落——道、光、神迹、七个「我是」、十架、空坟墓。读一段,或全部读完。</span></p>
+  <div class="cta"><a href="#s1"><span class="en">Begin →</span><span class="zh">开始 →</span></a></div>
+</div>
+
+<div class="wrap">
+
+<!-- 1 · Identity -->
+<section class="mod" id="s1">
+  <div class="step">01</div>
+  <div class="eyebrow"><span class="en">The core question</span><span class="zh">核心之问</span></div>
+  <h2 class="head"><span class="en">Who is He?</span><span class="zh">他到底是谁?</span></h2>
+  <p class="lead"><span class="en">Everything in John turns on one question. Not "what should I do?" but "who is this?" A moral example, a gifted teacher, a visionary prophet — or something more?</span><span class="zh">整卷约翰福音都围着一个问题转。不是"我该做什么?",而是"这一位,是谁?"道德榜样、有恩赐的老师、有远见的先知——还是更多?</span></p>
+  <div class="options">
+    <div class="op"><span class="en">A moral example?</span><span class="zh">道德榜样?</span></div>
+    <div class="op"><span class="en">A gifted teacher?</span><span class="zh">有恩赐的老师?</span></div>
+    <div class="op"><span class="en">A visionary prophet?</span><span class="zh">有远见的先知?</span></div>
+    <div class="op key"><span class="en">Or the Son of God and Savior of the world?</span><span class="zh">还是神的儿子、世界的救主?</span></div>
+  </div>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Which of these has been your honest answer so far — and what would change if the last one were true?</span><span class="zh">到目前为止,你心里诚实的答案是哪一个?如果最后一个是真的,会改变什么?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">God, if you are really here, help me ask this honestly and follow where the answer leads.</span><span class="zh">神啊,如果你真的在这里,帮助我诚实地问,并跟随答案所指的方向。</span></p></div>
+  </div>
+</section>
+
+<!-- 2 · Human condition & divine answer -->
+<section class="mod" id="s2">
+  <div class="step">02</div>
+  <div class="eyebrow"><span class="en">Book one meets book two</span><span class="zh">第一卷,遇见第二卷</span></div>
+  <h2 class="head"><span class="en">The human condition &amp; the divine answer</span><span class="zh">人的困境,与神的答案</span></h2>
+  <p class="lead muted"><span class="en">Where Ecclesiastes ends its honest search, John begins its answer.</span><span class="zh">传道书诚实的追寻在哪里停下,约翰福音的答案就在哪里开始。</span></p>
+  <div class="twocol">
+    <div class="col dim">
+      <div class="h"><span class="en">Ecclesiastes · under the sun</span><span class="zh">传道书 · 日光之下</span></div>
+      <div class="it"><b><span class="en">The Void</span><span class="zh">虚空</span></b> · <span class="en">eternity is out of reach.</span><span class="zh">永恒够不着。</span></div>
+      <div class="it"><b><span class="en">The End</span><span class="zh">终局</span></b> · <span class="en">death comes to all.</span><span class="zh">死亡临到众人。</span></div>
+      <div class="it"><b><span class="en">The Effort</span><span class="zh">劳碌</span></b> · <span class="en">human labor cannot satisfy the heart.</span><span class="zh">人的劳碌填不满心。</span></div>
+      <div class="it"><b><span class="en">The Reality</span><span class="zh">现实</span></b> · <span class="en">the inescapable weight of vanity.</span><span class="zh">虚空,挥之不去的重量。</span></div>
+    </div>
+    <div class="col sun">
+      <div class="h"><span class="en">John · the Light of Life</span><span class="zh">约翰福音 · 生命之光</span></div>
+      <div class="it"><b><span class="en">The Arrival</span><span class="zh">临到</span></b> · <span class="en">eternal life arrives in Christ.</span><span class="zh">永生在基督里临到。</span></div>
+      <div class="it"><b><span class="en">The Victory</span><span class="zh">得胜</span></b> · <span class="en">Jesus is the Resurrection.</span><span class="zh">耶稣是复活。</span></div>
+      <div class="it"><b><span class="en">The Provision</span><span class="zh">供应</span></b> · <span class="en">Jesus is the Bread of Life and Living Water.</span><span class="zh">耶稣是生命的粮与活水。</span></div>
+      <div class="it"><b><span class="en">The Reality</span><span class="zh">现实</span></b> · <span class="en">the dispelling power of the Light.</span><span class="zh">光,驱散黑暗的能力。</span></div>
+    </div>
+  </div>
+  <div class="rp">
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Lord, I know the left side well. Show me if the right side is true.</span><span class="zh">主啊,左边那一栏我太熟悉了。求你让我看见,右边是不是真的。</span></p></div>
+  </div>
+</section>
+
+<!-- 3 · Dawn of the Word -->
+<section class="mod" id="s3">
+  <div class="step">03</div>
+  <div class="eyebrow"><span class="en">The dawn of the Word</span><span class="zh">道的破晓</span></div>
+  <h2 class="head"><span class="en">The Word became flesh</span><span class="zh">道成了肉身</span></h2>
+  <div class="verse">
+    <div class="t"><span class="en">"In the beginning was the Word, and the Word was with God, and the Word was God… The Word became flesh and made his dwelling among us."</span><span class="zh">"太初有道,道与神同在,道就是神……道成了肉身,住在我们中间,充充满满地有恩典有真理。"</span><span class="ref">John 1:1,14 · 约翰福音 1:1,14</span></div>
+  </div>
+  <p class="lead"><span class="en">God did not watch humanity suffer from afar. He personally stepped into the world — with a body, a name, and tears — full of grace and truth.</span><span class="zh">神没有远远地看着人受苦。他亲自走进这个世界——有身体、有名字、会流泪——满有恩典和真理。</span></p>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Does God feel distant to you? What difference would it make if He came close — on purpose?</span><span class="zh">对你来说,神是不是很遥远?如果他是刻意地靠近了呢——会有什么不同?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Word made flesh, thank You for not staying far. Come near to me too.</span><span class="zh">道成肉身的主,谢谢你没有停在远处。也求你靠近我。</span></p></div>
+  </div>
+</section>
+
+<!-- 4 · The metaphor of light -->
+<section class="mod" id="s4">
+  <div class="step">04</div>
+  <div class="eyebrow"><span class="en">The metaphor of light</span><span class="zh">光的隐喻</span></div>
+  <h2 class="head"><span class="en">"I am the light of the world"</span><span class="zh">"我是世界的光"</span></h2>
+  <div class="verse">
+    <div class="t"><span class="en">"I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life."</span><span class="zh">"我是世界的光。跟从我的,就不在黑暗里走,必要得着生命的光。"</span><span class="ref">John 8:12 · 约翰福音 8:12</span></div>
+  </div>
+  <div class="grid2">
+    <div class="c"><div class="n"><span class="en">Light exposes</span><span class="zh">光,揭露</span></div><div class="d"><span class="en">sin, confusion, emptiness, and the hidden realities of the human heart.</span><span class="zh">罪、混乱、空虚,以及人心里隐藏的真相。</span></div></div>
+    <div class="c"><div class="n"><span class="en">Light directs</span><span class="zh">光,引导</span></div><div class="d"><span class="en">it gives a path, a vision, and the very source of spiritual life.</span><span class="zh">它给出道路、方向,和属灵生命的源头本身。</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Light can feel uncomfortable before it feels like relief. What in you would rather stay in the dark?</span><span class="zh">光在成为安慰之前,常常先让人不适。你里面有什么,宁愿留在黑暗里?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Light of the world, shine where I have been afraid to look — and lead me forward.</span><span class="zh">世界的光啊,照进我一直不敢看的地方——并引我往前走。</span></p></div>
+  </div>
+</section>
+
+<!-- 5 · Purpose of the gospel -->
+<section class="mod" id="s5">
+  <div class="step">05</div>
+  <div class="eyebrow"><span class="en">Why this book exists</span><span class="zh">这卷书为何而写</span></div>
+  <h2 class="head"><span class="en">An invitation, not an imposition</span><span class="zh">是邀请,不是强加</span></h2>
+  <div class="verse">
+    <div class="t"><span class="en">"But these are written that you may believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name."</span><span class="zh">"但记这些事,要叫你们信耶稣是基督,是神的儿子,并且叫你们信了他,就可以因他的名得生命。"</span><span class="ref">John 20:31 · 约翰福音 20:31</span></div>
+  </div>
+  <p class="lead"><span class="en">John states his aim plainly: this is not an imposition of rules, but an invitation to belief — written so you may look, weigh, and decide.</span><span class="zh">约翰把目的说得很直白:这不是一套强加的规条,而是一份相信的邀请——写下来,是要你去看、去掂量、去决定。</span></p>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Have you experienced faith more as pressure, or as invitation? What would it mean to be simply invited?</span><span class="zh">你经历到的信仰,更多是压力,还是邀请?如果只是"被邀请",那会是什么感觉?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Thank You that this is an invitation. Give me the freedom to consider it honestly.</span><span class="zh">谢谢你,这是一份邀请。求你给我诚实思考的自由。</span></p></div>
+  </div>
+</section>
+
+<!-- 6 · Seven signs -->
+<section class="mod" id="s6">
+  <div class="step">06</div>
+  <div class="eyebrow"><span class="en">The seven signs</span><span class="zh">七个神迹</span></div>
+  <h2 class="head"><span class="en">A roadmap of revelation</span><span class="zh">一张启示的路线图</span></h2>
+  <p class="lead muted"><span class="en">John records seven "signs" — not tricks, but windows. Each miracle reveals who Jesus is.</span><span class="zh">约翰记下七个"神迹"——不是把戏,而是窗户。每个神迹,都在显明耶稣是谁。</span></p>
+  <div class="rows">
+    <div class="r"><div class="a"><span class="en">Turning water to wine</span><span class="zh">水变酒</span></div><div class="arw">→</div><div class="b"><span class="en">bringing new joy &amp; abundance</span><span class="zh">带来新的喜乐与丰盛</span></div></div>
+    <div class="r"><div class="a"><span class="en">Healing the official's son</span><span class="zh">医治大臣的儿子</span></div><div class="arw">→</div><div class="b"><span class="en">the life-giving authority of His word</span><span class="zh">他话语中赐生命的权柄</span></div></div>
+    <div class="r"><div class="a"><span class="en">Healing the man at Bethesda</span><span class="zh">医治毕士大池边的人</span></div><div class="arw">→</div><div class="b"><span class="en">restoring the long-term weak</span><span class="zh">恢复长久软弱的人</span></div></div>
+    <div class="r"><div class="a"><span class="en">Feeding the 5,000</span><span class="zh">喂饱五千人</span></div><div class="arw">→</div><div class="b"><span class="en">the ultimate provision of life</span><span class="zh">生命最终极的供应</span></div></div>
+    <div class="r"><div class="a"><span class="en">Walking on water</span><span class="zh">在水面上行走</span></div><div class="arw">→</div><div class="b"><span class="en">absolute victory over fear &amp; chaos</span><span class="zh">胜过恐惧与混乱</span></div></div>
+    <div class="r"><div class="a"><span class="en">Healing the man born blind</span><span class="zh">医治生来瞎眼的</span></div><div class="arw">→</div><div class="b"><span class="en">leading from darkness into light</span><span class="zh">从黑暗领入光明</span></div></div>
+    <div class="r"><div class="a"><span class="en">Raising Lazarus from the dead</span><span class="zh">叫拉撒路复活</span></div><div class="arw">→</div><div class="b"><span class="en">total victory over death</span><span class="zh">完全胜过死亡</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Which sign meets the need you feel most right now — joy, healing, provision, courage, sight, or life itself?</span><span class="zh">哪一个神迹,正对着你此刻最深的需要——喜乐、医治、供应、勇气、看见,还是生命本身?</span></p></div>
+  </div>
+</section>
+
+<!-- 7 · Seven I AM -->
+<section class="mod" id="s7">
+  <div class="step">07</div>
+  <div class="eyebrow"><span class="en">The signature of this book</span><span class="zh">这卷书的签名</span></div>
+  <h2 class="head"><span class="en">The seven "I AM" sayings</span><span class="zh">七个「我是」</span></h2>
+  <p class="lead muted"><span class="en">"I AM" is the name God gave himself (Exodus 3:14). Seven times, Jesus completes the sentence — and each answers a human ache.</span><span class="zh">"我是"是神给自己起的名(出埃及记 3:14)。耶稣七次把这句话说完——每一句,都回应一种人的疼痛。</span></p>
+  <div class="grid2">
+    <div class="c"><div class="n"><span class="en">The Bread of Life</span><span class="zh">生命的粮</span></div><div class="d"><span class="en">answers human hunger.</span><span class="zh">回应人的饥饿。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Light of the World</span><span class="zh">世界的光</span></div><div class="d"><span class="en">answers human darkness.</span><span class="zh">回应人的黑暗。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Door for the Sheep</span><span class="zh">羊的门</span></div><div class="d"><span class="en">answers the need for safety.</span><span class="zh">回应对安全的需要。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Good Shepherd</span><span class="zh">好牧人</span></div><div class="d"><span class="en">answers the need for guidance.</span><span class="zh">回应对引导的需要。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Resurrection &amp; the Life</span><span class="zh">复活与生命</span></div><div class="d"><span class="en">answers the reality of death.</span><span class="zh">回应死亡的现实。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Way, the Truth &amp; the Life</span><span class="zh">道路、真理、生命</span></div><div class="d"><span class="en">answers spiritual lostness.</span><span class="zh">回应属灵的迷失。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The True Vine</span><span class="zh">真葡萄树</span></div><div class="d"><span class="en">answers spiritual fruitlessness.</span><span class="zh">回应属灵的不结果。</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Jesus, be the "I AM" my heart most needs today.</span><span class="zh">耶稣,今天就作我心最需要的那个「我是」。</span></p></div>
+  </div>
+</section>
+
+<!-- 8 · Encounters in the light -->
+<section class="mod" id="s8">
+  <div class="step">08</div>
+  <div class="eyebrow"><span class="en">Encounters in the light</span><span class="zh">光中的相遇</span></div>
+  <h2 class="head"><span class="en">Four people, four kinds of need</span><span class="zh">四个人,四种需要</span></h2>
+  <div class="grid2">
+    <div class="c"><div class="n"><span class="en">Nicodemus — religious &amp; status-driven</span><span class="zh">尼哥底母 — 宗教与地位</span></div><div class="d"><span class="en">Relies on knowledge and position; discovers the necessity of spiritual rebirth.</span><span class="zh">靠知识与地位;却发现必须重生。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The Samaritan woman — ashamed &amp; lonely</span><span class="zh">撒玛利亚妇人 — 羞愧与孤单</span></div><div class="d"><span class="en">Carries stigma and deep thirst; discovers the satisfaction of Living Water.</span><span class="zh">背着污名与深渴;却尝到活水的满足。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The blind man — the broken</span><span class="zh">瞎眼的人 — 残缺者</span></div><div class="d"><span class="en">Trapped in literal and social darkness; discovers sight and deeper vision.</span><span class="zh">困在肉身与社会的黑暗里;却得着看见,与更深的洞见。</span></div></div>
+    <div class="c"><div class="n"><span class="en">Thomas &amp; Peter — doubting &amp; failing</span><span class="zh">多马与彼得 — 怀疑与失败</span></div><div class="d"><span class="en">Crippled by skepticism and shame; discover restoration and grace to follow again.</span><span class="zh">被怀疑与羞愧压住;却得着恢复,和重新跟随的恩典。</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Which of these four sounds most like you right now?</span><span class="zh">此刻的你,最像这四个人中的哪一个?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">You met each of them where they were. Meet me here, as I am.</span><span class="zh">你在每个人所在之处遇见他们。也求你就在这里,如我本相地遇见我。</span></p></div>
+  </div>
+</section>
+
+<!-- 9 · Upper room -->
+<section class="mod" id="s9">
+  <div class="step">09</div>
+  <div class="eyebrow"><span class="en">The upper room · the call to abide</span><span class="zh">楼上的房间 · 住在里面的呼召</span></div>
+  <h2 class="head"><span class="en">On the last night</span><span class="zh">在最后一夜</span></h2>
+  <div class="grid2">
+    <div class="c"><div class="n"><span class="en">Humility &amp; love</span><span class="zh">谦卑与爱</span></div><div class="d"><span class="en">washing the disciples' feet, and a new command: love one another.</span><span class="zh">为门徒洗脚,并颁下新命令:彼此相爱。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The promise of the Spirit</span><span class="zh">圣灵的应许</span></div><div class="d"><span class="en">the Helper who empowers believers to live out the truth.</span><span class="zh">那位保惠师,赐人力量去活出真理。</span></div></div>
+    <div class="c"><div class="n"><span class="en">The true vine</span><span class="zh">真葡萄树</span></div><div class="d"><span class="en">true discipleship is not striving or self-reliance, but remaining connected to Christ to bear fruit.</span><span class="zh">真正的门徒不是苦撑或自靠,而是住在基督里、连于他而结果子。</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">Are you trying to bear fruit by striving — or by staying connected? What would "abiding" look like this week?</span><span class="zh">你是想靠"用力"结果子,还是靠"连于他"?这一周,"住在他里面"会是什么样子?</span></p></div>
+  </div>
+</section>
+
+<!-- 10 · The cross -->
+<section class="mod" id="s10">
+  <div class="step">10</div>
+  <div class="eyebrow"><span class="en">The climax of the cross</span><span class="zh">十架的高峰</span></div>
+  <div class="statement">
+    <div class="big"><span class="en">"It is finished."</span><span class="zh">"成了。"</span></div>
+    <div class="sub"><span class="en">John 19:30 · 约翰福音 19:30</span><span class="zh">约翰福音 19:30 · John 19:30</span></div>
+  </div>
+  <p class="lead"><span class="en">The crucifixion is not a failure; it is redemption accomplished. Jesus willingly lays down His life to reconcile sinners to God — absorbing the darkness so we can walk in the light.</span><span class="zh">十字架不是失败,而是救赎的完成。耶稣甘心舍命,使罪人与神和好——他吸尽了黑暗,好叫我们能行在光中。</span></p>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">"It is finished" — a debt paid, not a task left undone. What have you been trying to finish on your own?</span><span class="zh">"成了"——是债已还清,不是事情没做完。有什么,是你一直想靠自己了结的?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Thank You for absorbing what I could never carry. Let me walk in the light You opened.</span><span class="zh">谢谢你担起了我永远背不动的。求你让我行在你所开的光中。</span></p></div>
+  </div>
+</section>
+
+<!-- 11 · Resurrection -->
+<section class="mod" id="s11">
+  <div class="step">11</div>
+  <div class="eyebrow"><span class="en">The resurrection &amp; the life</span><span class="zh">复活与生命</span></div>
+  <h2 class="head"><span class="en">Death is not the final word</span><span class="zh">死亡,不是最后一句话</span></h2>
+  <p class="lead muted"><span class="en">The true Lord of Life emerges from the tomb — and He comes looking for people, one at a time.</span><span class="zh">真正的生命之主从坟墓里出来——并且他来寻找人,一个一个地找。</span></p>
+  <div class="grid2">
+    <div class="c"><div class="n"><span class="en">To Mary, in her grief</span><span class="zh">向哀伤的马利亚</span></div><div class="d"><span class="en">He speaks her name.</span><span class="zh">他叫出她的名字。</span></div></div>
+    <div class="c"><div class="n"><span class="en">To the disciples, behind locked doors</span><span class="zh">向门徒,在紧锁的门后</span></div><div class="d"><span class="en">"Peace be with you."</span><span class="zh">"愿你们平安。"</span></div></div>
+    <div class="c"><div class="n"><span class="en">To Thomas, in his doubt</span><span class="zh">向多马,在他的怀疑中</span></div><div class="d"><span class="en">He offers His own scars.</span><span class="zh">他伸出自己的伤痕。</span></div></div>
+    <div class="c"><div class="n"><span class="en">To Peter, to offer restoration</span><span class="zh">向彼得,给他恢复</span></div><div class="d"><span class="en">"Do you love me? … Follow me."</span><span class="zh">"你爱我吗?……你跟从我吧。"</span></div></div>
+  </div>
+  <div class="rp">
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">Risen Lord, You come to grief, to fear, to doubt, to failure. Come to mine.</span><span class="zh">复活的主,你来到哀伤、恐惧、怀疑、失败之中。也求你来到我这里。</span></p></div>
+  </div>
+</section>
+
+<!-- 12 · Eternal life -->
+<section class="mod" id="s12">
+  <div class="step">12</div>
+  <div class="eyebrow"><span class="en">The reality of eternal life</span><span class="zh">永生的实际</span></div>
+  <h2 class="head"><span class="en">Life that starts now</span><span class="zh">从现在就开始的生命</span></h2>
+  <div class="verse">
+    <div class="t"><span class="en">"For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life."</span><span class="zh">"神爱世人,甚至将他的独生子赐给他们,叫一切信他的,不至灭亡,反得永生。"</span><span class="ref">John 3:16 · 约翰福音 3:16</span></div>
+  </div>
+  <div class="verse">
+    <div class="t"><span class="en">"Now this is eternal life: that they know you, the only true God, and Jesus Christ, whom you have sent."</span><span class="zh">"认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。"</span><span class="ref">John 17:3 · 约翰福音 17:3</span></div>
+  </div>
+  <p class="lead"><span class="en">Eternal life starts now. It is not earned by merit, wealth, or religious performance, but received — through knowing God and resting in His grace.</span><span class="zh">永生从现在就开始。它不是靠功德、财富或宗教表现挣来的,而是被领受的——藉着认识神,并安息在他的恩典里。</span></p>
+  <div class="rp">
+    <div class="box"><div class="lbl"><span class="en">Reflect</span><span class="zh">默想</span></div><p><span class="en">If eternal life is a relationship that starts today, not a reward after death — where would you begin?</span><span class="zh">如果永生是一段"今天就开始"的关系,而不是死后的奖赏——你会从哪里开始?</span></p></div>
+    <div class="box pray"><div class="lbl"><span class="en">A prayer</span><span class="zh">祷告</span></div><p><span class="en">I stop trying to earn it. Teach me to know You, and to rest.</span><span class="zh">我不再想着去挣得它了。教我认识你,并且安息。</span></p></div>
+  </div>
+</section>
+
+<!-- 13 · The verdict -->
+<section class="mod" id="s13">
+  <div class="step">13</div>
+  <div class="eyebrow"><span class="en">The verdict</span><span class="zh">结论</span></div>
+  <h2 class="head"><span class="en">From darkness into life</span><span class="zh">从黑暗,进入生命</span></h2>
+  <p class="lead"><span class="en">The Gospel of John testifies that Jesus is the Son of God, the Light of Life, and the Savior of the world; and that through belief in Him, we step permanently out of darkness and into eternal life.</span><span class="zh">《约翰福音》见证:耶稣是神的儿子、是生命之光、是世界的救主;并且藉着信他,我们就永远地走出黑暗,进入永生。</span></p>
+  <div class="statement" style="padding-top:8px">
+    <div class="big"><span class="en">The Light has come.</span><span class="zh">真光已经来到。</span></div>
+  </div>
+</section>
+
+<!-- next steps -->
+<section class="mod" id="next">
+  <div class="eyebrow"><span class="en">Where to go next</span><span class="zh">下一步去哪里</span></div>
+  <h2 class="head"><span class="en">Keep going, gently</span><span class="zh">温柔地,继续走</span></h2>
+  <div class="nav-cards">
+    <a href="john.html"><span><span class="en">The Gospel of John — full site</span><span class="zh">约翰福音 · 主站(含 Ask 问答、敬拜)</span></span><span class="go">→</span></a>
+    <a href="john-deck-en.html"><span><span class="en">The visual deck (15 slides)</span><span class="zh">完整图解(15 页)</span></span><span class="go">→</span></a>
+    <a href="ecclesiastes.html?lang=zh"><span><span class="en">Book one — Ecclesiastes</span><span class="zh">第一卷 · 传道书</span></span><span class="go">→</span></a>
+    <a href="index.html"><span><span class="en">Bible Library — home</span><span class="zh">圣经书阁 · 首页</span></span><span class="go">→</span></a>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <span class="en">Scripture: Chinese Union Version (和合本) &amp; NIV/KJV, public domain. Content adapted from "The Light of Life." · MVP</span>
+  <span class="zh">经文:和合本(公有领域)。内容改编自《生命之光》导览。· 演示版</span>
+</footer>
+
+<nav class="tabbar" aria-label="quick navigation">
+  <a href="john.html"><span class="ic">📖</span><span><span class="en">Read</span><span class="zh">阅读</span></span></a>
+  <a href="listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+  <a href="john.html#ask"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
+  <a href="#s1"><span class="ic">✦</span><span><span class="en">Study</span><span class="zh">导览</span></span></a>
+  <button type="button" onclick="shareThis()"><span class="ic">↗</span><span><span class="en">Share</span><span class="zh">分享</span></span></button>
+</nav>
+
+<script>
+  function setLang(l){
+    document.body.classList.toggle('lang-zh', l==='zh');
+    document.documentElement.lang = l==='zh' ? 'zh-CN' : 'en';
+    document.getElementById('btnZh').classList.toggle('active', l==='zh');
+    document.getElementById('btnEn').classList.toggle('active', l==='en');
+    try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  }
+  function toggleCompare(){
+    var on = document.body.classList.toggle('compare');
+    document.getElementById('cmpBtn').classList.toggle('on', on);
+  }
+  function shareThis(){
+    var d={ title: document.title, url: location.href };
+    if(navigator.share){ navigator.share(d).catch(function(){}); }
+    else if(navigator.clipboard){ navigator.clipboard.writeText(location.href); }
+  }
+  (function(){
+    var p=new URLSearchParams(location.search), saved=null;
+    try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+    var nl=(navigator.language||'').toLowerCase(), q=p.get('lang');
+    setLang((q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en')));
+  })();
+</script>
+</body>
+</html>

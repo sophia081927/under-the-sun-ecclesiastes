@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>马太福音 · Matthew · 敬请期待</title>
+<meta name="description" content="马太福音 · Matthew — coming soon to the Bible Library. 敬请期待。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: { fontFamily: {
+    serif: ['"Playfair Display"','"Noto Serif SC"','Georgia','serif'],
+    sans:  ['Inter','"Noto Sans SC"','system-ui','sans-serif'],
+    mono:  ['"JetBrains Mono"','ui-monospace','monospace'] } } } };
+</script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+</head>
+<body class="min-h-screen bg-[#12161A] text-[#F4F1EA] font-sans antialiased flex flex-col" data-book="matthew">
+  <header class="px-5 md:px-8 py-4 flex justify-between items-center border-b border-gray-800/70">
+    <a href="index.html" class="inline-flex items-center gap-2 text-gray-400 hover:text-[#D4AF37] text-sm"><i data-lucide="chevron-left" class="h-4 w-4"></i><span data-i18n="back"></span></a>
+    <div class="inline-flex border border-[#D4AF37]/40 rounded-full overflow-hidden text-xs">
+      <button id="btnZh" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('zh')">中文</button>
+      <button id="btnEn" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('en')">EN</button>
+    </div>
+  </header>
+
+  <main id="main" class="flex-1 flex items-center justify-center px-6 py-16 relative overflow-hidden">
+    <div class="absolute inset-0 opacity-70 pointer-events-none" id="bgwash"></div>
+    <div class="relative max-w-xl w-full text-center">
+      <div class="mx-auto mb-8 w-16 h-16 rounded-full border flex items-center justify-center" id="iconRing">
+        <i data-lucide="hourglass" class="h-6 w-6"></i>
+      </div>
+      <div class="text-xs font-mono tracking-[0.28em] uppercase mb-4" id="type" style="color:#B8C7D9"></div>
+      <h1 class="font-serif text-4xl md:text-5xl font-bold leading-tight" id="titleZh"></h1>
+      <div class="font-sans text-gray-500 mt-2 tracking-widest uppercase text-sm" id="titleEn"></div>
+      <div class="font-serif italic mt-6 text-lg leading-snug" id="tagline" style="color:#B8C7D9"></div>
+      <p class="text-gray-400 text-sm leading-relaxed font-light mt-5 max-w-md mx-auto" id="desc"></p>
+
+      <figure class="mt-8 border-l-2 pl-4 text-left max-w-md mx-auto" id="verseWrap" style="border-color:#B8C7D9">
+        <blockquote class="font-serif italic text-[15px] leading-relaxed text-[#ECE7DD]" id="verseText"></blockquote>
+        <figcaption class="text-gray-500 text-xs mt-2" id="verseRef"></figcaption>
+      </figure>
+
+      <div class="mt-10 inline-flex items-center gap-2 text-xs tracking-[0.18em] uppercase text-gray-400 border border-gray-700 rounded-full px-5 py-3">
+        <i data-lucide="clock" class="h-3.5 w-3.5"></i> <span id="soon"></span>
+      </div>
+      <div class="mt-8">
+        <a href="index.html" class="text-gray-500 hover:text-[#D4AF37] text-xs tracking-wider uppercase" data-i18n="browse"></a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="py-7 text-center text-[10px] text-gray-600 tracking-widest uppercase border-t border-gray-950 px-6">
+    圣经书阁 · Bible Library
+  </footer>
+
+<script type="module">
+  import { getBookById } from './data/bibleRegistry.js';
+  const book = getBookById(document.body.dataset.book);
+  const UI = { zh: { back:'书阁', browse:'← 返回浏览所有书卷', soon:'敬请期待' },
+               en: { back:'Library', browse:'← Browse all books', soon:'Coming soon' } };
+  let lang = 'zh';
+
+  function render() {
+    if (!book) return;
+    const acc = book.accentColor || '#D4AF37';
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => el.textContent = UI[lang][el.dataset.i18n] || '');
+    document.getElementById('btnZh').classList.toggle('text-[#D4AF37]', lang==='zh');
+    document.getElementById('btnEn').classList.toggle('text-[#D4AF37]', lang==='en');
+    document.getElementById('type').textContent = lang==='zh' ? (book.bookTypeZh||book.bookType) : book.bookType;
+    document.getElementById('type').style.color = acc;
+    document.getElementById('titleZh').textContent = lang==='zh' ? book.titleZh : book.titleEn;
+    document.getElementById('titleEn').textContent = lang==='zh' ? book.titleEn : book.titleZh;
+    document.getElementById('tagline').textContent = lang==='zh' ? book.taglineZh : book.taglineEn;
+    document.getElementById('tagline').style.color = acc;
+    document.getElementById('desc').textContent = lang==='zh' ? book.descriptionZh : book.descriptionEn;
+    const kv = book.keyVerse[lang];
+    document.getElementById('verseText').textContent = '“' + kv.text + '”';
+    document.getElementById('verseRef').textContent = kv.reference;
+    document.getElementById('verseWrap').style.borderColor = acc;
+    document.getElementById('soon').textContent = UI[lang].soon;
+    document.getElementById('iconRing').style.borderColor = acc + '66';
+    document.getElementById('iconRing').style.color = acc;
+    document.getElementById('bgwash').style.background =
+      `radial-gradient(60% 45% at 50% 20%, ${acc}14, transparent 70%)`;
+    document.title = (lang==='zh'?book.titleZh:book.titleEn) + ' · ' + UI[lang].soon;
+    if (window.lucide) lucide.createIcons();
+  }
+  window.setLang = (l) => { lang = l; try{ localStorage.setItem('bible_lang', l); }catch(e){} render(); };
+  let saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  const nl=(navigator.language||'').toLowerCase();
+  lang = saved || (nl.indexOf('zh')===0?'zh':'en');
+  render();
+</script>
+</body>
+</html>

@@ -70,19 +70,9 @@
     <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light" data-i18n="sub"></p>
   </section>
 
-  <!-- Ask from Scripture (platform-level open-ended Q&A) -->
-  <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-8">
-    <a href="ask.html" class="group block rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-br from-[#D4AF37]/10 to-transparent p-6 md:p-7 transition-all hover:border-[#D4AF37]/60 hover:shadow-[0_18px_40px_rgba(0,0,0,.35)]">
-      <div class="flex items-center gap-4 md:gap-5">
-        <i data-lucide="message-circle" class="h-7 w-7 md:h-8 md:w-8 text-[#D4AF37] shrink-0"></i>
-        <div class="flex-1 min-w-0">
-          <span class="text-[10px] font-mono tracking-[0.22em] uppercase text-[#D4AF37]" data-i18n="askEyebrow"></span>
-          <h2 class="font-serif text-xl md:text-2xl font-bold text-[#F4F1EA] mt-1" data-i18n="askTitle"></h2>
-          <p class="text-gray-400 text-sm leading-relaxed font-light mt-1.5" data-i18n="askSub"></p>
-        </div>
-        <span class="hidden sm:inline-flex items-center gap-1.5 font-semibold text-xs tracking-wider uppercase px-5 py-3 rounded-full min-h-[46px] bg-[#D4AF37] text-[#12161A] shrink-0 transition-transform group-hover:translate-x-0.5" data-i18n="askBtn"></span>
-      </div>
-    </a>
+  <!-- Ask from Scripture (platform-level open-ended Q&A component) -->
+  <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-10">
+    <div id="biblical-qa"></div>
   </section>
 
   <!-- Books (rendered from data/bibleRegistry.js) -->
@@ -97,6 +87,7 @@
 
 <script type="module">
   import { bibleRegistry, featureLabels, resolveHash } from './data/bibleRegistry.js';
+  import { mountBiblicalQA } from './components/biblical-qa.js';
 
   // GitHub-Pages-safe hash routing: #/john/listen → john-listen.html (refresh-safe).
   function gotoHash() {
@@ -208,6 +199,8 @@
     const nl = (navigator.language || '').toLowerCase();
     lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
     render();
+    // mount the reusable Biblical Q&A component (auto-syncs language via <html lang>)
+    mountBiblicalQA(document.getElementById('biblical-qa'));
   }
 </script>
 </body>

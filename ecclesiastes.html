@@ -750,6 +750,13 @@
   </div>
 </section>
 
+<!-- ============ BIBLICAL Q&A (open-ended · shared component) ============ -->
+<section id="biblical-qa-section">
+  <div class="wrap">
+    <div id="biblical-qa"></div>
+  </div>
+</section>
+
 <!-- ============ GOING DEEPER (opt-in bridge) ============ -->
 <section id="deeper">
   <div class="wrap">
@@ -1385,6 +1392,10 @@ Through thorny ways leads to a joyful end.</span><span class="zh">我灵镇静!�
     var lang = (q==='zh'||q==='en') ? q : (saved || (nl.indexOf('zh')===0 ? 'zh' : 'en'));
     setLang(lang);
   })();
+</script>
+<script type="module">
+  import { mountBiblicalQA } from './components/biblical-qa.js';
+  mountBiblicalQA(document.getElementById('biblical-qa'));
 </script>
 </body>
 </html>

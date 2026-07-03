@@ -674,6 +674,13 @@
   <p class="q"><span class="en">"I have come that they may have life, and have it to the full."</span><span class="zh">"我来了,是要叫人得生命,并且得的更丰盛。"</span></p>
 </div>
 
+<!-- ============ BIBLICAL Q&A (open-ended · shared component) ============ -->
+<section id="biblical-qa-section">
+  <div class="wrap">
+    <div id="biblical-qa"></div>
+  </div>
+</section>
+
 <!-- ============ WORSHIP SONGS ============ -->
 <section id="worship">
   <div class="wrap">
@@ -1134,6 +1141,10 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
     var lang = (q==='zh'||q==='en') ? q : (saved || (nl.indexOf('zh')===0 ? 'zh' : 'en'));
     setLang(lang);
   })();
+</script>
+<script type="module">
+  import { mountBiblicalQA } from './components/biblical-qa.js';
+  mountBiblicalQA(document.getElementById('biblical-qa'));
 </script>
 </body>
 </html>

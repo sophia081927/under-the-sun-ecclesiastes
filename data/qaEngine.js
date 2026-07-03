@@ -274,9 +274,9 @@ export const qaRegistry = [
 ];
 
 /* ---- crisis keywords (checked FIRST, before any topic matching) ---- */
-const CRISIS_ZH = ['想死','自杀','不想活','伤害自己','被打','家暴','被侵犯','轻生','活不下去','想结束生命','没人救我','结束生命','结束自己'];
+const CRISIS_ZH = ['想死','自杀','不想活','不想活了','伤害自己','被打','家暴','被侵犯','轻生','活不下去','想结束生命','没人救我','结束生命','结束自己','撑不住了','不想醒来'];
 const CRISIS_EN = ['suicide','kill myself','killing myself','want to die','self harm','self-harm','abuse','domestic violence','assault',
-  'end my life','hurt myself','no reason to live','cannot go on','cant go on',"can't go on"];
+  'end my life','hurt myself','no reason to live','cannot go on','cant go on',"can't go on",'want to disappear'];
 
 export function detectCrisis(input, lang) {
   const lc = (input || '').toLowerCase();

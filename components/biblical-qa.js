@@ -27,9 +27,10 @@ const UI = {
     inputLabel: '你想问什么?',
     placeholder: '例如:我为什么总觉得空虚?神真的爱我吗?我很焦虑怎么办?',
     button: '用圣经回应我',
+    loading: '正在从圣经中寻找回应……',
     guided: '不知从何问起?试试这些:',
-    lVerse: '相关经文', lExpl: '简短解释', lReflect: '默想', lNext: '下一步', lPray: '祷告', lRead: '延伸阅读',
-    note: '这是扎根圣经的引导,是一个温柔的起点,不能取代牧者、辅导员或专业帮助。'
+    lVerse: '相关经文', lExpl: '简短解释', lReflect: '默想问题', lNext: '下一步', lPray: '祷告', lRead: '相关书卷',
+    safetyFooter: '如果你正处于紧急危机中,请立即拨打 988(美国)或联系你信任的人。'
   },
   en: {
     title: 'Biblical Q&A',
@@ -37,20 +38,21 @@ const UI = {
     inputLabel: 'What would you like to ask?',
     placeholder: 'For example: Why do I feel empty? Does God really love me? What does the Bible say about anxiety?',
     button: 'Answer from Scripture',
+    loading: 'Searching Scripture for a response...',
     guided: 'Not sure where to start? Try one:',
-    lVerse: 'Relevant Scripture', lExpl: 'Reflection', lReflect: 'A question to sit with', lNext: 'Next Step', lPray: 'Prayer', lRead: 'Keep reading',
-    note: 'This is Scripture-based guidance — a gentle starting point, not a substitute for a pastor, counselor, or professional care.'
+    lVerse: 'Relevant Scripture', lExpl: 'Reflection', lReflect: 'Question for Reflection', lNext: 'Next Step', lPray: 'Prayer', lRead: 'Related Books',
+    safetyFooter: 'If you are in immediate crisis, please call or text 988 (United States) or reach out to someone you trust.'
   }
 };
 
 const GUIDED = [
-  { zh: '我为什么总觉得空虚?', en: 'Why do I still feel empty even when I have things?' },
-  { zh: '我很焦虑,圣经怎么说?', en: 'What does the Bible say about anxiety?' },
+  { zh: '我为什么总觉得空虚?', en: 'Why do I feel empty?' },
+  { zh: '我很焦虑怎么办?', en: 'What does the Bible say about anxiety?' },
   { zh: '神真的爱我吗?', en: 'Does God really love me?' },
-  { zh: '我想认识耶稣', en: 'Who is Jesus?' },
-  { zh: '我努力了很多还是不满足', en: 'Why am I not satisfied even after success?' },
-  { zh: '圣经怎么看苦难?', en: 'What does Scripture say about suffering?' }
+  { zh: '我想认识耶稣', en: 'How can I know Jesus?' }
 ];
+
+const LOADING_MS = 700; // brief, mobile-friendly; crisis responses skip this entirely
 
 const BOOK_LINKS = {
   ecclesiastes: { zh: '读传道书', en: 'Read Ecclesiastes', href: 'ecclesiastes.html' },
@@ -97,7 +99,12 @@ const CSS = `
 .bqa-links{margin-top:20px;padding-top:16px;border-top:1px solid var(--bqa-soft);display:flex;flex-wrap:wrap;gap:10px}
 .bqa-links a{font-size:13.5px;color:#14161a;background:var(--bqa-sun);border-radius:30px;padding:8px 17px;text-decoration:none;transition:background .2s}
 .bqa-links a:hover{background:var(--bqa-sun2)}
-.bqa-note{margin-top:16px;font-size:12px;color:var(--bqa-faint);line-height:1.65;text-align:center}
+.bqa-loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:26px 18px;color:var(--bqa-sun2);font-size:14.5px;letter-spacing:.02em;animation:bqaFade .3s ease}
+.bqa-loading .dot{width:7px;height:7px;border-radius:50%;background:var(--bqa-sun);opacity:.4;animation:bqaPulse 1s infinite ease-in-out}
+.bqa-loading .dot:nth-child(2){animation-delay:.16s}.bqa-loading .dot:nth-child(3){animation-delay:.32s}
+@keyframes bqaPulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
+@keyframes bqaFade{from{opacity:0}to{opacity:1}}
+.bqa-safety{margin-top:16px;font-size:12px;color:var(--bqa-faint);line-height:1.65;text-align:center}
 @media(max-width:540px){.bqa-box{padding:20px 16px}.bqa-card{padding:20px 16px}}
 `;
 
@@ -151,7 +158,7 @@ export function mountBiblicalQA(container, opts) {
       </div>
     </div>
     <div class="bqa-answer" data-el="answer" aria-live="polite"></div>
-    <p class="bqa-note" data-k="note"></p>
+    <p class="bqa-safety" data-k="safetyFooter"></p>
   `;
 
   const el = (n) => container.querySelector(`[data-el="${n}"]`);
@@ -166,7 +173,7 @@ export function mountBiblicalQA(container, opts) {
         const lk = BOOK_LINKS[b];
         return lk ? `<a href="${lk.href}">${esc(lang === 'zh' ? lk.zh : lk.en)}</a>` : '';
       }).join('');
-      if (parts) links = `<div class="bqa-links">${parts}</div>`;
+      if (parts) links = `<div class="bqa-sect"><div class="bqa-slabel">${esc(t.lRead)}</div><div class="bqa-links">${parts}</div></div>`;
     }
     answer.innerHTML = `
       <div class="bqa-card${crisis ? ' crisis' : ''}">
@@ -182,12 +189,32 @@ export function mountBiblicalQA(container, opts) {
     answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
+  let loadTimer = 0;
+  function renderLoading(lang) {
+    const t = UI[lang];
+    answer.innerHTML =
+      `<div class="bqa-loading"><span>${esc(t.loading)}</span>` +
+      `<span class="dot"></span><span class="dot"></span><span class="dot"></span></div>`;
+    answer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
   function ask(q) {
     const lang = detectLang(opts);
     const question = (q != null ? q : input.value || '').trim();
     if (!question) return;
     lastQuestion = question;
-    renderCard(question, getBiblicalResponse(question, lang), lang);
+    if (loadTimer) { clearTimeout(loadTimer); loadTimer = 0; }
+
+    const r = getBiblicalResponse(question, lang);
+    // §1.3 — crisis responses bypass the loading animation entirely.
+    if (r.id === 'crisis') { renderCard(question, r, lang); return; }
+
+    // normal Q&A: brief loading state, then fade-in the card.
+    renderLoading(lang);
+    loadTimer = setTimeout(() => {
+      loadTimer = 0;
+      const l = detectLang(opts);
+      renderCard(question, getBiblicalResponse(question, l), l);
+    }, LOADING_MS);
   }
 
   function renderChrome() {

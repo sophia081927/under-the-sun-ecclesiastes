@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="用圣经回应 · Ask">
+<title>Ask from Scripture · 用圣经回应我的问题</title>
+<meta name="description" content="Bring your real questions, doubts, and struggles — and receive gentle, Scripture-centered guidance from Ecclesiastes and John. 带着你真实的问题、疑惑与挣扎而来,从传道书与约翰福音得到温柔、扎根圣经的回应。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/ask.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Under the Sun · 日光之下">
+<meta property="og:title" content="Ask from Scripture · 用圣经回应我的问题">
+<meta property="og:description" content="Bring your real questions and receive gentle, Scripture-centered guidance. 带着真实的问题而来,得到扎根圣经的温柔回应。">
+<meta property="og:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/violin.webp">
+<meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/ask.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+    --warn:#e0855b; --jade:#7fae9b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  /* language show/hide */
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  /* topbar */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;
+    background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
+    color:var(--muted);text-transform:uppercase;
+  }
+  .topbar .mark{color:var(--sun-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.asklink{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.asklink:hover{color:var(--sun-soft)}
+  .lang-toggle{border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;font-family:inherit;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  @media(max-width:540px){
+    .topbar{letter-spacing:.1em;padding:12px 16px}
+    .topbar .asklink{display:none}
+    .topbar .mark{font-size:11px}
+  }
+
+  /* hero */
+  .hero{max-width:760px;margin:0 auto;padding:104px 22px 8px;text-align:center}
+  .hero .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px}
+  .hero h1{font-size:clamp(27px,5.4vw,42px);line-height:1.25;color:var(--ink);font-weight:400}
+  .hero h1 .accent{color:var(--sun-soft)}
+  .hero .lead{margin-top:18px;font-size:16px;color:var(--muted);line-height:1.75}
+
+  main{max-width:760px;margin:0 auto;padding:22px 22px 80px}
+
+  /* ask box */
+  .askbox{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:26px 24px;box-shadow:0 14px 40px rgba(0,0,0,.28);margin-top:28px}
+  .askbox .qlabel{font-size:15px;color:var(--sun-soft);letter-spacing:.02em;margin-bottom:12px}
+  .askbox textarea{
+    width:100%;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--ink);
+    font-family:inherit;font-size:16px;line-height:1.6;padding:14px 15px;resize:vertical;min-height:82px;
+  }
+  .askbox textarea:focus{outline:none;border-color:var(--sun)}
+  .askbox .go{margin-top:14px;display:flex;justify-content:flex-end}
+  .askbox .go button{background:var(--sun);color:#14161a;border:none;border-radius:30px;cursor:pointer;font-family:inherit;font-weight:700;padding:12px 30px;font-size:15px;letter-spacing:.03em;transition:background .2s}
+  .askbox .go button:hover{background:var(--sun-soft)}
+
+  /* example chips */
+  .examples{margin-top:22px}
+  .examples .hint{font-size:12.5px;color:var(--faint);letter-spacing:.06em;margin-bottom:11px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:13.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:8px 15px;cursor:pointer;background:var(--bg);font-family:inherit;transition:all .2s;line-height:1.4;text-align:left}
+  .chip:hover{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
+
+  /* answer card */
+  #answer{margin-top:26px;display:flex;flex-direction:column;gap:18px}
+  .card{background:var(--bg2);border:1px solid var(--line-soft);border-radius:12px;padding:26px 24px;animation:rise .4s ease}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .card .qecho{font-size:14px;color:var(--faint);font-style:italic;border-left:2px solid var(--line);padding-left:12px;margin-bottom:20px;line-height:1.6}
+  .card .book-badge{display:inline-block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);border:1px solid var(--line);border-radius:30px;padding:4px 13px;margin-bottom:18px}
+  .sect{margin-top:20px}
+  .sect:first-of-type{margin-top:0}
+  .sect .slabel{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.9;margin-bottom:9px}
+  .verse{border-left:2px solid var(--sun);padding:2px 0 2px 15px;margin-bottom:15px}
+  .verse:last-child{margin-bottom:0}
+  .verse .ref{font-size:13px;color:var(--sun-soft);font-style:italic;letter-spacing:.02em;margin-bottom:4px}
+  .verse .vtext{font-size:16px;color:var(--ink);line-height:1.7}
+  .sect .body{font-size:15.5px;color:var(--ink);line-height:1.78}
+  .sect.prayer .body{color:var(--sun-soft);font-style:italic}
+  .links{margin-top:22px;padding-top:18px;border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:10px}
+  .links a{font-size:13.5px;color:#14161a;background:var(--sun);border-radius:30px;padding:8px 18px;text-decoration:none;transition:background .2s}
+  .links a:hover{background:var(--sun-soft)}
+  .links a.ghost{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
+  .links a.ghost:hover{color:var(--sun-soft);border-color:var(--sun)}
+
+  /* crisis card */
+  .card.crisis{background:rgba(224,133,91,.10);border:1px solid rgba(224,133,91,.5)}
+  .card.crisis .slabel{color:var(--warn)}
+  .card.crisis .body{font-size:15.5px;line-height:1.8}
+  .card.crisis strong{color:var(--sun-soft)}
+
+  /* fallback card */
+  .card.fallback .body{font-size:15px;color:var(--muted);line-height:1.78}
+
+  /* scope note */
+  .scope{margin-top:26px;font-size:12.5px;color:var(--faint);line-height:1.7;text-align:center;padding:0 6px}
+
+  /* tabbar */
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(24,27,32,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a,.tabbar button{flex:1;background:none;border:none;color:var(--muted);
+    font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:10.5px;letter-spacing:.03em;padding:5px 2px;min-height:50px;text-decoration:none}
+  .tabbar a:hover,.tabbar button:hover{color:var(--sun-soft)}
+  .tabbar a.active{color:var(--sun)}
+  .tabbar .ic{font-size:18px;line-height:1}
+  @media(max-width:700px){ .tabbar{display:flex} body{padding-bottom:66px} }
+
+  footer{border-top:1px solid var(--line-soft);padding:40px 22px;text-align:center;color:var(--faint)}
+  footer .mark{color:var(--sun-soft);font-size:15px;letter-spacing:.06em}
+  footer p{margin-top:12px;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="asklink" href="index.html"><span class="en">Library</span><span class="zh">书阁</span></a>
+    <a class="asklink" href="ecclesiastes.html"><span class="en">Ecclesiastes</span><span class="zh">传道书</span></a>
+    <a class="asklink" href="john.html"><span class="en">John</span><span class="zh">约翰福音</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="kicker"><span class="en">Ask from Scripture</span><span class="zh">用圣经回应我的问题</span></div>
+  <h1>
+    <span class="en">Bring the question you'd be <span class="accent">afraid to ask out loud</span></span>
+    <span class="zh">把你<span class="accent">不敢说出口</span>的那个问题,带来这里</span>
+  </h1>
+  <p class="lead">
+    <span class="en">Type your real question — about emptiness, anxiety, love, suffering, or how to begin knowing God — and receive gentle guidance rooted in the words of Scripture, not generic advice.</span>
+    <span class="zh">写下你真实的问题——关于空虚、焦虑、爱、苦难,或如何开始认识神——你会得到一份温柔的回应,扎根于圣经的话语,而不是空泛的鸡汤。</span>
+  </p>
+</header>
+
+<main>
+  <div class="askbox">
+    <div class="qlabel"><span class="en">What would you like to ask?</span><span class="zh">你想问什么?</span></div>
+    <textarea id="qInput" rows="3"></textarea>
+    <div class="go">
+      <button onclick="ask()"><span class="en">Answer from Scripture</span><span class="zh">用圣经回应我</span></button>
+    </div>
+  </div>
+
+  <div class="examples">
+    <div class="hint"><span class="en">Not sure where to start? Try one:</span><span class="zh">不知从何问起?试试这些:</span></div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <div id="answer" aria-live="polite"></div>
+
+  <p class="scope">
+    <span class="en">This offers Scripture-centered guidance from Ecclesiastes and John — a gentle starting point, not a substitute for a pastor, counselor, or professional care. It won't pretend to answer every question perfectly.</span>
+    <span class="zh">这里提供的是来自传道书与约翰福音、扎根圣经的引导——是一个温柔的起点,不能取代牧者、辅导员或专业帮助,也不假装能完美回答每一个问题。</span>
+  </p>
+</main>
+
+<nav class="tabbar" aria-label="quick navigation">
+  <a href="index.html"><span class="ic">📚</span><span><span class="en">Library</span><span class="zh">书阁</span></span></a>
+  <a href="ecclesiastes.html"><span class="ic">📖</span><span><span class="en">Read</span><span class="zh">阅读</span></span></a>
+  <a href="ask.html" class="active"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
+  <a href="listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+  <a href="john.html"><span class="ic">✦</span><span><span class="en">John</span><span class="zh">约翰</span></span></a>
+</nav>
+
+<footer>
+  <div class="mark">日光之下 · under the sun</div>
+  <p>
+    <span class="en">Scripture-centered Q&amp;A, drawn from Ecclesiastes &amp; John. · MVP demo.</span>
+    <span class="zh">扎根圣经的问答,文本来自传道书与约翰福音。· MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+/* ===================== language ===================== */
+var I18N_TITLE = {
+  en: "Ask from Scripture · Bring your real questions",
+  zh: "用圣经回应我的问题 · 带着真实的问题而来"
+};
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang = (l==='zh') ? 'zh-CN' : 'en';
+  document.title = l==='zh' ? I18N_TITLE.zh : I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  setPlaceholder();
+  renderChips();
+  reRenderAnswer();
+}
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+function setPlaceholder(){
+  document.getElementById('qInput').placeholder = curLang()==='zh'
+    ? '例如:我为什么总觉得空虚?神真的爱我吗?'
+    : 'For example: Why do I feel empty? Does God really love me?';
+}
+
+/* ===================== crisis safety ===================== */
+var CRISIS = ['自杀','自残','想死','不想活','活不下去','结束生命','结束自己','伤害自己','轻生','没有活下去',
+  'suicide','kill myself','killing myself','end my life','end it all','want to die','wanna die',
+  'self-harm','self harm','hurt myself','harm myself','cut myself',"can't go on",'cant go on','no reason to live'];
+
+function crisisHtml(){
+  return curLang()==='zh'
+    ? '<strong>谢谢你把这件事说出来。</strong>此刻你听起来正承受着真实而沉重的痛苦——这比任何一节经文都更重要。请<strong>现在</strong>就去找一个真实的人:在美国可拨打或发短信至 <strong>988</strong>(自杀与危机生命热线,全天候、免费、保密),或发送 <strong>HOME</strong> 到 <strong>741741</strong>;若有即时危险请拨 <strong>911</strong>。也请尽快联系一位你信任的牧者、辅导员或家人朋友。你并不孤单,你值得有人陪你一起面对。'
+    : "<strong>Thank you for saying that out loud.</strong> It sounds like you're carrying something real and heavy right now — and that matters more than any verse. Please reach a real person <strong>now</strong>: in the US, call or text <strong>988</strong> (Suicide &amp; Crisis Lifeline, 24/7, free, confidential), or text <strong>HOME</strong> to <strong>741741</strong>. If you're in immediate danger, call <strong>911</strong>. Please also reach out to a trusted pastor, counselor, or friend as soon as you can. You are not alone, and you deserve someone alongside you.";
+}
+
+/* ===================== Scripture map ===================== */
+/* primaryBook: 'ecclesiastes' | 'john'  → drives the "keep reading" links */
+var MAP = [
+  { id:'emptiness', book:'ecclesiastes',
+    kwZh:['空虚','虚空','没意义','没有意义','毫无意义','不满足','人生意义','活着的意义','迷茫','空洞','捕风'],
+    kwEn:['empty','emptiness','meaningless','meaning of life','no meaning','pointless','not satisfied','unsatisfied','purpose','void'],
+    verses:[
+      {refZh:'传道书 1:14',refEn:'Ecclesiastes 1:14',
+       tZh:'我见日光之下所做的一切事,都是虚空,都是捕风。',
+       tEn:'I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.'},
+      {refZh:'传道书 3:11',refEn:'Ecclesiastes 3:11',
+       tZh:'神造万物,各按其时成为美好,又将永生(原文是永远)安置在世人心里。',
+       tEn:'He has made everything beautiful in its time. He has also set eternity in the human heart.'}
+    ],
+    refZh:'传道书并不回避空虚,而是诚实地指出:如果人只活在"日光之下",即使拥有很多,也仍像在捕风。你心里那份填不满的感觉,不是你的缺陷——是神放在你心里的"永恒",在提醒你:有限的东西,本来就装不下一颗为永恒而造的心。',
+    refEn:'Ecclesiastes does not avoid emptiness — it names it honestly. Life lived only "under the sun" cannot fully satisfy, no matter how much you hold. That ache you cannot fill is not a flaw in you; it is the "eternity" God set in your heart, quietly telling you that finite things were never meant to fill a heart made for the eternal.',
+    nextZh:'不妨从《传道书》第 1 章和第 3 章读起,让它先诚实地说中你的处境;然后再进入《约翰福音》,认识那位说"我来是要叫人得生命,并且得的更丰盛"的耶稣。',
+    nextEn:'Try reading Ecclesiastes 1 and 3 first — let it name your situation honestly. Then move to John, and meet the One who said, "I have come that they may have life, and have it to the full."',
+    prayZh:'神啊,我承认我心里有一种填不满的空。求你帮助我不再向捕风的事物讨要满足,而是转向你——那位把永恒放进我心里的神。',
+    prayEn:'God, I admit there is an emptiness in me that nothing has filled. Help me stop demanding satisfaction from things that are like chasing the wind, and turn toward You — the One who placed eternity in my heart.' },
+
+  { id:'success', book:'ecclesiastes',
+    kwZh:['成功','成就','努力','奋斗','事业','拼命','升职','赚了很多','有了很多','还是不满足','还是空','为什么还是','明明','什么都有'],
+    kwEn:['success','successful','achieve','accomplish','career','hard work','worked hard','promotion','have everything','still empty','still not enough','after success','why am i not satisfied'],
+    verses:[
+      {refZh:'传道书 2:11',refEn:'Ecclesiastes 2:11',
+       tZh:'后来,我察看我手所经营的一切事和我劳碌所成的功。谁知都是虚空,都是捕风,在日光之下毫无益处。',
+       tEn:'Yet when I surveyed all that my hands had done and what I had toiled to achieve, everything was meaningless, a chasing after the wind; nothing was gained under the sun.'},
+      {refZh:'传道书 5:10',refEn:'Ecclesiastes 5:10',
+       tZh:'贪爱银子的,不因得银子知足;贪爱丰富的,也不因得利益知足。这也是虚空。',
+       tEn:'Whoever loves money never has enough; whoever loves wealth is never satisfied with their income. This too is meaningless.'}
+    ],
+    refZh:'写下这些话的人,比你我更努力、成就更大——他什么都得到了,却发现"再多一点"永远填不满。问题从来不在你不够努力,而在于:成就按其本质是留不住的,它撑不起你压在它身上的全部重量。你不是失败,你只是碰到了"日光之下"一切成功共同的天花板。',
+    refEn:'The man who wrote these words worked harder and achieved more than you or I — he got all of it, and found that "a little more" never lands. The problem was never that you tried too little. It is that achievement, by its nature, cannot be kept; it was never built to carry the full weight you rest on it. You are not a failure — you have simply reached the ceiling every success shares "under the sun."',
+    nextZh:'读《传道书》第 2 章,看作者如何走过你正在走的路;若你愿意再走一步,《约翰福音》第 4 章里有一句话值得停下来想:"人若喝我所赐的水,就永远不渴。"',
+    nextEn:'Read Ecclesiastes 2 and watch the author walk the very road you are on. If you want to go one step further, pause on John 4: "Whoever drinks the water I give them will never thirst."',
+    prayZh:'主啊,我努力了这么久,心里却还是不满足。求你让我看清:我真正渴的,不是更多的成就,而是你。',
+    prayEn:'Lord, I have worked so long and still feel unsatisfied. Help me see that what I truly thirst for is not more achievement, but You.' },
+
+  { id:'anxiety', book:'john',
+    kwZh:['焦虑','担心','忧虑','害怕','恐惧','不安','紧张','压力','惊慌','心里乱','睡不着','放不下'],
+    kwEn:['anxious','anxiety','worry','worried','afraid','fear','fearful','stress','stressed','nervous','panic','overwhelmed','cant sleep',"can't stop worrying"],
+    verses:[
+      {refZh:'约翰福音 14:27',refEn:'John 14:27',
+       tZh:'我留下平安给你们,我将我的平安赐给你们;我所赐的,不像世人所赐的。你们心里不要忧愁,也不要胆怯。',
+       tEn:'Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.'},
+      {refZh:'约翰福音 16:33',refEn:'John 16:33',
+       tZh:'我将这些事告诉你们,是要叫你们在我里面有平安。在世上你们有苦难,但你们可以放心,我已经胜了世界。',
+       tEn:'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.'}
+    ],
+    refZh:'耶稣没有对害怕的人说"别想太多"。他承认这个世界里真的有苦难、有让你心跳加速的事。他给的不是"没事的"这种空话,而是一种不一样的平安——不建立在事情都顺利上,而建立在"我已经胜了世界"上。焦虑说"一切都失控了";他说"我在,而且我比你所怕的更大"。',
+    refEn:'Jesus never told frightened people to "just relax." He admits this world really does hold trouble — real things that make your heart race. What he offers is not the empty "it\'ll be fine," but a different kind of peace: not resting on circumstances going well, but on "I have overcome the world." Anxiety says everything is out of control; he says, "I am here, and I am greater than what you fear."',
+    nextZh:'当焦虑袭来时,试着慢慢读约翰福音 14 章;也可以到"聆听"页,让这些话被轻声读给你听,像有人陪你坐下来。',
+    nextEn:'When anxiety rises, read John 14 slowly. You can also open the Listen page and let these words be read gently to you — like someone sitting down beside you.',
+    prayZh:'主耶稣,我的心里很乱、很怕。求你把你那"不像世人所赐的"平安,此刻放在我里面。我把我担心的事,一件一件交给你。',
+    prayEn:'Lord Jesus, my heart is anxious and afraid. Would You place Your peace — the kind the world cannot give — in me right now. One by one, I hand You the things I am carrying.' },
+
+  { id:'godlove', book:'john',
+    kwZh:['神爱我','神爱','神真的爱','神在乎','神在意','被爱','没有人爱','值得被爱','神会爱','神还爱','爱我吗'],
+    kwEn:['god love','does god love','god really love','loved by god','god care','am i loved','no one loves','worth loving','god still love'],
+    verses:[
+      {refZh:'约翰福音 3:16',refEn:'John 3:16',
+       tZh:'神爱世人,甚至将他的独生子赐给他们,叫一切信他的,不至灭亡,反得永生。',
+       tEn:'For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.'},
+      {refZh:'约翰福音 15:9',refEn:'John 15:9',
+       tZh:'我爱你们,正如父爱我一样;你们要常在我的爱里。',
+       tEn:'As the Father has loved me, so have I loved you. Now remain in my love.'}
+    ],
+    refZh:'圣经回答"神真的爱我吗"的方式,不是一句保证,而是一个动作:神舍下他的独生子。爱若只是说说,可以很廉价;但这份爱是付出了代价的。而且请注意 3:16 里的"世人"——不是"够好的人""表现好的人",是"世人",里面就有此刻正在问这个问题的你。你不需要先变得可爱,才配得这份爱。',
+    refEn:'The Bible answers "does God really love me?" not with a reassurance but with an action: God gave His one and only Son. Love that only talks is cheap; this love paid a price. And notice the word in John 3:16 — "the world." Not "the good enough," not "those who perform well," but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
+    nextZh:'从《约翰福音》第 3 章读起,再读第 15 章;你会看到,这份爱不是遥远的概念,而是耶稣亲自走进人的处境。',
+    nextEn:'Begin with John 3, then read John 15. You will see that this love is not a distant idea — it is Jesus stepping personally into the human situation.',
+    prayZh:'神啊,我常常怀疑自己是否值得被爱。求你让我真的知道——不是道理上,而是心里——你爱我,爱到舍下你的儿子。求你帮助我住在你的爱里。',
+    prayEn:'God, I so often doubt whether I am worth loving. Help me truly know — not just in my head, but in my heart — that You love me, enough to give Your Son. Help me remain in Your love.' },
+
+  { id:'knowjesus', book:'john',
+    kwZh:['认识耶稣','认识神','怎么信','如何信','开始信','怎样信','怎么认识','如何认识','耶稣是谁','信耶稣','得救','救恩','成为基督徒','怎么开始'],
+    kwEn:['know jesus','know god','how to believe','begin to know','how do i start','who is jesus','follow jesus','be saved','salvation','become a christian','how to become','start with god'],
+    verses:[
+      {refZh:'约翰福音 1:4-5',refEn:'John 1:4-5',
+       tZh:'生命在他里头,这生命就是人的光。光照在黑暗里,黑暗却不接受光。',
+       tEn:'In him was life, and that life was the light of all mankind. The light shines in the darkness, and the darkness has not overcome it.'},
+      {refZh:'约翰福音 14:6',refEn:'John 14:6',
+       tZh:'耶稣说:"我就是道路、真理、生命;若不藉着我,没有人能到父那里去。"',
+       tEn:'Jesus answered, "I am the way and the truth and the life. No one comes to the Father except through me."'},
+      {refZh:'约翰福音 3:16',refEn:'John 3:16',
+       tZh:'神爱世人,甚至将他的独生子赐给他们,叫一切信他的,不至灭亡,反得永生。',
+       tEn:'For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.'}
+    ],
+    refZh:'认识耶稣,不是先通过一场考试,而是从"看"开始——看这个人是谁。约翰写整卷福音书,就是为了让你认识耶稣:他是"光""道路""生命"。你不需要先把所有疑问都解决,才能开始;你可以像第一批门徒那样,先走近、先观察、先问。信,往往是在认识的过程中慢慢发生的,不是在认识之前就要求你具备的。',
+    refEn:'Knowing Jesus does not begin with passing a test — it begins with looking, at who this person is. John wrote his whole Gospel so that you could come to know Jesus: the "light," the "way," the "life." You do not need to resolve every doubt before you begin. Like the first disciples, you can simply come close, watch, and ask. Faith often grows in the process of getting to know him — it is not a prerequisite demanded before you start.',
+    nextZh:'从《约翰福音》第 1 章开始读,这是认识耶稣最好的入口;书阁里也有《约翰福音导览》,一章一章带你走。若你愿意,可以简单地对神说:"我想认识你。"这就是一个真实的开始。',
+    nextEn:'Start with John chapter 1 — the best doorway to knowing Jesus. The Library also has a John study guide that walks you through it. And if you are willing, you can simply say to God, "I want to know You." That is a real beginning.',
+    prayZh:'耶稣,我还有很多不明白,但我愿意认识你。求你向我显明你是谁,带我走出黑暗,进入你生命的光中。',
+    prayEn:'Jesus, there is much I still do not understand, but I am willing to know You. Show me who You are, and lead me out of darkness into the light of Your life.' },
+
+  { id:'seeker', book:'ecclesiastes',
+    kwZh:['不信','无神','无神论','还没信','不是基督徒','可以读圣经','也能读','怀疑神','没有信仰','不信教'],
+    kwEn:['not a christian','dont believe','do not believe','not religious','atheist','agnostic','can i read','skeptic','no faith','not sure god'],
+    verses:[
+      {refZh:'传道书 1:14',refEn:'Ecclesiastes 1:14',
+       tZh:'我见日光之下所做的一切事,都是虚空,都是捕风。',
+       tEn:'I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.'},
+      {refZh:'传道书 3:11',refEn:'Ecclesiastes 3:11',
+       tZh:'神造万物,各按其时成为美好,又将永生安置在世人心里。',
+       tEn:'He has made everything beautiful in its time. He has also set eternity in the human heart.'}
+    ],
+    refZh:'当然可以——而且《传道书》可能是圣经里最为你写的一卷。它反复说"日光之下",意思正是:不预设神、不预设来世,只诚实地看眼前这个世界。你完全可以作为一个怀疑者来读它,因为它本身就是从怀疑者的前提出发的。开始读圣经,不需要你先"信什么",只需要你愿意诚实。',
+    refEn:'Yes, absolutely — and Ecclesiastes may be the book in the Bible most written for you. Its recurring phrase "under the sun" means exactly this: life examined honestly, with no God and no afterlife assumed — just this world as it is. You can read it as a skeptic, because it argues from the skeptic\'s own premises. Reading the Bible does not require you to "believe" something first; it only asks for honesty.',
+    nextZh:'从《传道书》第 1 章读起,把它当作对工作、享乐、成功的普通观察来读,看它有没有说中你真实的经历。这就是本站请你走的唯一"第一步"——所有和信仰有关的内容都是自选的,清楚标注。',
+    nextEn:'Start with Ecclesiastes 1, reading it as plain observation about work, pleasure, and success — and notice whether it names something true about your own life. That is the only "first step" this site asks for. Everything about faith here is opt-in and clearly labeled.',
+    prayZh:'(如果你还不确定神是否存在,不必勉强祷告。你可以只是诚实地说:)"如果你真的在,求你让我看见。"诚实的寻找,本身就是一个开始。',
+    prayEn:'(If you are not sure God is even there, you do not have to force a prayer. You can simply say, honestly:) "If You are real, help me see." An honest search is itself a beginning.' },
+
+  { id:'suffering', book:'john',
+    kwZh:['痛苦','苦难','受苦','为什么是我','患难','绝望','撑不下去','难熬','折磨','走不出','看不到希望','很苦'],
+    kwEn:['suffering','suffer','pain','why me','hardship','despair','cant take it','hopeless','no hope','going through','painful','trial'],
+    verses:[
+      {refZh:'约翰福音 16:33',refEn:'John 16:33',
+       tZh:'在世上你们有苦难,但你们可以放心,我已经胜了世界。',
+       tEn:'In this world you will have trouble. But take heart! I have overcome the world.'},
+      {refZh:'传道书 3:4',refEn:'Ecclesiastes 3:4',
+       tZh:'哭有时,笑有时;哀恸有时,跳舞有时。',
+       tEn:'a time to weep and a time to laugh, a time to mourn and a time to dance.'}
+    ],
+    refZh:'圣经从不轻看你的痛苦。传道书说,人生里有"哀恸的时候"——它不催你赶快好起来。而耶稣自己也没有绕过苦难:他哭过、被离弃过、受过死。他对苦难中的人说的不是"这没什么",而是"在世上你们有苦难"——他先承认了真实,然后加上一句:"但你们可以放心,我已经胜了世界。"你不需要假装坚强,才能到他面前来。',
+    refEn:'Scripture never makes light of your pain. Ecclesiastes says there is "a time to mourn" — it does not rush you to feel better. And Jesus himself did not go around suffering: he wept, he was abandoned, he died. To those in pain he does not say "it\'s nothing," but "in this world you will have trouble" — he names the truth first, then adds: "but take heart, I have overcome the world." You do not have to pretend to be strong to come to him.',
+    nextZh:'读《约翰福音》第 11 章,看耶稣站在朋友的坟前落泪——他明白失去是什么。(关于苦难、失去与无法解释的痛,书阁未来会加入《约伯记》模块,更深地陪你面对。)',
+    nextEn:'Read John 11 and watch Jesus weep at the grave of his friend — he knows what loss is. (For suffering, loss, and unexplained pain, a Job module is planned for the Library to walk with you more deeply.)',
+    prayZh:'主啊,我很痛,有时甚至说不出话。谢谢你没有要求我先坚强起来。求你在我的苦难里与我同在,让我知道我不是一个人在撑。',
+    prayEn:'Lord, I am in pain, sometimes with no words for it. Thank You that You do not ask me to be strong first. Be with me in my suffering, and let me know I am not carrying this alone.' },
+
+  { id:'marriage', book:'ecclesiastes',
+    kwZh:['婚姻','夫妻','老公','老婆','丈夫','妻子','感情','关系','离婚','吵架','孤单','孤独','没人懂','相处'],
+    kwEn:['marriage','married','spouse','husband','wife','relationship','divorce','lonely','loneliness','alone','no one understands'],
+    verses:[
+      {refZh:'传道书 4:9-10',refEn:'Ecclesiastes 4:9-10',
+       tZh:'两个人总比一个人好,因为二人劳碌同得美好的果效。若是跌倒,这人可以扶起他的同伴;若是孤身跌倒,没有别人扶起他来,这人就有祸了。',
+       tEn:'Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up.'},
+      {refZh:'约翰福音 16:33',refEn:'John 16:33',
+       tZh:'我将这些事告诉你们,是要叫你们在我里面有平安。在世上你们有苦难,但你们可以放心,我已经胜了世界。',
+       tEn:'I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.'}
+    ],
+    refZh:'传道书对"两个人比一个人好"说得很美,但它讲的从来不是童话般的婚姻,而是真实的同行——会跌倒,也需要有人扶。婚姻里的痛,往往正是因为我们本是为深深的连结而造,所以断裂才这么疼。圣经不给一个简单的"照做就好"的公式;但它承认你的痛是真的,也指向一位在你婚姻的重担里、愿意与你同在的神。',
+    refEn:'Ecclesiastes speaks beautifully of "two being better than one," but it never describes a fairy-tale marriage — it describes real companionship, where people fall and need to be lifted. The pain in a marriage often hurts so much precisely because we were made for deep connection, so rupture cuts deep. Scripture offers no simple "just do this" formula; but it honors that your pain is real, and points to a God willing to be with you inside the weight of your marriage.',
+    nextZh:'这类的痛,通常也需要真实的人来陪伴——一位牧者、辅导员,或成熟的属灵同伴。愿意的话,可以在祷告里先把这份重担交给神,再迈出寻求帮助的一步。',
+    nextEn:'This kind of pain usually also needs real people alongside you — a pastor, a counselor, or a mature spiritual friend. If you are willing, bring the weight to God in prayer first, then take a step toward seeking help.',
+    prayZh:'神啊,我的婚姻(关系)让我很痛。求你亲自进入我们之间,医治那些破裂的地方,也给我智慧和恩典,知道下一步该怎么走。',
+    prayEn:'God, my marriage (my relationship) is a place of real pain. Step into it Yourself, heal what is broken, and give me the wisdom and grace to know the next step to take.' },
+
+  { id:'death', book:'ecclesiastes',
+    kwZh:['死','死亡','离世','去世','丧','过世','没了','活着有什么','人都会死','怕死','死后'],
+    kwEn:['death','die','dying','mortal','pass away','passed away','afraid to die','after death','everyone dies','what happens when we die'],
+    verses:[
+      {refZh:'传道书 12:7',refEn:'Ecclesiastes 12:7',
+       tZh:'尘土仍归于地,灵仍归于赐灵的神。',
+       tEn:'and the dust returns to the ground it came from, and the spirit returns to God who gave it.'},
+      {refZh:'约翰福音 11:25-26',refEn:'John 11:25-26',
+       tZh:'耶稣对她说:"复活在我,生命也在我。信我的人虽然死了,也必复活;凡活着信我的人必永远不死。"',
+       tEn:'Jesus said to her, "I am the resurrection and the life. The one who believes in me will live, even though they die; and whoever lives by believing in me will never die."'}
+    ],
+    refZh:'传道书诚实到令人发冷:在"日光之下",死亡使所有人归于平等,它不粉饰这堵墙。但它留了一个耐人寻味的缝隙——"灵仍归于赐灵的神":这本书隐约承认,人不只是尘土。而《约翰福音》正是从墙的另一边回应:耶稣不是说他"有关于复活的道理",而是说"复活在我"。面对死亡,他给的不是一套解释,而是他自己。',
+    refEn:'Ecclesiastes is honest to the point of chill: "under the sun," death levels everyone, and it does not soften that wall. Yet it leaves a striking crack — "the spirit returns to God who gave it": the book quietly admits we are more than dust. And John answers from the other side of the wall: Jesus does not say he has a teaching about resurrection — he says, "I am the resurrection." In the face of death, what he offers is not an explanation, but himself.',
+    nextZh:'先读《传道书》第 12 章,让它诚实地把你带到墙前;再读《约翰福音》第 11 章,看耶稣如何面对死亡与坟墓。',
+    nextEn:'Read Ecclesiastes 12 first and let it bring you honestly to the wall; then read John 11 and see how Jesus stands before death and the grave.',
+    prayZh:'神啊,死亡让我害怕,也让我困惑。求你让我认识那位说"复活在我"的耶稣,让我在必朽的日子里,抓住不朽的盼望。',
+    prayEn:'God, death frightens and unsettles me. Help me know the Jesus who said, "I am the resurrection," so that in my mortal days I may hold on to a hope that does not perish.' },
+
+  { id:'thirst', book:'john',
+    kwZh:['满足','填满','口渴','永远不渴','活水','生命的粮','喂不饱','填不满','总是想要更多','够了没','知足'],
+    kwEn:['satisfy','satisfied','fill me','thirst','thirsty','never thirst','living water','bread of life','always want more','content','enough'],
+    verses:[
+      {refZh:'约翰福音 4:13-14',refEn:'John 4:13-14',
+       tZh:'耶稣回答说:"凡喝这水的,还要再渴;人若喝我所赐的水,就永远不渴。我所赐的水要在他里头成为泉源,直涌到永生。"',
+       tEn:'Jesus answered, "Everyone who drinks this water will be thirsty again, but whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life."'},
+      {refZh:'约翰福音 6:35',refEn:'John 6:35',
+       tZh:'耶稣说:"我就是生命的粮。到我这里来的,必定不饿;信我的,永远不渴。"',
+       tEn:'Then Jesus declared, "I am the bread of life. Whoever comes to me will never go hungry, and whoever believes in me will never be thirsty."'}
+    ],
+    refZh:'传道书诊断出那个"喝了还要再渴"的循环——你追一样东西,得到了,过不久又空了。约翰福音接着说:问题不在于你喝得不够多,而在于你喝的是哪一种水。耶稣说他能给的,是一种在你里头"成为泉源"的水——不是从外面一次次去舀,而是从里面不断涌出来。真正的满足,不是得到更多,而是连接到源头。',
+    refEn:'Ecclesiastes diagnoses the loop of "thirsty again" — you chase something, get it, and soon you are empty once more. John responds: the problem is not that you drank too little, but which water you drank. Jesus says the water he gives becomes "a spring" inside you — not something you keep scooping from outside, but something welling up from within. Real satisfaction is not getting more; it is being connected to the Source.',
+    nextZh:'读《约翰福音》第 4 章那个井边的对话,再读第 6 章;你会看到耶稣一次次把人从"再要一点"引向"到我这里来"。',
+    nextEn:'Read the well-side conversation in John 4, then John 6. You will watch Jesus turn people, again and again, from "just a little more" toward "come to me."',
+    prayZh:'主耶稣,我追了很多东西,想让自己满足,却总是很快又空了。求你把你所说的"活水"给我,在我里头成为涌流的泉源。',
+    prayEn:'Lord Jesus, I have chased so many things to satisfy myself, and keep running dry. Give me the "living water" You spoke of, and let it become a spring welling up within me.' },
+
+  { id:'light', book:'john',
+    kwZh:['黑暗','走在黑暗','迷失','迷路','没方向','找不到方向','道路','真理','人生方向','看不清','该往哪'],
+    kwEn:['darkness','in the dark','lost','no direction','which way','the way','truth','direction in life','cant see','where do i go'],
+    verses:[
+      {refZh:'约翰福音 8:12',refEn:'John 8:12',
+       tZh:'耶稣又对众人说:"我是世界的光。跟从我的,就不在黑暗里走,必要得着生命的光。"',
+       tEn:'When Jesus spoke again to the people, he said, "I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life."'},
+      {refZh:'约翰福音 14:6',refEn:'John 14:6',
+       tZh:'耶稣说:"我就是道路、真理、生命;若不藉着我,没有人能到父那里去。"',
+       tEn:'Jesus answered, "I am the way and the truth and the life. No one comes to the Father except through me."'}
+    ],
+    refZh:'在黑暗里,人最需要的往往不是更多的信息,而是光——一个能让你看清脚下这一步的东西。耶稣没有说"我给你指个方向",而是说"我就是道路"。跟从光,不代表你一下子看清整条路;它代表你在走的这一步上,不再是自己一个人摸黑。',
+    refEn:'In the dark, what a person needs most is often not more information, but light — something that lets you see the one step in front of you. Jesus did not say "I will point you a direction"; he said "I am the way." Following the light does not mean the whole road becomes clear at once; it means that in the step you are taking now, you are no longer feeling through the dark alone.',
+    nextZh:'读《约翰福音》第 8 章和第 14 章;若你此刻正迷茫,不妨先只求认识那位光,而不必急着看清全程。',
+    nextEn:'Read John 8 and John 14. If you feel lost right now, try seeking to know the Light first — you do not have to see the whole road at once.',
+    prayZh:'主啊,我在黑暗里,看不清该往哪走。求你作我的光,照亮我脚下的下一步,让我不再独自摸索。',
+    prayEn:'Lord, I am in the dark and cannot see which way to go. Be my light, shine on the next step in front of me, and let me stop groping through this alone.' }
+];
+
+/* links derived from primary book */
+function linksFor(book){
+  if(book==='john'){
+    return [
+      {zh:'读约翰福音',en:'Read John',href:'john.html',cls:''},
+      {zh:'约翰福音导览',en:'John study guide',href:'john-study.html',cls:'ghost'},
+      {zh:'聆听',en:'Listen',href:'john-listen.html',cls:'ghost'}
+    ];
+  }
+  return [
+    {zh:'读传道书',en:'Read Ecclesiastes',href:'ecclesiastes.html',cls:''},
+    {zh:'聆听传道书',en:'Listen',href:'listen.html',cls:'ghost'},
+    {zh:'认识耶稣(约翰福音)',en:'Meet Jesus (John)',href:'john.html',cls:'ghost'}
+  ];
+}
+
+/* ===================== matching ===================== */
+function scoreEntry(entry, lc){
+  var n=0, kws=entry.kwZh.concat(entry.kwEn), i;
+  for(i=0;i<kws.length;i++){ if(lc.indexOf(kws[i].toLowerCase())!==-1) n++; }
+  return n;
+}
+function bestMatch(q){
+  var lc=(q||'').toLowerCase(), best=null, bestScore=0;
+  for(var i=0;i<MAP.length;i++){
+    var s=scoreEntry(MAP[i], lc);
+    /* >= so that on a tie a more specific, later-listed topic
+       (e.g. marriage) wins over a broad one (e.g. suffering) */
+    if(s>0 && s>=bestScore){ bestScore=s; best=MAP[i]; }
+  }
+  return best; /* null if nothing matched */
+}
+function isCrisis(q){
+  var lc=(q||'').toLowerCase();
+  for(var i=0;i<CRISIS.length;i++){ if(lc.indexOf(CRISIS[i])!==-1) return true; }
+  return false;
+}
+
+/* ===================== rendering ===================== */
+var lastQuestion=null, lastKind=null, lastEntry=null;
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+function L(zh,en){ return curLang()==='zh'?zh:en; }
+
+function renderCrisis(q){
+  var box=document.getElementById('answer');
+  box.innerHTML =
+    '<div class="card crisis">'
+    + '<div class="qecho">'+escapeHtml(q)+'</div>'
+    + '<div class="sect"><div class="slabel">'+L('请先照顾好自己 · Please reach a person','A person, not a verse')+'</div>'
+    + '<div class="body">'+crisisHtml()+'</div></div>'
+    + '</div>';
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderFallback(q){
+  var box=document.getElementById('answer');
+  var msg = L(
+    '这是一个扎根经文的演示版本,内置的题目还有限,我不愿意凭记忆替圣经"编"一节经文出来——那正是这个功能要守住的底线。请试着换一种说法(例如"我很焦虑""神真的爱我吗""我怎么开始认识耶稣"),或点上面的例子。正式版本会把你的问题在传道书与约翰福音全文中检索,只根据检索到的经文作答。',
+    "This is a Scripture-grounded demo with a limited built-in set, and I won't invent a verse from memory — that is the exact line this feature holds. Try rephrasing (e.g. \"I feel anxious,\" \"does God really love me,\" \"how do I begin to know Jesus\"), or tap one of the examples above. The full build will search the whole text of Ecclesiastes and John and answer only from what it retrieves."
+  );
+  box.innerHTML = '<div class="card fallback"><div class="qecho">'+escapeHtml(q)+'</div><div class="sect"><div class="slabel">'+L('换个说法试试 · Try rephrasing','Try rephrasing')+'</div><div class="body">'+msg+'</div></div></div>';
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function renderAnswer(q, entry){
+  var box=document.getElementById('answer');
+  var versesHtml='';
+  for(var i=0;i<entry.verses.length;i++){
+    var v=entry.verses[i];
+    versesHtml += '<div class="verse"><div class="ref">'+escapeHtml(L(v.refZh,v.refEn))+'</div><div class="vtext">'+escapeHtml(L(v.tZh,v.tEn))+'</div></div>';
+  }
+  var links=linksFor(entry.book), linksHtml='';
+  for(var j=0;j<links.length;j++){
+    var lk=links[j];
+    linksHtml += '<a class="'+lk.cls+'" href="'+lk.href+'">'+escapeHtml(L(lk.zh,lk.en))+'</a>';
+  }
+  var badge = entry.book==='john' ? L('约翰福音','John') : L('传道书','Ecclesiastes');
+
+  box.innerHTML =
+    '<div class="card">'
+    + '<div class="qecho">'+escapeHtml(q)+'</div>'
+    + '<span class="book-badge">'+badge+'</span>'
+    + '<div class="sect"><div class="slabel">'+L('相关经文','Relevant Scripture')+'</div>'+versesHtml+'</div>'
+    + '<div class="sect"><div class="slabel">'+L('简短解释','Reflection')+'</div><div class="body">'+escapeHtml(L(entry.refZh,entry.refEn))+'</div></div>'
+    + '<div class="sect"><div class="slabel">'+L('下一步','Next Step')+'</div><div class="body">'+escapeHtml(L(entry.nextZh,entry.nextEn))+'</div></div>'
+    + '<div class="sect prayer"><div class="slabel">'+L('祷告','Prayer')+'</div><div class="body">'+escapeHtml(L(entry.prayZh,entry.prayEn))+'</div></div>'
+    + '<div class="links">'+linksHtml+'</div>'
+    + '</div>';
+  box.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function respond(q){
+  lastQuestion=q;
+  if(isCrisis(q)){ lastKind='crisis'; lastEntry=null; renderCrisis(q); return; }
+  var entry=bestMatch(q);
+  if(entry){ lastKind='answer'; lastEntry=entry; renderAnswer(q, entry); }
+  else { lastKind='fallback'; lastEntry=null; renderFallback(q); }
+}
+/* re-render the last answer in the newly selected language */
+function reRenderAnswer(){
+  if(!lastQuestion || !lastKind) return;
+  if(lastKind==='crisis') renderCrisis(lastQuestion);
+  else if(lastKind==='answer' && lastEntry) renderAnswer(lastQuestion, lastEntry);
+  else renderFallback(lastQuestion);
+}
+
+function ask(){
+  var inp=document.getElementById('qInput');
+  var q=(inp.value||'').trim();
+  if(!q) return;
+  respond(q);
+}
+
+/* ===================== example chips ===================== */
+var EXAMPLES = [
+  {zh:'我为什么总觉得人生很空虚?', en:'Why do I still feel empty even when I have many things?'},
+  {zh:'我很焦虑,圣经怎么说?', en:'What does the Bible say about anxiety?'},
+  {zh:'神真的爱我吗?', en:'Does God really love me?'},
+  {zh:'我怎么开始认识耶稣?', en:'How can I begin to know Jesus?'},
+  {zh:'我为什么努力了很多还是不满足?', en:'Why am I not satisfied even after success?'},
+  {zh:'圣经怎么看苦难?', en:'What does Scripture say about suffering?'},
+  {zh:'如果我还不信神,也可以读圣经吗?', en:'Can I read the Bible even if I am not a Christian?'}
+];
+function renderChips(){
+  var box=document.getElementById('chips');
+  box.innerHTML='';
+  EXAMPLES.forEach(function(e){
+    var b=document.createElement('button');
+    b.className='chip';
+    b.textContent=L(e.zh,e.en);
+    b.onclick=function(){
+      document.getElementById('qInput').value=L(e.zh,e.en);
+      respond(L(e.zh,e.en));
+    };
+    box.appendChild(b);
+  });
+}
+
+document.getElementById('qInput').addEventListener('keydown', function(e){
+  if(e.key==='Enter' && (e.metaKey||e.ctrlKey)){ e.preventDefault(); ask(); }
+});
+
+/* ===================== init ===================== */
+(function(){
+  var p=new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

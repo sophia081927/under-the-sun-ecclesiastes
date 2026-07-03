@@ -410,6 +410,144 @@ export const qaRegistry = [
       nextStep: 'Read John 8 and John 14. If you feel lost right now, try seeking to know the Light first — you do not have to see the whole road at once.',
       prayer: 'Lord, I am in the dark and cannot see which way to go. Be my light, shine on the next step in front of me, and let me stop groping through this alone. Amen.'
     }
+  },
+
+  {
+    id: 'guilt', priority: 16,
+    keywordsZh: ['内疚','罪恶感','后悔','良心不安','我做错了','神会原谅我吗'],
+    keywordsEn: ['guilt','i feel guilty','regret','will god forgive me','ashamed'],
+    relatedBooks: ['john','psalms'],
+    zh: {
+      title: '当你被内疚缠住',
+      verse: '【约翰一书 1:9】“我们若认自己的罪,神是信实的,是公义的,必要赦免我们的罪,洗净我们一切的不义。”',
+      explanation: '内疚有两种:一种把你带向修复与赦免,一种只是把你按在过去反复羞辱。圣经里的认罪,不是没完没了地自责,而是把罪如实说出来,交给一位“信实又公义”的神——他赦免,不是因为你的罪不严重,而是因为他的怜悯足够大。诗篇51篇里,大卫犯了大错,也正是这样把罪摊开,求神洗净、重造。',
+      reflection: '有没有一件事,你一直在心里判自己有罪,却从未把它如实地交给神,求赦免?',
+      nextStep: '读约翰一书 1:9,再读诗篇51篇,看认罪之后神如何“造清洁的心”。',
+      prayer: '神啊,我把这件一直压着我的事,如实交在你面前。谢谢你信实又公义,愿意赦免、洗净我。求你让我不再靠自责活着,而是靠你的怜悯。阿们。'
+    },
+    en: {
+      title: 'When Guilt Won’t Let Go',
+      verse: '【1 John 1:9】“If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.” (NIV)',
+      explanation: 'There are two kinds of guilt: one leads you toward repair and forgiveness; the other just pins you to the past and shames you on repeat. Confession in the Bible is not endless self-blame — it is naming the wrong honestly and handing it to a God who is “faithful and just.” He forgives not because your sin was small, but because His mercy is large enough. In Psalm 51 David laid his grave failure open the same way, and asked to be washed and remade.',
+      reflection: 'Is there something you keep sentencing yourself for, but have never honestly handed to God to ask for forgiveness?',
+      nextStep: 'Read 1 John 1:9, then Psalm 51, and see how God “creates a clean heart” after confession.',
+      prayer: 'God, I bring You honestly the thing that keeps weighing on me. Thank You that You are faithful and just, willing to forgive and cleanse. Help me stop living on self-blame, and live on Your mercy instead. Amen.'
+    }
+  },
+
+  {
+    id: 'forgiving', priority: 17,
+    keywordsZh: ['无法原谅','怎么饶恕','恨一个人','被伤害了','放不下仇恨'],
+    keywordsEn: ['how to forgive','cannot forgive','i hate someone','they hurt me'],
+    relatedBooks: ['john'],
+    zh: {
+      title: '当你无法原谅',
+      verse: '【马太福音 18:21-22】“主啊,我弟兄得罪我,我当饶恕他几次呢?到七次可以吗?耶稣说:我对你说,不是到七次,乃是到七十个七次。”',
+      explanation: '饶恕不是说“你没有伤害我”,也不是假装伤口不存在。它是一个艰难的决定:不再让仇恨来定义你、绑架你。耶稣把饶恕说成“七十个七次”——不是算账,而是一种新的活法。这很难,尤其当对方从未道歉。但保留苦毒,常常最先毒害的是自己;神也说“伸冤在我”(罗12:19),意思是你可以把公义交给他,不必自己扛。',
+      reflection: '你放不下的那份怨恨,如今最重地压在谁的身上——对方,还是你自己?',
+      nextStep: '读马太福音 18 章那个不饶恕人的比喻,再读以弗所书 4:32,慢慢求神给你迈出一小步的力量。',
+      prayer: '主啊,有一个伤口我一直放不下,也还没准备好原谅。我先把这份重担、这份想讨回公道的心,交在你手里。求你医治我,也在你的时间里,给我饶恕的力量。阿们。'
+    },
+    en: {
+      title: 'When You Can’t Forgive',
+      verse: '【Matthew 18:21-22】“Lord, how many times shall I forgive my brother or sister who sins against me? Up to seven times? Jesus answered, I tell you, not seven times, but seventy-seven times.” (NIV)',
+      explanation: 'Forgiveness does not mean “you didn’t hurt me,” nor pretending the wound isn’t there. It is a hard decision: to stop letting hatred define and hijack you. Jesus frames it as “seventy-seven times” — not bookkeeping, but a whole new way to live. It is hard, especially when the other person never apologized. But holding bitterness usually poisons you first; and God says “It is mine to avenge” (Rom 12:19) — meaning you can hand the justice to Him and not carry it yourself.',
+      reflection: 'The resentment you can’t put down — who does it weigh on most heavily now: the other person, or you?',
+      nextStep: 'Read the parable of the unforgiving servant in Matthew 18, then Ephesians 4:32, and ask God slowly for strength to take one small step.',
+      prayer: 'Lord, there is a wound I can’t put down, and I’m not ready to forgive. First I hand You this weight, and my craving to settle the score. Heal me, and in Your time, give me the strength to forgive. Amen.'
+    }
+  },
+
+  {
+    id: 'grief', priority: 18,
+    keywordsZh: ['失去亲人','失去了亲人','亲人去世','走不出来','太想念','哀伤'],
+    keywordsEn: ['lost a loved one','grieving','someone died','miss them so much'],
+    relatedBooks: ['john','psalms'],
+    zh: {
+      title: '当你失去了所爱的人',
+      verse: '【马太福音 5:4】“哀恸的人有福了,因为他们必得安慰。”',
+      explanation: '哀伤不是软弱,也不是不属灵。耶稣没有说“别哭”,他自己就在朋友拉撒路的坟前哭了(约11:35)——神完全明白失去是什么滋味。哀恸的人“有福”,不是因为悲伤本身是好的,而是因为神应许亲自安慰,并且有一天要“擦去他们一切的眼泪”(启21:4)。你不需要赶快好起来,也不需要假装坚强,才可以来到他面前。',
+      reflection: '如果你能对神说出这份思念里最真实的一句话,你会说什么?',
+      nextStep: '读诗篇34篇,那里说“神靠近伤心的人”;若你愿意,也读约翰福音11章,看耶稣如何面对死亡与眼泪。',
+      prayer: '主啊,我失去了我所爱的,心里空了一块。谢谢你没有要求我快点好起来。求你亲自靠近我的伤心,在我流泪的时候与我同在,也让我抓住有一天你要擦去一切眼泪的应许。阿们。'
+    },
+    en: {
+      title: 'When You Have Lost Someone You Love',
+      verse: '【Matthew 5:4】“Blessed are those who mourn, for they will be comforted.” (NIV)',
+      explanation: 'Grief is not weakness, nor unspiritual. Jesus did not say “don’t cry” — He Himself wept at the tomb of His friend Lazarus (John 11:35). God fully knows what loss feels like. Those who mourn are “blessed” not because sorrow itself is good, but because God promises to comfort them Himself, and one day to “wipe every tear from their eyes” (Rev 21:4). You do not have to get better quickly, or pretend to be strong, to come to Him.',
+      reflection: 'If you could say the truest sentence inside this missing-them to God, what would it be?',
+      nextStep: 'Read Psalm 34, where “the Lord is close to the brokenhearted”; and if you’re willing, John 11, to see how Jesus faces death and tears.',
+      prayer: 'Lord, I have lost someone I love, and there is an empty place in me. Thank You that You do not ask me to hurry up and heal. Draw close to my grief, be with me as I weep, and let me hold the promise that one day You will wipe away every tear. Amen.'
+    }
+  },
+
+  {
+    id: 'burnout', priority: 19,
+    keywordsZh: ['太累了','工作压力','疲惫不堪','撑得好辛苦','喘不过气'],
+    keywordsEn: ['burned out','exhausted','work stress','so tired'],
+    relatedBooks: ['ecclesiastes','psalms'],
+    zh: {
+      title: '当你累到快撑不住',
+      verse: '【马太福音 11:28-30】“凡劳苦担重担的人,可以到我这里来,我就使你们得安息……因为我的轭是容易的,我的担子是轻省的。”',
+      explanation: '累,不只是身体的事。长期扛着超过自己能承受的重担,人会被掏空。传道书早就说过:日光之下的劳碌,若没有安息,只是捕风。耶稣的邀请不是“再加把劲”,而是“到我这里来”——把重担卸下,换上他“容易的轭”。真正的休息,不只是睡一觉,而是把那份“全靠我撑”的重压,交回给托住万有的神。',
+      reflection: '你现在扛着的重担里,有哪一部分其实不是你该独自扛的?',
+      nextStep: '读马太福音 11:28-30,也可以读传道书 2 章,看清“劳碌若没有神,终归捕风”;累的时候,也可以到“聆听”页,让经文读给你听。',
+      prayer: '主啊,我太累了,感觉快撑不住。谢谢你没有叫我更努力,而是叫我到你这里来得安息。我把这压得我喘不过气的担子交给你,求你让我重新得力。阿们。'
+    },
+    en: {
+      title: 'When You’re Worn Down to Empty',
+      verse: '【Matthew 11:28-30】“Come to me, all you who are weary and burdened, and I will give you rest… For my yoke is easy and my burden is light.” (NIV)',
+      explanation: 'Exhaustion is not only physical. Carrying a weight beyond what you can bear, for too long, hollows a person out. Ecclesiastes said it long ago: toil under the sun, without rest, is chasing the wind. Jesus’ invitation is not “try harder,” but “come to me” — lay the load down and take His “easy yoke.” Real rest is not just a night’s sleep; it is handing the crushing “it all depends on me” back to the God who holds all things together.',
+      reflection: 'In the load you’re carrying now, which part was never actually yours to carry alone?',
+      nextStep: 'Read Matthew 11:28-30, and Ecclesiastes 2 to see that toil without God ends in chasing the wind; when you’re tired, you can also open the Listen page and let Scripture be read to you.',
+      prayer: 'Lord, I am so worn down I can barely carry this. Thank You that You do not tell me to try harder, but to come to You for rest. I hand You the load that has left me breathless — please renew my strength. Amen.'
+    }
+  },
+
+  {
+    id: 'envy', priority: 20,
+    keywordsZh: ['嫉妒','比不上别人','凭什么是他','心里不平衡','攀比'],
+    keywordsEn: ['jealous','envy','comparing myself','why them not me'],
+    relatedBooks: ['ecclesiastes','psalms'],
+    zh: {
+      title: '当你嫉妒、心里不平',
+      verse: '【诗篇 73:25-26】“除你以外,在天上我有谁呢?除你以外,在地上我也没有所爱慕的……但神是我心里的力量,又是我的福分,直到永远。”',
+      explanation: '嫉妒常常从一个问题开始:“凭什么是他,不是我?”诗篇73篇的作者也这样,看见恶人享福,几乎站不住。转机发生在他“进了神的圣所”,重新看见结局与永恒——攀比就松开了。嫉妒让你一直盯着别人手里有什么;这节经文邀请你先回到“神是我的福分”,从那里重新衡量自己真正拥有的。',
+      reflection: '你最近一次的攀比,如果诚实说,你真正羡慕的,是那样东西,还是它背后你以为会有的安全感或价值感?',
+      nextStep: '读诗篇73篇全篇,看作者如何从“心怀不平”走到“神是我的福分”;也可以读传道书,看“人靠比较得来的,终归捕风”。',
+      prayer: '神啊,我承认我心里在嫉妒、不平。求你帮助我把眼光从别人手里,转回到你身上;让我真的相信,有你,就已经是我最大的福分。阿们。'
+    },
+    en: {
+      title: 'When Envy Leaves You Bitter',
+      verse: '【Psalm 73:25-26】“Whom have I in heaven but you? And earth has nothing I desire besides you… God is the strength of my heart and my portion forever.” (NIV)',
+      explanation: 'Envy often begins with a question: “Why them, and not me?” The writer of Psalm 73 felt it too — he saw the wicked thrive and nearly lost his footing. The turn came when he “entered the sanctuary of God” and saw the end and eternity again; the comparison loosened. Envy keeps your eyes fixed on what’s in someone else’s hands; this verse invites you back to “God is my portion,” and to re-measure what you truly have from there.',
+      reflection: 'Your latest comparison — honestly, is it the thing itself you envy, or the security or worth you imagine it would give you?',
+      nextStep: 'Read all of Psalm 73 and watch the writer move from bitterness to “God is my portion”; and read Ecclesiastes on how what we gain by comparison ends in chasing the wind.',
+      prayer: 'God, I admit the envy and unrest in my heart. Help me turn my eyes from other people’s hands back to You; and help me truly believe that having You is already my greatest portion. Amen.'
+    }
+  },
+
+  {
+    id: 'belonging', priority: 21,
+    keywordsZh: ['漂泊','没有归属感','异乡','不属于这里','想家','移民的孤独'],
+    keywordsEn: ['do not belong','homesick','foreigner','far from home','immigrant'],
+    relatedBooks: ['john','psalms'],
+    zh: {
+      title: '当你觉得无处归属',
+      verse: '【诗篇 139:9-10】“我若展开清晨的翅膀,飞到海极居住,就是在那里,你的手必引导我;你的右手也必扶持我。”',
+      explanation: '漂泊、想家、在异乡觉得“我不属于这里”——这种没有归属的感觉,很深也很真实。圣经里许多人也是寄居的、客旅(来11:13),他们“羡慕一个更美的家乡”。诗篇139篇给出的安慰是:无论你飞到多远、身在何方,神的手一直在那里引导、扶持你。你或许在地上没有一处完全属于的地方;但有一位神,无论你在哪里,他都与你同在——而信的人真正的家乡,是在他那里。',
+      reflection: '在你漂泊或想家的感觉里,你最深渴望的“归属”,是一个地方,还是被谁完全接纳、看见?',
+      nextStep: '读诗篇139篇,看神如何无处不在地与你同在;若你愿意,读腓立比书 3:20,看信的人真正的“国籍”在哪里。',
+      prayer: '神啊,我常常觉得漂泊、无处归属。谢谢你应许,无论我在多远的地方,你的手都在引导我、扶持我。求你作我漂泊中的家,让我在你里面找到真正的归属。阿们。'
+    },
+    en: {
+      title: 'When You Feel You Don’t Belong',
+      verse: '【Psalm 139:9-10】“If I rise on the wings of the dawn, if I settle on the far side of the sea, even there your hand will guide me, your right hand will hold me fast.” (NIV)',
+      explanation: 'Drifting, homesick, feeling “I don’t belong here” in a foreign place — that ache of not belonging is deep and real. Many people in the Bible were sojourners and strangers too (Heb 11:13), “longing for a better country.” Psalm 139 offers this comfort: however far you fly, wherever you are, God’s hand is already there to guide and hold you. You may have no place on earth that fully belongs to you; but there is a God who is with you wherever you are — and the believer’s true home is in Him.',
+      reflection: 'In your drifting or homesickness, the “belonging” you long for most — is it a place, or to be fully accepted and seen by someone?',
+      nextStep: 'Read Psalm 139 and see how God is with you everywhere; and if you’re willing, Philippians 3:20, on where the believer’s true “citizenship” is.',
+      prayer: 'God, I so often feel adrift, like I belong nowhere. Thank You for promising that however far I go, Your hand still guides and holds me. Be my home in my wandering, and let me find true belonging in You. Amen.'
+    }
   }
 ];
 

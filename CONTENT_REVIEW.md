@@ -115,7 +115,7 @@
 |---|---|---|---|---|
 | guilt | 16 | 内疚·罪恶感·后悔·良心不安·我做错了·神会原谅我吗 | guilt·i feel guilty·regret·will god forgive me·ashamed | john, psalms |
 | forgiving | 17 | 无法原谅·怎么饶恕·恨一个人·被伤害了·放不下仇恨 | how to forgive·cannot forgive·i hate someone·they hurt me | john |
-| grief | 18 | 失去亲人·亲人去世·走不出来·太想念·哀伤 | lost a loved one·grieving·someone died·miss them so much | john, psalms |
+| grief | 18 | 失去亲人·失去了亲人·亲人去世·走不出来·太想念·哀伤 | lost a loved one·grieving·someone died·miss them so much | john, psalms |
 | burnout | 19 | 太累了·工作压力·疲惫不堪·撑得好辛苦·喘不过气 | burned out·exhausted·work stress·so tired | ecclesiastes, psalms |
 | envy | 20 | 嫉妒·比不上别人·凭什么是他·心里不平衡·攀比 | jealous·envy·comparing myself·why them not me | ecclesiastes, psalms |
 | belonging | 21 | 漂泊·没有归属感·异乡·不属于这里·想家·移民的孤独 | do not belong·homesick·foreigner·far from home·immigrant | john, psalms |
@@ -145,7 +145,7 @@
 - **en**：Forgiveness does not mean “you didn’t hurt me,” nor pretending the wound isn’t there. It is a hard decision: to stop letting hatred define and hijack you. Jesus frames it as “seventy-seven times” — not bookkeeping, but a whole new way to live. It is hard, especially when the other person never apologized. But holding bitterness usually poisons you first; and God says “It is mine to avenge” (Rom 12:19) — meaning you can hand the justice to Him and not carry it yourself.
 - **reflection zh**：你放不下的那份怨恨，如今最重地压在谁的身上——对方，还是你自己？ · **en**：The resentment you can’t put down — who does it weigh on most heavily now: the other person, or you?
 - **nextStep zh**：读马太福音 18 章那个不饶恕人的比喻，再读以弗所书 4:32，慢慢求神给你迈出一小步的力量。 · **en**：Read the parable of the unforgiving servant in Matthew 18, then Ephesians 4:32, and ask God slowly for strength to take one small step.
-- **prayer zh**：主啊，有一个伤口我一直放不下，也还没准备好原谅。我先把这份重担、这份想讨回公道的心，交在你手里。求你医治我，也在你的时间里，给我饶恕的力量。阿们。 · **en**：Lord, there is a wound I can’t put down, and I’m not ready to forgive. First I hand You this weight, and my craving to get justice back. Heal me, and in Your time, give me the strength to forgive. Amen.
+- **prayer zh**：主啊，有一个伤口我一直放不下，也还没准备好原谅。我先把这份重担、这份想讨回公道的心，交在你手里。求你医治我，也在你的时间里，给我饶恕的力量。阿们。 · **en**：Lord, there is a wound I can’t put down, and I’m not ready to forgive. First I hand You this weight, and my craving to settle the score. Heal me, and in Your time, give me the strength to forgive. Amen.
 
 ### 5.3 grief · 当你失去了所爱的人 / When You Have Lost Someone You Love
 - **verse zh** 【马太福音 5:4】“哀恸的人有福了，因为他们必得安慰。” · **en** 【Matthew 5:4】“Blessed are those who mourn, for they will be comforted.” (NIV)

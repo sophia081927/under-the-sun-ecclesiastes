@@ -56,7 +56,8 @@ const LOADING_MS = 700; // brief, mobile-friendly; crisis responses skip this en
 
 const BOOK_LINKS = {
   ecclesiastes: { zh: '读传道书', en: 'Read Ecclesiastes', href: 'ecclesiastes.html' },
-  john:         { zh: '读约翰福音', en: 'Read John', href: 'john.html' }
+  john:         { zh: '读约翰福音', en: 'Read John', href: 'john.html' },
+  psalms:       { zh: '读诗篇', en: 'Read Psalms', href: 'psalms.html' }
 };
 
 const CSS = `

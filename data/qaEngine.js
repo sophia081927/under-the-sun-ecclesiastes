@@ -68,7 +68,7 @@ export const qaRegistry = [
     id: 'anxiety', priority: 2,
     keywordsZh: ['焦虑','害怕','压力','担心','忧愁','忧虑','睡不着','恐惧','不安','紧张','惊慌','放不下'],
     keywordsEn: ['anxious','anxiety','fear','afraid','fearful','stress','stressed','worry','worried','cannot sleep',"can't sleep",'nervous','panic','overwhelmed'],
-    relatedBooks: ['john'],
+    relatedBooks: ['john','psalms'],
     variants: [
       { verse: { zh: '【腓立比书 4:6-7】“应当一无挂虑,只要凡事借着祷告、祈求和感谢,将你们所要的告诉神。神所赐出人意外的平安,必在基督耶稣里保守你们的心怀意念。”', en: '【Philippians 4:6-7】“Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.” (NIV)' } },
       { verse: { zh: '【马太福音 6:34】“所以,不要为明天忧虑,因为明天自有明天的忧虑;一天的难处一天当就够了。”', en: '【Matthew 6:34】“Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.” (NIV)' } }
@@ -148,7 +148,7 @@ export const qaRegistry = [
     id: 'insecurity', priority: 5,
     keywordsZh: ['没有安全感','不安全','害怕失去','没人保护','缺乏安全感','心里不踏实','怕被抛弃','孤单无助'],
     keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
-    relatedBooks: ['john'],
+    relatedBooks: ['john','psalms'],
     variants: [
       { verse: { zh: '【以赛亚书 41:10】“你不要害怕,因为我与你同在;不要惊惶,因为我是你的神。我必坚固你,我必帮助你;我必用我公义的右手扶持你。”', en: '【Isaiah 41:10】“So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.” (NIV)' } },
       { verse: { zh: '【约翰福音 10:27-29】“我的羊听我的声音,我也认识他们,他们也跟着我。我又赐给他们永生;他们永不灭亡,谁也不能从我手里把他们夺去。”', en: '【John 10:27-29】“My sheep listen to my voice; I know them, and they follow me. I give them eternal life, and they shall never perish; no one will snatch them out of my hand.” (NIV)' } }
@@ -229,7 +229,7 @@ export const qaRegistry = [
     id: 'loneliness', priority: 8,
     keywordsZh: ['孤独','孤单','没人懂我','被遗忘','没人陪'],
     keywordsEn: ['lonely','no one understands me','forgotten','feel abandoned'],
-    relatedBooks: ['john'],
+    relatedBooks: ['john','psalms'],
     variants: [
       { verse: { zh: '【马太福音 28:20】“凡我所吩咐你们的,都教训他们遵守,我就常与你们同在,直到世界的末了。”', en: '【Matthew 28:20】“…And surely I am with you always, to the very end of the age.” (NIV)' } }
     ],
@@ -301,7 +301,7 @@ export const qaRegistry = [
     id: 'suffering', priority: 11,
     keywordsZh: ['痛苦','苦难','受苦','为什么是我','患难','绝望','撑不下去','难熬','折磨','走不出','看不到希望','很苦','熬不住'],
     keywordsEn: ['suffering','suffer','pain','why me','hardship','despair','hopeless','no hope','going through','painful','trial','hurting'],
-    relatedBooks: ['john','ecclesiastes'],
+    relatedBooks: ['john','ecclesiastes','psalms'],
     zh: {
       title: '当你正在受苦',
       verse: '【约翰福音 16:33】“我将这些事告诉你们,是要叫你们在我里面有平安。在世上你们有苦难,但你们可以放心,我已经胜了世界。”',

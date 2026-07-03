@@ -29,8 +29,7 @@ const UI = {
     button: '用圣经回应我',
     loading: '正在从圣经中寻找回应……',
     guided: '不知从何问起?试试这些:',
-    lVerse: '相关经文', lExpl: '简短解释', lReflect: '默想问题', lNext: '下一步', lPray: '祷告', lRead: '相关书卷',
-    safetyFooter: '如果你正处于紧急危机中,请立即拨打 988(美国)或联系你信任的人。'
+    lVerse: '相关经文', lExpl: '简短解释', lReflect: '默想问题', lNext: '下一步', lPray: '祷告', lRead: '相关书卷'
   },
   en: {
     title: 'Biblical Q&A',
@@ -40,8 +39,7 @@ const UI = {
     button: 'Answer from Scripture',
     loading: 'Searching Scripture for a response...',
     guided: 'Not sure where to start? Try one:',
-    lVerse: 'Relevant Scripture', lExpl: 'Reflection', lReflect: 'Question for Reflection', lNext: 'Next Step', lPray: 'Prayer', lRead: 'Related Books',
-    safetyFooter: 'If you are in immediate crisis, please call or text 988 (United States) or reach out to someone you trust.'
+    lVerse: 'Relevant Scripture', lExpl: 'Reflection', lReflect: 'Question for Reflection', lNext: 'Next Step', lPray: 'Prayer', lRead: 'Related Books'
   }
 };
 
@@ -112,7 +110,6 @@ const CSS = `
 .bqa-loading .dot:nth-child(2){animation-delay:.16s}.bqa-loading .dot:nth-child(3){animation-delay:.32s}
 @keyframes bqaPulse{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1)}}
 @keyframes bqaFade{from{opacity:0}to{opacity:1}}
-.bqa-safety{margin-top:16px;font-size:12px;color:var(--bqa-faint);line-height:1.65;text-align:center}
 @media(max-width:540px){.bqa-box{padding:20px 16px}.bqa-card{padding:20px 16px}}
 `;
 
@@ -179,7 +176,6 @@ export function mountBiblicalQA(container, opts) {
       </div>
     </div>
     <div class="bqa-answer" data-el="answer" aria-live="polite"></div>
-    <p class="bqa-safety" data-k="safetyFooter"></p>
   `;
 
   const el = (n) => container.querySelector(`[data-el="${n}"]`);

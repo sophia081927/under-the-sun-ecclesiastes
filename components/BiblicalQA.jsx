@@ -30,8 +30,7 @@ const UI = {
     button: '用圣经回应我',
     loading: '正在从圣经中寻找回应……',
     guided: '不知从何问起?试试这些:',
-    labels: { verse: '相关经文', explanation: '简短解释', reflection: '默想问题', nextStep: '下一步', prayer: '祷告', relatedBooks: '相关书卷' },
-    safetyFooter: '如果你正处于紧急危机中,请立即拨打 988(美国)或联系你信任的人。'
+    labels: { verse: '相关经文', explanation: '简短解释', reflection: '默想问题', nextStep: '下一步', prayer: '祷告', relatedBooks: '相关书卷' }
   },
   en: {
     title: 'Biblical Q&A',
@@ -41,8 +40,7 @@ const UI = {
     button: 'Answer from Scripture',
     loading: 'Searching Scripture for a response...',
     guided: 'Not sure where to start? Try one:',
-    labels: { verse: 'Relevant Scripture', explanation: 'Reflection', reflection: 'Question for Reflection', nextStep: 'Next Step', prayer: 'Prayer', relatedBooks: 'Related Books' },
-    safetyFooter: 'If you are in immediate crisis, please call or text 988 (United States) or reach out to someone you trust.'
+    labels: { verse: 'Relevant Scripture', explanation: 'Reflection', reflection: 'Question for Reflection', nextStep: 'Next Step', prayer: 'Prayer', relatedBooks: 'Related Books' }
   }
 };
 
@@ -130,7 +128,6 @@ export default function BiblicalQA({ lang = 'zh' }) {
         {!loading && response && <ResponseCard r={response} t={t} L={L} asked={asked} />}
       </div>
 
-      <p className="bqa-safety">{t.safetyFooter}</p>
     </section>
   );
 }

@@ -11,12 +11,12 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="书阁 Library">
 <title>Bible Library · 圣经书阁</title>
-<meta name="description" content="一间安静的中英双语读经室,一次一卷。A quiet, bilingual reading room for the Bible — Ecclesiastes and the Gospel of John. 现有《传道书》与《约翰福音》。">
+<meta name="description" content="一间安静的中英双语读经室,一次一卷。A quiet, bilingual, expandable Scripture platform — Ecclesiastes, John, and more to come.">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bible Library · 圣经书阁">
 <meta property="og:title" content="Bible Library · 圣经书阁">
-<meta property="og:description" content="一间安静的中英双语读经室,一次一卷。《传道书》与《约翰福音》。">
+<meta property="og:description" content="一间安静的中英双语读经室,一次一卷。A quiet bilingual Scripture platform.">
 <meta property="og:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/bridge.webp">
 <meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/">
 
@@ -40,86 +40,120 @@
 <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
 <style>
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
   body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
-  .book { transition: border-color .25s, background .25s, transform .25s; }
-  .book:hover { border-color: rgba(212,175,55,.55); background: rgba(212,175,55,.05); transform: translateY(-3px); }
+  .book { transition: border-color .25s, transform .25s, box-shadow .25s; }
+  .book.active:hover { border-color: rgba(212,175,55,.5); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
+  .book.upcoming { opacity: .62; }
 </style>
 </head>
 
 <body class="min-h-screen bg-[#12161A] text-[#F4F1EA] font-sans antialiased selection:bg-[#D4AF37]/30 flex flex-col">
 
   <!-- Header -->
-  <header class="border-b border-gray-800 bg-[#12161A]/90 backdrop-blur-md px-6 md:px-8 py-5 flex justify-between items-center">
+  <header class="border-b border-gray-800 bg-[#12161A]/90 backdrop-blur-md px-5 md:px-8 py-4 flex justify-between items-center sticky top-0 z-50">
     <div class="flex items-center space-x-2">
       <i data-lucide="library" class="h-5 w-5 text-[#D4AF37]"></i>
-      <span class="font-serif text-lg tracking-widest uppercase font-bold text-[#D4AF37]">圣经书阁 <span class="text-gray-400 font-sans font-light">| Bible Library</span></span>
+      <span class="font-serif text-base md:text-lg tracking-widest uppercase font-bold text-[#D4AF37]">圣经书阁 <span class="text-gray-500 font-sans font-light hidden sm:inline">| Bible Library</span></span>
+    </div>
+    <div class="inline-flex border border-[#D4AF37]/40 rounded-full overflow-hidden text-xs">
+      <button id="btnZh" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('zh')">中文</button>
+      <button id="btnEn" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('en')">EN</button>
     </div>
   </header>
 
   <!-- Hero -->
-  <section class="max-w-4xl mx-auto text-center pt-20 pb-10 px-6 relative">
-    <div class="absolute top-6 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none"></div>
-    <span class="text-xs font-mono tracking-[0.3em] text-[#D4AF37] uppercase mb-4 block">A quiet reading room, one book at a time</span>
-    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-5 tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#F4F1EA] to-gray-400">
-      一次一卷，安静地读圣经
-    </h1>
-    <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light">
-      不急着说服你相信，只邀请你诚实地读。中英文对照，随时切换。<br class="hidden md:block">
-      <span class="text-gray-500">You don't have to believe to begin — only to read honestly. Bilingual throughout.</span>
-    </p>
+  <section class="max-w-4xl mx-auto text-center pt-16 md:pt-20 pb-8 px-6 relative">
+    <div class="absolute top-4 left-1/2 -translate-x-1/2 w-72 h-72 bg-[#D4AF37]/5 blur-[120px] rounded-full pointer-events-none"></div>
+    <span class="text-xs font-mono tracking-[0.3em] text-[#D4AF37] uppercase mb-4 block" data-i18n="kicker"></span>
+    <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-5 tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#F4F1EA] to-gray-400" data-i18n="title"></h1>
+    <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light" data-i18n="sub"></p>
   </section>
 
-  <!-- Books -->
-  <section class="max-w-4xl w-full mx-auto px-6 pb-20 grid gap-6 md:grid-cols-2">
+  <!-- Books (rendered from data/bibleRegistry.js) -->
+  <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-16 grid gap-5 md:grid-cols-2" id="books"></section>
 
-    <!-- Ecclesiastes -->
-    <div class="book border border-gray-800/80 rounded-2xl p-7 bg-[#1A1D20]/50 backdrop-blur-md flex flex-col">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-[10px] font-mono tracking-[0.25em] text-[#D4AF37] uppercase">Book One · 第一卷</span>
-        <i data-lucide="sunset" class="h-5 w-5 text-[#D4AF37]/70"></i>
-      </div>
-      <h2 class="font-serif text-2xl font-bold text-[#F4F1EA]">传道书 <span class="text-gray-500 text-lg font-sans font-light">Ecclesiastes</span></h2>
-      <div class="text-[#D4AF37]/90 font-serif italic mt-1">日光之下 · Under the Sun</div>
-      <p class="text-gray-400 text-sm leading-relaxed font-light mt-4 flex-1">
-        成功之后为什么还是空？死亡为什么让人无力？一卷三千年前的智慧书，诚实揭开“日光之下”的问题。<br>
-        <span class="text-gray-500">An honest look at emptiness, success, and mortality — the questions under the sun.</span>
-      </p>
-      <div class="mt-6 flex items-center gap-3 text-sm">
-        <a href="ecclesiastes.html?lang=zh" class="bg-[#D4AF37] hover:bg-[#C5A059] text-[#12161A] font-semibold text-xs tracking-wider uppercase px-5 py-2.5 rounded-full transition-all inline-flex items-center gap-1.5">进入 <i data-lucide="chevron-right" class="h-3 w-3"></i></a>
-        <a href="listen.html" class="text-gray-400 hover:text-[#D4AF37] text-xs tracking-wider uppercase transition-colors inline-flex items-center gap-1">♪ 聆听</a>
-        <a href="ecclesiastes.html" class="text-gray-400 hover:text-[#D4AF37] text-xs tracking-wider uppercase transition-colors">EN →</a>
-      </div>
-    </div>
-
-    <!-- Gospel of John -->
-    <div class="book border border-gray-800/80 rounded-2xl p-7 bg-[#1A1D20]/50 backdrop-blur-md flex flex-col">
-      <div class="flex items-center justify-between mb-4">
-        <span class="text-[10px] font-mono tracking-[0.25em] text-[#D4AF37] uppercase">Book Two · 第二卷</span>
-        <i data-lucide="sun" class="h-5 w-5 text-[#D4AF37]/70 animate-spin-slow"></i>
-      </div>
-      <h2 class="font-serif text-2xl font-bold text-[#F4F1EA]">约翰福音 <span class="text-gray-500 text-lg font-sans font-light">John</span></h2>
-      <div class="text-[#D4AF37]/90 font-serif italic mt-1">生命之光 · The Light of Life</div>
-      <p class="text-gray-400 text-sm leading-relaxed font-light mt-4 flex-1">
-        如果《传道书》诚实揭开了空，《约翰福音》就把我们带向那位真正的生命之光——道成肉身、活水、复活与生命。<br>
-        <span class="text-gray-500">Where Ecclesiastes exposes the emptiness, John leads to the true Light of Life.</span>
-      </p>
-      <div class="mt-6 flex items-center gap-3 text-sm">
-        <a href="john.html?lang=zh" class="bg-[#D4AF37] hover:bg-[#C5A059] text-[#12161A] font-semibold text-xs tracking-wider uppercase px-5 py-2.5 rounded-full transition-all inline-flex items-center gap-1.5">进入 <i data-lucide="chevron-right" class="h-3 w-3"></i></a>
-        <a href="john.html" class="text-gray-400 hover:text-[#D4AF37] text-xs tracking-wider uppercase transition-colors">English →</a>
-      </div>
-    </div>
-  </section>
-
-  <div class="max-w-4xl w-full mx-auto px-6 pb-16 text-center text-gray-600 text-xs tracking-wide">
-    更多书卷陆续加入 · More books coming, one at a time
-  </div>
+  <div class="max-w-4xl w-full mx-auto px-6 pb-14 text-center text-gray-600 text-xs tracking-wide" data-i18n="more"></div>
 
   <!-- Footer -->
   <footer class="mt-auto py-8 text-center text-[10px] text-gray-600 tracking-widest uppercase border-t border-gray-950 px-6 leading-relaxed">
-    “He has also set eternity in the human heart.” · 神将永恒安置在世人心里 &copy; 2026
+    &ldquo;He has also set eternity in the human heart.&rdquo; · 神将永恒安置在世人心里 &copy; 2026
   </footer>
 
-<script> lucide.createIcons(); </script>
+<script type="module">
+  import { bibleRegistry } from './data/bibleRegistry.js';
+
+  const UI = {
+    zh: { kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
+          sub: '一个可以慢慢生长的中英双语读经空间。不急着说服你相信,只邀请你诚实地读。',
+          more: '更多书卷陆续加入 · 只需在注册表里追加一条配置',
+          enter: '进入', listen: '聆听', soon: '敬请期待', comingType: '书卷筹备中' },
+    en: { kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
+          sub: 'A calm, growing bilingual space for reading Scripture. No pressure to believe — only an invitation to read honestly.',
+          more: 'More books are on the way · just append one entry to the registry',
+          enter: 'Enter', listen: 'Listen', soon: 'Coming soon', comingType: 'In preparation' },
+  };
+
+  let lang = 'zh';
+  const esc = (s) => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+  function cardHtml(b) {
+    const t = UI[lang];
+    const title = lang === 'zh' ? b.titleZh : b.titleEn;
+    const alt   = lang === 'zh' ? b.titleEn : b.titleZh;
+    const type  = lang === 'zh' ? (b.bookTypeZh || b.bookType) : b.bookType;
+    const tagline = lang === 'zh' ? b.taglineZh : b.taglineEn;
+    const desc  = lang === 'zh' ? b.descriptionZh : b.descriptionEn;
+    const active = b.status === 'active';
+    const accent = b.accentColor || '#D4AF37';
+
+    const badge = active
+      ? `<span class="text-[10px] font-mono tracking-[0.2em] uppercase" style="color:${accent}">No. ${b.order}</span>`
+      : `<span class="text-[10px] font-mono tracking-[0.18em] uppercase text-gray-500 border border-gray-700 rounded-full px-2.5 py-1">${esc(t.soon)}</span>`;
+
+    const foot = active
+      ? `<div class="mt-6 flex items-center gap-3 flex-wrap text-sm">
+           <a href="${b.page}" class="font-semibold text-xs tracking-wider uppercase px-5 py-2.5 rounded-full transition-all inline-flex items-center gap-1.5 min-h-[44px]"
+              style="background:${accent};color:#12161A">${esc(t.enter)} <i data-lucide="chevron-right" class="h-3 w-3"></i></a>
+           ${b.audioEnabled && b.listen ? `<a href="${b.listen}" class="text-gray-400 hover:text-[#D4AF37] text-xs tracking-wider uppercase transition-colors inline-flex items-center gap-1 min-h-[44px] py-2">♪ ${esc(t.listen)}</a>` : ''}
+         </div>`
+      : `<div class="mt-6 text-xs tracking-wider uppercase text-gray-500 min-h-[44px] flex items-center">${esc(t.comingType)} ·  ${esc(t.soon)}</div>`;
+
+    return `
+      <article class="book ${active ? 'active' : 'upcoming'} border border-gray-800/80 rounded-2xl p-6 md:p-7 flex flex-col bg-gradient-to-br ${b.bgColor}">
+        <div class="flex items-center justify-between mb-4">
+          <span class="text-[10px] font-mono tracking-[0.22em] uppercase" style="color:${accent}">${esc(type)}</span>
+          ${badge}
+        </div>
+        <h2 class="font-serif text-2xl font-bold text-[#F4F1EA]">${esc(title)} <span class="text-gray-500 text-base font-sans font-light">${esc(alt)}</span></h2>
+        <div class="font-serif italic mt-2 text-[15px] leading-snug" style="color:${accent}">${esc(tagline)}</div>
+        <p class="text-gray-400 text-sm leading-relaxed font-light mt-4 flex-1">${esc(desc)}</p>
+        ${foot}
+      </article>`;
+  }
+
+  function render() {
+    const t = UI[lang];
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] || ''; });
+    document.getElementById('btnZh').classList.toggle('text-[#D4AF37]', lang === 'zh');
+    document.getElementById('btnEn').classList.toggle('text-[#D4AF37]', lang === 'en');
+    const books = [...bibleRegistry].sort((a, b) => a.order - b.order);
+    document.getElementById('books').innerHTML = books.map(cardHtml).join('');
+    if (window.lucide) lucide.createIcons();
+  }
+
+  window.setLang = function (l) {
+    lang = l;
+    try { localStorage.setItem('bible_lang', l); } catch (e) {}
+    render();
+  };
+
+  // init: saved preference > browser language
+  let saved = null; try { saved = localStorage.getItem('bible_lang'); } catch (e) {}
+  const nl = (navigator.language || '').toLowerCase();
+  lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
+  render();
+</script>
 </body>
 </html>

@@ -123,8 +123,63 @@ export const bibleRegistry = [
     features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: true, deck: true }
   },
   {
-    id: 'job',
+    id: 'psalms',
     order: 3,
+    slug: 'psalms',
+    titleZh: '诗篇精选',
+    titleEn: 'Psalms',
+    status: 'active',
+    safeHash: '#/psalms',
+    listenHash: '#/psalms/listen',
+    worshipHash: '#/psalms/worship',
+    route: '/psalms',
+    listenRoute: '/psalms/listen',
+    worshipRoute: '/psalms/worship',
+    page: 'psalms.html',
+    listen: 'psalms-listen.html',
+    worship: 'psalms-worship.html',
+    study: null,
+    deck: null,
+    bookType: 'Poetry & Worship',
+    bookTypeZh: '诗歌书',
+    themeZh: '真实向神喊话：恐惧、忧闷、悔改、避难、同在',
+    themeEn: 'Honest cries to God: fear, sorrow, repentance, refuge, presence',
+    taglineZh: '当你说不出祷告的时候，诗篇替你开口。',
+    taglineEn: 'When you have no words to pray, the Psalms give you a voice.',
+    descriptionZh: '诗篇精选十一篇——不是完美信徒的赞美，而是真实的人向神喊出恐惧、质问与盼望，与传道书“日光之下”的诚实彼此呼应。',
+    descriptionEn: 'Eleven selected Psalms — not the praise of perfect believers, but real people crying out fear, protest, and hope to God, echoing the honesty of Ecclesiastes “under the sun.”',
+    keyVerse: {
+      zh: { reference: '诗篇 34:18', text: '耶和华靠近伤心的人，拯救灵性痛悔的人。' },
+      en: { reference: 'Psalm 34:18', text: 'The Lord is close to the brokenhearted and saves those who are crushed in spirit.' }
+    },
+    mediaHub: {
+      zh: {
+        audioTitle: '诗篇精选 · 聆听',
+        audioGuide: '🎧 点击聆听：在恐惧、忧闷与避难中，向神诚实地喊话。',
+        worshipTitle: '《你是我的避难所》',
+        worshipGuide: '🎵 神是我们的避难所，是我们在患难中随时的帮助。',
+        spotifyLink: 'https://open.spotify.com/search/你是我的避难所',
+        youtubeLink: 'https://www.youtube.com/results?search_query=你是我的避难所+赞美诗'
+      },
+      en: {
+        audioTitle: 'Psalms · Listen',
+        audioGuide: '🎧 Click to listen: honest cries to God in fear, sorrow, and refuge.',
+        worshipTitle: 'You Are My Hiding Place',
+        worshipGuide: '🎵 God is our refuge and strength, an ever-present help in trouble.',
+        spotifyLink: 'https://open.spotify.com/search/You+Are+My+Hiding+Place',
+        youtubeLink: 'https://www.youtube.com/results?search_query=You+Are+My+Hiding+Place+worship'
+      }
+    },
+    bgColor: 'from-[#1A2E3A] to-[#12161A]',
+    accentColor: '#A8C5D6',
+    audioPathBase: 'audio/psalms/',
+    languages: ['zh', 'en'],
+    audioEnabled: true,
+    features: { read: true, listen: true, ask: true, reflection: true, worship: false, bilingual: true, study: false, deck: false }
+  },
+  {
+    id: 'job',
+    order: 4,
     slug: 'job',
     titleZh: '约伯记',
     titleEn: 'Job',
@@ -161,7 +216,7 @@ export const bibleRegistry = [
   },
   {
     id: 'matthew',
-    order: 4,
+    order: 5,
     slug: 'matthew',
     titleZh: '马太福音',
     titleEn: 'Matthew',

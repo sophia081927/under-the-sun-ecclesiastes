@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="诗篇精选 · Psalms">
+<title>Psalms · 诗篇精选 · 日光之下</title>
+<meta name="description" content="Eleven selected Psalms — honest cries to God in fear, sorrow, and refuge, echoing Ecclesiastes under the sun. 诗篇精选十一篇:恐惧、忧闷、悔改、避难中向神诚实的喊话,与传道书彼此呼应。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/psalms.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Under the Sun · 日光之下">
+<meta property="og:title" content="Psalms · 诗篇精选">
+<meta property="og:description" content="Honest cries to God — fear, sorrow, repentance, refuge, presence. 真实向神喊话的诗篇精选。">
+<meta property="og:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/violin.webp">
+<meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/psalms.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --sky:#a8c5d6; --sky-soft:#c6dbe6;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+    --sky-line:rgba(168,197,214,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
+    color:var(--muted);text-transform:uppercase}
+  .topbar .mark{color:var(--sky-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.nav{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.nav:hover{color:var(--sky-soft)}
+  .lang-toggle{border:1px solid var(--sky-line);border-radius:30px;overflow:hidden;display:flex;font-family:inherit;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sky);color:#14161a;font-weight:700}
+  @media(max-width:600px){.topbar{letter-spacing:.1em;padding:12px 16px}.topbar .nav.hideS{display:none}.topbar .mark{font-size:11px}}
+
+  .hero{max-width:760px;margin:0 auto;padding:104px 22px 8px;text-align:center}
+  .hero .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,6vw,48px);line-height:1.15;color:var(--ink);font-weight:400}
+  .hero .sub{margin-top:10px;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+  .hero .intro{margin-top:24px;font-size:16px;color:var(--muted);line-height:1.85;text-align:left;
+    border-left:2px solid var(--sky-line);padding-left:18px}
+
+  .pnav{max-width:760px;margin:26px auto 0;padding:0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .pnav a{font-size:13px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;
+    padding:7px 14px;text-decoration:none;transition:all .2s;min-height:36px;display:inline-flex;align-items:center}
+  .pnav a:hover{border-color:var(--sky);color:var(--sky-soft);background:rgba(168,197,214,.06)}
+
+  main{max-width:760px;margin:0 auto;padding:14px 22px 90px}
+
+  .psalm{padding:44px 0 40px;border-top:1px solid var(--line-soft);scroll-margin-top:76px}
+  .psalm:first-child{border-top:none}
+  .psalm .pnum{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-bottom:10px}
+  .psalm .ptitle{font-size:clamp(22px,4.4vw,30px);line-height:1.25;color:var(--ink);font-weight:400}
+  .psalm .ptheme{margin-top:8px;font-size:16px;color:var(--sky-soft);font-style:italic;line-height:1.6}
+  .verses{margin-top:22px;display:flex;flex-direction:column;gap:16px}
+  .verse{border-left:2px solid var(--sky);padding:3px 0 3px 16px}
+  .verse .ref{font-size:12.5px;color:var(--sky-soft);font-style:italic;letter-spacing:.02em;margin-bottom:5px}
+  .verse .vt{font-size:16.5px;color:var(--ink);line-height:1.85}
+  .sect{margin-top:24px}
+  .sect .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.9;margin-bottom:9px}
+  .sect .body{font-size:15.5px;color:var(--muted);line-height:1.85}
+  .sect.med .body{color:var(--ink)}
+  .sect.med{background:rgba(168,197,214,.05);border:1px solid var(--line-soft);border-radius:10px;padding:18px 20px;margin-top:22px}
+  .sect.med .lbl{color:var(--sky)}
+
+  .endcta{max-width:760px;margin:0 auto;padding:20px 22px 70px;text-align:center}
+  .endcta .card{background:var(--bg2);border:1px solid var(--sky-line);border-radius:12px;padding:30px 24px}
+  .endcta h3{font-size:20px;color:var(--sky-soft);font-weight:400;line-height:1.4}
+  .endcta p{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.75}
+  .endcta a.ask{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--sky);color:#14161a;
+    border-radius:30px;padding:12px 26px;font-size:15px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:background .2s;min-height:46px}
+  .endcta a.ask:hover{background:var(--sky-soft)}
+  .endcta .back{display:block;margin-top:18px;font-size:13px;color:var(--faint);text-decoration:none;letter-spacing:.06em}
+  .endcta .back:hover{color:var(--sky-soft)}
+
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(24,27,32,.94);backdrop-filter:blur(12px);border-top:1px solid var(--sky-line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a{flex:1;background:none;border:none;color:var(--muted);font-family:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;letter-spacing:.03em;padding:5px 2px;min-height:50px;text-decoration:none}
+  .tabbar a:hover{color:var(--sky-soft)}
+  .tabbar a.active{color:var(--sky)}
+  .tabbar .ic{font-size:18px;line-height:1}
+  @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:66px}}
+
+  footer{border-top:1px solid var(--line-soft);padding:36px 22px;text-align:center;color:var(--faint)}
+  footer .mark{color:var(--sky-soft);font-size:15px;letter-spacing:.06em}
+  footer p{margin-top:12px;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="nav hideS" href="index.html"><span class="en">Library</span><span class="zh">书阁</span></a>
+    <a class="nav hideS" href="ecclesiastes.html"><span class="en">Ecclesiastes</span><span class="zh">传道书</span></a>
+    <a class="nav" href="psalms-listen.html"><span class="en">Listen ♪</span><span class="zh">聆听 ♪</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="kicker"><span class="en">Selected Psalms</span><span class="zh">诗篇精选</span></div>
+  <h1><span class="en">Psalms</span><span class="zh">诗篇</span></h1>
+  <div class="sub"><span class="en">Honest cries to God</span><span class="zh">真实向神喊话</span></div>
+  <p class="intro">
+    <span class="en">The Psalms are not a collection of polished praise. They record the raw voices of real people crying out to God — trust, yes, but also fear, anger, sorrow, and protest. God did not edit these out; He wrote them into Scripture. That means your honest feelings, right now, need not be cleaned up before you bring them to God. Ecclesiastes looks honestly at the emptiness “under the sun”; the Psalms teach us how, inside that same emptiness, to lift our eyes and speak to the God “above the sun.”</span>
+    <span class="zh">诗篇不是完美信徒的赞美集。它收录的是真实的人向神喊出来的声音——有信靠,也有恐惧、愤怒、忧闷和质问。神没有删掉这些,反而把它们写进圣经里。这意味着:你此刻真实的情绪,不必先整理干净,就可以带到神面前。传道书诚实地看“日光之下”的虚空;诗篇则教我们,在同样的虚空里,如何抬头向“日光之上”的神说话。</span>
+  </p>
+</header>
+
+<nav class="pnav" id="pnav" aria-label="psalm quick jump"></nav>
+
+<main id="list"></main>
+
+<div class="endcta">
+  <div class="card">
+    <h3><span class="en">Bring the question you can't put into a prayer</span><span class="zh">把你还组织不成祷告的那个问题,带来</span></h3>
+    <p><span class="en">Type your real question — fear, doubt, grief, loneliness — and receive gentle, Scripture-centered guidance.</span><span class="zh">写下你真实的问题——恐惧、怀疑、哀伤、孤独——得到一份温柔、扎根圣经的回应。</span></p>
+    <a class="ask" href="ask.html"><span class="en">Ask from Scripture →</span><span class="zh">用圣经回应我 →</span></a>
+    <a class="back" href="index.html"><span class="en">← Back to the Library</span><span class="zh">← 返回书阁</span></a>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="quick navigation">
+  <a href="index.html"><span class="ic">📚</span><span><span class="en">Library</span><span class="zh">书阁</span></span></a>
+  <a href="psalms.html" class="active"><span class="ic">📖</span><span><span class="en">Psalms</span><span class="zh">诗篇</span></span></a>
+  <a href="ask.html"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
+  <a href="psalms-listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+</nav>
+
+<footer>
+  <div class="mark">日光之下 · under the sun</div>
+  <p>
+    <span class="en">Selected Psalms, in parallel Chinese &amp; English. 和合本 · NIV. · MVP demo.</span>
+    <span class="zh">诗篇精选,中英并列。和合本 · NIV。· MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+/* ============================================================
+   PSALMS — 11 selected psalms. Verses are verbatim:
+   Chinese 和合本 (public domain), English NIV (marked).
+   ============================================================ */
+var PSALMS = [
+  { num:23, title:{zh:'牧者',en:'The Shepherd'},
+    theme:{zh:'就算走过死荫的幽谷,也有牧者与你同行。',en:'Even through the darkest valley, the Shepherd walks with you.'},
+    verses:[
+      {ref:{zh:'诗篇 23:1-6',en:'Psalm 23:1-6 (NIV)'},
+       zh:'耶和华是我的牧者,我必不致缺乏。他使我躺卧在青草地上,领我在可安歇的水边。他使我的灵魂苏醒,为自己的名引导我走义路。我虽然行过死荫的幽谷,也不怕遭害,因为你与我同在;你的杖,你的竿,都安慰我。在我敌人面前,你为我摆设筵席;你用油膏了我的头,使我的福杯满溢。我一生一世必有恩惠慈爱随着我;我且要住在耶和华的殿中,直到永远。',
+       en:'The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters, he refreshes my soul. He guides me along the right paths for his name’s sake. Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me. You prepare a table before me in the presence of my enemies. You anoint my head with oil; my cup overflows. Surely your goodness and love will follow me all the days of my life, and I will dwell in the house of the Lord forever.'}
+    ],
+    connect:{zh:'传道书说,人在日光之下劳碌,像羊没有牧人,不知从哪里来、往哪里去。诗篇23篇给出另一幅图:你不是无主的孤羊——有一位认得你、供应你、在幽谷里仍与你同行的牧者。孤独最深的时候,你要的往往不是答案,而是同在——“因为你与我同在”。',
+             en:'Ecclesiastes says we toil under the sun like sheep without a shepherd, unsure where we came from or where we go. Psalm 23 offers another picture: you are not an ownerless sheep — there is a Shepherd who knows you, provides for you, and walks with you even through the valley. In the deepest loneliness, what you need is often not an answer but a presence — “for you are with me.”'},
+    meditate:{zh:'在你最近走过的“幽谷”里,你更需要的是一个解释,还是知道有人一直在身边?',
+              en:'In the “valley” you’ve walked lately, did you need an explanation more — or to know Someone was beside you the whole time?'} },
+
+  { num:27, title:{zh:'惧怕中的光',en:'Light in Fear'},
+    theme:{zh:'当惧怕逼近,先看清是谁与你同在。',en:'When fear closes in, look first at who is with you.'},
+    verses:[
+      {ref:{zh:'诗篇 27:1',en:'Psalm 27:1 (NIV)'},
+       zh:'耶和华是我的亮光,是我的拯救,我还怕谁呢?耶和华是我性命的保障,我还惧谁呢?',
+       en:'The Lord is my light and my salvation — whom shall I fear? The Lord is the stronghold of my life — of whom shall I be afraid?'},
+      {ref:{zh:'诗篇 27:14',en:'Psalm 27:14 (NIV)'},
+       zh:'要等候耶和华!当壮胆,坚固你的心!我再说,要等候耶和华!',
+       en:'Wait for the Lord; be strong and take heart and wait for the Lord.'}
+    ],
+    connect:{zh:'惧怕会把眼前的威胁放到最大,让神显得很小。诗篇27篇不否认危险真实存在,却先调整视角:先看“亮光”与“拯救”是谁。日光之下,你无法控制明天;但你可以决定此刻先看向谁。',
+             en:'Fear magnifies the threat in front of us and shrinks God. Psalm 27 does not deny that danger is real; it re-orders our gaze — look first at who our “light” and “salvation” is. Under the sun you cannot control tomorrow, but you can choose whom you look to first, right now.'},
+    meditate:{zh:'如果把你现在最大的惧怕,放在“耶和华是我的亮光”这句话旁边,它有没有变小一点?',
+              en:'If you set your biggest fear right now next to the words “The Lord is my light,” does it shrink even a little?'} },
+
+  { num:34, title:{zh:'靠近伤心的人',en:'Close to the Brokenhearted'},
+    theme:{zh:'神不躲开破碎的人,祂靠近。',en:'God does not avoid the broken; He draws near.'},
+    verses:[
+      {ref:{zh:'诗篇 34:17-18',en:'Psalm 34:17-18 (NIV)'},
+       zh:'义人呼求,耶和华听见了,便救他们脱离一切患难。耶和华靠近伤心的人,拯救灵性痛悔的人。',
+       en:'The righteous cry out, and the Lord hears them; he delivers them from all their troubles. The Lord is close to the brokenhearted and saves those who are crushed in spirit.'}
+    ],
+    connect:{zh:'传道书敢直视苦难,却停在墙前,不给最终答案。诗篇34篇补上一句极重要的话:在你伤心痛悔的地方,神不是站得远远地评判,而是“靠近”。安慰不等于苦难消失,而是苦难中不再只有你一个人。(这也是本站危机提醒里的那节经文。)',
+             en:'Ecclesiastes dares to look at suffering, but stops at the wall without a final answer. Psalm 34 adds something vital: right where you are broken and crushed, God does not stand far off in judgment — He is “close.” Comfort is not the disappearance of pain, but no longer being alone in it. (This is the verse in this site’s crisis note, too.)'},
+    meditate:{zh:'“神靠近伤心的人”——如果这句话此刻是真的,它会改变你今天独自扛着的哪一件事?',
+              en:'“God is close to the brokenhearted” — if that is true right now, which thing you’re carrying alone today would it change?'} },
+
+  { num:42, title:{zh:'忧闷的灵魂',en:'A Downcast Soul'},
+    theme:{zh:'可以一边低落,一边对自己的灵魂诚实说话。',en:'You can be downcast and still speak honestly to your own soul.'},
+    verses:[
+      {ref:{zh:'诗篇 42:5,11',en:'Psalm 42:5, 11 (NIV)'},
+       zh:'我的心哪,你为何忧闷?为何在我里面烦躁?应当仰望神,因他笑脸帮助我;我还要称赞他。',
+       en:'Why, my soul, are you downcast? Why so disturbed within me? Put your hope in God, for I will yet praise him, my Savior and my God.'}
+    ],
+    connect:{zh:'诗篇42篇没有假装喜乐。诗人承认自己“忧闷、烦躁”,眼泪成了饮食。但他做了一件事:向自己的灵魂说话,把盼望重新指向神。低谷里的信心,常常不是感觉,而是一个决定——“我还要称赞他”。如果你正处在抑郁般的低谷,这卷诗告诉你:你并不孤单,连圣经里的人也这样喊过。',
+             en:'Psalm 42 does not fake joy. The poet admits he is “downcast and disturbed,” his tears his food. But he does one thing: he speaks to his own soul and re-aims his hope at God. Faith in the valley is often not a feeling but a decision — “I will yet praise him.” If you are in a depression-like low, this psalm says: you are not alone; even people in the Bible cried like this.'},
+    meditate:{zh:'如果此刻你能对自己的灵魂说一句诚实、又不放弃的话,那会是什么?',
+              en:'If you could say one honest-yet-not-giving-up sentence to your own soul right now, what would it be?'} },
+
+  { num:46, title:{zh:'避难所',en:'Our Refuge'},
+    theme:{zh:'世界摇动时,有一处不动摇的所在。',en:'When the world shakes, there is a place that does not.'},
+    verses:[
+      {ref:{zh:'诗篇 46:1-2',en:'Psalm 46:1-2 (NIV)'},
+       zh:'神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。所以,地虽改变,山虽摇动到海心,其中的水虽砰訇翻腾,山虽因海涨而战抖,我们也不害怕。',
+       en:'God is our refuge and strength, an ever-present help in trouble. Therefore we will not fear, though the earth give way and the mountains fall into the heart of the sea, though its waters roar and foam and the mountains quake with their surging.'},
+      {ref:{zh:'诗篇 46:10',en:'Psalm 46:10 (NIV)'},
+       zh:'你们要休息,要知道我是神!',
+       en:'Be still, and know that I am God.'}
+    ],
+    connect:{zh:'没有安全感,是因为我们把稳固建立在会摇动的东西上——关系、金钱、健康、明天。诗篇46篇承认地会改变、山会摇动,却指向一个不随环境改变的避难所。真正的安全感不是掌控一切,而是“知道我是神”。',
+             en:'Insecurity comes from building our stability on things that shake — relationships, money, health, tomorrow. Psalm 46 admits the earth gives way and mountains fall, yet points to a refuge that does not move with circumstances. True security is not control, but to “be still, and know that I am God.”'},
+    meditate:{zh:'你现在的安全感,主要建立在哪一件“会摇动”的事情上?',
+              en:'What “shakable” thing is your sense of security mostly built on right now?'} },
+
+  { num:51, title:{zh:'求你造清洁的心',en:'Create in Me a Clean Heart'},
+    theme:{zh:'内疚不必靠遮掩,可以带到神面前求更新。',en:'Guilt need not be hidden; it can be brought to God for renewal.'},
+    verses:[
+      {ref:{zh:'诗篇 51:1-2',en:'Psalm 51:1-2 (NIV)'},
+       zh:'神啊,求你按你的慈爱怜恤我!按你丰盛的慈悲涂抹我的过犯!求你将我的罪孽洗除净尽,并洁除我的罪!',
+       en:'Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Wash away all my iniquity and cleanse me from my sin.'},
+      {ref:{zh:'诗篇 51:10',en:'Psalm 51:10 (NIV)'},
+       zh:'神啊,求你为我造清洁的心,使我里面重新有正直的灵。',
+       en:'Create in me a pure heart, O God, and renew a steadfast spirit within me.'}
+    ],
+    connect:{zh:'这是大卫犯下大错后写的诗。他没有为自己辩解,也没有被内疚压垮到绝望,而是把罪直接摊在神面前,求“洗净”与“重造”。真正的悔改不是无止境地自责,而是相信神的慈悲比你的过犯更大。日光之下,人靠自己无法洗净良心;这篇诗指向那位能重造人心的神。',
+             en:'David wrote this after a grave failure. He neither excused himself nor let guilt crush him into despair; he laid his sin openly before God and asked to be “washed” and “re-created.” Real repentance is not endless self-blame but trusting that God’s mercy is greater than your wrong. Under the sun no one can cleanse their own conscience; this psalm points to the God who can remake a heart.'},
+    meditate:{zh:'有没有一件事,你一直在心里反复责备自己,却从未真正交给神,求赦免和更新?',
+              en:'Is there something you keep blaming yourself for inwardly, but have never actually handed to God for forgiveness and renewal?'} },
+
+  { num:73, title:{zh:'当恶人亨通',en:'When the Wicked Prosper'},
+    theme:{zh:'把“凭什么是他”带进神的殿,视角就变了。',en:'Bring “why them?” into God’s presence, and the view changes.'},
+    verses:[
+      {ref:{zh:'诗篇 73:2-3',en:'Psalm 73:2-3 (NIV)'},
+       zh:'至于我,我的脚几乎失闪;我的脚险些滑跌。我见恶人和狂傲人享平安就心怀不平。',
+       en:'But as for me, my feet had almost slipped; I had nearly lost my foothold. For I envied the arrogant when I saw the prosperity of the wicked.'},
+      {ref:{zh:'诗篇 73:25-26',en:'Psalm 73:25-26 (NIV)'},
+       zh:'除你以外,在天上我有谁呢?除你以外,在地上我也没有所爱慕的。我的肉体和我的心肠衰残;但神是我心里的力量,又是我的福分,直到永远。',
+       en:'Whom have I in heaven but you? And earth has nothing I desire besides you. My flesh and my heart may fail, but God is the strength of my heart and my portion forever.'}
+    ],
+    connect:{zh:'这篇诗几乎是为传道书写的。诗人看见坏人反而顺利,“心怀不平”,差点站不住。转折发生在他“进了神的圣所”——他重新看见结局与永恒,嫉妒就松开了。攀比让人一直向旁边看;诗篇73篇邀请你先向上看,再看回自己的处境。',
+             en:'This psalm could have been written for Ecclesiastes. The poet sees bad people thrive, grows bitter, and nearly falls. The turn comes when he “enters the sanctuary of God” — he sees the end and eternity again, and the envy loosens. Comparison keeps us looking sideways; Psalm 73 invites you to look up first, then back at your situation.'},
+    meditate:{zh:'你最近一次让你“心怀不平”的攀比,如果放进“神是我的福分,直到永远”里,它还那么重要吗?',
+              en:'The last comparison that left you bitter — placed inside “God is my portion forever,” does it still weigh the same?'} },
+
+  { num:90, title:{zh:'数算你的日子',en:'Number Your Days'},
+    theme:{zh:'生命短如飞去——求主教我们活得有智慧。',en:'Life flies by — teach us to live it wisely.'},
+    verses:[
+      {ref:{zh:'诗篇 90:2',en:'Psalm 90:2 (NIV)'},
+       zh:'诸山未曾生出,地与世界你未曾造成,从亘古到永远,你是神。',
+       en:'Before the mountains were born or you brought forth the whole world, from everlasting to everlasting you are God.'},
+      {ref:{zh:'诗篇 90:10,12',en:'Psalm 90:10, 12 (NIV)'},
+       zh:'我们一生的年日是七十岁,若是强壮可到八十岁;但其中所矜夸的不过是劳苦愁烦,转眼成空,我们便如飞而去……求你指教我们怎样数算自己的日子,好叫我们得着智慧的心。',
+       en:'Our days may come to seventy years, or eighty, if our strength endures; yet the best of them are but trouble and sorrow, for they quickly pass, and we fly away… Teach us to number our days, that we may gain a heart of wisdom.'}
+    ],
+    connect:{zh:'这是摩西写的诗,是整卷诗篇里最像传道书的一篇:人生短暂、劳苦、转眼如飞。但它没有停在虚空,而是转成一个祷告:“求你教我们数算自己的日子。”承认有限,不是为了绝望,而是为了向永恒的神求一颗智慧的心——把有限的日子活得有分量。',
+             en:'Moses wrote this — the most Ecclesiastes-like psalm of all: life is short, full of toil, gone in a breath. But it does not stop at vanity; it turns into a prayer: “Teach us to number our days.” Admitting our limits is not for despair but to ask the eternal God for a wise heart — to live our few days with weight.'},
+    meditate:{zh:'如果你真的“数算”自己剩下的日子,有没有哪件事你会立刻多做、或立刻停下?',
+              en:'If you truly “numbered” your remaining days, is there something you would immediately do more of, or stop?'} },
+
+  { num:91, title:{zh:'至高者的荫下',en:'Under the Shadow of the Most High'},
+    theme:{zh:'投靠神,不是免于风暴,而是在风暴中有荫庇。',en:'Refuge in God is not exemption from storms, but shelter within them.'},
+    verses:[
+      {ref:{zh:'诗篇 91:1-2',en:'Psalm 91:1-2 (NIV)'},
+       zh:'住在至高者隐密处的,必住在全能者的荫下。我要论到耶和华说:他是我的避难所,是我的山寨,是我的神,是我所倚靠的。',
+       en:'Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty. I will say of the Lord, “He is my refuge and my fortress, my God, in whom I trust.”'},
+      {ref:{zh:'诗篇 91:11',en:'Psalm 91:11 (NIV)'},
+       zh:'因他要为你吩咐他的使者,在你行的一切道路上保护你。',
+       en:'For he will command his angels concerning you to guard you in all your ways.'}
+    ],
+    connect:{zh:'诗篇91篇讲保护,但要小心读:它不是保证信的人永不遇难。它讲的是一种更深的荫庇——在患难中投靠神的人,灵魂有一个稳妥的“隐密处”。日光之下没有绝对安全的角落;但有一位可以投靠的神,即使在阴影里,也是荫庇。',
+             en:'Psalm 91 speaks of protection, but read it carefully: it is not a promise that believers never face harm. It speaks of a deeper shelter — those who take refuge in God have a secure “hiding place” for the soul in trouble. Under the sun there is no perfectly safe corner; but there is a God to take refuge in, whose very shadow is shelter.'},
+    meditate:{zh:'“投靠”神,对你此刻的处境,具体会是什么样子的一步?',
+              en:'What would “taking refuge” in God look like as one concrete step in your situation right now?'} },
+
+  { num:121, title:{zh:'帮助从何而来',en:'Where Help Comes From'},
+    theme:{zh:'抬头一问,就把重担交给了造天地的主。',en:'Look up, ask, and hand the weight to the Maker of heaven and earth.'},
+    verses:[
+      {ref:{zh:'诗篇 121:1-2',en:'Psalm 121:1-2 (NIV)'},
+       zh:'我要向山举目;我的帮助从何而来?我的帮助从造天地的耶和华而来。',
+       en:'I lift up my eyes to the mountains — where does my help come from? My help comes from the Lord, the Maker of heaven and earth.'},
+      {ref:{zh:'诗篇 121:7-8',en:'Psalm 121:7-8 (NIV)'},
+       zh:'耶和华要保护你,免受一切的灾害;他要保护你的性命。你出你入,耶和华要保护你,从今时直到永远。',
+       en:'The Lord will keep you from all harm — he will watch over your life; the Lord will watch over your coming and going both now and forevermore.'}
+    ],
+    connect:{zh:'这是一首“上行之诗”,朝圣路上唱的。它先问一个很人性的问题:“我的帮助从何而来?”——然后立刻把答案指向造天地的主,而不是自己的能力或山那边的偶像。当你累到只想找个依靠时,这篇诗教你抬头、问对方向。',
+             en:'This is a “song of ascents,” sung on the pilgrim road. It begins with a very human question — “Where does my help come from?” — then immediately points the answer to the Maker of heaven and earth, not to our own strength or the idols beyond the hills. When you’re worn down and just looking for something to lean on, this psalm teaches you to look up and ask in the right direction.'},
+    meditate:{zh:'此刻你在盼望“帮助”从哪里来?那个方向,承受得起你压上去的重量吗?',
+              en:'Where are you hoping “help” will come from right now? Can that direction hold the weight you’re leaning on it?'} },
+
+  { num:139, title:{zh:'你已经认识我',en:'You Have Searched Me'},
+    theme:{zh:'无处可逃的,不是审判,而是那位完全懂你的同在。',en:'What you cannot flee is not judgment, but the presence of One who fully knows you.'},
+    verses:[
+      {ref:{zh:'诗篇 139:1-3',en:'Psalm 139:1-3 (NIV)'},
+       zh:'耶和华啊,你已经鉴察我,认识我。我坐下,我起来,你都晓得;你从远处知道我的意念。我行路,我躺卧,你都细察;你也深知我一切所行的。',
+       en:'You have searched me, Lord, and you know me. You know when I sit and when I rise; you perceive my thoughts from afar. You discern my going out and my lying down; you are familiar with all my ways.'},
+      {ref:{zh:'诗篇 139:7-10',en:'Psalm 139:7-10 (NIV)'},
+       zh:'我往哪里去躲避你的灵?我往哪里逃、躲避你的面?……我若展开清晨的翅膀,飞到海极居住,就是在那里,你的手必引导我;你的右手也必扶持我。',
+       en:'Where can I go from your Spirit? Where can I flee from your presence? … If I rise on the wings of the dawn, if I settle on the far side of the sea, even there your hand will guide me, your right hand will hold me fast.'},
+      {ref:{zh:'诗篇 139:23-24',en:'Psalm 139:23-24 (NIV)'},
+       zh:'神啊,求你鉴察我,知道我的心思,试炼我,知道我的意念,看在我里面有什么恶行没有,引导我走永生的道路。',
+       en:'Search me, God, and know my heart; test me and know my anxious thoughts. See if there is any offensive way in me, and lead me in the way everlasting.'}
+    ],
+    connect:{zh:'被完全看透,可能很可怕;但诗篇139篇把它变成了安慰:那位鉴察你的神,不是要抓你的把柄,而是比你自己更认识你、更爱你。你逃到天涯海角,祂的手仍“引导”“扶持”。孤独最深处的渴望——“有没有人真的懂我”——在这篇诗里得到回应:有,而且祂一直都在。',
+             en:'Being fully seen can feel terrifying; but Psalm 139 turns it into comfort: the God who searches you is not hunting for evidence against you — He knows you better than you know yourself, and loves you. Flee to the ends of the earth, and His hand still “guides” and “holds.” The deepest longing of loneliness — “does anyone truly know me?” — is answered here: yes, and He has been there all along.'},
+    meditate:{zh:'如果真有一位比你自己更懂你、又不离开你的神,这对你今天面对的孤独或羞耻,意味着什么?',
+              en:'If there is a God who knows you better than you know yourself and never leaves, what does that mean for the loneliness or shame you face today?'} }
+];
+
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+var I18N_TITLE = { en:'Psalms · Honest cries to God · Under the Sun', zh:'诗篇精选 · 真实向神喊话 · 日光之下' };
+
+function render(){
+  var L = curLang();
+  // quick-jump nav
+  document.getElementById('pnav').innerHTML = PSALMS.map(function(p){
+    return '<a href="#psalm-'+p.num+'">'+(L==='zh'?('诗 '+p.num):('Ps '+p.num))+'</a>';
+  }).join('');
+  // psalm sections
+  document.getElementById('list').innerHTML = PSALMS.map(function(p){
+    var verses = p.verses.map(function(v){
+      return '<div class="verse"><div class="ref">'+esc(v.ref[L])+'</div><div class="vt">'+esc(v[L])+'</div></div>';
+    }).join('');
+    var lblConnect = L==='zh'?'与日光之下的连接':'The connection under the sun';
+    var lblMed = L==='zh'?'默想':'A question to sit with';
+    return '<section class="psalm" id="psalm-'+p.num+'">'
+      + '<div class="pnum">'+(L==='zh'?('诗篇 '+p.num):('Psalm '+p.num))+'</div>'
+      + '<h2 class="ptitle">'+esc(p.title[L])+'</h2>'
+      + '<div class="ptheme">'+esc(p.theme[L])+'</div>'
+      + '<div class="verses">'+verses+'</div>'
+      + '<div class="sect"><div class="lbl">'+lblConnect+'</div><div class="body">'+esc(p.connect[L])+'</div></div>'
+      + '<div class="sect med"><div class="lbl">'+lblMed+'</div><div class="body">'+esc(p.meditate[L])+'</div></div>'
+      + '</section>';
+  }).join('');
+}
+
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.title = l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  render();
+  // preserve hash target after re-render
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) el.scrollIntoView(); }
+}
+
+(function(){
+  var p = new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) setTimeout(function(){el.scrollIntoView();},60); }
+})();
+</script>
+</body>
+</html>

@@ -5,6 +5,29 @@
 
 ---
 
+## 诗篇卷 Phase 1 · 经文核对（psalms.html / psalms-listen.html 已上线）
+
+> 页面的**引言、"与日光之下的连接"、默想问题**为原创文案,已随页面上线,可在 psalms.html 内以真实排版审核语气;如需调整语气告诉我即可改。
+> 以下是页面引用的**全部经文出处**(中文和合本 / 英文 NIV,均逐字录入,请核对):
+
+| 篇 | 主题 | 引用节数 |
+|---|---|---|
+| 23 | 牧者 / The Shepherd | 诗 23:1-6（全） |
+| 27 | 惧怕中的光 / Light in Fear | 诗 27:1；27:14 |
+| 34 | 靠近伤心的人 / Close to the Brokenhearted | 诗 34:17-18 |
+| 42 | 忧闷的灵魂 / A Downcast Soul | 诗 42:5,11 |
+| 46 | 避难所 / Our Refuge | 诗 46:1-2；46:10 |
+| 51 | 造清洁的心 / Create in Me a Clean Heart | 诗 51:1-2；51:10 |
+| 73 | 当恶人亨通 / When the Wicked Prosper | 诗 73:2-3；73:25-26 |
+| 90 | 数算你的日子 / Number Your Days | 诗 90:2；90:10,12 |
+| 91 | 至高者的荫下 / Under the Shadow | 诗 91:1-2；91:11 |
+| 121 | 帮助从何而来 / Where Help Comes From | 诗 121:1-2；121:7-8 |
+| 139 | 你已经认识我 / You Have Searched Me | 诗 139:1-3；139:7-10；139:23-24 |
+
+**遗留项**：`psalms-worship.html` 未建(按你 #4 的取舍,先列遗留,不为此改架构;registry 已设 `worship:false`,无死链)。篇级 `relatedBooks` 锚点(如 `#psalm-46`)列为增强项。
+
+---
+
 ## ⚠️ 重要前置发现：主题基线不符（需你确认后再动新主题）
 
 规格假设"现有 8–9 个主题"，但**当前 `qaRegistry` 实际已有 15 个主题**：

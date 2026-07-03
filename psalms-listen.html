@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="聆听诗篇 · Listen">
+<title>Listen · Psalms · 聆听诗篇</title>
+<meta name="description" content="Listen to eleven selected Psalms in Chinese or English — an audio meditation. 聆听诗篇精选十一篇,中文或英文。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/psalms-listen.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --sky:#a8c5d6; --sky-soft:#c6dbe6;
+    --line:rgba(168,197,214,.26); --line-soft:rgba(236,231,221,.10);
+    --hl:rgba(168,197,214,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);color:var(--muted);text-transform:uppercase}
+  .topbar .mark{color:var(--sky-soft);border:none;text-decoration:none;white-space:nowrap}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.nav{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.nav:hover{color:var(--sky-soft)}
+  .lang-toggle{border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sky);color:#14161a;font-weight:700}
+
+  .wrap{max-width:720px;margin:0 auto;padding:96px 22px 20px}
+  .hero{text-align:center;margin-bottom:8px}
+  .hero .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:12px}
+  .hero h1{font-size:clamp(26px,5.2vw,38px);font-weight:400}
+  .hero p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.7}
+  .hint{margin-top:16px;font-size:13px;color:var(--faint);line-height:1.7;text-align:center}
+  .voicetip{max-width:560px;margin:.6rem auto 0;font-size:12px;color:var(--faint);line-height:1.7}
+  .voicetip summary{cursor:pointer;list-style:none;opacity:.85;color:var(--sky-soft)}
+  .voicemsg{display:none;max-width:560px;margin:10px auto 0;font-size:12.5px;color:#e0855b;line-height:1.6;text-align:center}
+  .voicemsg.show{display:block}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:18px 0 6px}
+  .controls button{font-family:inherit;cursor:pointer;border-radius:30px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);
+    font-size:14px;padding:11px 20px;min-height:44px;transition:all .2s}
+  .controls .primary{background:var(--sky);color:#14161a;border-color:var(--sky);font-weight:700}
+  .controls .primary:hover{background:var(--sky-soft)}
+  .controls .rate{min-width:64px}
+  .controls label{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+
+  .list{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+  .list .row{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all .2s}
+  .list .row:hover{background:var(--bg2);border-color:var(--line-soft)}
+  .list .row.playing{background:var(--bg2);border-color:var(--line)}
+  .list .row .n{color:var(--sky);font-size:13px;min-width:56px;padding-top:2px;letter-spacing:.04em}
+  .list .row .meta .t{font-size:16.5px;color:var(--ink)}
+  .list .row .meta .th{font-size:13.5px;color:var(--muted);margin-top:3px;font-style:italic;line-height:1.5}
+
+  .now{margin-top:26px;background:var(--bg2);border:1px solid var(--line-soft);border-radius:12px;padding:22px 20px;display:none}
+  .now.show{display:block}
+  .now .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin-bottom:8px}
+  .now h2{font-size:20px;font-weight:400;margin-bottom:12px}
+  .transcript .blk{margin-bottom:16px}
+  .transcript .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);opacity:.8;margin-bottom:6px}
+  .transcript .sent{font-size:17px;line-height:1.95;color:var(--muted);transition:color .3s,background .3s;border-radius:4px;padding:1px 3px}
+  .transcript .sent.on{color:var(--ink);background:var(--hl)}
+  .transcript .med{color:var(--sky-soft);font-style:italic}
+
+  .mini{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(24,27,32,.96);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none}
+  .mini.show{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto}
+  .mini .play{width:46px;height:46px;border-radius:50%;border:none;background:var(--sky);color:#14161a;font-size:18px;cursor:pointer;flex:none}
+  .mini .info{flex:1;min-width:0}
+  .mini .info .t{font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini .prog{height:4px;background:var(--bg3);border-radius:3px;margin-top:6px;overflow:hidden;cursor:pointer}
+  .mini .prog .fill{height:100%;width:0;background:var(--sky)}
+  .mini .time{font-size:11px;color:var(--faint);margin-top:4px}
+
+  footer{border-top:1px solid var(--line-soft);padding:30px 22px;text-align:center;color:var(--faint);font-size:12.5px}
+  footer a{color:var(--sky-soft);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="nav" href="psalms.html"><span class="en">Read</span><span class="zh">阅读</span></a>
+    <a class="nav" href="ask.html"><span class="en">Ask</span><span class="zh">提问</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker"><span class="en">Listen · Psalms</span><span class="zh">聆听 · 诗篇</span></div>
+    <h1><span class="en">Let the Psalms be read to you</span><span class="zh">让诗篇读给你听</span></h1>
+    <p><span class="en">Eleven psalms, in Chinese or English. Tap one and your device reads it aloud — right now.</span><span class="zh">十一篇诗,中文或英文。点一篇,设备即刻读给你听。</span></p>
+  </div>
+
+  <p class="hint"><span class="en">Current audio uses temporary text-to-speech. A more natural professional female voice recording can be added later.</span><span class="zh">当前为临时语音朗读版本,未来可升级为更自然的专业女声录音。</span></p>
+  <details class="voicetip">
+    <summary><span class="en">＋ Want a more natural female voice? (one-time phone setup)</span><span class="zh">＋ 想要更自然的女声?(手机一次性设置)</span></summary>
+    <div style="margin-top:.5rem">
+      <p style="margin:.2rem 0"><span class="en"><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → download an enhanced voice (Chinese: Tingting; English: Samantha), then reopen this page.</span><span class="zh"><b>iPhone:</b> 设置 → 辅助功能 → 朗读内容 → 声音 → 下载"增强"版(中文选"婷婷",英文选 Samantha),下载后重新打开本页。</span></p>
+      <p style="margin:.2rem 0"><span class="en"><b>Android:</b> Settings → Language &amp; input → Text-to-speech → choose Google TTS and download the Chinese / English voice packs.</span><span class="zh"><b>安卓:</b> 设置 → 语言和输入 → 文字转语音 → 选 Google 语音,下载中文 / 英文语音包。</span></p>
+    </div>
+  </details>
+  <p id="voiceMsg" class="voicemsg" role="status"><span class="en">English voice is not available on this device. Please try Safari, Chrome, or enable English voices in your device settings.</span><span class="zh">当前设备暂未加载英文语音,请尝试使用 Safari、Chrome,或在系统设置中启用英文语音。</span></p>
+
+  <div class="controls">
+    <button class="primary" id="playAllBtn" onclick="Player.toggleAll()"><span class="en">▶ Play all</span><span class="zh">▶ 连续播放</span></button>
+    <button class="rate" id="rateBtn" onclick="Player.cycleRate()">0.85x</button>
+    <label><input type="checkbox" id="autoNext" checked> <span class="en">Auto-continue</span><span class="zh">自动续播</span></label>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="now" id="now">
+    <div class="eyebrow" id="nowEyebrow"></div>
+    <h2 id="nowTitle"></h2>
+    <div class="transcript" id="transcript"></div>
+  </div>
+</div>
+
+<div class="mini" id="mini">
+  <button class="play" id="miniPlay" onclick="Player.toggle()">▶</button>
+  <div class="info">
+    <div class="t" id="miniTitle"></div>
+    <div class="prog" id="prog" onclick="Player.seekAt(event)"><div class="fill" id="fill"></div></div>
+    <div class="time" id="miniTime"></div>
+  </div>
+</div>
+
+<footer>
+  <span class="en">Psalms · audio meditation. <a href="psalms.html">Read the text →</a></span>
+  <span class="zh">诗篇 · 聆听默想。<a href="psalms.html">阅读全文 →</a></span>
+</footer>
+
+<script>
+/* ============================================================
+   Psalms audio — same swappable provider design as john-listen:
+   MP3Provider is tried first (audio/psalms/psalm-NN-<lang>-female.mp3);
+   if absent, the browser TTSProvider reads the text. English playback
+   uses the fixed voice logic (cached voices, no cross-language voice,
+   guarded cancel, synchronous speak inside the tap).
+   ============================================================ */
+var CHAPTERS = [
+  { num:23, title:{zh:'诗篇 23 · 牧者',en:'Psalm 23 · The Shepherd'},
+    intro:{zh:'就算走过死荫的幽谷,也有牧者与你同行。',en:'Even through the darkest valley, the Shepherd walks with you.'},
+    verse:{zh:'耶和华是我的牧者,我必不致缺乏。他使我躺卧在青草地上,领我在可安歇的水边。我虽然行过死荫的幽谷,也不怕遭害,因为你与我同在;你的杖,你的竿,都安慰我。',en:'The Lord is my shepherd, I lack nothing. He makes me lie down in green pastures, he leads me beside quiet waters. Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.'},
+    med:{zh:'默想:在你最近走过的幽谷里,你更需要一个解释,还是知道有人一直在身边?',en:'Reflect: in the valley you have walked lately, did you need an explanation, or to know Someone was beside you?'} },
+  { num:27, title:{zh:'诗篇 27 · 惧怕中的光',en:'Psalm 27 · Light in Fear'},
+    intro:{zh:'当惧怕逼近,先看清是谁与你同在。',en:'When fear closes in, look first at who is with you.'},
+    verse:{zh:'耶和华是我的亮光,是我的拯救,我还怕谁呢?耶和华是我性命的保障,我还惧谁呢?要等候耶和华!当壮胆,坚固你的心!',en:'The Lord is my light and my salvation — whom shall I fear? The Lord is the stronghold of my life — of whom shall I be afraid? Wait for the Lord; be strong and take heart.'},
+    med:{zh:'默想:把你最大的惧怕放在"耶和华是我的亮光"旁边,它变小了吗?',en:'Reflect: set your biggest fear beside "The Lord is my light" — does it shrink?'} },
+  { num:34, title:{zh:'诗篇 34 · 靠近伤心的人',en:'Psalm 34 · Close to the Brokenhearted'},
+    intro:{zh:'神不躲开破碎的人,祂靠近。',en:'God does not avoid the broken; He draws near.'},
+    verse:{zh:'义人呼求,耶和华听见了,便救他们脱离一切患难。耶和华靠近伤心的人,拯救灵性痛悔的人。',en:'The righteous cry out, and the Lord hears them; he delivers them from all their troubles. The Lord is close to the brokenhearted and saves those who are crushed in spirit.'},
+    med:{zh:'默想:如果"神靠近伤心的人"此刻是真的,它会改变你独自扛着的哪件事?',en:'Reflect: if "God is close to the brokenhearted" is true now, what would it change?'} },
+  { num:42, title:{zh:'诗篇 42 · 忧闷的灵魂',en:'Psalm 42 · A Downcast Soul'},
+    intro:{zh:'可以一边低落,一边对自己的灵魂诚实说话。',en:'You can be downcast and still speak honestly to your soul.'},
+    verse:{zh:'我的心哪,你为何忧闷?为何在我里面烦躁?应当仰望神,因他笑脸帮助我;我还要称赞他。',en:'Why, my soul, are you downcast? Why so disturbed within me? Put your hope in God, for I will yet praise him, my Savior and my God.'},
+    med:{zh:'默想:此刻你能对自己的灵魂说一句诚实又不放弃的话,会是什么?',en:'Reflect: one honest-yet-not-giving-up sentence to your own soul — what is it?'} },
+  { num:46, title:{zh:'诗篇 46 · 避难所',en:'Psalm 46 · Our Refuge'},
+    intro:{zh:'世界摇动时,有一处不动摇的所在。',en:'When the world shakes, there is a place that does not.'},
+    verse:{zh:'神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。所以,地虽改变,山虽摇动到海心,我们也不害怕。你们要休息,要知道我是神!',en:'God is our refuge and strength, an ever-present help in trouble. Therefore we will not fear, though the earth give way and the mountains fall into the heart of the sea. Be still, and know that I am God.'},
+    med:{zh:'默想:你现在的安全感,主要建立在哪一件"会摇动"的事情上?',en:'Reflect: what "shakable" thing is your security mostly built on right now?'} },
+  { num:51, title:{zh:'诗篇 51 · 造清洁的心',en:'Psalm 51 · Create in Me a Clean Heart'},
+    intro:{zh:'内疚不必靠遮掩,可以带到神面前求更新。',en:'Guilt need not be hidden; bring it to God for renewal.'},
+    verse:{zh:'神啊,求你按你的慈爱怜恤我!按你丰盛的慈悲涂抹我的过犯!神啊,求你为我造清洁的心,使我里面重新有正直的灵。',en:'Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Create in me a pure heart, O God, and renew a steadfast spirit within me.'},
+    med:{zh:'默想:有没有一件事你反复自责,却从未真正交给神求赦免和更新?',en:'Reflect: is there something you keep blaming yourself for but never handed to God?'} },
+  { num:73, title:{zh:'诗篇 73 · 当恶人亨通',en:'Psalm 73 · When the Wicked Prosper'},
+    intro:{zh:'把"凭什么是他"带进神的殿,视角就变了。',en:'Bring "why them?" into God’s presence, and the view changes.'},
+    verse:{zh:'我见恶人和狂傲人享平安就心怀不平。除你以外,在天上我有谁呢?除你以外,在地上我也没有所爱慕的。但神是我心里的力量,又是我的福分,直到永远。',en:'I envied the arrogant when I saw the prosperity of the wicked. Whom have I in heaven but you? And earth has nothing I desire besides you. God is the strength of my heart and my portion forever.'},
+    med:{zh:'默想:你最近的攀比,放进"神是我的福分,直到永远",还那么重要吗?',en:'Reflect: your latest comparison, placed inside "God is my portion forever" — still as heavy?'} },
+  { num:90, title:{zh:'诗篇 90 · 数算你的日子',en:'Psalm 90 · Number Your Days'},
+    intro:{zh:'生命短如飞去——求主教我们活得有智慧。',en:'Life flies by — teach us to live it wisely.'},
+    verse:{zh:'从亘古到永远,你是神。我们一生的年日不过是劳苦愁烦,转眼成空,我们便如飞而去。求你指教我们怎样数算自己的日子,好叫我们得着智慧的心。',en:'From everlasting to everlasting you are God. Our days are but trouble and sorrow, for they quickly pass, and we fly away. Teach us to number our days, that we may gain a heart of wisdom.'},
+    med:{zh:'默想:若你真的数算剩下的日子,有哪件事你会立刻多做、或立刻停下?',en:'Reflect: if you truly numbered your days, what would you do more of, or stop?'} },
+  { num:91, title:{zh:'诗篇 91 · 至高者的荫下',en:'Psalm 91 · Under the Shadow of the Most High'},
+    intro:{zh:'投靠神,不是免于风暴,而是在风暴中有荫庇。',en:'Refuge in God is not exemption from storms, but shelter within them.'},
+    verse:{zh:'住在至高者隐密处的,必住在全能者的荫下。我要论到耶和华说:他是我的避难所,是我的山寨,是我的神,是我所倚靠的。',en:'Whoever dwells in the shelter of the Most High will rest in the shadow of the Almighty. I will say of the Lord, He is my refuge and my fortress, my God, in whom I trust.'},
+    med:{zh:'默想:"投靠"神,对你此刻的处境,具体会是什么样的一步?',en:'Reflect: what would "taking refuge" in God look like as one concrete step?'} },
+  { num:121, title:{zh:'诗篇 121 · 帮助从何而来',en:'Psalm 121 · Where Help Comes From'},
+    intro:{zh:'抬头一问,就把重担交给了造天地的主。',en:'Look up, ask, and hand the weight to the Maker of heaven and earth.'},
+    verse:{zh:'我要向山举目;我的帮助从何而来?我的帮助从造天地的耶和华而来。你出你入,耶和华要保护你,从今时直到永远。',en:'I lift up my eyes to the mountains — where does my help come from? My help comes from the Lord, the Maker of heaven and earth. The Lord will watch over your coming and going both now and forevermore.'},
+    med:{zh:'默想:你在盼望"帮助"从哪里来?那个方向承受得起你的重量吗?',en:'Reflect: where are you hoping help comes from? Can that direction hold your weight?'} },
+  { num:139, title:{zh:'诗篇 139 · 你已经认识我',en:'Psalm 139 · You Have Searched Me'},
+    intro:{zh:'无处可逃的,不是审判,而是那位完全懂你的同在。',en:'What you cannot flee is not judgment, but the presence of One who fully knows you.'},
+    verse:{zh:'耶和华啊,你已经鉴察我,认识我。我往哪里逃、躲避你的面?我若飞到海极居住,就是在那里,你的手必引导我;你的右手也必扶持我。',en:'You have searched me, Lord, and you know me. Where can I flee from your presence? If I settle on the far side of the sea, even there your hand will guide me, your right hand will hold me fast.'},
+    med:{zh:'默想:若真有一位比你自己更懂你、又不离开你的神,这对你今天的孤独或羞耻意味着什么?',en:'Reflect: if a God knows you better than yourself and never leaves, what does that mean for today?'} }
+];
+CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-zh-female.mp3',
+                                          en:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-en-female.mp3' }; });
+
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+
+/* ---------- voice quality: cached voices, best (female) voice, never cross-language ---------- */
+var _voices=[];
+function loadVoices(){ try{ _voices=(window.speechSynthesis.getVoices())||[]; }catch(e){ _voices=[]; } }
+if('speechSynthesis' in window){ loadVoices(); try{ window.speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
+function getCachedVoices(){ if(!_voices||!_voices.length) loadVoices(); return _voices; }
+function selectBestVoice(language){
+  var voices=getCachedVoices();
+  var zhPreferred=['Xiaoxiao','Xiaoyi','Tingting','Meijia','Sinji','Huihui','Yaoyao','Google 普通话','Mandarin','Chinese','Microsoft'];
+  var enPreferred=['Samantha','Google US English','Microsoft Jenny','Microsoft Aria','Microsoft Sonia','Microsoft Emma','Zira','Hazel','Eva','Susan','Natural','Female'];
+  var preferred=language==='zh'?zhPreferred:enPreferred;
+  var langCode=language==='zh'?'zh':'en';
+  var low=function(s){return (s||'').toLowerCase();};
+  return voices.find(function(v){ return low(v.lang).indexOf(langCode)===0 && preferred.some(function(n){return low(v.name).indexOf(low(n))!==-1;}); })
+      || voices.find(function(v){ return low(v.lang).indexOf(langCode)===0; })
+      || null;   /* never a cross-language voice — assigning a zh voice to en-US goes silent */
+}
+function showVoiceUnavailableMessage(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.add('show'); }
+function hideVoiceMsg(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.remove('show'); }
+
+function makeBlocks(ch, lang){
+  var v=function(o){return o[lang]||o.zh;};
+  var parts=[
+    {label:{zh:'导读',en:'Intro'}, text:v(ch.intro)},
+    {label:{zh:'经文',en:'Scripture'}, text:v(ch.verse)},
+    {label:{zh:'默想',en:'Reflect'}, text:v(ch.med), cls:'med'}
+  ];
+  return parts.map(function(p){
+    var s=(p.text||'').split(/(?<=[。!?;；.!?])\s*/).map(function(x){return x.trim();}).filter(Boolean);
+    if(!s.length) s=[p.text];
+    return {label:p.label, cls:p.cls||'', sentences:s};
+  });
+}
+
+function TTSProvider(){
+  var self=this, idx=0, total=0, rate=0.85, playing=false, sents=[];
+  self.onprogress=self.onsentence=self.onend=function(){};
+  self.kind='tts';
+  self.load=function(blocks){ window.speechSynthesis && window.speechSynthesis.cancel();
+    sents=[]; blocks.forEach(function(b,bi){ b.sentences.forEach(function(s,si){ sents.push({t:s,b:bi,s:si}); }); });
+    total=sents.length; idx=0; return total>0; };
+  function speakFrom(i){
+    if(!window.speechSynthesis){ self.onend(); return; }
+    if(window.speechSynthesis.speaking || window.speechSynthesis.pending){ window.speechSynthesis.cancel(); }
+    idx=i;
+    (function next(){
+      if(idx>=total){ playing=false; self.onprogress(1,''); self.onend(); return; }
+      self.onsentence(idx); self.onprogress(idx/total,(idx+1)+' / '+total);
+      var lang=curLang();
+      var u=new SpeechSynthesisUtterance(sents[idx].t);
+      u.lang=(lang==='zh')?'zh-CN':'en-US';
+      var vo=selectBestVoice(lang); if(vo) u.voice=vo;
+      u.rate=rate; u.pitch=(lang==='zh')?1.05:1.03; u.volume=1;
+      u.onstart=function(){ hideVoiceMsg(); };
+      u.onend=function(){ if(!playing) return; idx++; next(); };
+      u.onerror=function(e){ if(!playing) return; var err=e&&e.error;
+        if(err==='canceled'||err==='interrupted'){ return; }
+        showVoiceUnavailableMessage(); playing=false; self.onend(); };
+      window.speechSynthesis.speak(u);
+    })();
+  }
+  self.play=function(){ playing=true; if(window.speechSynthesis && window.speechSynthesis.paused){ window.speechSynthesis.resume(); } else { speakFrom(idx); } };
+  self.pause=function(){ playing=false; try{ window.speechSynthesis.pause(); }catch(e){} };
+  self.stop=function(){ playing=false; try{ window.speechSynthesis.cancel(); }catch(e){} };
+  self.setRate=function(r){ rate=r; if(playing){ speakFrom(idx); } };
+  self.seekFrac=function(f){ speakFrom(Math.max(0,Math.min(total-1,Math.floor(f*total)))); };
+}
+
+function MP3Provider(audio){
+  var self=this; self.kind='mp3'; self.onprogress=self.onsentence=self.onend=function(){}; self.el=audio;
+  audio.ontimeupdate=function(){ if(audio.duration){ self.onprogress(audio.currentTime/audio.duration, fmt(audio.currentTime)+' / '+fmt(audio.duration)); } };
+  audio.onended=function(){ self.onend(); };
+  self.load=function(){ return true; };
+  self.play=function(){ audio.play(); }; self.pause=function(){ audio.pause(); };
+  self.stop=function(){ audio.pause(); audio.currentTime=0; };
+  self.setRate=function(r){ audio.playbackRate=r; };
+  self.seekFrac=function(f){ if(audio.duration) audio.currentTime=f*audio.duration; };
+  function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+}
+function tryMP3(path){ return new Promise(function(res){ var a=new Audio(),done=false; a.preload='metadata';
+  a.oncanplay=a.onloadedmetadata=function(){ if(!done){done=true;res(new MP3Provider(a));} };
+  a.onerror=function(){ if(!done){done=true;res(null);} }; a.src=path;
+  setTimeout(function(){ if(!done){done=true;res(null);} },2500); }); }
+
+var _ttsUnlocked=false;
+function unlockTTS(){ if(_ttsUnlocked || !window.speechSynthesis) return; _ttsUnlocked=true;
+  try{ var u=new SpeechSynthesisUtterance(' '); u.volume=0; window.speechSynthesis.speak(u); window.speechSynthesis.cancel(); }catch(e){} }
+
+var Player = {
+  current:null, provider:null, rate:0.85, rates:[0.75,0.85,1,1.15,1.25], playing:false, blocks:null, allMode:false,
+  async load(i, autoplay){
+    this.stop(); this.current=i;
+    var ch=CHAPTERS[i], lang=curLang();
+    this.blocks=makeBlocks(ch, lang);
+    renderNow(i);
+    var mp3=await tryMP3(ch.audio[lang]);
+    if(mp3){ this.provider=mp3; } else { this.provider=new TTSProvider(); this.provider.load(this.blocks, lang); }
+    var self=this;
+    this.provider.onsentence=function(gi){ highlightSentence(gi); };
+    this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%'; document.getElementById('miniTime').textContent=label||''; };
+    this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+      if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+      else { self.allMode=false; setAllBtn(); self.provider&&self.provider.stop&&self.provider.stop(); } };
+    this.provider.setRate(this.rate);
+    document.getElementById('mini').classList.add('show');
+    document.getElementById('now').classList.add('show');
+    document.getElementById('miniTitle').textContent=CHAPTERS[i].title[lang];
+    markPlayingRow(i);
+    if(autoplay!==false) this.play();
+  },
+  play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
+  pause(){ if(!this.provider) return; this.playing=false; setPlayIcon(false); this.provider.pause(); },
+  toggle(){ unlockTTS(); if(this.current==null){ this.playFrom(0); return; } this.playing?this.pause():this.play(); },
+  toggleAll(){ unlockTTS(); if(this.allMode && this.playing){ this.pause(); return; } this.allMode=true; setAllBtn(); if(this.current==null) this.playFrom(0); else this.play(); },
+  stop(){ if(this.provider){ this.provider.stop&&this.provider.stop(); } this.playing=false; setPlayIcon(false); },
+  playFrom(i){ unlockTTS(); this.load(i, true); },
+  cycleRate(){ var i=(this.rates.indexOf(this.rate)+1)%this.rates.length; this.rate=this.rates[i];
+    document.getElementById('rateBtn').textContent=this.rate+'x'; if(this.provider) this.provider.setRate(this.rate); },
+  seekAt(ev){ if(!this.provider) return; var r=document.getElementById('prog').getBoundingClientRect();
+    var f=(ev.clientX-r.left)/r.width; this.provider.seekFrac(Math.max(0,Math.min(1,f))); }
+};
+function markPlayingRow(i){ document.querySelectorAll('.list .row').forEach(function(r,ri){ r.classList.toggle('playing', ri===i); }); }
+function setAllBtn(){ var b=document.getElementById('playAllBtn'); if(!b) return;
+  b.innerHTML = Player.allMode ? '<span class="en">⏸ Playing all</span><span class="zh">⏸ 连续播放中</span>' : '<span class="en">▶ Play all</span><span class="zh">▶ 连续播放</span>'; }
+function setPlayIcon(on){ var m=document.getElementById('miniPlay'); if(m) m.textContent=on?'⏸':'▶'; }
+
+function renderList(){
+  var l=curLang();
+  document.getElementById('list').innerHTML = CHAPTERS.map(function(c,i){
+    return '<div class="row" onclick="Player.playFrom('+i+')">'
+      + '<div class="n">'+(l==='zh'?('诗 '+c.num):('Ps '+c.num))+'</div>'
+      + '<div class="meta"><div class="t">'+ (l==='zh'? c.title.zh.replace(/^诗篇 \d+ · /,'') : c.title.en.replace(/^Psalm \d+ · /,'')) +'</div>'
+      + '<div class="th">'+ c.intro[l] +'</div></div></div>';
+  }).join('');
+  if(Player.current!=null) markPlayingRow(Player.current);
+}
+function renderNow(i){
+  var c=CHAPTERS[i], l=curLang();
+  document.getElementById('nowEyebrow').textContent = l==='zh'?'正在聆听':'Now listening';
+  document.getElementById('nowTitle').textContent = c.title[l];
+  var blocks=Player.blocks||makeBlocks(c,l);
+  document.getElementById('transcript').innerHTML = blocks.map(function(b,bi){
+    return '<div class="blk"><div class="lbl">'+b.label[l]+'</div>'
+      + b.sentences.map(function(s,si){ return '<span class="sent '+(b.cls||'')+'" data-i="'+bi+'-'+si+'">'+s+'</span>'; }).join(' ')
+      + '</div>';
+  }).join('');
+}
+function highlightSentence(gi){
+  var flat=[]; (Player.blocks||[]).forEach(function(b,bi){ b.sentences.forEach(function(s,si){ flat.push(bi+'-'+si); }); });
+  var key=flat[gi];
+  document.querySelectorAll('.transcript .sent').forEach(function(el){ el.classList.toggle('on', el.dataset.i===key); });
+  var on=document.querySelector('.transcript .sent.on'); if(on) on.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+var I18N_TITLE={ en:'Listen · Psalms · Under the Sun', zh:'聆听诗篇 · 日光之下' };
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang=(l==='zh')?'zh-CN':'en';
+  document.title=l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  setAllBtn(); renderList();
+  if(Player.current!=null){ Player.blocks=makeBlocks(CHAPTERS[Player.current], l); renderNow(Player.current);
+    document.getElementById('miniTitle').textContent=CHAPTERS[Player.current].title[l]; }
+}
+(function(){
+  var p=new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

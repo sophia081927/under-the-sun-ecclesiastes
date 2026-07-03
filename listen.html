@@ -69,6 +69,9 @@
   }
   .bigplay button:active{transform:scale(.97)}
   .bigplay button:hover{background:var(--sun-soft)}
+  .bigplay-sub{margin-top:12px;font-size:13px;color:var(--muted);letter-spacing:.02em}
+  .ttswarn{margin:18px auto 0;max-width:470px;border:1px solid rgba(224,133,91,.5);background:rgba(224,133,91,.10);
+    border-radius:10px;padding:12px 16px;color:#e0855b;font-size:13.5px;line-height:1.65}
 
   /* tabs */
   .tabs{display:flex;gap:8px;justify-content:center;margin:38px 0 8px}
@@ -88,8 +91,10 @@
   .row .meta{flex:1;min-width:0}
   .row .meta .t{font-size:16.5px;color:var(--ink);font-weight:600;line-height:1.4}
   .row .meta .s{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .row .go{flex:none;color:var(--faint);font-size:18px}
-  .row.active .go{color:var(--sun)}
+  .row .go{flex:none;width:44px;height:44px;border-radius:50%;background:var(--sun);color:#14161a;
+    display:flex;align-items:center;justify-content:center;font-size:16px;padding-left:2px;transition:background .2s}
+  .row:hover .go{background:var(--sun-soft)}
+  .row.active .go{background:var(--sun-soft)}
   .hint{color:var(--faint);font-size:12.5px;text-align:center;margin-top:14px;line-height:1.7}
 
   /* now-playing / transcript */
@@ -159,7 +164,9 @@
   <p class="tag"><span class="en">Not to be read in a hurry — to be heard, slowly.</span><span class="zh">不必急着读完,慢慢听就好。</span></p>
   <div class="scenes" id="scenes"></div>
   <div class="bigplay">
-    <button onclick="Player.playFrom(0)">▶ <span class="en">Play all 12 chapters</span><span class="zh">从第一章连续聆听</span></button>
+    <button onclick="Player.playFrom(0)">▶ <span class="en">Start Listening</span><span class="zh">开始聆听</span></button>
+    <div class="bigplay-sub"><span class="en">Reads all 12 chapters aloud · tap any chapter to jump in</span><span class="zh">从第一章起连续朗读 12 章 · 点任意章节可跳听</span></div>
+    <div class="ttswarn" id="ttsWarn" style="display:none"><span class="en">Your browser does not support speech playback. Please try Chrome or Safari.</span><span class="zh">当前浏览器暂不支持语音朗读,请尝试使用 Chrome 或 Safari。</span></div>
   </div>
 </div>
 
@@ -171,7 +178,7 @@
 
   <div class="list" id="listCh"></div>
   <div class="list" id="listTh" style="display:none"></div>
-  <p class="hint"><span class="en">No recording yet — your device reads it aloud. Real narration can be added later without changing anything you see.</span><span class="zh">暂无录音,由你的设备朗读。日后放入真实录音即可自动替换,界面不变。</span></p>
+  <p class="hint"><span class="en">▶ Tap any chapter and your device reads it aloud — right now. Real narration can be added later without changing anything.</span><span class="zh">▶ 现在就能听:点任意章节,设备即会朗读。日后放入真实录音会自动替换,界面不变。</span></p>
 
   <!-- now playing -->
   <div class="now" id="now">
@@ -441,7 +448,7 @@ var Player = {
       else { self.provider && self.provider.stop && self.provider.stop(); } };
     this.provider.setRate(this.rate);
     document.getElementById('mini').classList.add('show');
-    document.getElementById('miniTitle').textContent=(lang==='zh'?('第 '+ch.num+' 章 · '+ch.title.zh):('Chapter '+ch.num+' · '+ch.title.en));
+    document.getElementById('miniTitle').textContent=(lang==='zh'?('传道书 · 第 '+ch.num+' 章 · '+ch.title.zh):('Ecclesiastes · Ch. '+ch.num+' · '+ch.title.en));
     if(autoplay!==false) this.play();
   },
   play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
@@ -558,6 +565,8 @@ function applyHash(){
   var nl=(navigator.language||'').toLowerCase();
   setLang(saved || (nl.indexOf('zh')===0?'zh':'en'));
   renderScenes(); renderLists();
+  // graceful fallback message if the browser can't do speech and there is no MP3 yet
+  if(!('speechSynthesis' in window)){ var w=document.getElementById('ttsWarn'); if(w) w.style.display='block'; }
   applyHash();
   window.addEventListener('hashchange', applyHash);
 })();

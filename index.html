@@ -126,6 +126,10 @@
       const meta = featureLabels[f];
       const href = f === 'ask' ? (b.page + '#ask') : (meta.key ? b[meta.key] : null);
       if (!href) return '';
+      // The Listen chip is a primary spiritual entry point — make it obvious.
+      if (f === 'listen') {
+        return `<a href="${href}" class="text-[12px] font-semibold tracking-wider uppercase rounded-full px-4 min-h-[40px] inline-flex items-center gap-1.5 transition-all" style="background:${accent}1f;border:1px solid ${accent}99;color:${accent}">♪ ${esc(meta[lang])}</a>`;
+      }
       return `<a href="${href}" class="text-[11px] tracking-wider uppercase text-gray-400 hover:text-[#D4AF37] border border-gray-700/70 hover:border-[#D4AF37]/50 rounded-full px-3 min-h-[36px] inline-flex items-center transition-colors">${esc(meta[lang])}</a>`;
     };
     const chips = active

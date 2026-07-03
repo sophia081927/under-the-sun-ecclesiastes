@@ -117,6 +117,8 @@
   .transcript .sent.on{color:var(--ink);background:var(--hl);box-shadow:0 0 0 1px var(--line-soft)}
   .transcript .prayer{color:var(--sun-soft);font-style:italic}
   .transcript .mQ{color:var(--ink)}
+  .voicemsg{display:none;max-width:640px;margin:10px auto 0;font-size:12.5px;color:#e0855b;line-height:1.6;text-align:center}
+  .voicemsg.show{display:block}
 
   /* mini player (fixed bottom) */
   .mini{position:fixed;left:0;right:0;bottom:0;z-index:60;
@@ -197,6 +199,7 @@
       <p style="margin:.2rem 0"><span class="en"><b>Android:</b> Settings → Language & input → Text-to-speech → choose Google TTS and download the Chinese / English voice packs.</span><span class="zh"><b>安卓:</b> 设置 → 语言和输入 → 文字转语音 → 选 Google 语音,下载中文 / 英文语音包。</span></p>
     </div>
   </details>
+  <p id="voiceMsg" class="voicemsg" role="status"><span class="en">English voice is not available on this device. Please try Safari, Chrome, or enable English voices in your device settings.</span><span class="zh">当前设备暂未加载英文语音,请尝试使用 Safari、Chrome,或在系统设置中启用英文语音。</span></p>
 
   <!-- now playing -->
   <div class="now" id="now">
@@ -411,6 +414,8 @@ function makeSentences(chapter, lang){
 var _voices=[];
 function loadVoices(){ try{ _voices=(window.speechSynthesis.getVoices())||[]; }catch(e){ _voices=[]; } }
 if('speechSynthesis' in window){ loadVoices(); try{ window.speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
+function showVoiceUnavailableMessage(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.add('show'); }
+function hideVoiceMsg(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.remove('show'); }
 function selectBestVoice(language){
   var voices=_voices.length ? _voices : ((window.speechSynthesis && window.speechSynthesis.getVoices()) || []);
   var zhPreferred=['Xiaoxiao','Xiaoyi','Tingting','Meijia','Sinji','Huihui','Yaoyao','Google 普通话','Mandarin','Chinese','Microsoft'];
@@ -420,7 +425,10 @@ function selectBestVoice(language){
   var low=function(s){return (s||'').toLowerCase();};
   return voices.find(function(v){ return low(v.lang).indexOf(langCode)===0 && preferred.some(function(n){return low(v.name).indexOf(low(n))!==-1;}); })
       || voices.find(function(v){ return low(v.lang).indexOf(langCode)===0; })
-      || voices[0] || null;
+      || null;   /* never fall back to a cross-language voice (voices[0]) — assigning e.g. a
+                    Chinese voice to an en-US utterance makes some browsers render silence.
+                    Returning null leaves utterance.voice unset so the browser uses its
+                    built-in default voice for the requested lang. */
 }
 
 function TTSProvider(){
@@ -435,7 +443,9 @@ function TTSProvider(){
   };
   function speakFrom(i){
     if(!window.speechSynthesis){ self.onend(); return; }
-    window.speechSynthesis.cancel();
+    /* guard cancel(): calling cancel() immediately before speak() can swallow the new
+       utterance on some Chrome builds — only cancel if something is actually active */
+    if(window.speechSynthesis.speaking || window.speechSynthesis.pending){ window.speechSynthesis.cancel(); }
     idx=i;
     (function next(){
       if(idx>=total){ playing=false; self.onprogress(1,''); self.onend(); return; }
@@ -448,8 +458,13 @@ function TTSProvider(){
       u.rate = rate;
       u.pitch = (lang==='zh')?1.05:1.03;
       u.volume = 1;
+      u.onstart=function(){ hideVoiceMsg(); };
       u.onend=function(){ if(!playing) return; idx++; next(); };
-      u.onerror=function(){ if(!playing) return; idx++; next(); };
+      u.onerror=function(e){ if(!playing) return;
+        var err=e&&e.error;
+        if(err==='canceled'||err==='interrupted'){ return; } /* benign: stop / seek / lang switch */
+        showVoiceUnavailableMessage();   /* genuine failure — surface once, don't spin silently */
+        playing=false; self.onend(); };
       window.speechSynthesis.speak(u);
     })();
   }

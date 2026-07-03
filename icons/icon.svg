@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect width="512" height="512" fill="#14161a"/>
+  <defs><radialGradient id="g" cx="50%" cy="66%" r="55%">
+    <stop offset="0" stop-color="#e8c77e" stop-opacity=".5"/>
+    <stop offset="60%" stop-color="#d9a441" stop-opacity=".08"/>
+    <stop offset="100%" stop-color="#d9a441" stop-opacity="0"/></radialGradient></defs>
+  <rect width="512" height="512" fill="url(#g)"/>
+  <g stroke="#e8c77e" stroke-width="10" stroke-linecap="round" stroke-opacity=".85">
+    <line x1="256" y1="330" x2="256" y2="150"/>
+    <line x1="256" y1="330" x2="150" y2="185"/>
+    <line x1="256" y1="330" x2="362" y2="185"/>
+    <line x1="256" y1="330" x2="120" y2="250"/>
+    <line x1="256" y1="330" x2="392" y2="250"/>
+  </g>
+  <line x1="96" y1="330" x2="416" y2="330" stroke="#d9a441" stroke-width="8" stroke-opacity=".5"/>
+  <path d="M176 330 a80 80 0 0 1 160 0" fill="none" stroke="#e8c77e" stroke-width="14"/>
+  <path d="M136 330 a120 120 0 0 1 240 0" fill="none" stroke="#d9a441" stroke-width="8" stroke-opacity=".55"/>
+</svg>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>聆听传道书 · Listen to Ecclesiastes</title>
+<meta name="description" content="聆听模式:读、听、默想《传道书》。开车、散步、睡前,都可以听。A quiet listening space for Ecclesiastes — read, listen, and reflect.">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="书阁 Library">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/listen.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+    --hl:rgba(217,164,65,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    background:
+      radial-gradient(120% 60% at 50% -10%, rgba(217,164,65,.06), transparent 60%),
+      var(--bg);
+    color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased;
+    min-height:100vh;padding-bottom:120px;
+  }
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:inline}
+  span.zh{display:none} span.en{display:inline}
+  body.lang-zh span.en{display:none} body.lang-zh span.zh{display:inline}
+
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  a{color:var(--sun-soft);text-decoration:none}
+
+  /* top bar */
+  .top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:14px 18px;background:linear-gradient(var(--bg),rgba(20,22,26,.82),transparent);
+    font-size:13px;letter-spacing:.06em}
+  .top a.back{color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .top a.back:hover{color:var(--sun-soft)}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);font-family:inherit;
+    font-size:12px;letter-spacing:.08em;padding:7px 14px;cursor:pointer;min-height:34px}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+
+  /* hero */
+  .hero{text-align:center;padding:46px 20px 20px}
+  .hero .mark{color:var(--sun);font-size:12px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:20px}
+  .hero h1{font-size:clamp(30px,8vw,44px);font-weight:600;line-height:1.2}
+  .hero h1 .sub{display:block;font-size:.5em;color:var(--sun-soft);margin-top:10px;letter-spacing:.08em}
+  .hero p.tag{color:var(--muted);margin-top:20px;font-size:16px;max-width:460px;margin-left:auto;margin-right:auto;font-style:italic}
+  .scenes{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:24px}
+  .scenes span{font-size:12.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:7px 15px}
+  .bigplay{margin-top:30px}
+  .bigplay button{
+    display:inline-flex;align-items:center;gap:11px;cursor:pointer;font-family:inherit;
+    background:var(--sun);color:#14161a;border:none;border-radius:40px;
+    padding:16px 34px;font-size:17px;font-weight:600;letter-spacing:.02em;min-height:56px;
+    box-shadow:0 12px 34px rgba(217,164,65,.18);transition:transform .15s,background .2s;
+  }
+  .bigplay button:active{transform:scale(.97)}
+  .bigplay button:hover{background:var(--sun-soft)}
+
+  /* tabs */
+  .tabs{display:flex;gap:8px;justify-content:center;margin:38px 0 8px}
+  .tabs button{background:transparent;border:1px solid var(--line-soft);color:var(--muted);
+    font-family:inherit;font-size:14px;border-radius:30px;padding:9px 20px;cursor:pointer;min-height:42px;transition:all .2s}
+  .tabs button.active{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
+
+  /* lists */
+  .list{margin-top:14px;display:grid;gap:10px}
+  .row{display:flex;align-items:center;gap:14px;border:1px solid var(--line-soft);border-radius:12px;
+    background:var(--bg2);padding:15px 16px;cursor:pointer;transition:border-color .2s,background .2s;min-height:64px}
+  .row:hover{border-color:var(--line)}
+  .row.active{border-color:var(--sun);background:rgba(217,164,65,.06)}
+  .row .idx{flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--sun);font-size:14px;font-style:italic}
+  .row.active .idx{background:var(--sun);color:#14161a;border-color:var(--sun)}
+  .row .meta{flex:1;min-width:0}
+  .row .meta .t{font-size:16.5px;color:var(--ink);font-weight:600;line-height:1.4}
+  .row .meta .s{font-size:13px;color:var(--muted);margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row .go{flex:none;color:var(--faint);font-size:18px}
+  .row.active .go{color:var(--sun)}
+  .hint{color:var(--faint);font-size:12.5px;text-align:center;margin-top:14px;line-height:1.7}
+
+  /* now-playing / transcript */
+  .now{margin-top:30px;border-top:1px solid var(--line-soft);padding-top:26px;display:none}
+  .now.show{display:block}
+  .now .eyebrow{color:var(--sun);font-size:11px;letter-spacing:.28em;text-transform:uppercase;text-align:center}
+  .now h2{text-align:center;font-size:clamp(24px,6vw,32px);margin-top:12px;line-height:1.25}
+  .now .core{text-align:center;color:var(--sun-soft);font-style:italic;font-size:17px;margin-top:16px;line-height:1.7}
+  .now .coreref{display:block;color:var(--faint);font-style:normal;font-size:13px;margin-top:6px;letter-spacing:.04em}
+  .transcript{margin-top:26px}
+  .transcript .blk{margin-bottom:20px}
+  .transcript .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.8;margin-bottom:8px}
+  .transcript .sent{font-size:17.5px;line-height:1.95;color:var(--muted);transition:color .3s,background .3s;border-radius:4px;padding:1px 3px}
+  .transcript .sent.on{color:var(--ink);background:var(--hl);box-shadow:0 0 0 1px var(--line-soft)}
+  .transcript .prayer{color:var(--sun-soft);font-style:italic}
+  .transcript .mQ{color:var(--ink)}
+
+  /* mini player (fixed bottom) */
+  .mini{position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:rgba(24,27,32,.92);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+    transform:translateY(120%);transition:transform .3s ease}
+  .mini.show{transform:none}
+  .mini .bar{max-width:680px;margin:0 auto}
+  .prog{height:4px;background:var(--bg3);border-radius:3px;overflow:hidden;cursor:pointer}
+  .prog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--sun),var(--sun-soft));transition:width .25s linear}
+  .mini .ctrls{display:flex;align-items:center;gap:8px;margin-top:9px}
+  .mini .title{flex:1;min-width:0;overflow:hidden}
+  .mini .title .t{font-size:14px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+  .mini .title .time{font-size:11.5px;color:var(--faint);letter-spacing:.04em}
+  .mini button{background:transparent;border:none;color:var(--ink);font-family:inherit;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;border-radius:50%;flex:none}
+  .mini .icon{width:44px;height:44px;font-size:18px}
+  .mini .icon:hover{color:var(--sun-soft)}
+  .mini .play{width:52px;height:52px;background:var(--sun);color:#14161a;font-size:20px}
+  .mini .play:active{transform:scale(.95)}
+  .mini .rate{border:1px solid var(--line);border-radius:20px;padding:0 12px;height:38px;font-size:13px;color:var(--sun-soft);min-width:52px}
+  .mini .autonext{font-size:11px;color:var(--faint);display:flex;align-items:center;gap:5px;letter-spacing:.03em}
+  .mini .autonext input{accent-color:var(--sun);width:16px;height:16px}
+
+  .share{display:inline-flex;align-items:center;gap:6px;margin-top:22px;font-size:13px;color:var(--muted);
+    border:1px solid var(--line-soft);border-radius:30px;padding:8px 16px;cursor:pointer;min-height:40px}
+  .share:hover{border-color:var(--sun);color:var(--sun-soft)}
+
+  footer{text-align:center;color:var(--faint);font-size:12px;padding:40px 20px 10px;line-height:1.9}
+
+  @media(min-width:700px){ .mini .autonext .lbltext{display:inline} }
+  @media(max-width:420px){ .row .meta .s{max-width:180px} }
+</style>
+</head>
+<body class="lang-zh">
+
+<div class="top">
+  <a class="back" href="ecclesiastes.html?lang=zh">‹ <span class="en">Ecclesiastes</span><span class="zh">传道书</span></a>
+  <div class="lang-toggle">
+    <button id="btnZh" class="active" onclick="setLang('zh')">中文</button>
+    <button id="btnEn" onclick="setLang('en')">EN</button>
+  </div>
+</div>
+
+<div class="hero">
+  <div class="mark">日光之下 · listening mode</div>
+  <h1><span class="en">Listen to Ecclesiastes</span><span class="zh">聆听传道书</span>
+    <span class="sub"><span class="en">read · listen · reflect</span><span class="zh">读 · 听 · 默想</span></span>
+  </h1>
+  <p class="tag"><span class="en">Not to be read in a hurry — to be heard, slowly.</span><span class="zh">不必急着读完,慢慢听就好。</span></p>
+  <div class="scenes" id="scenes"></div>
+  <div class="bigplay">
+    <button onclick="Player.playFrom(0)">▶ <span class="en">Play all 12 chapters</span><span class="zh">从第一章连续聆听</span></button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button id="tabCh" class="active" onclick="showTab('ch')"><span class="en">By chapter</span><span class="zh">按章节</span></button>
+    <button id="tabTh" onclick="showTab('th')"><span class="en">By theme</span><span class="zh">按主题</span></button>
+  </div>
+
+  <div class="list" id="listCh"></div>
+  <div class="list" id="listTh" style="display:none"></div>
+  <p class="hint"><span class="en">No recording yet — your device reads it aloud. Real narration can be added later without changing anything you see.</span><span class="zh">暂无录音,由你的设备朗读。日后放入真实录音即可自动替换,界面不变。</span></p>
+
+  <!-- now playing -->
+  <div class="now" id="now">
+    <div class="eyebrow" id="nowEyebrow"></div>
+    <h2 id="nowTitle"></h2>
+    <div class="core" id="nowCore"></div>
+    <div class="transcript" id="transcript"></div>
+    <div style="text-align:center">
+      <button class="share" onclick="shareCurrent()">↗ <span class="en">Share this chapter</span><span class="zh">分享这一章</span></button>
+      <span id="shareTip" style="display:block;font-size:12px;color:var(--sun-soft);margin-top:8px"></span>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span class="en">Scripture: Chinese Union Version (和合本) &amp; KJV, public domain. A quiet listening space. · MVP</span>
+  <span class="zh">经文:和合本与 KJV(公有领域)。一个安静的聆听空间。· 演示版</span>
+</footer>
+
+<!-- mini player -->
+<div class="mini" id="mini">
+  <div class="bar">
+    <div class="prog" id="prog" onclick="Player.seekAt(event)"><div class="fill" id="fill"></div></div>
+    <div class="ctrls">
+      <button class="icon" onclick="Player.prev()" aria-label="Previous">⏮</button>
+      <button class="play" id="playBtn" onclick="Player.toggle()" aria-label="Play/Pause">▶</button>
+      <button class="icon" onclick="Player.next()" aria-label="Next">⏭</button>
+      <div class="title">
+        <div class="t" id="miniTitle">—</div>
+        <div class="time" id="miniTime"></div>
+      </div>
+      <button class="rate" id="rateBtn" onclick="Player.cycleRate()">1x</button>
+      <label class="autonext"><input type="checkbox" id="autoNext" checked><span class="lbltext"><span class="en">auto</span><span class="zh">自动</span></span></label>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   i18n
+   ============================================================ */
+var LANG_KEY='bible_lang';
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.documentElement.lang = l==='zh' ? 'zh-CN' : 'en';
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  try{ localStorage.setItem(LANG_KEY,l); }catch(e){}
+  renderLists();
+  if(Player.current!=null) renderNow(Player.current);
+}
+
+/* ============================================================
+   DATA — chapters, themes, scenes
+   Audio paths are pre-wired for future MP3s; until a file exists
+   the player falls back to on-device Text-to-Speech automatically.
+   ============================================================ */
+var SCENES = {
+  zh:['开车时','散步时','做家务时','睡前','情绪低落时','安静独处时'],
+  en:['driving','walking','chores','before sleep','when low','in the quiet']
+};
+
+var CHAPTERS = [
+  { num:1, theme:'meaning',
+    title:{zh:'一切都是虚空',en:'All is vapor'},
+    core:{ref:'传道书 1:14 · Ecclesiastes 1:14', zh:'“我见日光之下所做的一切事,都是虚空,都是捕风。”', en:'"I have seen all the works that are done under the sun; and, behold, all is vanity and vexation of spirit."'},
+    intro:{zh:'传道书从一个诚实的观察开始:日光之下,一切都在循环,却抓不住。',en:'Ecclesiastes opens with an honest observation: under the sun, everything cycles, yet nothing can be held.'},
+    med:{zh:'默想:你最近想抓住、却抓不住的,是什么?',en:'Reflect: what have you been trying to hold onto, that keeps slipping away?'},
+    prayer:{zh:'主啊,我承认自己抓不住生命。求你让我在你里面寻得安稳。',en:'Lord, I admit I cannot hold my life. Let me find rest in You.'} },
+  { num:2, theme:'meaning',
+    title:{zh:'成功的空洞',en:'The emptiness of success'},
+    core:{ref:'传道书 2:11 · Ecclesiastes 2:11', zh:'“我察看我手所经营的一切事……谁知都是虚空,都是捕风,在日光之下毫无益处。”', en:'"Then I looked on all the works that my hands had wrought… and, behold, all was vanity… and there was no profit under the sun."'},
+    intro:{zh:'作者试了享乐、建造、财富——全都得到了,却仍觉得空。',en:'The author tried pleasure, building, and wealth — he got all of it, and still felt empty.'},
+    med:{zh:'默想:如果你得到了想要的一切,那份空虚会自动消失吗?',en:'Reflect: if you got everything you wanted, would the emptiness simply disappear?'},
+    prayer:{zh:'主啊,别让我把人生建在留不住的东西上。求你作我真正的满足。',en:'Lord, keep me from building my life on what cannot last. Be my true satisfaction.'} },
+  { num:3, theme:'time',
+    title:{zh:'凡事都有定时',en:'A time for everything'},
+    core:{ref:'传道书 3:1,11 · Ecclesiastes 3:1,11', zh:'“凡事都有定期,天下万务都有定时……神造万物,各按其时成为美好,又将永生安置在世人心里。”', en:'"To every thing there is a season… He hath made every thing beautiful in his time: also he hath set the world in their heart."'},
+    intro:{zh:'人无法掌控时间,却被造得渴望永恒——神把“永远”放进了人心里。',en:'We cannot control time, yet we were made to long for forever — God set eternity in the human heart.'},
+    med:{zh:'默想:在你无法掌控的事上,你能不能试着松开手?',en:'Reflect: in what you cannot control, can you try to loosen your grip?'},
+    prayer:{zh:'主啊,教我接受人的有限,信靠那位超越时间的掌管者。',en:'Lord, teach me to accept my limits and trust the One beyond time.'} },
+  { num:4, theme:'wisdom',
+    title:{zh:'竞争、孤独与压迫',en:'Rivalry, loneliness, oppression'},
+    core:{ref:'传道书 4:9 · Ecclesiastes 4:9', zh:'“两个人总比一个人好,因为二人劳碌同得美好的果效。”', en:'"Two are better than one; because they have a good reward for their labour."'},
+    intro:{zh:'许多劳碌只是与人攀比。而人不是被造来孤单地撑着的。',en:'Much of our toil is just rivalry. And we were not made to hold life up alone.'},
+    med:{zh:'默想:有谁是你可以不设防、真实相待的人?',en:'Reflect: who is someone you can be truly, unguardedly yourself with?'},
+    prayer:{zh:'主啊,救我脱离无止境的比较,给我真实的同行者。',en:'Lord, free me from endless comparison, and give me real companions.'} },
+  { num:5, theme:'fear-god',
+    title:{zh:'钱不能满足人',en:'Money cannot satisfy'},
+    core:{ref:'传道书 5:10 · Ecclesiastes 5:10', zh:'“贪爱银子的,不因得银子知足;贪爱丰富的,也不因得利益知足。”', en:'"He that loveth silver shall not be satisfied with silver; nor he that loveth abundance with increase."'},
+    intro:{zh:'满足永远在“下一次”之后——除非那份渴望有一个不同的方向。',en:'Satisfaction is always one step away — unless that longing is pointed somewhere else.'},
+    med:{zh:'默想:你心里那个“再多一点就好了”的声音,指向的是什么?',en:'Reflect: that voice inside — "just a little more" — what is it really reaching for?'},
+    prayer:{zh:'主啊,把我心里那个填不满的洞,交在你手里。',en:'Lord, I bring You the hole in me that nothing fills.'} },
+  { num:6, theme:'meaning',
+    title:{zh:'拥有不等于享受',en:'Having is not enjoying'},
+    core:{ref:'传道书 6:9 · Ecclesiastes 6:9', zh:'“眼睛所看的,比心里妄想的倒好。这也是虚空,也是捕风。”', en:'"Better is the sight of the eyes than the wandering of the desire: this is also vanity and vexation of spirit."'},
+    intro:{zh:'一个人可以拥有一切,却没有能力去享受——那是更深的空。',en:'A person can own everything and lack the power to enjoy it — a deeper kind of emptiness.'},
+    med:{zh:'默想:你是否太忙于得到,以至于忘了领受眼前的好?',en:'Reflect: are you so busy acquiring that you forget to receive the good in front of you?'},
+    prayer:{zh:'主啊,教我以感恩的心,领受今天你手中的礼物。',en:'Lord, teach me to receive today\'s gifts from Your hand with thanks.'} },
+  { num:7, theme:'wisdom',
+    title:{zh:'智慧面对死亡',en:'Wisdom faces death'},
+    core:{ref:'传道书 7:2 · Ecclesiastes 7:2', zh:'“往遭丧的家去,强如往宴乐的家去;因为死是众人的结局,活人也必将这事放在心上。”', en:'"It is better to go to the house of mourning, than to go to the house of feasting: for that is the end of all men; and the living will lay it to his heart."'},
+    intro:{zh:'智慧不是回避死亡,而是让死亡教我们怎样活。',en:'Wisdom does not avoid death; it lets death teach us how to live.'},
+    med:{zh:'默想:如果记得自己会死,你今天会把什么看得更重、更轻?',en:'Reflect: remembering you will die — what would you hold more tightly today, and what more loosely?'},
+    prayer:{zh:'主啊,求你指教我数算自己的日子,好得着智慧的心。',en:'Lord, teach me to number my days, that I may gain a heart of wisdom.'} },
+  { num:8, theme:'time',
+    title:{zh:'公义延迟,人心困惑',en:'Delayed justice, human confusion'},
+    core:{ref:'传道书 8:17 · Ecclesiastes 8:17', zh:'“我就看明神一切的作为,知道人查不出日光之下所做的事。”', en:'"Then I beheld all the work of God, that a man cannot find out the work that is done under the sun."'},
+    intro:{zh:'世界并不总是公平,答案也不总是及时。有些事,我们看不透。',en:'The world is not always fair, and answers are not always timely. Some things we cannot see through.'},
+    med:{zh:'默想:哪一件“想不通”的事,你愿意暂时交托,而不是硬要答案?',en:'Reflect: what unresolved thing could you entrust for now, instead of forcing an answer?'},
+    prayer:{zh:'主啊,在我看不明白的事上,求你给我信靠的心。',en:'Lord, where I cannot understand, give me a trusting heart.'} },
+  { num:9, theme:'death',
+    title:{zh:'死亡临到众人',en:'Death comes to all'},
+    core:{ref:'传道书 9:5,7 · Ecclesiastes 9:5,7', zh:'“……你只管去欢欢喜喜吃你的饭,心中快乐喝你的酒,因为神已经悦纳你的作为。”', en:'"…Go thy way, eat thy bread with joy, and drink thy wine with a merry heart; for God now accepteth thy works."'},
+    intro:{zh:'正因为日子有限,传道书反而叫我们珍惜地领受当下的每一顿饭、每一份工。',en:'Precisely because days are limited, Ecclesiastes tells us to receive each meal and each work as a gift, today.'},
+    med:{zh:'默想:此刻有哪一件平凡的好,值得你停下来,好好领受?',en:'Reflect: what ordinary good, right now, is worth pausing to receive?'},
+    prayer:{zh:'主啊,谢谢你今天所赐的饭食、工作与呼吸。教我珍惜。',en:'Lord, thank You for today\'s food, work, and breath. Teach me to treasure them.'} },
+  { num:10, theme:'wisdom',
+    title:{zh:'愚昧如何破坏人生',en:'How folly damages life'},
+    core:{ref:'传道书 10:12 · Ecclesiastes 10:12', zh:'“智慧人的口说出恩言;愚昧人的嘴吞灭自己。”', en:'"The words of a wise man\'s mouth are gracious; but the lips of a fool will swallow up himself."'},
+    intro:{zh:'一点点愚昧,就能败坏许多智慧。言语与选择,日积月累地塑造一生。',en:'A little folly can undo much wisdom. Words and choices shape a life, day by day.'},
+    med:{zh:'默想:有没有一个小习惯,正在悄悄消耗你?',en:'Reflect: is there a small habit quietly draining you?'},
+    prayer:{zh:'主啊,在小事上也求你的智慧,守住我的言语与脚步。',en:'Lord, give me wisdom even in small things; guard my words and my steps.'} },
+  { num:11, theme:'death',
+    title:{zh:'在不确定中仍然行动',en:'Acting amid uncertainty'},
+    core:{ref:'传道书 11:1 · Ecclesiastes 11:1', zh:'“当将你的粮食撒在水面,因为日久必能得着。”', en:'"Cast thy bread upon the waters: for thou shalt find it after many days."'},
+    intro:{zh:'看不清未来,不等于不去行动。撒种、去爱、去付出——把结果交给神。',en:'Not seeing the future is no reason to stop acting. Sow, love, give — and leave the harvest with God.'},
+    med:{zh:'默想:有哪一件好事,你一直因为“没把握”而迟迟不做?',en:'Reflect: what good thing have you delayed simply because you weren\'t sure?'},
+    prayer:{zh:'主啊,给我勇气在不确定中仍然去行你看为好的事。',en:'Lord, give me courage to do good even when the outcome is unsure.'} },
+  { num:12, theme:'fear-god',
+    title:{zh:'趁年幼记念造你的主',en:'Remember your Creator'},
+    core:{ref:'传道书 12:1,13 · Ecclesiastes 12:1,13', zh:'“你趁着年幼……当记念造你的主。……敬畏神,谨守他的诫命,这是人所当尽的本分。”', en:'"Remember now thy Creator in the days of thy youth… Fear God, and keep his commandments: for this is the whole duty of man."'},
+    intro:{zh:'走过一切留不住的东西之后,传道书落在一句安稳的话上:记念造你的主。',en:'After everything that cannot be kept, Ecclesiastes lands on one steady word: remember your Creator.'},
+    med:{zh:'默想:如果人生真有一位源头与归宿,这会怎样改变你今天的一步?',en:'Reflect: if life truly has a Source and a home, how might that change your next step today?'},
+    prayer:{zh:'主啊,你是我生命的源头与归宿。今天,我愿意抬头认你。',en:'Lord, You are my life\'s Source and home. Today, I look up and acknowledge You.'} },
+];
+CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-cn.mp3',
+                                         en:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-en.mp3' }; });
+
+var THEMES = [
+  { id:'meaning', title:{zh:'虚空与人生意义',en:'Vanity & the meaning of life'}, chapters:[1,2,6] },
+  { id:'wisdom',  title:{zh:'智慧与愚昧',en:'Wisdom & folly'},               chapters:[4,7,10] },
+  { id:'time',    title:{zh:'时间与永恒',en:'Time & eternity'},              chapters:[3,8] },
+  { id:'death',   title:{zh:'死亡与盼望',en:'Death & hope'},                 chapters:[9,11] },
+  { id:'fear-god',title:{zh:'敬畏神',en:'The fear of God'},                  chapters:[5,12] },
+];
+function themeOf(id){ return THEMES.filter(function(t){return t.id===id;})[0]; }
+
+/* ============================================================
+   AUDIO PROVIDERS — swappable. MP3Provider is tried first when a
+   file is present; otherwise TTSProvider (browser speech) is used.
+   Both expose the same tiny interface the Player depends on:
+     load(chapter, lang), play(), pause(), setRate(r),
+     seekFrac(f), and callbacks: onprogress(frac,label), onsentence(i), onend()
+   ============================================================ */
+function makeSentences(chapter, lang){
+  var v = function(o){ return o[lang] || o.zh; };
+  var parts = [];
+  parts.push({label:{zh:'导读',en:'Intro'}, text:v(chapter.intro)});
+  parts.push({label:{zh:'核心经文',en:'Core verse'}, text:v(chapter.core)});
+  parts.push({label:{zh:'默想',en:'Reflect'}, text:v(chapter.med), cls:'mQ'});
+  parts.push({label:{zh:'回应祷告',en:'A prayer'}, text:v(chapter.prayer), cls:'prayer'});
+  // split each block into sentences for highlight
+  var blocks = parts.map(function(p){
+    var s = (p.text||'').split(/(?<=[。!?;；.!?])\s*/).map(function(x){return x.trim();}).filter(Boolean);
+    if(!s.length) s=[p.text];
+    return { label:p.label, cls:p.cls||'', sentences:s };
+  });
+  return blocks;
+}
+
+function TTSProvider(){
+  var self=this, utters=[], idx=0, total=0, rate=1, playing=false, sents=[];
+  self.onprogress=self.onsentence=self.onend=function(){};
+  self.kind='tts';
+  self.load=function(blocks, lang){
+    window.speechSynthesis && window.speechSynthesis.cancel();
+    sents=[]; blocks.forEach(function(b,bi){ b.sentences.forEach(function(s,si){ sents.push({t:s,b:bi,s:si}); }); });
+    total=sents.length; idx=0;
+    return total>0;
+  };
+  function speakFrom(i){
+    if(!window.speechSynthesis){ self.onend(); return; }
+    window.speechSynthesis.cancel();
+    idx=i;
+    (function next(){
+      if(idx>=total){ playing=false; self.onprogress(1,''); self.onend(); return; }
+      self.onsentence(idx);
+      self.onprogress(idx/total, (idx+1)+' / '+total);
+      var u=new SpeechSynthesisUtterance(sents[idx].t);
+      u.lang = (curLang()==='zh')?'zh-CN':'en-US';
+      u.rate = rate;
+      u.onend=function(){ if(!playing) return; idx++; next(); };
+      u.onerror=function(){ if(!playing) return; idx++; next(); };
+      window.speechSynthesis.speak(u);
+    })();
+  }
+  self.play=function(){ playing=true; if(window.speechSynthesis && window.speechSynthesis.paused){ window.speechSynthesis.resume(); } else { speakFrom(idx); } };
+  self.pause=function(){ playing=false; try{ window.speechSynthesis.pause(); }catch(e){} };
+  self.stop=function(){ playing=false; try{ window.speechSynthesis.cancel(); }catch(e){} };
+  self.setRate=function(r){ rate=r; if(playing){ speakFrom(idx); } };
+  self.seekFrac=function(f){ speakFrom(Math.max(0,Math.min(total-1,Math.floor(f*total)))); };
+  self.timeLabel=function(){ return (Math.min(idx+1,total))+' / '+total; };
+}
+
+function MP3Provider(audio){
+  var self=this; self.kind='mp3'; self.onprogress=self.onsentence=self.onend=function(){};
+  self.el=audio;
+  audio.ontimeupdate=function(){ if(audio.duration){ self.onprogress(audio.currentTime/audio.duration, fmt(audio.currentTime)+' / '+fmt(audio.duration)); } };
+  audio.onended=function(){ self.onend(); };
+  self.load=function(){ return true; };
+  self.play=function(){ audio.play(); };
+  self.pause=function(){ audio.pause(); };
+  self.stop=function(){ audio.pause(); audio.currentTime=0; };
+  self.setRate=function(r){ audio.playbackRate=r; };
+  self.seekFrac=function(f){ if(audio.duration) audio.currentTime=f*audio.duration; };
+  function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+}
+
+/* try to build an MP3 provider only if the file actually loads; else null */
+function tryMP3(path){
+  return new Promise(function(res){
+    var a=new Audio(); var done=false;
+    a.preload='metadata';
+    a.oncanplay=function(){ if(!done){done=true; res(new MP3Provider(a));} };
+    a.onloadedmetadata=function(){ if(!done){done=true; res(new MP3Provider(a));} };
+    a.onerror=function(){ if(!done){done=true; res(null);} };
+    a.src=path;
+    setTimeout(function(){ if(!done){done=true; res(null);} },2500);
+  });
+}
+
+/* ============================================================
+   PLAYER — orchestrates provider + UI
+   ============================================================ */
+/* iOS needs speech started inside a user gesture; our async MP3 probe can break
+   that, so we "unlock" the speech engine synchronously on the first tap. */
+var _ttsUnlocked=false;
+function unlockTTS(){ if(_ttsUnlocked || !window.speechSynthesis) return; _ttsUnlocked=true;
+  try{ var u=new SpeechSynthesisUtterance(' '); u.volume=0; window.speechSynthesis.speak(u); window.speechSynthesis.cancel(); }catch(e){} }
+
+var Player = {
+  current:null, provider:null, rate:1, rates:[0.75,1,1.25], playing:false, blocks:null,
+  queue:[], queueMode:false,
+  async load(i, autoplay){
+    this.stop();
+    this.current=i;
+    var ch=CHAPTERS[i], lang=curLang();
+    this.blocks = makeSentences(ch, lang);
+    renderNow(i);
+    // provider selection: real MP3 if available, else TTS
+    var mp3 = await tryMP3(ch.audio[lang]);
+    if(mp3){ this.provider=mp3; }
+    else { this.provider=new TTSProvider(); this.provider.load(this.blocks, lang); }
+    var self=this;
+    this.provider.onsentence=function(gi){ highlightSentence(gi); };
+    this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%';
+      document.getElementById('miniTime').textContent=label||''; };
+    this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+      if(self.queueMode){ // theme playback: follow the theme's chapter subset
+        if(self.queue.length){ var n=self.queue.shift(); location.hash='chapter-'+CHAPTERS[n].num; self.load(n,true); }
+        else { self.queueMode=false; }
+        return;
+      }
+      if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+      else { self.provider && self.provider.stop && self.provider.stop(); } };
+    this.provider.setRate(this.rate);
+    document.getElementById('mini').classList.add('show');
+    document.getElementById('miniTitle').textContent=(lang==='zh'?('第 '+ch.num+' 章 · '+ch.title.zh):('Chapter '+ch.num+' · '+ch.title.en));
+    if(autoplay!==false) this.play();
+  },
+  play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
+  pause(){ if(!this.provider) return; this.playing=false; setPlayIcon(false); this.provider.pause(); },
+  toggle(){ unlockTTS(); if(this.current==null){ this.playFrom(0); return; } this.playing?this.pause():this.play(); },
+  stop(){ if(this.provider){ this.provider.stop&&this.provider.stop(); } this.playing=false; setPlayIcon(false); },
+  playFrom(i){ unlockTTS(); this.queueMode=false; this.queue=[]; location.hash = 'chapter-'+CHAPTERS[i].num; this.load(i, true); },
+  next(){ if(this.current!=null && this.current<CHAPTERS.length-1) this.playFrom(this.current+1); },
+  prev(){ if(this.current!=null && this.current>0) this.playFrom(this.current-1); },
+  cycleRate(){ var i=(this.rates.indexOf(this.rate)+1)%this.rates.length; this.rate=this.rates[i];
+    document.getElementById('rateBtn').textContent=this.rate+'x'; if(this.provider) this.provider.setRate(this.rate); },
+  seekAt(ev){ if(!this.provider) return; var r=document.getElementById('prog').getBoundingClientRect();
+    var f=(ev.clientX-r.left)/r.width; this.provider.seekFrac(Math.max(0,Math.min(1,f))); },
+};
+
+/* ============================================================
+   UI RENDER
+   ============================================================ */
+function renderScenes(){
+  var l=curLang(); document.getElementById('scenes').innerHTML =
+    SCENES[l].map(function(s){return '<span>'+s+'</span>';}).join('');
+}
+function renderLists(){
+  var l=curLang();
+  document.getElementById('listCh').innerHTML = CHAPTERS.map(function(c,i){
+    var t = l==='zh'? c.title.zh : c.title.en;
+    var s = l==='zh'? c.core.zh : c.core.en;
+    return '<div class="row" data-i="'+i+'" onclick="Player.playFrom('+i+')">'
+      + '<div class="idx">'+c.num+'</div>'
+      + '<div class="meta"><div class="t">'+(l==='zh'?('第 '+c.num+' 章 · '+t):('Ch. '+c.num+' · '+t))+'</div><div class="s">'+s.replace(/[“”"]/g,'')+'</div></div>'
+      + '<div class="go">▶</div></div>';
+  }).join('');
+  document.getElementById('listTh').innerHTML = THEMES.map(function(t){
+    var chs=t.chapters.join('、');
+    var title=l==='zh'?t.title.zh:t.title.en;
+    var sub = l==='zh'? ('第 '+chs+' 章') : ('Chapters '+t.chapters.join(', '));
+    return '<div class="row" onclick="playTheme(\''+t.id+'\')">'
+      +'<div class="idx">✦</div>'
+      +'<div class="meta"><div class="t">'+title+'</div><div class="s">'+sub+'</div></div>'
+      +'<div class="go">▶</div></div>';
+  }).join('');
+  markActive();
+}
+function markActive(){
+  document.querySelectorAll('#listCh .row').forEach(function(r){
+    r.classList.toggle('active', Player.current!=null && +r.dataset.i===Player.current);
+  });
+}
+function renderNow(i){
+  var c=CHAPTERS[i], l=curLang();
+  document.getElementById('now').classList.add('show');
+  document.getElementById('nowEyebrow').textContent = l==='zh'?('传道书 · 第 '+c.num+' 章'):('Ecclesiastes · Chapter '+c.num);
+  document.getElementById('nowTitle').textContent = l==='zh'?c.title.zh:c.title.en;
+  document.getElementById('nowCore').innerHTML = (l==='zh'?c.core.zh:c.core.en)+'<span class="coreref">'+c.core.ref+'</span>';
+  var blocks=Player.blocks||makeSentences(c,l);
+  document.getElementById('transcript').innerHTML = blocks.map(function(b,bi){
+    var lbl = l==='zh'?b.label.zh:b.label.en;
+    var sents=b.sentences.map(function(s,si){ return '<span class="sent '+(b.cls||'')+'" data-g="'+bi+'-'+si+'">'+s+' </span>'; }).join('');
+    return '<div class="blk"><div class="lbl">'+lbl+'</div>'+sents+'</div>';
+  }).join('');
+  // rebuild global sentence order for highlight indexing
+  window._sentEls=[].slice.call(document.querySelectorAll('#transcript .sent'));
+  markActive();
+  document.getElementById('shareTip').textContent='';
+}
+function highlightSentence(gi){
+  if(!window._sentEls) return;
+  window._sentEls.forEach(function(el,i){ el.classList.toggle('on', i===gi); });
+  var on=window._sentEls[gi]; if(on){ on.scrollIntoView({behavior:'smooth',block:'center'}); }
+}
+function setPlayIcon(p){ document.getElementById('playBtn').textContent = p?'⏸':'▶'; }
+
+function showTab(which){
+  document.getElementById('tabCh').classList.toggle('active', which==='ch');
+  document.getElementById('tabTh').classList.toggle('active', which==='th');
+  document.getElementById('listCh').style.display = which==='ch'?'grid':'none';
+  document.getElementById('listTh').style.display = which==='th'?'grid':'none';
+}
+function playTheme(id){
+  unlockTTS();
+  location.hash='theme-'+id;
+  var t=themeOf(id); if(!t) return;
+  var nums=CHAPTERS.map(function(c){return c.num;});
+  var q = t.chapters.map(function(n){ return nums.indexOf(n); }).filter(function(x){return x>=0;});
+  var first=q.shift();
+  Player.queue=q; Player.queueMode=true;   // when each chapter ends, play the theme's next chapter
+  Player.load(first, true);
+}
+function shareCurrent(){
+  var url=location.href;
+  var tip=document.getElementById('shareTip');
+  if(navigator.share){ navigator.share({title:'聆听传道书 · Listen to Ecclesiastes', url:url}).catch(function(){}); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(url).then(function(){ tip.textContent=curLang()==='zh'?'✦ 链接已复制':'✦ Link copied'; }); }
+  else { tip.textContent=url; }
+}
+
+/* ============================================================
+   HASH ROUTING (shareable: #chapter-1, #theme-meaning)
+   ============================================================ */
+function applyHash(){
+  var h=(location.hash||'').replace('#','');
+  var m;
+  if((m=h.match(/^chapter-(\d+)$/))){ var n=+m[1]; var i=CHAPTERS.map(function(c){return c.num;}).indexOf(n);
+    if(i>=0){ showTab('ch'); Player.load(i, false); } }
+  else if((m=h.match(/^theme-([a-z-]+)$/))){ showTab('th'); /* select but don't autoplay */
+    var t=themeOf(m[1]); if(t){ var i=CHAPTERS.map(function(c){return c.num;}).indexOf(t.chapters[0]); if(i>=0) Player.load(i,false); } }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+(function(){
+  var saved=null; try{ saved=localStorage.getItem(LANG_KEY);}catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  setLang(saved || (nl.indexOf('zh')===0?'zh':'en'));
+  renderScenes(); renderLists();
+  applyHash();
+  window.addEventListener('hashchange', applyHash);
+})();
+</script>
+</body>
+</html>

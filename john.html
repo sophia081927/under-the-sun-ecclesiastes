@@ -2,7 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="书阁 Library">
 <title>The Gospel of John · 约翰福音:生命之光</title>
 <meta name="description" content="The Gospel of John: the Light of Life. Where Ecclesiastes exposes the emptiness of life under the sun, John leads to Jesus — the light, the living water, the resurrection and the life. 约翰福音:生命之光——从《传道书》的空,走向那位真正的生命之光。">
 <link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/john.html">
@@ -199,6 +206,12 @@
   /* ---- slide figure (from the deck) ---- */
   figure.slidefig{margin:30px 0 0}
   figure.slidefig img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px}
+
+  /* ---- hand-drawn SVG illustrations ---- */
+  .hero-emblem{display:block;margin:0 auto 30px;width:clamp(150px,26vw,200px);height:auto;opacity:.92}
+  .fig-art{margin:34px auto 6px;max-width:560px}
+  .fig-art svg{width:100%;height:auto;display:block}
+  .fig-art figcaption{margin-top:12px;text-align:center;font-size:12px;color:var(--faint);letter-spacing:.08em;font-style:italic}
   figure.slidefig figcaption{margin-top:10px;font-size:12px;color:var(--faint);letter-spacing:.06em;text-align:center}
 
   /* ---- passage reader ---- */
@@ -291,6 +304,18 @@
   .to-top:hover{border-color:var(--sun);background:rgba(217,164,65,.15);color:var(--sun)}
   @media(max-width:540px){.to-top{right:16px;bottom:16px;width:42px;height:42px}}
 
+  /* ---- mobile bottom tab bar (App-like) ---- */
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(24,27,32,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a,.tabbar button{flex:1;background:none;border:none;border-bottom:none;color:var(--muted);
+    font-family:inherit;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;
+    font-size:10.5px;letter-spacing:.03em;padding:5px 2px;min-height:50px;text-decoration:none}
+  .tabbar a:hover,.tabbar button:hover{color:var(--sun-soft)}
+  .tabbar a:active,.tabbar button:active{color:var(--sun)}
+  .tabbar .ic{font-size:18px;line-height:1}
+  @media(max-width:700px){ .tabbar{display:flex} body{padding-bottom:66px} .to-top{bottom:78px} }
+
   /* ---- going deeper (opt-in) ---- */
   .bridge-intro{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:26px 28px;margin-top:28px;line-height:1.85}
   .bridge-intro p{font-size:16.5px}
@@ -347,7 +372,29 @@
 
 <!-- ============ HERO ============ -->
 <header class="hero" id="top">
-  <div class="kicker"><span class="en">The Gospel of John · Book Two</span><span class="zh">约翰福音 · 圣经书阁第二卷</span></div>
+  <svg class="hero-emblem" viewBox="0 0 200 120" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="glow" cx="50%" cy="78%" r="60%">
+        <stop offset="0%" stop-color="#e8c77e" stop-opacity=".55"/>
+        <stop offset="55%" stop-color="#d9a441" stop-opacity=".12"/>
+        <stop offset="100%" stop-color="#d9a441" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect x="0" y="0" width="200" height="120" fill="url(#glow)"/>
+    <g stroke="#e8c77e" stroke-opacity=".6" stroke-width="1.1" stroke-linecap="round">
+      <line x1="100" y1="94" x2="100" y2="30"/>
+      <line x1="100" y1="94" x2="66" y2="40"/>
+      <line x1="100" y1="94" x2="134" y2="40"/>
+      <line x1="100" y1="94" x2="42" y2="58"/>
+      <line x1="100" y1="94" x2="158" y2="58"/>
+      <line x1="100" y1="94" x2="26" y2="78"/>
+      <line x1="100" y1="94" x2="174" y2="78"/>
+    </g>
+    <line x1="18" y1="94" x2="182" y2="94" stroke="#d9a441" stroke-opacity=".45" stroke-width="1"/>
+    <path d="M74 94 a26 26 0 0 1 52 0" fill="none" stroke="#e8c77e" stroke-width="1.6"/>
+    <path d="M60 94 a40 40 0 0 1 80 0" fill="none" stroke="#d9a441" stroke-opacity=".5" stroke-width="1"/>
+  </svg>
+  <div class="kicker"><span class="en">The Gospel of John · Book Two</span><span class="zh">约翰福音 · 书阁 · 第二卷</span></div>
   <h1>
     <span class="en">The Gospel of John:<br>The Light of Life</span>
     <span class="zh">约翰福音:<br>生命之光</span>
@@ -382,6 +429,54 @@
   </div>
 </section>
 
+<!-- ============ PROLOGUE · READ THE OPENING ============ -->
+<section id="prologue">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Read the actual opening</span><span class="zh">读一读真正的开篇</span></div>
+    <h2 class="head">
+      <span class="en">"In the beginning was the Word"</span>
+      <span class="zh">"太初有道"</span>
+    </h2>
+    <p class="lead">
+      <span class="en">John doesn't start with a manger. He starts before time — with "the Word" (Greek <em>logos</em>, rendered 道 in Chinese): the mind and voice behind everything, who "became flesh and dwelt among us." Read the opening lines yourself.</span>
+      <span class="zh">约翰福音不从马槽开始,而是从时间之前开始——从"道"(希腊文 <em>logos</em>,中文译作"道"):万有背后的心意与声音,那位"成了肉身,住在我们中间"的。自己读一读这段开篇。</span>
+    </p>
+
+    <div class="reader">
+      <div class="tabs">
+        <button id="tabKjv" class="active" onclick="setPane('kjv')">KJV (English)</button>
+        <button id="tabCuv" onclick="setPane('cuv')">和合本 (中文)</button>
+      </div>
+      <div class="body">
+        <div class="pane active" id="paneKjv">
+          <div class="v"><span class="n">1</span><span>In the beginning was the <em class="h">Word</em>, and the Word was with God, and the Word was God.</span></div>
+          <div class="v"><span class="n">3</span><span>All things were made by him; and without him was not any thing made that was made.</span></div>
+          <div class="v"><span class="n">4</span><span>In him was <em class="h">life</em>; and the life was the <em class="h">light</em> of men.</span></div>
+          <div class="v"><span class="n">5</span><span>And the light shineth in darkness; and the darkness comprehended it not.</span></div>
+          <div class="v"><span class="n">9</span><span>That was the true Light, which lighteth every man that cometh into the world.</span></div>
+          <div class="v"><span class="n">11</span><span>He came unto his own, and his own received him not.</span></div>
+          <div class="v"><span class="n">12</span><span>But as many as received him, to them gave he power to become the sons of God, even to them that <em class="h">believe</em> on his name:</span></div>
+          <div class="v"><span class="n">14</span><span>And the Word was made <em class="h">flesh</em>, and dwelt among us… full of grace and truth.</span></div>
+        </div>
+        <div class="pane" id="paneCuv">
+          <div class="v"><span class="n">1</span><span>太初有<em class="h">道</em>,道与神同在,道就是神。</span></div>
+          <div class="v"><span class="n">3</span><span>万物是藉着他造的;凡被造的,没有一样不是藉着他造的。</span></div>
+          <div class="v"><span class="n">4</span><span>生命在他里头,这<em class="h">生命</em>就是人的<em class="h">光</em>。</span></div>
+          <div class="v"><span class="n">5</span><span>光照在黑暗里,黑暗却不接受光。</span></div>
+          <div class="v"><span class="n">9</span><span>那光是真光,照亮一切生在世上的人。</span></div>
+          <div class="v"><span class="n">11</span><span>他到自己的地方来,自己的人倒不接待他。</span></div>
+          <div class="v"><span class="n">12</span><span>凡接待他的,就是<em class="h">信</em>他名的人,他就赐他们权柄作神的儿女。</span></div>
+          <div class="v"><span class="n">14</span><span>道成了<em class="h">肉身</em>,住在我们中间,充充满满地有恩典有真理。我们也见过他的荣光,正是父独生子的荣光。</span></div>
+        </div>
+      </div>
+      <div class="src">
+        <span class="en">Text: KJV (public domain) &amp; Chinese Union Version (和合本). Verses 2, 6–8, 10, 13 omitted for length — the full chapter is one click away in a finished build.</span>
+        <span class="zh">经文:KJV(公有领域)与和合本。为篇幅略去第 2、6–8、10、13 节——完整章节在正式版本中一键可读。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CORE THEMES ============ -->
 <section id="themes">
   <div class="wrap">
@@ -399,6 +494,41 @@
       <div class="ch"><div class="num"><span class="en">The Way, the Truth, the Life</span><span class="zh">道路、真理、生命</span></div><div class="desc"><span class="en">Not a map to the answer — the answer in person.</span><span class="zh">不是通往答案的地图,而是那位答案本身。</span> <span class="ref">14:6</span></div></div>
       <div class="ch"><div class="num"><span class="en">The Resurrection and the Life</span><span class="zh">复活与生命</span></div><div class="desc"><span class="en">The wall Ecclesiastes stops at — answered from the far side.</span><span class="zh">传道书停在死亡这堵墙前;这里从墙的另一边回应。</span> <span class="ref">11:25</span></div></div>
       <div class="ch"><div class="num"><span class="en">Life through believing</span><span class="zh">信而得生命</span></div><div class="desc"><span class="en">Written so that you may believe — and have life.</span><span class="zh">这书写下来,是要你信,并且因信得生命。</span> <span class="ref">20:31</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE SEVEN "I AM" SAYINGS ============ -->
+<section id="iam">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The signature of this book</span><span class="zh">这卷书的签名</span></div>
+    <h2 class="head">
+      <span class="en">Seven times, Jesus says "I AM"</span>
+      <span class="zh">耶稣七次说"我是"</span>
+    </h2>
+    <p class="lead">
+      <span class="en">Running through John are seven sentences that begin the same way — "I am…". To first-century ears this was startling: "I AM" is the name God gave himself when Moses asked (Exodus 3:14). John is quietly showing you who he thinks Jesus is.</span>
+      <span class="zh">约翰福音里贯穿着七句同样开头的话——"我是……"。在当时的人听来,这很震撼:"我是"正是神在摩西问祂名字时,给自己起的名(出埃及记 3:14)。约翰是在安静地告诉你:他认为耶稣是谁。</span>
+    </p>
+
+    <div class="lens">
+      <div class="word">ἐγώ εἰμι · <span class="en">I AM</span><span class="zh">我是</span></div>
+      <div class="heb"><span class="en">the name of God, spoken in the first person</span><span class="zh">神的名,用第一人称说了出来</span></div>
+      <div class="renders">
+        <div class="render real"><div class="t">John 6:35 · 约6:35</div><div class="v"><span class="en">I am the bread of life</span><span class="zh">我是生命的粮</span></div></div>
+        <div class="render real"><div class="t">John 8:12 · 约8:12</div><div class="v"><span class="en">I am the light of the world</span><span class="zh">我是世界的光</span></div></div>
+        <div class="render real"><div class="t">John 10:9 · 约10:9</div><div class="v"><span class="en">I am the door</span><span class="zh">我是门</span></div></div>
+        <div class="render real"><div class="t">John 10:11 · 约10:11</div><div class="v"><span class="en">I am the good shepherd</span><span class="zh">我是好牧人</span></div></div>
+        <div class="render real"><div class="t">John 11:25 · 约11:25</div><div class="v"><span class="en">I am the resurrection and the life</span><span class="zh">我是复活,我是生命</span></div></div>
+        <div class="render real"><div class="t">John 14:6 · 约14:6</div><div class="v"><span class="en">I am the way, the truth, and the life</span><span class="zh">我是道路、真理、生命</span></div></div>
+      </div>
+      <div class="renders" style="margin-top:14px;grid-template-columns:1fr">
+        <div class="render real"><div class="t">John 15:1 · 约15:1</div><div class="v"><span class="en">I am the true vine</span><span class="zh">我是真葡萄树</span></div></div>
+      </div>
+      <p class="note">
+        <span class="en">Notice what each one offers: bread for hunger, light for darkness, a door for the shut-out, a shepherd for the lost, resurrection for the dying, a way for the disoriented, a vine for the fruitless. Every ache Ecclesiastes names, one of these quietly answers.</span>
+        <span class="zh">留意每一句在回应什么:粮,给饥饿的;光,给黑暗中的;门,给被关在外面的;牧人,给迷失的;复活,给将死的;道路,给迷茫的;葡萄树,给不结果子的。传道书说出的每一种疼痛,这里都有一句在安静地回应。</span>
+      </p>
     </div>
   </div>
 </section>
@@ -454,6 +584,40 @@
       <span class="en">From "under the sun" to "the Light of Life"</span>
       <span class="zh">从"日光之下"到"生命之光"</span>
     </h2>
+
+    <figure class="fig-art">
+      <svg viewBox="0 0 520 150" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+        <line x1="24" y1="112" x2="496" y2="112" stroke="#d9a441" stroke-opacity=".35" stroke-width="1"/>
+        <!-- dusk: a dim, setting sun sinking below the line -->
+        <g>
+          <path d="M96 112 a34 34 0 0 1 68 0" fill="none" stroke="#9a948a" stroke-width="1.5" stroke-opacity=".8"/>
+          <g stroke="#9a948a" stroke-opacity=".4" stroke-width="1" stroke-linecap="round">
+            <line x1="130" y1="112" x2="130" y2="86"/>
+            <line x1="130" y1="112" x2="104" y2="92"/>
+            <line x1="130" y1="112" x2="156" y2="92"/>
+          </g>
+          <text x="130" y="136" text-anchor="middle" fill="#6f6a62" font-size="12" font-style="italic" font-family="Georgia, serif">under the sun · 日光之下</text>
+        </g>
+        <!-- arrow -->
+        <g stroke="#d9a441" stroke-opacity=".7" stroke-width="1.4" stroke-linecap="round" fill="none">
+          <line x1="222" y1="96" x2="298" y2="96"/>
+          <path d="M288 89 L300 96 L288 103"/>
+        </g>
+        <!-- dawn: a bright, rising sun with full rays -->
+        <g>
+          <g stroke="#e8c77e" stroke-opacity=".7" stroke-width="1.2" stroke-linecap="round">
+            <line x1="390" y1="112" x2="390" y2="60"/>
+            <line x1="390" y1="112" x2="356" y2="70"/>
+            <line x1="390" y1="112" x2="424" y2="70"/>
+            <line x1="390" y1="112" x2="334" y2="88"/>
+            <line x1="390" y1="112" x2="446" y2="88"/>
+          </g>
+          <path d="M356 112 a34 34 0 0 1 68 0" fill="none" stroke="#e8c77e" stroke-width="1.8"/>
+          <text x="390" y="136" text-anchor="middle" fill="#d9a441" font-size="12" font-style="italic" font-family="Georgia, serif">the Light of Life · 生命之光</text>
+        </g>
+      </svg>
+    </figure>
+
     <div class="bridge-intro">
       <div class="lbl"><span class="en">Four honest hand-offs</span><span class="zh">四句诚实的接力</span></div>
       <p><span class="en"><strong>Ecclesiastes:</strong> we cannot hold eternity by ourselves. &nbsp;→&nbsp; <strong>John:</strong> eternal life comes to us in Christ.</span><span class="zh"><strong>《传道书》说,</strong>人不能靠自己抓住永恒。&nbsp;→&nbsp; <strong>《约翰福音》说,</strong>永恒的生命在基督里临到人。</span></p>
@@ -726,6 +890,14 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
 
 <button id="toTop" class="to-top" type="button" aria-label="Back to top / 回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
+<nav class="tabbar" aria-label="quick navigation">
+  <a href="#top"><span class="ic">📖</span><span><span class="en">Read</span><span class="zh">阅读</span></span></a>
+  <a href="listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+  <a href="#ask"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
+  <a href="#worship"><span class="ic">✦</span><span><span class="en">Reflect</span><span class="zh">默想</span></span></a>
+  <button type="button" onclick="shareThis()"><span class="ic">↗</span><span><span class="en">Share</span><span class="zh">分享</span></span></button>
+</nav>
+
 <footer>
   <div class="mark">生命之光 · the light of life</div>
   <p style="margin-top:14px">
@@ -753,6 +925,7 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
     var md = document.querySelector('meta[name="description"]');
     if(md) md.setAttribute('content', l==='zh' ? I18N_DESC.zh : I18N_DESC.en);
     swapSlideImages(l);
+    try{ localStorage.setItem('bible_lang', l); }catch(e){}
     renderChips();
     setInputPlaceholder();
   }
@@ -779,6 +952,13 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
     var card = btn.closest('.song'); if(!card) return;
     var m = card.querySelector('.moment-msg'); if(!m) return;
     m.classList.toggle('show');
+  }
+
+  /* ---------- share (bottom tab) ---------- */
+  function shareThis(){
+    var d={ title: document.title, url: location.href };
+    if(navigator.share){ navigator.share(d).catch(function(){}); }
+    else if(navigator.clipboard){ navigator.clipboard.writeText(location.href); }
   }
 
   /* ---------- back-to-top ---------- */
@@ -929,11 +1109,14 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
     if(e.key === 'Enter') askQuestion();
   });
 
-  // init — honor ?lang=zh (used by the Chinese entry link)
+  // init — priority: ?lang param  >  saved preference  >  browser language
   (function(){
     var p = new URLSearchParams(location.search);
-    if(p.get('lang') === 'zh'){ setLang('zh'); }
-    else { renderChips(); setInputPlaceholder(); }
+    var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+    var nl=(navigator.language||'').toLowerCase();
+    var q=p.get('lang');
+    var lang = (q==='zh'||q==='en') ? q : (saved || (nl.indexOf('zh')===0 ? 'zh' : 'en'));
+    setLang(lang);
   })();
 </script>
 </body>

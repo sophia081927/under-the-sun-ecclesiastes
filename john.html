@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gospel of John · 约翰福音:生命之光</title>
+<meta name="description" content="The Gospel of John: the Light of Life. Where Ecclesiastes exposes the emptiness of life under the sun, John leads to Jesus — the light, the living water, the resurrection and the life. 约翰福音:生命之光——从《传道书》的空,走向那位真正的生命之光。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/john.html">
+
+<!-- Social share cards (WeChat / Facebook / X link previews) -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bible Library · 圣经书阁">
+<meta property="og:title" content="The Gospel of John · 约翰福音:生命之光">
+<meta property="og:description" content="If Ecclesiastes exposes the emptiness of life under the sun, the Gospel of John leads us to the true Light of Life. 约翰福音:生命之光。">
+<meta property="og:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/bridge.webp">
+<meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/john.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Gospel of John · 约翰福音:生命之光">
+<meta name="twitter:description" content="The Light of Life — where Ecclesiastes' honest questions find their answer. 从《传道书》的诚实之问,走向生命之光。">
+<meta name="twitter:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/bridge.webp">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Bible Library · 圣经书阁",
+  "url": "https://sophia081927.github.io/under-the-sun-ecclesiastes/",
+  "inLanguage": ["zh-CN", "en"],
+  "description": "A quiet, bilingual reading room for the Bible, book by book — Ecclesiastes and the Gospel of John. 一个安静的中英双语圣经导读:《传道书》与《约翰福音》。",
+  "about": { "@type": "Book", "name": "The Gospel of John · 约翰福音" }
+}
+</script>
+<style>
+  :root{
+    --bg:#14161a;
+    --bg2:#1b1e24;
+    --bg3:#22262e;
+    --ink:#ece7dd;
+    --muted:#9a948a;
+    --faint:#6f6a62;
+    --sun:#d9a441;
+    --sun-soft:#e8c77e;
+    --line:rgba(217,164,65,.22);
+    --line-soft:rgba(236,231,221,.10);
+    --warn:#e0855b;
+    --jade:#7fae9b;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.85;-webkit-font-smoothing:antialiased;
+  }
+  section,header,.quotecard{scroll-margin-top:72px}
+
+  /* language visibility */
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .wrap{max-width:760px;margin:0 auto;padding:0 26px}
+  h1,h2,h3{font-weight:600;letter-spacing:.01em}
+  p{color:var(--ink)}
+  .muted{color:var(--muted)}
+  a{color:var(--sun-soft);text-decoration:none;border-bottom:1px solid rgba(232,199,126,.35)}
+  a:hover{color:var(--sun)}
+
+  /* ---- top bar ---- */
+  .topbar{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;
+    background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
+    color:var(--muted);text-transform:uppercase;
+  }
+  .topbar .mark{color:var(--sun-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.asklink{
+    border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;
+  }
+  .topbar a.asklink:hover{color:var(--sun-soft)}
+  .lang-toggle{
+    border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;
+    font-family:inherit;flex:none;
+  }
+  .lang-toggle button{
+    background:transparent;border:none;color:var(--muted);cursor:pointer;
+    padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s;
+  }
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  @media(max-width:540px){
+    .topbar{letter-spacing:.1em;padding:12px 16px}
+    .topbar .asklink{display:none}
+    .topbar .mark{font-size:11px}
+  }
+
+  /* ---- hero ---- */
+  .hero{
+    min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+    padding:120px 26px 90px;max-width:860px;margin:0 auto;position:relative;
+  }
+  .hero .kicker{color:var(--sun);font-size:13px;letter-spacing:.32em;text-transform:uppercase;margin-bottom:30px}
+  .hero h1{
+    font-size:clamp(34px,6.5vw,62px);line-height:1.22;font-weight:600;
+  }
+  .hero .q2{margin-top:20px;font-size:clamp(20px,3.2vw,28px);color:var(--muted);font-style:italic;line-height:1.5}
+  .hero .sub{margin-top:40px;font-size:18px;color:var(--ink);max-width:640px;opacity:.92}
+  .hero .enter{margin-top:46px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .scrollcue{margin-top:60px;font-size:12px;letter-spacing:.3em;color:var(--faint);text-transform:uppercase}
+
+  .btn{
+    display:inline-block;cursor:pointer;font-family:inherit;font-size:15px;letter-spacing:.04em;
+    padding:13px 30px;border-radius:2px;transition:all .2s;border:1px solid var(--sun);
+    background:transparent;color:var(--sun-soft);
+  }
+  .btn:hover{background:rgba(217,164,65,.12);color:var(--sun)}
+  .btn-ghost{border-color:var(--line);color:var(--muted)}
+  .btn-ghost:hover{border-color:var(--sun);color:var(--sun-soft);background:transparent}
+  .btn-solid{background:var(--sun);color:#14161a;font-weight:600;border-color:var(--sun)}
+  .btn-solid:hover{background:var(--sun-soft);color:#14161a}
+
+  /* ---- sections ---- */
+  section{padding:84px 0;border-top:1px solid var(--line-soft)}
+  .eyebrow{color:var(--sun);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:18px}
+  h2.head{font-size:clamp(26px,4vw,38px);line-height:1.3;margin-bottom:8px}
+  .lead{font-size:18px;color:var(--ink);margin-top:22px;opacity:.92}
+  .narr p{margin-top:20px;font-size:17.5px}
+  .ref{color:var(--sun-soft);font-size:14px;letter-spacing:.04em;font-style:italic}
+
+  /* ---- how to use ---- */
+  .howto{margin-top:30px;display:grid;gap:12px}
+  .howto .item{
+    display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;
+    border:1px solid var(--line-soft);border-radius:9px;background:var(--bg2);padding:18px 22px;transition:all .2s;
+  }
+  .howto .item:hover{border-color:var(--line);background:var(--bg3)}
+  .howto .item .cond{font-size:16px;color:var(--muted);flex:1;min-width:200px}
+  .howto .item a{
+    font-size:14.5px;color:var(--sun-soft);border:none;white-space:nowrap;
+    display:inline-flex;align-items:center;gap:6px;
+  }
+  .howto .item a:hover{color:var(--sun)}
+
+  /* ---- hevel word lens ---- */
+  .lens{background:var(--bg2);border:1px solid var(--line);border-radius:8px;padding:34px 30px;margin-top:30px}
+  .lens .word{font-size:42px;color:var(--sun-soft);letter-spacing:.04em;text-align:center}
+  .lens .heb{text-align:center;color:var(--muted);font-size:15px;margin-top:6px;font-style:italic}
+  .lens .renders{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+  .render{border:1px solid var(--line-soft);border-radius:5px;padding:16px 18px;background:var(--bg3)}
+  .render .t{font-size:13px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+  .render .v{font-size:19px;color:var(--ink);margin-top:4px}
+  .render.real{border-color:var(--line)}
+  .render.real .v{color:var(--sun-soft)}
+  .lens .note{margin-top:24px;font-size:15.5px;color:var(--muted);line-height:1.8}
+  @media(max-width:540px){.lens .renders{grid-template-columns:1fr}}
+
+  /* ---- two-setting compare (Joshua Bell) ---- */
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .compare .col{background:var(--bg2);border:1px solid var(--line-soft);border-radius:8px;padding:26px 24px}
+  .compare .col .label{font-size:13px;letter-spacing:.1em;color:var(--sun);text-transform:uppercase;margin-bottom:10px}
+  .compare .col h3{font-size:20px;margin-bottom:8px}
+  .compare .col p{font-size:15px;color:var(--muted);line-height:1.7}
+  .compare .col.dim{opacity:.78}
+  .pull{margin-top:24px;font-size:17px;background:var(--bg3);border-left:2px solid var(--sun);border-radius:0 6px 6px 0;padding:18px 22px;line-height:1.85}
+  @media(max-width:540px){.compare{grid-template-columns:1fr}}
+
+  /* ---- 虚空 vs 空 (the gentle distinction) ---- */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px}
+  .vs .col{border:1px solid var(--line-soft);border-radius:8px;padding:26px 24px;background:var(--bg2)}
+  .vs .col.kong{border-color:rgba(127,174,155,.4)}
+  .vs .col.xu{border-color:var(--line)}
+  .vs .col .tag{font-size:13px;letter-spacing:.08em;margin-bottom:12px;text-transform:uppercase}
+  .vs .col.kong .tag{color:var(--jade)}
+  .vs .col.xu .tag{color:var(--sun-soft)}
+  .vs .col .big{font-size:26px;margin-bottom:14px;line-height:1.3}
+  .vs .col.kong .big{color:var(--jade)}
+  .vs .col.xu .big{color:var(--sun-soft)}
+  .vs .col ul{list-style:none}
+  .vs .col li{font-size:15px;padding:8px 0;border-bottom:1px dashed var(--line-soft);color:var(--ink);line-height:1.6}
+  .vs .col li:last-child{border-bottom:none}
+  @media(max-width:540px){.vs{grid-template-columns:1fr}}
+  .vs-note{margin-top:24px;font-size:16px;background:var(--bg3);border-left:2px solid var(--sun);border-radius:0 5px 5px 0;padding:18px 22px;line-height:1.85}
+  .vs-caveat{margin-top:16px;font-size:13.5px;color:var(--faint);line-height:1.75;font-style:italic}
+
+  /* ---- roadmap ---- */
+  .roadmap{margin-top:30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:14px}
+  .roadmap .ch{border:1px solid var(--line-soft);border-radius:8px;background:var(--bg2);padding:18px 20px;transition:all .2s}
+  .roadmap .ch:hover{border-color:var(--line);background:var(--bg3)}
+  .roadmap .ch .num{color:var(--sun);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-style:italic}
+  .roadmap .ch .desc{font-size:15px;color:var(--ink);margin-top:8px;line-height:1.6}
+  .roadmap-note{margin-top:22px;font-size:15px;color:var(--muted);line-height:1.8}
+
+  /* ---- slide figure (from the deck) ---- */
+  figure.slidefig{margin:30px 0 0}
+  figure.slidefig img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:8px}
+  figure.slidefig figcaption{margin-top:10px;font-size:12px;color:var(--faint);letter-spacing:.06em;text-align:center}
+
+  /* ---- passage reader ---- */
+  .reader{background:var(--bg2);border:1px solid var(--line);border-radius:8px;margin-top:26px;overflow:hidden}
+  .reader .tabs{display:flex;border-bottom:1px solid var(--line-soft)}
+  .reader .tabs button{
+    flex:1;background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:inherit;
+    padding:14px;font-size:14px;letter-spacing:.05em;transition:all .2s;border-bottom:2px solid transparent;
+  }
+  .reader .tabs button.active{color:var(--sun-soft);border-bottom-color:var(--sun)}
+  .reader .body{padding:28px 30px;max-height:420px;overflow-y:auto}
+  .reader .body .v{display:flex;gap:12px;margin-bottom:12px;font-size:16.5px;line-height:1.75}
+  .reader .body .v .n{color:var(--sun);font-size:12px;min-width:20px;padding-top:5px;font-style:italic}
+  .reader .body .pane{display:none}
+  .reader .body .pane.active{display:block}
+  .reader .body em.h{color:var(--sun-soft);font-style:normal;border-bottom:1px dotted var(--sun)}
+  .reader .src{padding:12px 30px;font-size:12px;color:var(--faint);border-top:1px solid var(--line-soft);letter-spacing:.04em}
+
+  /* ---- Q&A (core feature) ---- */
+  #ask{background:radial-gradient(120% 60% at 50% 0%,rgba(217,164,65,.05),transparent 70%)}
+  .qa{background:var(--bg2);border:1px solid var(--line);border-radius:10px;margin-top:26px;padding:28px 28px;box-shadow:0 14px 40px rgba(0,0,0,.28)}
+  .qa .scope{font-size:13px;color:var(--muted);background:var(--bg3);border-radius:5px;padding:10px 14px;margin-bottom:16px;line-height:1.6}
+  .qa .prompt-hint{font-size:13px;color:var(--faint);letter-spacing:.04em;margin-bottom:12px}
+  .qa .log{display:flex;flex-direction:column;gap:16px;margin-bottom:18px}
+  .qa .msg{padding:14px 16px;border-radius:8px;font-size:15.5px;line-height:1.75;max-width:90%}
+  .qa .msg.you{align-self:flex-end;background:var(--bg3);color:var(--ink)}
+  .qa .msg.bot{align-self:flex-start;background:rgba(217,164,65,.07);border:1px solid var(--line-soft)}
+  .qa .msg.crisis{align-self:stretch;max-width:100%;background:rgba(224,133,91,.10);border:1px solid rgba(224,133,91,.5)}
+  .qa .msg .cite{display:inline-block;margin-top:8px;font-size:13px;color:var(--sun-soft);font-style:italic}
+  .qa .ask{display:flex;gap:10px}
+  .qa input{
+    flex:1;background:var(--bg);border:1px solid var(--line);border-radius:4px;color:var(--ink);
+    font-family:inherit;font-size:15px;padding:13px 14px;
+  }
+  .qa input:focus{outline:none;border-color:var(--sun)}
+  .qa .send{background:var(--sun);color:#14161a;border:none;border-radius:4px;cursor:pointer;font-family:inherit;font-weight:600;padding:0 24px;font-size:15px}
+  .qa .send:hover{background:var(--sun-soft)}
+  .qa .chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+  .qa .chip{font-size:13.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:8px 15px;cursor:pointer;background:var(--bg);font-family:inherit;transition:all .2s;line-height:1.4}
+  .qa .chip:hover{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
+  .qa .demo{font-size:12px;color:var(--faint);margin-top:14px;line-height:1.6}
+
+  /* ---- quote / reflection cards ---- */
+  .quotecard{max-width:700px;margin:0 auto;padding:56px 30px;text-align:center}
+  .quotecard .q{font-size:clamp(21px,3.5vw,30px);line-height:1.6;color:var(--sun-soft);font-style:italic;letter-spacing:.01em}
+  .quotecard .q::before{content:"“";opacity:.5}
+  .quotecard .q::after{content:"”";opacity:.5}
+
+  /* ---- worship songs ---- */
+  .song-group{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-top:38px;margin-bottom:14px;font-weight:600}
+  .songs{display:grid;gap:16px}
+  .song{border:1px solid var(--line-soft);border-radius:10px;background:var(--bg2);padding:24px 26px;transition:border-color .2s}
+  .song:hover{border-color:var(--line)}
+  .song .sname{font-size:20px;color:var(--sun-soft);font-weight:600;letter-spacing:.01em}
+  .song .artist{font-size:12.5px;color:var(--faint);font-style:italic;margin-top:5px}
+  .song .field{margin-top:15px}
+  .song .field .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);opacity:.85;margin-bottom:3px}
+  .song .field .val{font-size:15px;color:var(--ink);line-height:1.7}
+  .song .intro{margin-top:15px;font-size:14.5px;color:var(--muted);line-height:1.75}
+  .song .actions{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .song .listen{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;letter-spacing:.06em;color:#14161a;background:var(--sun);border:1px solid var(--sun);border-radius:30px;padding:9px 22px;transition:all .2s}
+  .song .listen:hover{background:var(--sun-soft)}
+  .song .moment-btn{display:inline-flex;align-items:center;gap:7px;font-size:13px;letter-spacing:.05em;color:var(--muted);background:transparent;border:1px solid var(--line-soft);border-radius:30px;padding:9px 18px;cursor:pointer;font-family:inherit;transition:all .2s}
+  .song .moment-btn:hover{border-color:var(--sun);color:var(--sun-soft)}
+  .song .streams{font-size:12.5px;color:var(--faint);letter-spacing:.03em}
+  .song .streams a{color:var(--muted);border:none}
+  .song .streams a:hover{color:var(--sun-soft)}
+  .song .moment-msg{display:none;margin-top:14px;font-size:14.5px;color:var(--sun-soft);font-style:italic;line-height:1.7;border-left:2px solid var(--line);padding-left:14px}
+  .song .moment-msg.show{display:block}
+  .songs-note{margin-top:26px;font-size:13px;color:var(--faint);line-height:1.75}
+  .song .lyrics-fold{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:12px}
+  .song .lyrics-fold summary{cursor:pointer;list-style:none;font-size:13px;letter-spacing:.06em;color:var(--sun-soft);display:inline-flex;align-items:center;gap:7px}
+  .song .lyrics-fold summary::-webkit-details-marker{display:none}
+  .song .lyrics-fold summary::before{content:"▸";color:var(--sun);font-size:11px}
+  .song .lyrics-fold[open] summary::before{content:"▾"}
+  .song .lyrics-fold .words{margin-top:12px;font-size:15px;line-height:1.9;color:var(--ink);white-space:pre-line}
+  .song .lyrics-fold .pd{font-size:11.5px;color:var(--faint);font-style:italic;margin-top:10px}
+
+  /* ---- back to top ---- */
+  .to-top{
+    position:fixed;right:22px;bottom:22px;width:46px;height:46px;border-radius:50%;
+    border:1px solid var(--line);background:rgba(27,30,36,.85);color:var(--sun-soft);
+    cursor:pointer;font-size:18px;line-height:1;font-family:inherit;
+    display:flex;align-items:center;justify-content:center;
+    opacity:0;pointer-events:none;transform:translateY(8px);
+    transition:opacity .3s,transform .3s,background .2s,border-color .2s;
+    backdrop-filter:blur(6px);z-index:60;
+  }
+  .to-top.show{opacity:1;pointer-events:auto;transform:none}
+  .to-top:hover{border-color:var(--sun);background:rgba(217,164,65,.15);color:var(--sun)}
+  @media(max-width:540px){.to-top{right:16px;bottom:16px;width:42px;height:42px}}
+
+  /* ---- going deeper (opt-in) ---- */
+  .bridge-intro{background:var(--bg2);border:1px solid var(--line);border-radius:9px;padding:26px 28px;margin-top:28px;line-height:1.85}
+  .bridge-intro p{font-size:16.5px}
+  .bridge-intro .lbl{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);margin-bottom:10px}
+  details.deeper{margin-top:20px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);overflow:hidden}
+  details.deeper summary{
+    cursor:pointer;list-style:none;padding:22px 26px;font-size:17px;color:var(--sun-soft);
+    display:flex;justify-content:space-between;align-items:center;gap:14px;
+  }
+  details.deeper summary::-webkit-details-marker{display:none}
+  details.deeper summary .opt{font-size:12px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+  details.deeper .inner{padding:0 26px 28px;border-top:1px solid var(--line-soft)}
+  details.deeper .inner p{margin-top:18px;font-size:16.5px}
+
+  /* ---- who this helps ---- */
+  .audience{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .audience .who{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:7px;background:var(--bg2);padding:16px 18px;font-size:15.5px;color:var(--ink);line-height:1.65}
+  .audience .who .dot{color:var(--sun);flex:none;line-height:1.65}
+  @media(max-width:540px){.audience{grid-template-columns:1fr}}
+  .share-line{margin-top:24px;font-size:15px;color:var(--muted);line-height:1.8}
+
+  /* ---- next steps ---- */
+  .steps{margin-top:26px;display:grid;gap:12px}
+  .steps .step{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line-soft);border-radius:8px;background:var(--bg2);padding:20px 22px}
+  .steps .step .k{color:var(--sun);font-size:15px;font-style:italic;letter-spacing:.1em;min-width:52px;padding-top:2px;text-transform:uppercase}
+  .steps .step .b .t{font-size:17px;color:var(--ink);font-weight:600}
+  .steps .step .b p{font-size:15px;color:var(--muted);margin-top:6px;line-height:1.75}
+
+  /* ---- off-ramp / crisis ---- */
+  .crisis-box{border:1px solid rgba(224,133,91,.5);background:rgba(224,133,91,.08);border-radius:8px;padding:22px 24px;margin-top:26px}
+  .crisis-box .t{color:var(--warn);font-weight:600;font-size:15.5px;margin-bottom:8px}
+  .crisis-box p{font-size:14.5px;color:var(--ink);line-height:1.7}
+  .crisis-box a{color:var(--sun-soft)}
+
+  footer{padding:60px 26px;text-align:center;color:var(--faint);font-size:13px;line-height:1.9;border-top:1px solid var(--line-soft)}
+  footer .mark{color:var(--muted);letter-spacing:.2em;text-transform:uppercase;font-size:12px}
+  footer a{color:var(--muted)}
+</style>
+</head>
+<body class="lang-en">
+
+<div class="topbar">
+  <a class="mark" href="index.html" style="border:none">生命之光 · the light of life</a>
+  <div class="right">
+    <a class="asklink" href="index.html"><span class="en">Library</span><span class="zh">书阁</span></a>
+    <a class="asklink" href="ecclesiastes.html"><span class="en">Ecclesiastes</span><span class="zh">传道书</span></a>
+    <a class="asklink" href="#ask"><span class="en">Ask →</span><span class="zh">随便问 →</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="kicker"><span class="en">The Gospel of John · Book Two</span><span class="zh">约翰福音 · 圣经书阁第二卷</span></div>
+  <h1>
+    <span class="en">The Gospel of John:<br>The Light of Life</span>
+    <span class="zh">约翰福音:<br>生命之光</span>
+  </h1>
+  <div class="q2">
+    <span class="en">If Ecclesiastes honestly exposes the emptiness of life under the sun, the Gospel of John leads us to the true Light of Life.</span>
+    <span class="zh">如果《传道书》诚实揭开了"日光之下"的空,《约翰福音》就把我们带向那位真正的生命之光。</span>
+  </div>
+  <div class="enter">
+    <a href="#asking" class="btn"><span class="en">What is this book asking? →</span><span class="zh">这卷书在问什么? →</span></a>
+    <a href="#ask" class="btn btn-ghost"><span class="en">Ask a question</span><span class="zh">直接提问</span></a>
+  </div>
+  <div class="scrollcue"><span class="en">scroll</span><span class="zh">向下</span></div>
+</header>
+
+<!-- ============ WHAT IS THIS BOOK ASKING ============ -->
+<section id="asking">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The question at its heart</span><span class="zh">这卷书的核心之问</span></div>
+    <h2 class="head">
+      <span class="en">Who is Jesus, really?</span>
+      <span class="zh">耶稣到底是谁?</span>
+    </h2>
+    <p class="lead">
+      <span class="en">Who is Jesus? Is he merely a teacher, a prophet, or a moral example — or is he God come near to us? And if success, wealth, and wisdom cannot fill the emptiness of life, where is true life actually found?</span>
+      <span class="zh">耶稣到底是谁?祂只是老师、先知、道德榜样,还是神亲自来到人间?如果人生的空不能靠成功、财富和智慧填满,那么生命真正的源头,又在哪里?</span>
+    </p>
+    <p class="lead muted">
+      <span class="en">John doesn't answer with a lecture. He tells a story — of light entering darkness, water becoming wine, the dead walking out of a tomb — and lets you decide who this could be.</span>
+      <span class="zh">约翰福音不用长篇大论回答。它讲一个故事——光进入黑暗,水变成酒,死人从坟墓里走出来——然后让你自己判断:这位,究竟是谁。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ CORE THEMES ============ -->
+<section id="themes">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The threads John follows</span><span class="zh">约翰福音的核心主题</span></div>
+    <h2 class="head">
+      <span class="en">Eight images of who Jesus is</span>
+      <span class="zh">八个"耶稣是谁"的意象</span>
+    </h2>
+    <div class="roadmap">
+      <div class="ch"><div class="num"><span class="en">The Word made flesh</span><span class="zh">道成肉身</span></div><div class="desc"><span class="en">God, not distant, but come near in a person.</span><span class="zh">神不再遥远,亲自成为一个人来到我们中间。</span> <span class="ref">1:14</span></div></div>
+      <div class="ch"><div class="num"><span class="en">The Light of Life</span><span class="zh">生命之光</span></div><div class="desc"><span class="en">Light that the darkness has never put out.</span><span class="zh">黑暗从来没能胜过、没能吞灭的光。</span> <span class="ref">8:12</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Living Water</span><span class="zh">活水</span></div><div class="desc"><span class="en">A thirst nothing under the sun can quench — met.</span><span class="zh">日光之下解不了的那种渴,在这里被解。</span> <span class="ref">4:14 · 7:38</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Born again</span><span class="zh">重生</span></div><div class="desc"><span class="en">Not self-improvement, but a new beginning from above.</span><span class="zh">不是自我升级,而是一个从上头来的新开始。</span> <span class="ref">3:3</span></div></div>
+      <div class="ch"><div class="num"><span class="en">The Good Shepherd</span><span class="zh">好牧人</span></div><div class="desc"><span class="en">One who lays down his life for the sheep.</span><span class="zh">一位为羊舍命的牧人。</span> <span class="ref">10:11</span></div></div>
+      <div class="ch"><div class="num"><span class="en">The Way, the Truth, the Life</span><span class="zh">道路、真理、生命</span></div><div class="desc"><span class="en">Not a map to the answer — the answer in person.</span><span class="zh">不是通往答案的地图,而是那位答案本身。</span> <span class="ref">14:6</span></div></div>
+      <div class="ch"><div class="num"><span class="en">The Resurrection and the Life</span><span class="zh">复活与生命</span></div><div class="desc"><span class="en">The wall Ecclesiastes stops at — answered from the far side.</span><span class="zh">传道书停在死亡这堵墙前;这里从墙的另一边回应。</span> <span class="ref">11:25</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Life through believing</span><span class="zh">信而得生命</span></div><div class="desc"><span class="en">Written so that you may believe — and have life.</span><span class="zh">这书写下来,是要你信,并且因信得生命。</span> <span class="ref">20:31</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 21-CHAPTER ROADMAP ============ -->
+<section id="roadmap">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">The whole book at a glance</span><span class="zh">整卷书一眼看懂</span></div>
+    <h2 class="head">
+      <span class="en">A 21-chapter roadmap through John</span>
+      <span class="zh">《约翰福音》21 章路线图</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">Twenty-one chapters. Read one a day and watch five words return again and again: light, life, believe, love, eternal.</span>
+      <span class="zh">二十一章。每天读一章,留意五个反复出现的词:光、生命、信、爱、永生。</span>
+    </p>
+    <div class="roadmap">
+      <div class="ch"><div class="num"><span class="en">Chapter 1</span><span class="zh">第 1 章</span></div><div class="desc"><span class="en">The Word made flesh; the Light enters the world</span><span class="zh">道成肉身,光来到世界</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 2</span><span class="zh">第 2 章</span></div><div class="desc"><span class="en">Water into wine; cleansing the temple</span><span class="zh">水变酒,洁净圣殿</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 3</span><span class="zh">第 3 章</span></div><div class="desc"><span class="en">Being born again; "God so loved the world"</span><span class="zh">重生与神爱世人</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 4</span><span class="zh">第 4 章</span></div><div class="desc"><span class="en">Living water and the Samaritan woman</span><span class="zh">活水与撒玛利亚妇人</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 5</span><span class="zh">第 5 章</span></div><div class="desc"><span class="en">The Son gives life</span><span class="zh">子赐生命</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 6</span><span class="zh">第 6 章</span></div><div class="desc"><span class="en">The Bread of Life</span><span class="zh">生命的粮</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 7</span><span class="zh">第 7 章</span></div><div class="desc"><span class="en">Rivers of living water</span><span class="zh">活水江河</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 8</span><span class="zh">第 8 章</span></div><div class="desc"><span class="en">The Light of the world</span><span class="zh">世界的光</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 9</span><span class="zh">第 9 章</span></div><div class="desc"><span class="en">The blind man receives sight</span><span class="zh">瞎眼得看见</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 10</span><span class="zh">第 10 章</span></div><div class="desc"><span class="en">The Good Shepherd</span><span class="zh">好牧人</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 11</span><span class="zh">第 11 章</span></div><div class="desc"><span class="en">The Resurrection and the Life</span><span class="zh">复活与生命</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 12</span><span class="zh">第 12 章</span></div><div class="desc"><span class="en">A grain of wheat falls to the ground</span><span class="zh">一粒麦子落在地里</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 13</span><span class="zh">第 13 章</span></div><div class="desc"><span class="en">Love one another</span><span class="zh">彼此相爱</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 14</span><span class="zh">第 14 章</span></div><div class="desc"><span class="en">The Way, the Truth, the Life</span><span class="zh">道路、真理、生命</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 15</span><span class="zh">第 15 章</span></div><div class="desc"><span class="en">The Vine and the branches</span><span class="zh">葡萄树与枝子</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 16</span><span class="zh">第 16 章</span></div><div class="desc"><span class="en">The Spirit; sorrow turned to joy</span><span class="zh">圣灵与忧愁变喜乐</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 17</span><span class="zh">第 17 章</span></div><div class="desc"><span class="en">Jesus prays for his own</span><span class="zh">耶稣的祷告</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 18</span><span class="zh">第 18 章</span></div><div class="desc"><span class="en">Betrayal and trial</span><span class="zh">被捕与受审</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 19</span><span class="zh">第 19 章</span></div><div class="desc"><span class="en">The cross</span><span class="zh">十字架</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 20</span><span class="zh">第 20 章</span></div><div class="desc"><span class="en">The resurrection</span><span class="zh">复活</span></div></div>
+      <div class="ch"><div class="num"><span class="en">Chapter 21</span><span class="zh">第 21 章</span></div><div class="desc"><span class="en">Peter restored; "Follow me"</span><span class="zh">恢复彼得与跟随主</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- quote card -->
+<div class="quotecard">
+  <p class="q"><span class="en">The light shines in the darkness, and the darkness has not overcome it.</span><span class="zh">光照在黑暗里,黑暗却从未胜过光。</span></p>
+</div>
+
+<!-- ============ FROM UNDER THE SUN TO THE LIGHT OF LIFE ============ -->
+<section id="connection">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Book one meets book two</span><span class="zh">第一卷,遇见第二卷</span></div>
+    <h2 class="head">
+      <span class="en">From "under the sun" to "the Light of Life"</span>
+      <span class="zh">从"日光之下"到"生命之光"</span>
+    </h2>
+    <div class="bridge-intro">
+      <div class="lbl"><span class="en">Four honest hand-offs</span><span class="zh">四句诚实的接力</span></div>
+      <p><span class="en"><strong>Ecclesiastes:</strong> we cannot hold eternity by ourselves. &nbsp;→&nbsp; <strong>John:</strong> eternal life comes to us in Christ.</span><span class="zh"><strong>《传道书》说,</strong>人不能靠自己抓住永恒。&nbsp;→&nbsp; <strong>《约翰福音》说,</strong>永恒的生命在基督里临到人。</span></p>
+      <p><span class="en"><strong>Ecclesiastes:</strong> death comes to all. &nbsp;→&nbsp; <strong>John:</strong> Jesus is the resurrection and the life.</span><span class="zh"><strong>《传道书》说,</strong>死亡临到众人。&nbsp;→&nbsp; <strong>《约翰福音》说,</strong>耶稣是复活与生命。</span></p>
+      <p><span class="en"><strong>Ecclesiastes:</strong> eternity is set in the human heart. &nbsp;→&nbsp; <strong>John:</strong> whoever believes in him has eternal life.</span><span class="zh"><strong>《传道书》说,</strong>人心里有永恒。&nbsp;→&nbsp; <strong>《约翰福音》说,</strong>信祂的人有永生。</span></p>
+      <p><span class="en"><strong>Ecclesiastes:</strong> everything under the sun is limited. &nbsp;→&nbsp; <strong>John:</strong> the true Light has come into the world.</span><span class="zh"><strong>《传道书》说,</strong>日光之下的一切都有限。&nbsp;→&nbsp; <strong>《约翰福音》说,</strong>真光已经来到世界。</span></p>
+    </div>
+    <p class="lead muted" style="font-size:15px">
+      <span class="en">Haven't read book one? &nbsp;<a href="ecclesiastes.html">Start with Ecclesiastes →</a></span>
+      <span class="zh">还没读第一卷? &nbsp;<a href="ecclesiastes.html?lang=zh">先读《传道书》→</a></span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ ASK ANYTHING ============ -->
+<section id="ask">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Ask anything · the heart of this site</span><span class="zh">随便问 · 本站的核心</span></div>
+    <h2 class="head">
+      <span class="en">Ask the questions you'd hesitate to say out loud</span>
+      <span class="zh">问出那些你不好意思说出口的问题</span>
+    </h2>
+    <p class="lead">
+      <span class="en">Doubt is welcome here. Tap a question to begin, or type your own.</span>
+      <span class="zh">这里欢迎怀疑。点一个问题开始,或者自己输入。</span>
+    </p>
+
+    <div class="qa">
+      <div class="scope">
+        <span class="en">🔒 This assistant answers from the Gospel of John and its links to the wider Bible, citing chapter-and-verse — and never asserts a verse it hasn't retrieved.</span>
+        <span class="zh">🔒 这个助手只从《约翰福音》、以及它与全本圣经的关联来回答,每条主张都标出章节,绝不凭记忆断言未检索的经文。</span>
+      </div>
+
+      <div class="prompt-hint"><span class="en">Questions people actually ask:</span><span class="zh">大家真正会问的问题:</span></div>
+      <div class="chips" id="chips"></div>
+
+      <div class="log" id="log"></div>
+
+      <div class="ask">
+        <input id="qInput" type="text" placeholder="">
+        <button class="send" onclick="askQuestion()"><span class="en">Ask</span><span class="zh">问</span></button>
+      </div>
+      <p class="demo">
+        <span class="en">⚙️ Demo note: answers below come from a small built-in, verse-grounded set. The production version is a retrieval model constrained to the Gospel of John, citing only what it retrieves.</span>
+        <span class="zh">⚙️ 演示说明:下面的回答取自一个内置的、扎根经文的小型集合。正式版本是被约束在《约翰福音》语料内的检索模型,只根据检索到的经文作答并标注章节。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- quote card -->
+<div class="quotecard">
+  <p class="q"><span class="en">"I have come that they may have life, and have it to the full."</span><span class="zh">"我来了,是要叫人得生命,并且得的更丰盛。"</span></p>
+</div>
+
+<!-- ============ WORSHIP SONGS ============ -->
+<section id="worship">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">A worship response · optional</span><span class="zh">敬拜回应 · 自选</span></div>
+    <h2 class="head">
+      <span class="en">Songs for the Light of Life</span>
+      <span class="zh">献给生命之光的诗歌</span>
+    </h2>
+    <p class="lead muted">
+      <span class="en">If John has stirred something in you, let these songs carry it back to God. Read a little, or simply listen.</span>
+      <span class="zh">如果《约翰福音》在你心里动了什么,让这些诗歌把它带回到神面前。读一点,或只是听一听。</span>
+    </p>
+
+    <h3 class="song-group"><span class="en">Classic Hymns</span><span class="zh">经典圣诗</span></h3>
+    <div class="songs">
+      <!-- Amazing Grace -->
+      <div class="song">
+        <div class="sname">Amazing Grace<span class="zh"> · 奇异恩典</span></div>
+        <div class="artist"><span class="en">Traditional hymn · John Newton, 1779</span><span class="zh">传统圣诗 · 约翰·牛顿,1779</span></div>
+        <div class="field">
+          <div class="lbl"><span class="en">When to listen</span><span class="zh">适合心境</span></div>
+          <div class="val"><span class="en">When you feel lost, and long to be found by grace again.</span><span class="zh">当你觉得迷失,渴望重新被恩典找回。</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl"><span class="en">John connection</span><span class="zh">和《约翰福音》的连接</span></div>
+          <div class="val"><span class="en">"Was blind, but now I see" is John 9 in one line — the light of Christ opening blind eyes.</span><span class="zh">"瞎眼今得看见"正是约翰福音第 9 章的一句缩影——基督的光,开了瞎眼。</span></div>
+        </div>
+        <p class="intro"><span class="en">A hymn of grace for the lost, tired, and searching soul.</span><span class="zh">一首关于「被恩典找回」的圣诗,给疲惫、迷失、仍在寻找的人。</span></p>
+        <details class="lyrics-fold">
+          <summary><span class="en">Show lyrics</span><span class="zh">展开歌词</span></summary>
+          <div class="words"><span class="en">Amazing grace! how sweet the sound,
+That saved a wretch like me!
+I once was lost, but now am found,
+Was blind, but now I see.</span><span class="zh">奇异恩典,何等甘甜,
+我罪已得赦免;
+前我失丧,今被寻回,
+瞎眼今得看见。</span></div>
+          <div class="pd"><span class="en">Public domain · John Newton, 1779</span><span class="zh">公有领域 · 约翰·牛顿,1779</span></div>
+        </details>
+        <div class="actions">
+          <a class="listen" href="https://www.youtube.com/results?search_query=Amazing+Grace+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">收听</span></a>
+          <button class="moment-btn" type="button" onclick="toggleMoment(this)"><span class="en">Good for this moment</span><span class="zh">适合我现在听</span></button>
+          <span class="streams"><a href="https://open.spotify.com/search/Amazing%20Grace" target="_blank" rel="noopener">Spotify</a> · <a href="https://music.apple.com/us/search?term=Amazing%20Grace" target="_blank" rel="noopener">Apple Music</a></span>
+        </div>
+        <p class="moment-msg"><span class="en">May this song help you become still for a moment and bring your burdens before God.</span><span class="zh">愿这首诗歌陪你安静片刻,把心里的重担交给神。</span></p>
+      </div>
+
+      <!-- Be Thou My Vision -->
+      <div class="song">
+        <div class="sname">Be Thou My Vision<span class="zh"> · 成为我异象</span></div>
+        <div class="artist"><span class="en">Traditional Irish hymn · translated 1905</span><span class="zh">传统爱尔兰圣诗 · 1905 译</span></div>
+        <div class="field">
+          <div class="lbl"><span class="en">When to listen</span><span class="zh">适合心境</span></div>
+          <div class="val"><span class="en">When you want to reorder your life around what truly gives light.</span><span class="zh">当你想把人生重新围绕那真正给你光的重新排序。</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl"><span class="en">John connection</span><span class="zh">和《约翰福音》的连接</span></div>
+          <div class="val"><span class="en">"Be Thou my Vision" is the prayer of someone who has met the Light of the world (John 8:12).</span><span class="zh">"成为我异象"是遇见了世界之光(约8:12)之人所发的祷告。</span></div>
+        </div>
+        <p class="intro"><span class="en">A prayer for God to become the center, vision, and wisdom of life.</span><span class="zh">一个祷告:主啊,成为我的异象、我的智慧、我的方向。</span></p>
+        <details class="lyrics-fold">
+          <summary><span class="en">Show lyrics</span><span class="zh">展开歌词</span></summary>
+          <div class="words"><span class="en">Be Thou my Vision, O Lord of my heart;
+Naught be all else to me, save that Thou art;
+Thou my best thought, by day or by night,
+Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异象,我心所仰望;
+万事皆虚空,惟主是希望;
+愿你居首位,日夜导引;
+或睡或睡醒,慈容作光明。</span></div>
+          <div class="pd"><span class="en">Public domain · trans. 1905 / versified 1912</span><span class="zh">公有领域 · 1905 英译 / 1912 韵文</span></div>
+        </details>
+        <div class="actions">
+          <a class="listen" href="https://www.youtube.com/results?search_query=Be+Thou+My+Vision+hymn" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">收听</span></a>
+          <button class="moment-btn" type="button" onclick="toggleMoment(this)"><span class="en">Good for this moment</span><span class="zh">适合我现在听</span></button>
+          <span class="streams"><a href="https://open.spotify.com/search/Be%20Thou%20My%20Vision" target="_blank" rel="noopener">Spotify</a> · <a href="https://music.apple.com/us/search?term=Be%20Thou%20My%20Vision" target="_blank" rel="noopener">Apple Music</a></span>
+        </div>
+        <p class="moment-msg"><span class="en">May this song help you become still for a moment and bring your burdens before God.</span><span class="zh">愿这首诗歌陪你安静片刻,把心里的重担交给神。</span></p>
+      </div>
+    </div>
+
+    <h3 class="song-group"><span class="en">Modern Worship</span><span class="zh">现代敬拜</span></h3>
+    <div class="songs">
+      <!-- In Christ Alone -->
+      <div class="song">
+        <div class="sname">In Christ Alone<span class="zh"> · 唯独基督</span></div>
+        <div class="artist"><span class="en">Keith Getty &amp; Stuart Townend</span><span class="zh">Keith Getty &amp; Stuart Townend</span></div>
+        <div class="field">
+          <div class="lbl"><span class="en">When to listen</span><span class="zh">适合心境</span></div>
+          <div class="val"><span class="en">When you need something solid to stand on — from cross to empty tomb.</span><span class="zh">当你需要一个真正踏实的立足点——从十字架到空坟墓。</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl"><span class="en">John connection</span><span class="zh">和《约翰福音》的连接</span></div>
+          <div class="val"><span class="en">It walks the road of John 19–20: the cross, the burial, and the morning He rose.</span><span class="zh">它走的正是约翰福音 19–20 章的路:十字架、埋葬,以及祂复活的清晨。</span></div>
+        </div>
+        <p class="intro"><span class="en">A modern hymn tracing the gospel from incarnation to resurrection.</span><span class="zh">一首现代圣诗,把福音从道成肉身一路唱到复活。</span></p>
+        <div class="actions">
+          <a class="listen" href="https://www.youtube.com/results?search_query=In+Christ+Alone+Keith+Getty" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">收听</span></a>
+          <button class="moment-btn" type="button" onclick="toggleMoment(this)"><span class="en">Good for this moment</span><span class="zh">适合我现在听</span></button>
+          <span class="streams"><a href="https://open.spotify.com/search/In%20Christ%20Alone" target="_blank" rel="noopener">Spotify</a> · <a href="https://music.apple.com/us/search?term=In%20Christ%20Alone" target="_blank" rel="noopener">Apple Music</a></span>
+        </div>
+        <p class="moment-msg"><span class="en">May this song help you become still for a moment and bring your burdens before God.</span><span class="zh">愿这首诗歌陪你安静片刻,把心里的重担交给神。</span></p>
+      </div>
+
+      <!-- Yet Not I But Through Christ in Me -->
+      <div class="song">
+        <div class="sname">Yet Not I But Through Christ in Me<span class="zh"> · 不再是我,乃是基督</span></div>
+        <div class="artist"><span class="en">CityAlight</span><span class="zh">CityAlight</span></div>
+        <div class="field">
+          <div class="lbl"><span class="en">When to listen</span><span class="zh">适合心境</span></div>
+          <div class="val"><span class="en">When you cannot hold on by your own strength.</span><span class="zh">当你觉得靠自己撑不下去。</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl"><span class="en">John connection</span><span class="zh">和《约翰福音》的连接</span></div>
+          <div class="val"><span class="en">John 15: apart from the Vine we can do nothing; abiding in Him, we bear fruit.</span><span class="zh">约翰福音 15 章:离了葡萄树我们就不能做什么;住在祂里面,就结果子。</span></div>
+        </div>
+        <p class="intro"><span class="en">A Christ-centered song for strength, endurance, and hope.</span><span class="zh">一首以基督为中心的诗歌:力量、坚忍与盼望。</span></p>
+        <div class="actions">
+          <a class="listen" href="https://www.youtube.com/results?search_query=Yet+Not+I+But+Through+Christ+in+Me+CityAlight" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">收听</span></a>
+          <button class="moment-btn" type="button" onclick="toggleMoment(this)"><span class="en">Good for this moment</span><span class="zh">适合我现在听</span></button>
+          <span class="streams"><a href="https://open.spotify.com/search/Yet%20Not%20I%20But%20Through%20Christ%20in%20Me" target="_blank" rel="noopener">Spotify</a> · <a href="https://music.apple.com/us/search?term=Yet%20Not%20I%20But%20Through%20Christ%20in%20Me" target="_blank" rel="noopener">Apple Music</a></span>
+        </div>
+        <p class="moment-msg"><span class="en">May this song help you become still for a moment and bring your burdens before God.</span><span class="zh">愿这首诗歌陪你安静片刻,把心里的重担交给神。</span></p>
+      </div>
+
+      <!-- Goodness of God -->
+      <div class="song">
+        <div class="sname">Goodness of God<span class="zh"> · 神的良善</span></div>
+        <div class="artist"><span class="en">Bethel Music · Jenn Johnson</span><span class="zh">Bethel Music · Jenn Johnson</span></div>
+        <div class="field">
+          <div class="lbl"><span class="en">When to listen</span><span class="zh">适合心境</span></div>
+          <div class="val"><span class="en">When you look back and want to trace the marks of grace.</span><span class="zh">当你回望人生,想寻找恩典的痕迹。</span></div>
+        </div>
+        <div class="field">
+          <div class="lbl"><span class="en">John connection</span><span class="zh">和《约翰福音》的连接</span></div>
+          <div class="val"><span class="en">The Good Shepherd of John 10 has been goodness and mercy all your days.</span><span class="zh">约翰福音 10 章的好牧人,一生一世都以恩慈相随。</span></div>
+        </div>
+        <p class="intro"><span class="en">A song of remembrance, gratitude, and trust in God's goodness.</span><span class="zh">一首关于回望、感恩,与信靠神良善的诗歌。</span></p>
+        <div class="actions">
+          <a class="listen" href="https://www.youtube.com/results?search_query=Goodness+of+God+Bethel+Jenn+Johnson" target="_blank" rel="noopener">♪ <span class="en">Listen</span><span class="zh">收听</span></a>
+          <button class="moment-btn" type="button" onclick="toggleMoment(this)"><span class="en">Good for this moment</span><span class="zh">适合我现在听</span></button>
+          <span class="streams"><a href="https://open.spotify.com/search/Goodness%20of%20God" target="_blank" rel="noopener">Spotify</a> · <a href="https://music.apple.com/us/search?term=Goodness%20of%20God" target="_blank" rel="noopener">Apple Music</a></span>
+        </div>
+        <p class="moment-msg"><span class="en">May this song help you become still for a moment and bring your burdens before God.</span><span class="zh">愿这首诗歌陪你安静片刻,把心里的重担交给神。</span></p>
+      </div>
+    </div>
+
+    <p class="songs-note">
+      <span class="en">Songs are a worship and reflection guide. Full lyrics are shown only for public-domain classic hymns (Chinese follows common hymnal versions). Copyrighted worship songs remain the property of their authors and publishers; for those, only listening links are provided.</span>
+      <span class="zh">诗歌仅作为敬拜与反思引导。站内仅对公有领域的经典圣诗展示完整歌词(中文依常见诗歌本)。现代敬拜歌曲版权归原作者与版权方所有,本站不复制其歌词,仅提供公开收听链接。</span>
+    </p>
+  </div>
+</section>
+
+<!-- ============ NEXT STEPS ============ -->
+<section id="nextsteps">
+  <div class="wrap">
+    <div class="eyebrow"><span class="en">Next steps · no pressure</span><span class="zh">下一步 · 不施压</span></div>
+    <h2 class="head">
+      <span class="en">If you want to take one more step</span>
+      <span class="zh">如果你愿意继续走一步</span>
+    </h2>
+
+    <div class="steps">
+      <div class="step">
+        <div class="k"><span class="en">Read</span><span class="zh">读</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Read one chapter a day</span><span class="zh">每天读一章</span></div>
+          <p><span class="en">Start with John chapter 1 and read one chapter a day.</span><span class="zh">从《约翰福音》第 1 章开始,每天读一章。</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Notice</span><span class="zh">留意</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Watch five words</span><span class="zh">特别留意五个词</span></div>
+          <p><span class="en">Notice how often "light, life, believe, love, eternal" return.</span><span class="zh">留意"光、生命、信、爱、永生"这些词反复出现。</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Ask</span><span class="zh">问</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Write your hardest question</span><span class="zh">写下最不明白的问题</span></div>
+          <p><span class="en">Put down the question you least understand — plainly, honestly.</span><span class="zh">把你最不明白的问题写下来,不用包装。</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Talk</span><span class="zh">聊</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Talk to a Christian friend</span><span class="zh">找一个基督徒朋友聊聊</span></div>
+          <p><span class="en">Send this page to someone you trust and ask what they think.</span><span class="zh">把这个页面发给一个你信任的人,问问他怎么看。</span></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="k"><span class="en">Visit</span><span class="zh">走进</span></div>
+        <div class="b">
+          <div class="t"><span class="en">Visit a church</span><span class="zh">走进一间教会</span></div>
+          <p><span class="en">If you're in Orange County, you might consider <a href="https://www.marinerschurch.org" target="_blank" rel="noopener">Mariners Church</a> — or a Bible-based church near you. Go quietly, at your own pace.</span><span class="zh">如果你在 Orange County,可以了解 <a href="https://www.marinerschurch.org" target="_blank" rel="noopener">Mariners Church</a>,或附近以圣经为根基的教会。安静地去,按自己的节奏。</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="crisis-box">
+      <div class="t"><span class="en">If something heavy has surfaced</span><span class="zh">如果心里泛起某种沉重</span></div>
+      <p>
+        <span class="en">If you're thinking about harming yourself or feel you can't go on, please reach a person now — in the US call or text <strong>988</strong> (24/7, free, confidential), or text <strong>HOME</strong> to <strong>741741</strong>. If you're in immediate danger, call <strong>911</strong>. You deserve to talk to someone real.</span>
+        <span class="zh">如果你有伤害自己的念头,或觉得撑不下去,请现在去找一个人——在美国可拨打或发短信至 <strong>988</strong>(全天候、免费、保密),或发送 <strong>HOME</strong> 到 <strong>741741</strong>;若有即时危险请拨 <strong>911</strong>。你值得和一个真实的人说说话。</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- quote card -->
+<div class="quotecard">
+  <p class="q"><span class="en">"For God so loved the world…" — the answer Ecclesiastes was reaching toward.</span><span class="zh">"神爱世人……"——这正是《传道书》一直伸手要够的那个答案。</span></p>
+</div>
+
+<button id="toTop" class="to-top" type="button" aria-label="Back to top / 回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <div class="mark">生命之光 · the light of life</div>
+  <p style="margin-top:14px">
+    <span class="en">The Gospel of John, book two in a quiet bilingual reading of the Bible. · <a href="index.html">Library</a> · <a href="ecclesiastes.html">Ecclesiastes</a> · MVP demo.</span>
+    <span class="zh">《约翰福音》,安静的中英双语圣经导读第二卷。· <a href="index.html">书阁</a> · <a href="ecclesiastes.html?lang=zh">传道书</a> · MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+  /* ---------- language ---------- */
+  var I18N_TITLE = {
+    en: "The Gospel of John · The Light of Life",
+    zh: "约翰福音 · 生命之光"
+  };
+  var I18N_DESC = {
+    en: "The Gospel of John: the Light of Life. Where Ecclesiastes exposes the emptiness of life under the sun, John leads to Jesus — light, living water, the resurrection and the life.",
+    zh: "约翰福音:生命之光。《传道书》揭开日光之下的空,《约翰福音》把我们带向那位真正的生命之光——温和、不说教,适合慕道与华人家庭。"
+  };
+  function setLang(l){
+    document.body.classList.toggle('lang-zh', l==='zh');
+    document.getElementById('btnEn').classList.toggle('active', l==='en');
+    document.getElementById('btnZh').classList.toggle('active', l==='zh');
+    document.documentElement.lang = (l==='zh') ? 'zh-CN' : 'en';
+    document.title = l==='zh' ? I18N_TITLE.zh : I18N_TITLE.en;
+    var md = document.querySelector('meta[name="description"]');
+    if(md) md.setAttribute('content', l==='zh' ? I18N_DESC.zh : I18N_DESC.en);
+    swapSlideImages(l);
+    renderChips();
+    setInputPlaceholder();
+  }
+  /* slide figures have baked-in text; show the matching language version */
+  function swapSlideImages(l){
+    document.querySelectorAll('img[data-en-src]').forEach(function(img){
+      var src = l==='zh' ? img.getAttribute('data-zh-src') : img.getAttribute('data-en-src');
+      if(src && img.getAttribute('src') !== src) img.setAttribute('src', src);
+    });
+  }
+  function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+
+  /* ---------- passage reader ---------- */
+  function setPane(p){
+    var kjv = p==='kjv';
+    document.getElementById('paneKjv').classList.toggle('active', kjv);
+    document.getElementById('paneCuv').classList.toggle('active', !kjv);
+    document.getElementById('tabKjv').classList.toggle('active', kjv);
+    document.getElementById('tabCuv').classList.toggle('active', !kjv);
+  }
+
+  /* ---------- worship: reveal the "good for this moment" blessing ---------- */
+  function toggleMoment(btn){
+    var card = btn.closest('.song'); if(!card) return;
+    var m = card.querySelector('.moment-msg'); if(!m) return;
+    m.classList.toggle('show');
+  }
+
+  /* ---------- back-to-top ---------- */
+  (function(){
+    var t = document.getElementById('toTop');
+    if(!t) return;
+    window.addEventListener('scroll', function(){
+      t.classList.toggle('show', window.scrollY > 600);
+    }, {passive:true});
+  })();
+
+  /* ---------- Q&A (grounded demo) ---------- */
+  var CRISIS = ['suicide','kill myself','kill me','end my life','want to die','wanna die',
+    "don't want to live",'dont want to live','no reason to live','end it all','hurt myself',
+    'self harm','self-harm','harm myself','give up on life',
+    '自杀','不想活','活不下去','结束生命','想死','轻生','活着没意思','没意思活','伤害自己','撑不下去','不想活了'];
+
+  /* The 10 preset questions double as the answer set. Chips bind directly to the
+     matching topic; free-typed questions fall back to keyword matching. */
+  var TOPICS = [
+    { id:'whois', kw:['耶稣是谁','谁是耶稣','who is jesus','jesus who'],
+      label:{en:'Who is Jesus, really?',zh:'耶稣到底是谁?'},
+      a:{ en:'John opens by calling Jesus "the Word" who "was God" and "became flesh and dwelt among us." Across the book He is shown not just teaching about God but doing what only God does — giving life, forgiving, raising the dead. The claim isn\'t that Jesus is a great man; it is that God has come near in a person you can actually meet.',
+          zh:'约翰福音开篇称耶稣为"道",说"道就是神""道成了肉身,住在我们中间"。全书里,祂不只是讲论神,而是做只有神能做的事——赐生命、赦罪、叫死人复活。约翰的主张不是"耶稣是个伟人",而是"神亲自成为一个你能真实遇见的人,来到我们中间"。' },
+      cite:'John 1:1,14 · 约翰福音 1:1,14' },
+
+    { id:'wordflesh', kw:['道成肉身','成肉身','word became flesh','incarnation'],
+      label:{en:'What does "the Word became flesh" mean?',zh:'"道成肉身"是什么意思?'},
+      a:{ en:'"The Word" (logos) is John\'s way of naming God\'s own self-expression — the mind and voice behind everything. "Became flesh" means this God did not stay distant or abstract: He took on a real human life, with a body, hunger, tears, and a name. Not God pretending to be human, nor a human promoted to God — God genuinely with us.',
+          zh:'"道"(logos)是约翰给"神自我表达"起的名字——万有背后那位的心意与声音。"成了肉身"是说:这位神没有停留在遥远、抽象里,而是取了真实的人性——有身体、会饿、会流泪、有名字。不是神假装成人,也不是人被提升为神,而是神真实地与我们同在。' },
+      cite:'John 1:14 · 约翰福音 1:14' },
+
+    { id:'light', kw:['光','是光','light'],
+      label:{en:'Why does John call Jesus the light?',zh:'为什么约翰福音说耶稣是光?'},
+      a:{ en:'John says "in Him was life, and that life was the light of men," and "the light shines in the darkness, and the darkness has not overcome it." Light means two things here: it lets you finally see what is real, and it drives back a dark you cannot fix on your own. Jesus says plainly, "I am the light of the world; whoever follows me will not walk in darkness."',
+          zh:'约翰说"生命在祂里头,这生命就是人的光","光照在黑暗里,黑暗却不能胜过光"。这里的"光"有两层:它让你终于看清真实,也驱散你靠自己赶不走的黑暗。耶稣直说:"我是世界的光,跟从我的,就不在黑暗里走。"' },
+      cite:'John 1:4–5; 8:12 · 约翰福音 1:4–5;8:12' },
+
+    { id:'bornagain', kw:['重生','再生','born again','regeneration'],
+      label:{en:'What does "born again" mean?',zh:'什么是重生?'},
+      a:{ en:'When Nicodemus — a religious expert — comes at night, Jesus tells him he must be "born again," born "from above." The point is startling: you cannot upgrade your way in by effort or morality. New life has to be given, not achieved — "born of the Spirit," like wind you feel but cannot control. Less self-improvement, more a fresh start you receive.',
+          zh:'当尼哥底母——一位宗教专家——夜里来找耶稣,耶稣告诉他必须"重生"、从"上头"生。这话很扎心:你无法靠努力或道德把自己"升级"进去。新生命是被赐下的,不是挣来的——"从圣灵生",像风,你感到它却无法掌控。这不是自我改良,而是一个你去领受的全新开始。' },
+      cite:'John 3:3–8 · 约翰福音 3:3–8' },
+
+    { id:'waytruthlife', kw:['道路','真理','生命','way truth life'],
+      label:{en:'Why does Jesus say He is the way, the truth, and the life?',zh:'为什么耶稣说自己是道路、真理、生命?'},
+      a:{ en:'The disciples ask how to know the way to God. Jesus does not hand them directions — He says, "I am the way, the truth, and the life." The claim is that God is reached not by a technique or a moral ladder, but through a person. It sounds exclusive; it is also an invitation — the way is not a rule to keep but a person to trust.',
+          zh:'门徒问怎样才能知道通往神的路。耶稣没有给他们一份路线图,而是说:"我就是道路、真理、生命。"这话的意思是:通往神不是靠某种方法或道德阶梯,而是借着一位。听起来很排他,但它同时是邀请——这条路不是要你守的规条,而是一位可以信靠的人。' },
+      cite:'John 14:6 · 约翰福音 14:6' },
+
+    { id:'unbeliever', kw:['不信','还不信','慕道','can i read','believe'],
+      label:{en:'Can I read John even if I don\'t believe yet?',zh:'如果我还不信,可以读约翰福音吗?'},
+      a:{ en:'Yes — John was written for exactly that. Near the end he says, "these are written so that you may believe." It is not a book only for people who already believe; it is an invitation to look at Jesus honestly and decide. You can read it as an investigation, bringing every doubt with you.',
+          zh:'可以——约翰福音正是为此而写。它在接近结尾处说:"但记这些事,要叫你们信。"这不是一本只写给已经信的人的书,而是一份邀请:诚实地看看耶稣,再自己判断。你完全可以把它当作一场调查来读,带着你所有的怀疑。' },
+      cite:'John 20:31 · 约翰福音 20:31' },
+
+    { id:'ecclesiastes', kw:['传道书','关系','两卷','ecclesiastes','relate'],
+      label:{en:'How does John relate to Ecclesiastes?',zh:'约翰福音和传道书有什么关系?'},
+      a:{ en:'Ecclesiastes is the honest question; John is the offered answer. Ecclesiastes says everything "under the sun" slips away, death levels all, and yet eternity aches in the human heart. John steps in from "above the sun": the true Light has come, Jesus is the resurrection and the life, and whoever believes has eternal life. Same longing — now met.',
+          zh:'《传道书》是那个诚实的问题,《约翰福音》是被给出的回答。《传道书》说"日光之下"的一切都在流逝、死亡使众人平等,而人心里却隐隐渴望永恒。《约翰福音》从"日光之上"接了进来:真光已经来到,耶稣是复活与生命,信的人有永生。同一份渴望——如今被回应。' },
+      cite:'John 1:9; 11:25 · 约翰福音 1:9;11:25' },
+
+    { id:'eternalnow', kw:['永生','死后','现在','eternal life','after death'],
+      label:{en:'Why does eternal life not start only after death?',zh:'为什么基督教说永生不是死后才开始?'},
+      a:{ en:'In John, "eternal life" is not mainly about how long you last after you die — it is a kind of life that starts now. Jesus says, "this is eternal life: that they know You, the only true God, and Jesus Christ." It is a relationship that begins the moment you trust Him, and death cannot end it. Not just more time — a different quality of life, starting today.',
+          zh:'在约翰福音里,"永生"主要不是指你死后能延续多久,而是一种"现在"就开始的生命。耶稣说:"认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。"它是一段在你信靠祂那一刻就开始的关系,而死亡无法终止它。不只是更长的时间,而是一种不同质地的生命,从今天开始。' },
+      cite:'John 17:3; 5:24 · 约翰福音 17:3;5:24' }
+  ];
+
+  function renderChips(){
+    var box = document.getElementById('chips');
+    box.innerHTML = '';
+    TOPICS.forEach(function(t){
+      var b = document.createElement('button');
+      b.className = 'chip';
+      b.textContent = t.label[curLang()];
+      b.onclick = function(){ askTopic(t); };
+      box.appendChild(b);
+    });
+  }
+  function setInputPlaceholder(){
+    document.getElementById('qInput').placeholder = curLang()==='zh'
+      ? '例如:耶稣到底是谁?'
+      : "e.g. Who is Jesus, really?";
+  }
+
+  function addMsg(cls, html){
+    var log = document.getElementById('log');
+    var d = document.createElement('div');
+    d.className = 'msg ' + cls;
+    d.innerHTML = html;
+    log.appendChild(d);
+    d.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+
+  /* chip → deterministic answer (no keyword guessing) */
+  function askTopic(t){
+    addMsg('you', escapeHtml(t.label[curLang()]));
+    addMsg('bot', escapeHtml(t.a[curLang()]) + '<span class="cite">— ' + t.cite + '</span>');
+  }
+
+  function askQuestion(){
+    var inp = document.getElementById('qInput');
+    var q = (inp.value || '').trim();
+    if(!q) return;
+    addMsg('you', escapeHtml(q));
+    inp.value = '';
+    var lc = q.toLowerCase();
+
+    // 1) crisis check FIRST — never answer with a verse
+    for(var i=0;i<CRISIS.length;i++){
+      if(lc.indexOf(CRISIS[i]) !== -1){
+        var c = curLang()==='zh'
+          ? '<strong>谢谢你把这件事说出来。</strong>此刻你听起来正承受着真实而沉重的痛苦,这件事比这本书里的任何一节经文都重要。请现在去找一个真实的人:在美国可拨打或发短信至 <strong>988</strong>(全天候、免费、保密),或发送 HOME 到 741741;若有即时危险请拨 <strong>911</strong>。你并不孤单,你值得有人陪你一起面对。'
+          : '<strong>Thank you for saying that out loud.</strong> It sounds like you\'re carrying something real and heavy right now, and that matters more than any verse in this book. Please reach a real person now: in the US, call or text <strong>988</strong> (24/7, free, confidential), or text HOME to 741741. If you\'re in immediate danger, call <strong>911</strong>. You are not alone, and you deserve someone alongside you.';
+        addMsg('crisis', c);
+        return;
+      }
+    }
+
+    // 2) topic match
+    var hit = null;
+    for(var t=0;t<TOPICS.length;t++){
+      for(var k=0;k<TOPICS[t].kw.length;k++){
+        if(lc.indexOf(TOPICS[t].kw[k].toLowerCase()) !== -1){ hit = TOPICS[t]; break; }
+      }
+      if(hit) break;
+    }
+    if(hit){
+      addMsg('bot', escapeHtml(hit.a[curLang()]) + '<span class="cite">— ' + hit.cite + '</span>');
+      return;
+    }
+
+    // 3) honest fallback (no fabricated verse)
+    var fb = curLang()==='zh'
+      ? '这是个演示版本,内置的扎根经文回答还有限,我不能凭记忆替《约翰福音》"编"一节经文出来——那正是这个产品要守住的底线。在正式版本里,这个问题会触发对《约翰福音》全文的检索,并只根据检索到的经文作答、标注章节。你可以点上面的几个问题,或换种问法。'
+      : "This is a demo with a limited built-in, verse-grounded set, and I won\'t invent a verse from memory for the Gospel of John — that\'s the exact line this product holds. In the full build, your question would trigger retrieval over the whole text and answer only from what\'s retrieved, with citations. Try one of the prompts above, or rephrase.";
+    addMsg('bot', fb);
+  }
+
+  function escapeHtml(s){
+    return s.replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  document.getElementById('qInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') askQuestion();
+  });
+
+  // init — honor ?lang=zh (used by the Chinese entry link)
+  (function(){
+    var p = new URLSearchParams(location.search);
+    if(p.get('lang') === 'zh'){ setLang('zh'); }
+    else { renderChips(); setInputPlaceholder(); }
+  })();
+</script>
+</body>
+</html>

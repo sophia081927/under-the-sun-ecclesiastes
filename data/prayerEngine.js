@@ -30,6 +30,24 @@
 
 import { detectCrisis, getCrisisResponse } from './qaEngine.js';
 
+/* Soft, optional prayer-sanctuary background music. Same local ambient track for
+   every topic; user-controlled only (never autoplayed) and looped in the panel. */
+export const AMBIENT_ZH = 'audio/ambient/prayer-sanctuary-zh.mp3';
+export const AMBIENT_EN = 'audio/ambient/prayer-sanctuary-en.mp3';
+
+/* Prayer trigger words — a person naming a burden often says "为我祷告 / pray for
+   me" before they know how to ask a theological question. Exported so the Q&A
+   surface can gently hand off to the Prayer Sanctuary Board when it sees one. */
+export const PRAYER_TRIGGERS = {
+  zh: ['祷告', '代祷', '请为我祷告', '帮我祷告', '为我祷告'],
+  en: ['pray', 'prayer', 'please pray', 'pray for me', 'intercede']
+};
+export function isPrayerRequest(input) {
+  const s = (input || '').toLowerCase();
+  return PRAYER_TRIGGERS.zh.some((k) => s.includes(k)) ||
+         PRAYER_TRIGGERS.en.some((k) => s.includes(k.toLowerCase()));
+}
+
 export const prayerRegistry = [
   {
     id: 'family_marriage',
@@ -38,6 +56,8 @@ export const prayerRegistry = [
     keywordsEn: ['marriage', 'family', 'husband', 'wife', 'divorce', 'relationship', 'conflict', 'separation', 'communication'],
     audioPathZh: 'audio/prayers/family-marriage-zh.mp3',
     audioPathEn: 'audio/prayers/family-marriage-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为家庭与婚姻关系的医治代祷',
       scripture: '【以弗所书 4:32】“并要以恩慈相待，存怜悯的心，彼此饶恕，正如神在基督里饶恕了你们一样。”',
@@ -57,6 +77,8 @@ export const prayerRegistry = [
     keywordsEn: ['future', 'career', 'job', 'work', 'school', 'exam', 'application', 'college', 'direction', 'decision', 'confused'],
     audioPathZh: 'audio/prayers/future-career-zh.mp3',
     audioPathEn: 'audio/prayers/future-career-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为前方道路的方向与交托代祷',
       scripture: '【诗篇 119:105】“你的话是我脚前的灯，是我路上的光。”',
@@ -76,6 +98,8 @@ export const prayerRegistry = [
     keywordsEn: ['health', 'body', 'sick', 'illness', 'pain', 'treatment', 'surgery', 'medical', 'insomnia', 'tired'],
     audioPathZh: 'audio/prayers/health-body-zh.mp3',
     audioPathEn: 'audio/prayers/health-body-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为身体健康与内心平安代祷',
       scripture: '【诗篇 34:18】“耶和华靠近伤心的人，拯救灵性痛悔的人。”',
@@ -95,6 +119,8 @@ export const prayerRegistry = [
     keywordsEn: ['child', 'children', 'son', 'daughter', 'parenting', 'school', 'teenager', 'education', 'pray for my child'],
     audioPathZh: 'audio/prayers/children-family-zh.mp3',
     audioPathEn: 'audio/prayers/children-family-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为孩子与亲子关系代祷',
       scripture: '【箴言 22:6】“教养孩童，使他走当行的道，就是到老他也不偏离。”',
@@ -114,6 +140,8 @@ export const prayerRegistry = [
     keywordsEn: ['anxiety', 'anxious', 'worry', 'worried', 'fear', 'stress', 'panic', 'cannot sleep', 'restless'],
     audioPathZh: 'audio/prayers/anxiety-peace-zh.mp3',
     audioPathEn: 'audio/prayers/anxiety-peace-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为焦虑中的平安代祷',
       scripture: '【腓立比书 4:6-7】“应当一无挂虑，只要凡事借着祷告、祈求和感谢，将你们所要的告诉神。神所赐出人意外的平安，必在基督耶稣里保守你们的心怀意念。”',
@@ -133,6 +161,8 @@ export const prayerRegistry = [
     keywordsEn: ['insecure', 'insecurity', 'unsafe', 'afraid of losing', 'afraid of being abandoned', 'no sense of security', 'not protected'],
     audioPathZh: 'audio/prayers/insecurity-safety-zh.mp3',
     audioPathEn: 'audio/prayers/insecurity-safety-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为缺乏安全感的心代祷',
       scripture: '【诗篇 46:1】“神是我们的避难所，是我们的力量，是我们在患难中随时的帮助。”',
@@ -152,6 +182,8 @@ export const prayerRegistry = [
     keywordsEn: ['lonely', 'alone', 'no one understands me', 'forgotten', 'abandoned', 'no one is with me'],
     audioPathZh: 'audio/prayers/loneliness-comfort-zh.mp3',
     audioPathEn: 'audio/prayers/loneliness-comfort-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为孤独中渴望被看见的心代祷',
       scripture: '【诗篇 139:1】“耶和华啊，你已经鉴察我，认识我。”',
@@ -171,6 +203,8 @@ export const prayerRegistry = [
     keywordsEn: ['know jesus', 'believe in jesus', 'accept jesus', 'know god', 'follow jesus', 'who is jesus'],
     audioPathZh: 'audio/prayers/knowing-jesus-zh.mp3',
     audioPathEn: 'audio/prayers/knowing-jesus-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
     zh: {
       title: '为开始认识耶稣代祷',
       scripture: '【约翰福音 14:6】耶稣说：“我就是道路、真理、生命；若不借着我，没有人能到父那里去。”',
@@ -226,7 +260,9 @@ function resolvePrayer(t, lang) {
     scripture: t[L].scripture,
     prayerBody: t[L].prayerBody,
     audioPathZh: t.audioPathZh,
-    audioPathEn: t.audioPathEn
+    audioPathEn: t.audioPathEn,
+    ambientPathZh: t.ambientPathZh,
+    ambientPathEn: t.ambientPathEn
   };
 }
 

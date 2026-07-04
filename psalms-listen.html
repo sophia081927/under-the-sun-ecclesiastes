@@ -132,7 +132,7 @@
     <h2 id="nowTitle"></h2>
     <span id="audioBadge" class="badge" style="display:none"></span>
     <div id="calib" class="calib" role="status">
-      <div class="calib-msg"><span class="en">Human narration is being calibrated</span><span class="zh">真人女声朗读正在校准中</span></div>
+      <div class="calib-msg"><span class="en">Human female narration is being produced and will be available soon.</span><span class="zh">真人女声朗读正在制作中，即将上线。</span></div>
       <button type="button" class="calib-btn" disabled aria-disabled="true"><span class="en">🎙️ Listen via Professional Audio Gateway</span><span class="zh">🎙️ 步入官方有声书阁听书</span></button>
     </div>
     <div class="transcript" id="transcript"></div>
@@ -156,7 +156,7 @@
 <script>
 /* ============================================================
    Psalms audio — HTML5 MP3 only (NO browser TTS). If a real human-voice MP3
-   exists at audio/psalms/psalm-NN-<lang>-female.mp3 it plays via <audio>;
+   exists at audio/psalms/psalm-NN-<lang>.mp3 it plays via <audio>;
    otherwise a calm "narration in calibration" state is shown (no synthesized
    speech, no autoplay, no external API).
    ============================================================ */
@@ -206,8 +206,8 @@ var CHAPTERS = [
     verse:{zh:'耶和华啊,你已经鉴察我,认识我。我往哪里逃、躲避你的面?我若飞到海极居住,就是在那里,你的手必引导我;你的右手也必扶持我。',en:'You have searched me, Lord, and you know me. Where can I flee from your presence? If I settle on the far side of the sea, even there your hand will guide me, your right hand will hold me fast.'},
     med:{zh:'默想:若真有一位比你自己更懂你、又不离开你的神,这对你今天的孤独或羞耻意味着什么?',en:'Reflect: if a God knows you better than yourself and never leaves, what does that mean for today?'} }
 ];
-CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-zh-female.mp3',
-                                          en:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-en-female.mp3' }; });
+CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-zh.mp3',
+                                          en:'audio/psalms/psalm-'+String(c.num).padStart(2,'0')+'-en.mp3' }; });
 
 function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
 
@@ -219,7 +219,7 @@ function setAudioBadge(state){
   b.className='badge '+(state==='ready'?'ready':'calib');
   b.innerHTML = state==='ready'
     ? '<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'
-    : '<span class="en">Human narration in calibration</span><span class="zh">真人朗读校准中</span>';
+    : '<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
   b.style.display='inline-flex';
 }
 function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }

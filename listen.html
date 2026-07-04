@@ -204,7 +204,7 @@
     <span id="audioBadge" class="badge" style="display:none"></span>
     <div class="core" id="nowCore"></div>
     <div id="calib" class="calib" role="status">
-      <div class="calib-msg"><span class="en">Human narration is being calibrated</span><span class="zh">真人女声朗读正在校准中</span></div>
+      <div class="calib-msg"><span class="en">Human female narration is being produced and will be available soon.</span><span class="zh">真人女声朗读正在制作中，即将上线。</span></div>
       <button type="button" class="calib-btn" disabled aria-disabled="true"><span class="en">🎙️ Listen via Professional Audio Gateway</span><span class="zh">🎙️ 步入官方有声书阁听书</span></button>
     </div>
     <div class="transcript" id="transcript"></div>
@@ -343,8 +343,8 @@ var CHAPTERS = [
     med:{zh:'默想:如果人生真有一位源头与归宿,这会怎样改变你今天的一步?',en:'Reflect: if life truly has a Source and a home, how might that change your next step today?'},
     prayer:{zh:'主啊,你是我生命的源头与归宿。今天,我愿意抬头认你。',en:'Lord, You are my life\'s Source and home. Today, I look up and acknowledge You.'} },
 ];
-CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-zh-female.mp3',
-                                         en:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-en-female.mp3' }; });
+CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-zh.mp3',
+                                         en:'audio/ecclesiastes/chapter-'+String(c.num).padStart(2,'0')+'-en.mp3' }; });
 
 var THEMES = [
   { id:'meaning', title:{zh:'虚空与人生意义',en:'Vanity & the meaning of life'}, chapters:[1,2,6] },
@@ -384,7 +384,7 @@ function setAudioBadge(state){
   b.className='badge '+(state==='ready'?'ready':'calib');
   b.innerHTML = state==='ready'
     ? '<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'
-    : '<span class="en">Human narration in calibration</span><span class="zh">真人朗读校准中</span>';
+    : '<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
   b.style.display='inline-flex';
 }
 function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }

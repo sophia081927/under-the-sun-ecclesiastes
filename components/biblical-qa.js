@@ -19,6 +19,8 @@
    ============================================================ */
 
 import { getBiblicalResponse, resolveById, getCrisisResponse, getFallbackResponse } from '../data/qaEngine.js';
+import { isPrayerRequest, getPrayerResponse } from '../data/prayerEngine.js';
+import { renderPrayerBoard } from './prayer-care.js';
 
 const UI = {
   zh: {
@@ -146,6 +148,7 @@ export function mountBiblicalQA(container, opts) {
 
   let lastQuestion = null; // remember the last asked question to re-render on lang switch
   let lastResp = null;     // the resolved response (id + variantIndex) — re-rendered on lang switch without re-rotating
+  let lastPrayer = null;   // if the last ask was a prayer request, the raw text (re-rendered as a Prayer Sanctuary Board on lang switch)
 
   // Re-render the last response in a new language WITHOUT advancing the variant
   // counter, so a language toggle keeps the same cited verse.
@@ -232,10 +235,19 @@ export function mountBiblicalQA(container, opts) {
     lastQuestion = question;
     if (loadTimer) { clearTimeout(loadTimer); loadTimer = 0; }
 
+    // Prayer intercept — when the reader asks for prayer ("为我祷告 / pray"),
+    // morph the outcome box into the Prayer Sanctuary Board rather than a Q&A card.
+    if (isPrayerRequest(question)) {
+      lastResp = null; lastPrayer = question;
+      renderPrayerBoard(answer, getPrayerResponse(question, lang), lang, { onClose: () => { lastPrayer = null; } });
+      return;
+    }
+
     // Resolve ONCE (advances the verse-variant counter exactly once per ask),
     // then reuse for the delayed render — never call the engine twice per ask.
     const r = getBiblicalResponse(question, lang);
     lastResp = r;
+    lastPrayer = null;
     // §1.3 — crisis responses bypass the loading animation entirely.
     if (r.id === 'crisis') { renderCard(question, r, lang); return; }
 
@@ -273,7 +285,8 @@ export function mountBiblicalQA(container, opts) {
       chips.appendChild(b);
     });
     // re-render the last answer in the new language (same verse, no re-rotation)
-    if (lastResp) renderCard(lastQuestion, reresolve(lastResp, lang), lang);
+    if (lastPrayer) renderPrayerBoard(answer, getPrayerResponse(lastPrayer, lang), lang, { onClose: () => { lastPrayer = null; } });
+    else if (lastResp) renderCard(lastQuestion, reresolve(lastResp, lang), lang);
   }
 
   btn.addEventListener('click', () => ask());

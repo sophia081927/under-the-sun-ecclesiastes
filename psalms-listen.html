@@ -80,6 +80,13 @@
   .transcript .sent{font-size:17px;line-height:1.95;color:var(--muted);transition:color .3s,background .3s;border-radius:4px;padding:1px 3px}
   .transcript .sent.on{color:var(--ink);background:var(--hl)}
   .transcript .med{color:var(--sky-soft);font-style:italic}
+  .badge{margin-top:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:30px;padding:5px 12px;align-items:center;gap:6px}
+  .badge.ready{color:#14161a;background:var(--sky-soft)}
+  .badge.calib{color:var(--sky-soft);background:transparent;border:1px solid var(--line)}
+  .calib{display:none;margin:18px 0;padding:24px 20px;text-align:center;background:rgba(168,197,214,.05);border:1px solid var(--line-soft);border-radius:12px}
+  .calib.show{display:block}
+  .calib .calib-msg{font-size:15.5px;color:var(--sky-soft);letter-spacing:.02em;line-height:1.7}
+  .calib .calib-btn{margin-top:14px;font-family:inherit;font-size:13px;color:var(--faint);background:transparent;border:1px solid var(--line-soft);border-radius:30px;padding:11px 20px;min-height:44px;cursor:not-allowed;opacity:.65}
 
   .mini{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(24,27,32,.96);backdrop-filter:blur(12px);
     border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none}
@@ -116,16 +123,6 @@
     <p><span class="en">Eleven psalms, in Chinese or English. Tap one and your device reads it aloud — right now.</span><span class="zh">十一篇诗,中文或英文。点一篇,设备即刻读给你听。</span></p>
   </div>
 
-  <p class="hint"><span class="en">Current audio uses temporary text-to-speech. A more natural professional female voice recording can be added later.</span><span class="zh">当前为临时语音朗读版本,未来可升级为更自然的专业女声录音。</span></p>
-  <details class="voicetip">
-    <summary><span class="en">＋ Want a more natural female voice? (one-time phone setup)</span><span class="zh">＋ 想要更自然的女声?(手机一次性设置)</span></summary>
-    <div style="margin-top:.5rem">
-      <p style="margin:.2rem 0"><span class="en"><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → download an enhanced voice (Chinese: Tingting; English: Samantha), then reopen this page.</span><span class="zh"><b>iPhone:</b> 设置 → 辅助功能 → 朗读内容 → 声音 → 下载"增强"版(中文选"婷婷",英文选 Samantha),下载后重新打开本页。</span></p>
-      <p style="margin:.2rem 0"><span class="en"><b>Android:</b> Settings → Language &amp; input → Text-to-speech → choose Google TTS and download the Chinese / English voice packs.</span><span class="zh"><b>安卓:</b> 设置 → 语言和输入 → 文字转语音 → 选 Google 语音,下载中文 / 英文语音包。</span></p>
-    </div>
-  </details>
-  <p id="voiceMsg" class="voicemsg" role="status"><span class="en">English voice is not available on this device. Please try Safari, Chrome, or enable English voices in your device settings.</span><span class="zh">当前设备暂未加载英文语音,请尝试使用 Safari、Chrome,或在系统设置中启用英文语音。</span></p>
-
   <div class="controls">
     <button class="primary" id="playAllBtn" onclick="Player.toggleAll()"><span class="en">▶ Play all</span><span class="zh">▶ 连续播放</span></button>
     <button class="rate" id="rateBtn" onclick="Player.cycleRate()">0.85x</button>
@@ -137,6 +134,11 @@
   <div class="now" id="now">
     <div class="eyebrow" id="nowEyebrow"></div>
     <h2 id="nowTitle"></h2>
+    <span id="audioBadge" class="badge" style="display:none"></span>
+    <div id="calib" class="calib" role="status">
+      <div class="calib-msg"><span class="en">Human narration is being calibrated</span><span class="zh">真人女声朗读正在校准中</span></div>
+      <button type="button" class="calib-btn" disabled aria-disabled="true"><span class="en">🎙️ Listen via Professional Audio Gateway</span><span class="zh">🎙️ 步入官方有声书阁听书</span></button>
+    </div>
     <div class="transcript" id="transcript"></div>
   </div>
 </div>
@@ -157,11 +159,10 @@
 
 <script>
 /* ============================================================
-   Psalms audio — same swappable provider design as john-listen:
-   MP3Provider is tried first (audio/psalms/psalm-NN-<lang>-female.mp3);
-   if absent, the browser TTSProvider reads the text. English playback
-   uses the fixed voice logic (cached voices, no cross-language voice,
-   guarded cancel, synchronous speak inside the tap).
+   Psalms audio — HTML5 MP3 only (NO browser TTS). If a real human-voice MP3
+   exists at audio/psalms/psalm-NN-<lang>-female.mp3 it plays via <audio>;
+   otherwise a calm "narration in calibration" state is shown (no synthesized
+   speech, no autoplay, no external API).
    ============================================================ */
 var CHAPTERS = [
   { num:23, title:{zh:'诗篇 23 · 牧者',en:'Psalm 23 · The Shepherd'},
@@ -214,24 +215,19 @@ CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/psalms/psalm-'+String(c.num)
 
 function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
 
-/* ---------- voice quality: cached voices, best (female) voice, never cross-language ---------- */
-var _voices=[];
-function loadVoices(){ try{ _voices=(window.speechSynthesis.getVoices())||[]; }catch(e){ _voices=[]; } }
-if('speechSynthesis' in window){ loadVoices(); try{ window.speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
-function getCachedVoices(){ if(!_voices||!_voices.length) loadVoices(); return _voices; }
-function selectBestVoice(language){
-  var voices=getCachedVoices();
-  var zhPreferred=['Xiaoxiao','Xiaoyi','Tingting','Meijia','Sinji','Huihui','Yaoyao','Google 普通话','Mandarin','Chinese','Microsoft'];
-  var enPreferred=['Samantha','Google US English','Microsoft Jenny','Microsoft Aria','Microsoft Sonia','Microsoft Emma','Zira','Hazel','Eva','Susan','Natural','Female'];
-  var preferred=language==='zh'?zhPreferred:enPreferred;
-  var langCode=language==='zh'?'zh':'en';
-  var low=function(s){return (s||'').toLowerCase();};
-  return voices.find(function(v){ return low(v.lang).indexOf(langCode)===0 && preferred.some(function(n){return low(v.name).indexOf(low(n))!==-1;}); })
-      || voices.find(function(v){ return low(v.lang).indexOf(langCode)===0; })
-      || null;   /* never a cross-language voice — assigning a zh voice to en-US goes silent */
+/* ---------- audio availability UI — NO browser TTS ----------
+   MP3-first: if a real human-voice MP3 loads, play it; otherwise show a calm
+   calibration state (no synthesized speech). */
+function setAudioBadge(state){
+  var b=document.getElementById('audioBadge'); if(!b) return;
+  b.className='badge '+(state==='ready'?'ready':'calib');
+  b.innerHTML = state==='ready'
+    ? '<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'
+    : '<span class="en">Human narration in calibration</span><span class="zh">真人朗读校准中</span>';
+  b.style.display='inline-flex';
 }
-function showVoiceUnavailableMessage(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.add('show'); }
-function hideVoiceMsg(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.remove('show'); }
+function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }
+function hideCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.remove('show'); }
 
 function makeBlocks(ch, lang){
   var v=function(o){return o[lang]||o.zh;};
@@ -245,40 +241,6 @@ function makeBlocks(ch, lang){
     if(!s.length) s=[p.text];
     return {label:p.label, cls:p.cls||'', sentences:s};
   });
-}
-
-function TTSProvider(){
-  var self=this, idx=0, total=0, rate=0.85, playing=false, sents=[];
-  self.onprogress=self.onsentence=self.onend=function(){};
-  self.kind='tts';
-  self.load=function(blocks){ window.speechSynthesis && window.speechSynthesis.cancel();
-    sents=[]; blocks.forEach(function(b,bi){ b.sentences.forEach(function(s,si){ sents.push({t:s,b:bi,s:si}); }); });
-    total=sents.length; idx=0; return total>0; };
-  function speakFrom(i){
-    if(!window.speechSynthesis){ self.onend(); return; }
-    if(window.speechSynthesis.speaking || window.speechSynthesis.pending){ window.speechSynthesis.cancel(); }
-    idx=i;
-    (function next(){
-      if(idx>=total){ playing=false; self.onprogress(1,''); self.onend(); return; }
-      self.onsentence(idx); self.onprogress(idx/total,(idx+1)+' / '+total);
-      var lang=curLang();
-      var u=new SpeechSynthesisUtterance(sents[idx].t);
-      u.lang=(lang==='zh')?'zh-CN':'en-US';
-      var vo=selectBestVoice(lang); if(vo) u.voice=vo;
-      u.rate=rate; u.pitch=(lang==='zh')?1.05:1.03; u.volume=1;
-      u.onstart=function(){ hideVoiceMsg(); };
-      u.onend=function(){ if(!playing) return; idx++; next(); };
-      u.onerror=function(e){ if(!playing) return; var err=e&&e.error;
-        if(err==='canceled'||err==='interrupted'){ return; }
-        showVoiceUnavailableMessage(); playing=false; self.onend(); };
-      window.speechSynthesis.speak(u);
-    })();
-  }
-  self.play=function(){ playing=true; if(window.speechSynthesis && window.speechSynthesis.paused){ window.speechSynthesis.resume(); } else { speakFrom(idx); } };
-  self.pause=function(){ playing=false; try{ window.speechSynthesis.pause(); }catch(e){} };
-  self.stop=function(){ playing=false; try{ window.speechSynthesis.cancel(); }catch(e){} };
-  self.setRate=function(r){ rate=r; if(playing){ speakFrom(idx); } };
-  self.seekFrac=function(f){ speakFrom(Math.max(0,Math.min(total-1,Math.floor(f*total)))); };
 }
 
 function MP3Provider(audio){
@@ -297,10 +259,6 @@ function tryMP3(path){ return new Promise(function(res){ var a=new Audio(),done=
   a.onerror=function(){ if(!done){done=true;res(null);} }; a.src=path;
   setTimeout(function(){ if(!done){done=true;res(null);} },2500); }); }
 
-var _ttsUnlocked=false;
-function unlockTTS(){ if(_ttsUnlocked || !window.speechSynthesis) return; _ttsUnlocked=true;
-  try{ var u=new SpeechSynthesisUtterance(' '); u.volume=0; window.speechSynthesis.speak(u); window.speechSynthesis.cancel(); }catch(e){} }
-
 var Player = {
   current:null, provider:null, rate:0.85, rates:[0.75,0.85,1,1.15,1.25], playing:false, blocks:null, allMode:false,
   async load(i, autoplay){
@@ -308,27 +266,34 @@ var Player = {
     var ch=CHAPTERS[i], lang=curLang();
     this.blocks=makeBlocks(ch, lang);
     renderNow(i);
-    var mp3=await tryMP3(ch.audio[lang]);
-    if(mp3){ this.provider=mp3; } else { this.provider=new TTSProvider(); this.provider.load(this.blocks, lang); }
-    var self=this;
-    this.provider.onsentence=function(gi){ highlightSentence(gi); };
-    this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%'; document.getElementById('miniTime').textContent=label||''; };
-    this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
-      if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
-      else { self.allMode=false; setAllBtn(); self.provider&&self.provider.stop&&self.provider.stop(); } };
-    this.provider.setRate(this.rate);
-    document.getElementById('mini').classList.add('show');
-    document.getElementById('now').classList.add('show');
-    document.getElementById('miniTitle').textContent=CHAPTERS[i].title[lang];
     markPlayingRow(i);
-    if(autoplay!==false) this.play();
+    document.getElementById('now').classList.add('show');
+    document.getElementById('miniTitle').textContent=ch.title[lang];
+    var self=this;
+    var mp3=await tryMP3(ch.audio[lang]);
+    if(mp3){
+      this.provider=mp3; setAudioBadge('ready'); hideCalibration();
+      this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%'; document.getElementById('miniTime').textContent=label||''; };
+      this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+        if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+        else { self.allMode=false; setAllBtn(); self.provider&&self.provider.stop&&self.provider.stop(); } };
+      this.provider.setRate(this.rate);
+      document.getElementById('mini').classList.add('show');
+      if(autoplay!==false) this.play();
+    } else {
+      /* Real human-voice MP3 not present yet → NO browser TTS. Show a calm
+         calibration state; the psalm text stays readable in the transcript. */
+      this.provider=null; this.playing=false; this.allMode=false; setAllBtn(); setPlayIcon(false);
+      setAudioBadge('calibrating'); showCalibration();
+      document.getElementById('mini').classList.remove('show');
+    }
   },
   play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
   pause(){ if(!this.provider) return; this.playing=false; setPlayIcon(false); this.provider.pause(); },
-  toggle(){ unlockTTS(); if(this.current==null){ this.playFrom(0); return; } this.playing?this.pause():this.play(); },
-  toggleAll(){ unlockTTS(); if(this.allMode && this.playing){ this.pause(); return; } this.allMode=true; setAllBtn(); if(this.current==null) this.playFrom(0); else this.play(); },
+  toggle(){ if(this.current==null){ this.playFrom(0); return; } if(!this.provider) return; this.playing?this.pause():this.play(); },
+  toggleAll(){ if(this.allMode && this.playing){ this.pause(); return; } this.allMode=true; setAllBtn(); if(this.current==null) this.playFrom(0); else this.play(); },
   stop(){ if(this.provider){ this.provider.stop&&this.provider.stop(); } this.playing=false; setPlayIcon(false); },
-  playFrom(i){ unlockTTS(); this.load(i, true); },
+  playFrom(i){ this.load(i, true); },
   cycleRate(){ var i=(this.rates.indexOf(this.rate)+1)%this.rates.length; this.rate=this.rates[i];
     document.getElementById('rateBtn').textContent=this.rate+'x'; if(this.provider) this.provider.setRate(this.rate); },
   seekAt(ev){ if(!this.provider) return; var r=document.getElementById('prog').getBoundingClientRect();

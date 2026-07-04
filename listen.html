@@ -102,6 +102,13 @@
   .row:hover .go{background:var(--sun-soft)}
   .row.active .go{background:var(--sun-soft)}
   .hint{color:var(--faint);font-size:12.5px;text-align:center;margin-top:14px;line-height:1.7}
+  .badge{margin-top:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:30px;padding:5px 12px;align-items:center;gap:6px}
+  .badge.ready{color:#14161a;background:var(--sun-soft)}
+  .badge.calib{color:var(--sun-soft);background:transparent;border:1px solid var(--line)}
+  .calib{display:none;margin:18px 0;padding:24px 20px;text-align:center;background:rgba(217,164,65,.05);border:1px solid var(--line-soft);border-radius:12px}
+  .calib.show{display:block}
+  .calib .calib-msg{font-size:15.5px;color:var(--sun-soft);letter-spacing:.02em;line-height:1.7}
+  .calib .calib-btn{margin-top:14px;font-family:inherit;font-size:13px;color:var(--faint);background:transparent;border:1px solid var(--line-soft);border-radius:30px;padding:11px 20px;min-height:44px;cursor:not-allowed;opacity:.65}
 
   /* now-playing / transcript */
   .now{margin-top:30px;border-top:1px solid var(--line-soft);padding-top:26px;display:none}
@@ -178,7 +185,6 @@
   <div class="bigplay">
     <button onclick="Player.playFrom(0)"><span class="en">▶ Start English Listening</span><span class="zh">▶ 开始中文聆听</span></button>
     <div class="bigplay-sub"><span class="en">Reads all 12 chapters aloud · tap any chapter to jump in</span><span class="zh">从第一章起连续朗读 12 章 · 点任意章节可跳听</span></div>
-    <div class="ttswarn" id="ttsWarn" style="display:none"><span class="en">Your browser does not support speech playback. Please try Chrome or Safari.</span><span class="zh">当前浏览器暂不支持语音朗读,请尝试使用 Chrome 或 Safari。</span></div>
   </div>
 </div>
 
@@ -190,22 +196,17 @@
 
   <div class="list" id="listCh"></div>
   <div class="list" id="listTh" style="display:none"></div>
-  <p class="hint"><span class="en">▶ Tap any chapter and your device reads it aloud — right now.</span><span class="zh">▶ 现在就能听:点任意章节,设备即会朗读。</span></p>
-  <p class="hint" style="opacity:.72;font-size:12px"><span class="en">Current audio uses temporary text-to-speech. A more natural professional female voice recording can be added later.</span><span class="zh">当前为临时语音朗读版本,未来可升级为更自然的专业女声录音。</span></p>
-  <details class="voicetip" style="max-width:640px;margin:.4rem auto 0;font-size:12px;opacity:.72;line-height:1.7">
-    <summary style="cursor:pointer;list-style:none;opacity:.85"><span class="en">＋ Want a more natural female voice? (one-time phone setup)</span><span class="zh">＋ 想要更自然的女声?(手机一次性设置)</span></summary>
-    <div style="margin-top:.5rem">
-      <p style="margin:.2rem 0"><span class="en"><b>iPhone:</b> Settings → Accessibility → Spoken Content → Voices → download an enhanced voice (Chinese: Tingting; English: Samantha), then reopen this page.</span><span class="zh"><b>iPhone:</b> 设置 → 辅助功能 → 朗读内容 → 声音 → 下载"增强"版(中文选"婷婷",英文选 Samantha),下载后重新打开本页即可自动选用。</span></p>
-      <p style="margin:.2rem 0"><span class="en"><b>Android:</b> Settings → Language & input → Text-to-speech → choose Google TTS and download the Chinese / English voice packs.</span><span class="zh"><b>安卓:</b> 设置 → 语言和输入 → 文字转语音 → 选 Google 语音,下载中文 / 英文语音包。</span></p>
-    </div>
-  </details>
-  <p id="voiceMsg" class="voicemsg" role="status"><span class="en">English voice is not available on this device. Please try Safari, Chrome, or enable English voices in your device settings.</span><span class="zh">当前设备暂未加载英文语音,请尝试使用 Safari、Chrome,或在系统设置中启用英文语音。</span></p>
 
   <!-- now playing -->
   <div class="now" id="now">
     <div class="eyebrow" id="nowEyebrow"></div>
     <h2 id="nowTitle"></h2>
+    <span id="audioBadge" class="badge" style="display:none"></span>
     <div class="core" id="nowCore"></div>
+    <div id="calib" class="calib" role="status">
+      <div class="calib-msg"><span class="en">Human narration is being calibrated</span><span class="zh">真人女声朗读正在校准中</span></div>
+      <button type="button" class="calib-btn" disabled aria-disabled="true"><span class="en">🎙️ Listen via Professional Audio Gateway</span><span class="zh">🎙️ 步入官方有声书阁听书</span></button>
+    </div>
     <div class="transcript" id="transcript"></div>
     <div style="text-align:center">
       <button class="share" onclick="shareCurrent()">↗ <span class="en">Share this chapter</span><span class="zh">分享这一章</span></button>
@@ -356,7 +357,7 @@ function themeOf(id){ return THEMES.filter(function(t){return t.id===id;})[0]; }
 
 /* ============================================================
    AUDIO PROVIDERS — swappable. MP3Provider is tried first when a
-   file is present; otherwise TTSProvider (browser speech) is used.
+   file is present; otherwise a calm calibration state is shown (no browser TTS).
    Both expose the same tiny interface the Player depends on:
      load(chapter, lang), play(), pause(), setRate(r),
      seekFrac(f), and callbacks: onprogress(frac,label), onsentence(i), onend()
@@ -377,71 +378,17 @@ function makeSentences(chapter, lang){
   return blocks;
 }
 
-/* ---------- voice quality: pick the warmest, most natural (female) voice ---------- */
-var _voices=[];
-function loadVoices(){ try{ _voices=(window.speechSynthesis.getVoices())||[]; }catch(e){ _voices=[]; } }
-if('speechSynthesis' in window){ loadVoices(); try{ window.speechSynthesis.onvoiceschanged=loadVoices; }catch(e){} }
-function showVoiceUnavailableMessage(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.add('show'); }
-function hideVoiceMsg(){ var e=document.getElementById('voiceMsg'); if(e) e.classList.remove('show'); }
-function selectBestVoice(language){
-  var voices=_voices.length ? _voices : ((window.speechSynthesis && window.speechSynthesis.getVoices()) || []);
-  var zhPreferred=['Xiaoxiao','Xiaoyi','Tingting','Meijia','Sinji','Huihui','Yaoyao','Google 普通话','Mandarin','Chinese','Microsoft'];
-  var enPreferred=['Samantha','Google US English','Microsoft Jenny','Microsoft Aria','Microsoft Sonia','Microsoft Emma','Zira','Hazel','Eva','Susan','Natural','Female'];
-  var preferred=language==='zh'?zhPreferred:enPreferred;
-  var langCode=language==='zh'?'zh':'en';
-  var low=function(s){return (s||'').toLowerCase();};
-  return voices.find(function(v){ return low(v.lang).indexOf(langCode)===0 && preferred.some(function(n){return low(v.name).indexOf(low(n))!==-1;}); })
-      || voices.find(function(v){ return low(v.lang).indexOf(langCode)===0; })
-      || null;   /* never fall back to a cross-language voice (voices[0]) — assigning e.g. a
-                    Chinese voice to an en-US utterance makes some browsers render silence.
-                    Returning null leaves utterance.voice unset so the browser uses its
-                    built-in default voice for the requested lang. */
+/* ---------- audio availability UI — NO browser TTS ---------- */
+function setAudioBadge(state){
+  var b=document.getElementById('audioBadge'); if(!b) return;
+  b.className='badge '+(state==='ready'?'ready':'calib');
+  b.innerHTML = state==='ready'
+    ? '<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'
+    : '<span class="en">Human narration in calibration</span><span class="zh">真人朗读校准中</span>';
+  b.style.display='inline-flex';
 }
-
-function TTSProvider(){
-  var self=this, utters=[], idx=0, total=0, rate=0.85, playing=false, sents=[];
-  self.onprogress=self.onsentence=self.onend=function(){};
-  self.kind='tts';
-  self.load=function(blocks, lang){
-    window.speechSynthesis && window.speechSynthesis.cancel();
-    sents=[]; blocks.forEach(function(b,bi){ b.sentences.forEach(function(s,si){ sents.push({t:s,b:bi,s:si}); }); });
-    total=sents.length; idx=0;
-    return total>0;
-  };
-  function speakFrom(i){
-    if(!window.speechSynthesis){ self.onend(); return; }
-    /* guard cancel(): calling cancel() immediately before speak() can swallow the new
-       utterance on some Chrome builds — only cancel if something is actually active */
-    if(window.speechSynthesis.speaking || window.speechSynthesis.pending){ window.speechSynthesis.cancel(); }
-    idx=i;
-    (function next(){
-      if(idx>=total){ playing=false; self.onprogress(1,''); self.onend(); return; }
-      self.onsentence(idx);
-      self.onprogress(idx/total, (idx+1)+' / '+total);
-      var lang=curLang();
-      var u=new SpeechSynthesisUtterance(sents[idx].t);
-      u.lang = (lang==='zh')?'zh-CN':'en-US';
-      var v=selectBestVoice(lang); if(v) u.voice=v;
-      u.rate = rate;
-      u.pitch = (lang==='zh')?1.05:1.03;
-      u.volume = 1;
-      u.onstart=function(){ hideVoiceMsg(); };
-      u.onend=function(){ if(!playing) return; idx++; next(); };
-      u.onerror=function(e){ if(!playing) return;
-        var err=e&&e.error;
-        if(err==='canceled'||err==='interrupted'){ return; } /* benign: stop / seek / lang switch */
-        showVoiceUnavailableMessage();   /* genuine failure — surface once, don't spin silently */
-        playing=false; self.onend(); };
-      window.speechSynthesis.speak(u);
-    })();
-  }
-  self.play=function(){ playing=true; if(window.speechSynthesis && window.speechSynthesis.paused){ window.speechSynthesis.resume(); } else { speakFrom(idx); } };
-  self.pause=function(){ playing=false; try{ window.speechSynthesis.pause(); }catch(e){} };
-  self.stop=function(){ playing=false; try{ window.speechSynthesis.cancel(); }catch(e){} };
-  self.setRate=function(r){ rate=r; if(playing){ speakFrom(idx); } };
-  self.seekFrac=function(f){ speakFrom(Math.max(0,Math.min(total-1,Math.floor(f*total)))); };
-  self.timeLabel=function(){ return (Math.min(idx+1,total))+' / '+total; };
-}
+function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }
+function hideCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.remove('show'); }
 
 function MP3Provider(audio){
   var self=this; self.kind='mp3'; self.onprogress=self.onsentence=self.onend=function(){};
@@ -473,12 +420,6 @@ function tryMP3(path){
 /* ============================================================
    PLAYER — orchestrates provider + UI
    ============================================================ */
-/* iOS needs speech started inside a user gesture; our async MP3 probe can break
-   that, so we "unlock" the speech engine synchronously on the first tap. */
-var _ttsUnlocked=false;
-function unlockTTS(){ if(_ttsUnlocked || !window.speechSynthesis) return; _ttsUnlocked=true;
-  try{ var u=new SpeechSynthesisUtterance(' '); u.volume=0; window.speechSynthesis.speak(u); window.speechSynthesis.cancel(); }catch(e){} }
-
 var Player = {
   current:null, provider:null, rate:0.85, rates:[0.75,0.85,1,1.15,1.25], playing:false, blocks:null,
   queue:[], queueMode:false,
@@ -488,32 +429,37 @@ var Player = {
     var ch=CHAPTERS[i], lang=curLang();
     this.blocks = makeSentences(ch, lang);
     renderNow(i);
-    // provider selection: real MP3 if available, else TTS
-    var mp3 = await tryMP3(ch.audio[lang]);
-    if(mp3){ this.provider=mp3; }
-    else { this.provider=new TTSProvider(); this.provider.load(this.blocks, lang); }
-    var self=this;
-    this.provider.onsentence=function(gi){ highlightSentence(gi); };
-    this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%';
-      document.getElementById('miniTime').textContent=label||''; };
-    this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
-      if(self.queueMode){ // theme playback: follow the theme's chapter subset
-        if(self.queue.length){ var n=self.queue.shift(); location.hash='chapter-'+CHAPTERS[n].num; self.load(n,true); }
-        else { self.queueMode=false; }
-        return;
-      }
-      if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
-      else { self.provider && self.provider.stop && self.provider.stop(); } };
-    this.provider.setRate(this.rate);
-    document.getElementById('mini').classList.add('show');
     document.getElementById('miniTitle').textContent=(lang==='zh'?('传道书 · 第 '+ch.num+' 章 · '+ch.title.zh):('Ecclesiastes · Ch. '+ch.num+' · '+ch.title.en));
-    if(autoplay!==false) this.play();
+    var self=this;
+    var mp3 = await tryMP3(ch.audio[lang]);
+    if(mp3){
+      this.provider=mp3; setAudioBadge('ready'); hideCalibration();
+      this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%';
+        document.getElementById('miniTime').textContent=label||''; };
+      this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+        if(self.queueMode){ // theme playback: follow the theme's chapter subset
+          if(self.queue.length){ var n=self.queue.shift(); location.hash='chapter-'+CHAPTERS[n].num; self.load(n,true); }
+          else { self.queueMode=false; }
+          return;
+        }
+        if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+        else { self.provider && self.provider.stop && self.provider.stop(); } };
+      this.provider.setRate(this.rate);
+      document.getElementById('mini').classList.add('show');
+      if(autoplay!==false) this.play();
+    } else {
+      /* Real human-voice MP3 not present yet → NO browser TTS. Show a calm
+         calibration state; the chapter text stays readable in the transcript. */
+      this.provider=null; this.playing=false; this.queueMode=false; this.queue=[]; setPlayIcon(false);
+      setAudioBadge('calibrating'); showCalibration();
+      document.getElementById('mini').classList.remove('show');
+    }
   },
   play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
   pause(){ if(!this.provider) return; this.playing=false; setPlayIcon(false); this.provider.pause(); },
-  toggle(){ unlockTTS(); if(this.current==null){ this.playFrom(0); return; } this.playing?this.pause():this.play(); },
+  toggle(){ if(this.current==null){ this.playFrom(0); return; } if(!this.provider) return; this.playing?this.pause():this.play(); },
   stop(){ if(this.provider){ this.provider.stop&&this.provider.stop(); } this.playing=false; setPlayIcon(false); },
-  playFrom(i){ unlockTTS(); this.queueMode=false; this.queue=[]; location.hash = 'chapter-'+CHAPTERS[i].num; this.load(i, true); },
+  playFrom(i){ this.queueMode=false; this.queue=[]; location.hash = 'chapter-'+CHAPTERS[i].num; this.load(i, true); },
   next(){ if(this.current!=null && this.current<CHAPTERS.length-1) this.playFrom(this.current+1); },
   prev(){ if(this.current!=null && this.current>0) this.playFrom(this.current-1); },
   cycleRate(){ var i=(this.rates.indexOf(this.rate)+1)%this.rates.length; this.rate=this.rates[i];
@@ -586,7 +532,6 @@ function showTab(which){
   document.getElementById('listTh').style.display = which==='th'?'grid':'none';
 }
 function playTheme(id){
-  unlockTTS();
   location.hash='theme-'+id;
   var t=themeOf(id); if(!t) return;
   var nums=CHAPTERS.map(function(c){return c.num;});
@@ -623,8 +568,6 @@ function applyHash(){
   var nl=(navigator.language||'').toLowerCase();
   setLang(saved || (nl.indexOf('zh')===0?'zh':'en'));
   renderScenes(); renderLists();
-  // graceful fallback message if the browser can't do speech and there is no MP3 yet
-  if(!('speechSynthesis' in window)){ var w=document.getElementById('ttsWarn'); if(w) w.style.display='block'; }
   applyHash();
   window.addEventListener('hashchange', applyHash);
 })();

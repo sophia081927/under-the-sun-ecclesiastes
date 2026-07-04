@@ -70,6 +70,11 @@
     <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light" data-i18n="sub"></p>
   </section>
 
+  <!-- Pray with Scripture (Intercessory Prayer Engine · a gentle care room, placed before Q&A) -->
+  <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-10">
+    <div id="prayer-care"></div>
+  </section>
+
   <!-- Ask from Scripture (platform-level open-ended Q&A component) -->
   <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-10">
     <div id="biblical-qa"></div>
@@ -88,6 +93,7 @@
 <script type="module">
   import { bibleRegistry, featureLabels, resolveHash } from './data/bibleRegistry.js';
   import { mountBiblicalQA } from './components/biblical-qa.js';
+  import { mountPrayerCare } from './components/prayer-care.js';
 
   // GitHub-Pages-safe hash routing: #/john/listen → john-listen.html (refresh-safe).
   function gotoHash() {
@@ -200,6 +206,7 @@
     lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
     render();
     // mount the reusable Biblical Q&A component (auto-syncs language via <html lang>)
+    mountPrayerCare(document.getElementById('prayer-care'));
     mountBiblicalQA(document.getElementById('biblical-qa'));
   }
 </script>

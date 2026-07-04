@@ -675,6 +675,13 @@
   <p class="q"><span class="en">"I have come that they may have life, and have it to the full."</span><span class="zh">"我来了,是要叫人得生命,并且得的更丰盛。"</span></p>
 </div>
 
+<!-- ============ PRAYER CARE (Intercessory Prayer Engine · placed before Q&A) ============ -->
+<section id="prayer-care-section">
+  <div class="wrap">
+    <div id="prayer-care"></div>
+  </div>
+</section>
+
 <!-- ============ BIBLICAL Q&A (open-ended · shared component) ============ -->
 <section id="biblical-qa-section">
   <div class="wrap">
@@ -1145,6 +1152,8 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
 </script>
 <script type="module">
   import { mountBiblicalQA } from './components/biblical-qa.js';
+  import { mountPrayerCare } from './components/prayer-care.js';
+  mountPrayerCare(document.getElementById('prayer-care'));
   mountBiblicalQA(document.getElementById('biblical-qa'));
 </script>
 </body>

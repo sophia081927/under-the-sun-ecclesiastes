@@ -10,10 +10,10 @@ export const john = {
   id: 'john',
 
   keyVerses: [
-    { reference: 'John 1:1,14 · 约翰福音 1:1,14', zh: '太初有道，道与神同在，道就是神……道成了肉身，住在我们中间。', en: 'In the beginning was the Word… The Word became flesh and made his dwelling among us.' },
-    { reference: 'John 8:12 · 约翰福音 8:12', zh: '我是世界的光。跟从我的，就不在黑暗里走，必要得着生命的光。', en: 'I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.' },
-    { reference: 'John 20:31 · 约翰福音 20:31', zh: '但记这些事，要叫你们信耶稣是基督，是神的儿子，并且叫你们信了他，就可以因他的名得生命。', en: 'But these are written that you may believe that Jesus is the Messiah, the Son of God, and that by believing you may have life in his name.' },
-    { reference: 'John 3:16 · 约翰福音 3:16', zh: '神爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。', en: 'For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.' }
+    { reference: 'John 1:1,14 · 约翰福音 1:1,14', zh: '太初有道，道与神同在，道就是神……道成了肉身，住在我们中间。', en: 'In the beginning was the Word, and the Word was with God, and the Word was God. The Word became flesh and made His dwelling among us. We have seen His glory, the glory of the one and only Son from the Father, full of grace and truth.' },
+    { reference: 'John 8:12 · 约翰福音 8:12', zh: '我是世界的光。跟从我的，就不在黑暗里走，必要得着生命的光。', en: 'Once again, Jesus spoke to the people and said, “I am the light of the world. Whoever follows Me will never walk in the darkness, but will have the light of life.”' },
+    { reference: 'John 20:31 · 约翰福音 20:31', zh: '但记这些事，要叫你们信耶稣是基督，是神的儿子，并且叫你们信了他，就可以因他的名得生命。', en: 'But these are written so that you may believe that Jesus is the Christ, the Son of God, and that by believing you may have life in His name.' },
+    { reference: 'John 3:16 · 约翰福音 3:16', zh: '神爱世人，甚至将他的独生子赐给他们，叫一切信他的，不至灭亡，反得永生。', en: 'For God so loved the world that He gave His one and only Son, that everyone who believes in Him shall not perish but have eternal life.' }
   ],
 
   // Seven signs (John 2–11).

@@ -175,7 +175,7 @@ export const bibleRegistry = [
     audioPathBase: 'audio/psalms/',
     languages: ['zh', 'en'],
     audioEnabled: true,
-    features: { read: true, listen: true, ask: true, reflection: true, worship: false, bilingual: true, study: false, deck: false }
+    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: false }
   },
   {
     id: 'job',

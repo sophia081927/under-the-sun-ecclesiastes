@@ -36,6 +36,8 @@
    "(BSB)", consistently everywhere.
    ============================================================ */
 
+import { detectCrisisTier } from './shared/crisisLexicon.js';
+
 export const qaRegistry = [
   {
     id: 'emptiness', priority: 1,
@@ -551,10 +553,9 @@ export const qaRegistry = [
   }
 ];
 
-/* ---- crisis keywords (checked FIRST, before any topic matching) ---- */
-const CRISIS_ZH = ['想死','自杀','不想活','不想活了','伤害自己','被打','家暴','被侵犯','轻生','活不下去','想结束生命','没人救我','结束生命','结束自己','撑不住了','不想醒来'];
-const CRISIS_EN = ['suicide','kill myself','killing myself','want to die','self harm','self-harm','abuse','domestic violence','assault',
-  'end my life','hurt myself','no reason to live','cannot go on','cant go on',"can't go on",'want to disappear'];
+/* ---- crisis keywords moved to the shared layer (data/shared/crisisLexicon.js).
+   Two tiers: 'high' -> crisis card; 'ambiguous' -> gentle support card.
+   Checked FIRST, before any topic matching. ---- */
 
 /* Crisis card — NEVER gets verse variants; stays byte-for-byte stable. */
 const CRISIS_CARD = {
@@ -580,11 +581,35 @@ const CRISIS_CARD = {
 export function getCrisisResponse(lang) { return { ...CRISIS_CARD[lang === 'en' ? 'en' : 'zh'] }; }
 
 export function detectCrisis(input, lang) {
-  const lc = (input || '').toLowerCase();
-  const hit = CRISIS_ZH.some((kw) => lc.includes(kw)) || CRISIS_EN.some((kw) => lc.includes(kw));
-  if (!hit) return null;
-  return getCrisisResponse(lang);
+  // Only the 'high' tier returns the crisis card (preserves prior behavior).
+  return detectCrisisTier(input) === 'high' ? getCrisisResponse(lang) : null;
 }
+
+/* Ambiguous-tier support card — for phrases that MAY be everyday exhaustion or
+   MAY be a quiet cry for help ("撑不下去" / "活着好累"). Gentle, non-diagnostic;
+   does NOT push the crisis page, does NOT recommend a book verse as the answer;
+   simply stays near and offers support resources as an option. */
+const SUPPORT_CARD = {
+  zh: {
+    id: 'support',
+    title: '慢一点，你不必一个人扛',
+    verse: '【诗篇 34:18】“耶和华靠近伤心的人,拯救灵性痛悔的人。”',
+    explanation: '听起来你现在很不容易。我不确定你此刻是只是很累,还是正被什么压得很重——不论哪一种,都很重要,都值得被好好对待。你可以先歇一口气,不必马上想清楚一切。',
+    reflection: '此刻,有没有一个你信任、可以说说话的人?',
+    nextStep: '如果你愿意,随时可以找一个信任的人聊聊;在美国也可以拨打或发短信 988(自杀与危机生命热线,全天候、免费、保密)。这只是放在这里的一个选择,你不必现在就用它。',
+    prayer: '主啊,我现在很累。求你靠近我,让我知道我不是一个人。求你赐我此刻所需要的安息与帮助。阿们。'
+  },
+  en: {
+    id: 'support',
+    title: 'Take a breath — you don’t have to carry this alone',
+    verse: '【Psalm 34:18】“The LORD is near to the brokenhearted; He saves the contrite in spirit.” (BSB)',
+    explanation: 'It sounds like things are heavy right now. I can’t tell whether you’re simply worn out or carrying something much heavier — either way, it matters, and it deserves care. It’s okay to pause; you don’t have to figure it all out at once.',
+    reflection: 'Is there someone you trust that you could talk to right now?',
+    nextStep: 'Whenever you’re ready, you could reach out to someone you trust. In the US you can also call or text 988 (Suicide & Crisis Lifeline — 24/7, free, confidential). It’s simply here as an option; you don’t have to use it now.',
+    prayer: 'Lord, I’m weary right now. Draw near to me and let me know I am not alone. Give me the rest and help I need in this moment. Amen.'
+  }
+};
+export function getAmbiguousSupport(lang) { return { ...SUPPORT_CARD[lang === 'en' ? 'en' : 'zh'] }; }
 
 /* Warm, Scripture-centered fallback — shown ONLY when nothing else matches.
    Never reads like a database/FAQ error. An unmatched question is treated as
@@ -658,6 +683,10 @@ export function getBiblicalResponse(userInput, currentLanguage = 'zh') {
 
   const crisisResponse = detectCrisis(input, lang);
   if (crisisResponse) return crisisResponse;
+
+  // Ambiguous distress ("撑不下去" / "活着好累"): gentle support + resources as an
+  // option, BEFORE any verse matching — never route these straight to a topic.
+  if (detectCrisisTier(input) === 'ambiguous') return getAmbiguousSupport(lang);
 
   let best = null, bestLen = 0, bestPriority = Infinity;
   for (const item of qaRegistry) {

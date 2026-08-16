@@ -86,7 +86,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Direction and the Future',
-      scripture: 'Psalm 119:105 — “Your word is a lamp for my feet, a light on my path.”',
+      scripture: 'Psalm 119:105 — “Your word is a lamp to my feet and a light to my path.”',
       prayerBody: 'Abba Father, when the road ahead feels unclear and I feel anxious about school, work, decisions, and the future, I come before You. Do not let fear lead me, and do not let me rely only on my own understanding. Let Your Word be a lamp to my feet and a light to my path. If there is a door You want to open, give me faith to walk through it. If a door is not from You, gently redirect me. Give me wisdom, patience, courage, and clarity, and teach me to trust You even in the unknown. In the name of Jesus Christ, Amen.'
     }
   },
@@ -107,7 +107,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Health and Inner Peace',
-      scripture: 'Psalm 34:18 — “The Lord is close to the brokenhearted and saves those who are crushed in spirit.”',
+      scripture: 'Psalm 34:18 — “The LORD is near to the brokenhearted; He saves the contrite in spirit.”',
       prayerBody: 'Lord, I bring my physical weakness, pain, worry, and uncertainty before You. You know my fear and You see my exhaustion. Draw near to me with healing, strength, and peace. Guide the doctors, tests, treatments, and every decision ahead. Let me know that I am not alone. Even when my body feels weak, strengthen my heart. Even when I do not yet have answers, help me rest in Your presence. In the name of Jesus Christ, Amen.'
     }
   },
@@ -149,7 +149,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Peace in Anxiety',
-      scripture: 'Philippians 4:6-7 — “Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.”',
+      scripture: 'Philippians 4:6-7 — “Be anxious for nothing, but in everything, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.”',
       prayerBody: 'Lord, I bring my anxiety, pressure, and restless heart to You. I confess that I often try to gain security by controlling everything, and it leaves me exhausted. Help me bring each worry before You and release the burdens I have been holding tightly. Give me the peace that surpasses understanding, and guard my heart and mind in Christ Jesus. Let fear no longer lead me today; lead me instead into Your rest. In the name of Jesus Christ, Amen.'
     }
   },
@@ -170,7 +170,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for a Heart That Feels Insecure',
-      scripture: 'Psalm 46:1 — “God is our refuge and strength, an ever-present help in trouble.”',
+      scripture: 'Psalm 46:1 — “God is our refuge and strength, an ever-present help in times of trouble.”',
       prayerBody: 'Lord, I bring my insecurity, fear, and need for safety before You. So often I try to find security in circumstances, relationships, money, or human approval, but none of these can truly hold my heart. Teach me to know You as my refuge and strength, my ever-present help in trouble. Steady me with Your unchanging love, and help me remember that even when life feels uncertain, I am seen, protected, and held by You. In the name of Jesus Christ, Amen.'
     }
   },
@@ -191,7 +191,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for a Lonely Heart Longing to Be Seen',
-      scripture: 'Psalm 139:1 — “You have searched me, Lord, and you know me.”',
+      scripture: 'Psalm 139:1 — “O LORD, You have searched me and known me.”',
       prayerBody: 'Lord, I bring before You the heart that feels lonely, unseen, and misunderstood. People may not see my exhaustion, and I may not know how to express the loneliness deep within me, but You know me. You know when I sit and when I rise; You know the words before they are spoken. Let me experience Your presence in loneliness and Your comfort in silence. Please also provide the right people, relationships, and spiritual companionship, so I do not feel I must carry everything alone. In the name of Jesus Christ, Amen.'
     }
   },
@@ -212,7 +212,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Beginning to Know Jesus',
-      scripture: 'John 14:6 — Jesus answered, “I am the way and the truth and the life.”',
+      scripture: 'John 14:6 — Jesus answered, “Jesus answered, “I am the way and the truth and the life. No one comes to the Father except through Me.”',
       prayerBody: 'Lord Jesus, I may not fully know You yet, but I bring my real self before You. Reveal to me who You are. Help me know You as the Way, the Truth, and the Life. Lead me out of confusion, doubt, and darkness—not merely to know facts about You, but to truly know You, trust You, and follow You. If my heart is still afraid or uncertain, guide me with Your gentleness and light. In the name of Jesus Christ, Amen.'
     }
   }
@@ -232,7 +232,7 @@ export function getGeneralPrayer(lang) {
     en: {
       id: 'general',
       title: 'Bring Your Burden Before God',
-      scripture: 'Matthew 11:28 — “Come to me, all you who are weary and burdened, and I will give you rest.”',
+      scripture: 'Matthew 11:28 — “Come to Me, all you who are weary and burdened, and I will give you rest.”',
       prayerBody: 'Lord Jesus, I bring before You the burden that I cannot fully explain, organize, or carry on my own. You do not ask me to become strong before I come near to You; You invite the weary and burdened to come to You. Give me light in my confusion, rest in my exhaustion, and peace in my uncertainty. Lead me step by step, and help me know that I am not facing this alone. In the name of Jesus Christ, Amen.'
     }
   };

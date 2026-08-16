@@ -40,7 +40,7 @@ export const bibleRegistry = [
     descriptionEn: 'Ecclesiastes invites readers to confront vanity, labor, time, mortality, and meaning, ultimately pointing toward the wisdom of fearing God.',
     keyVerse: {
       zh: { reference: '传道书 1:14', text: '我见日光之下所行的一切事，都是虚空，都是捕风。' },
-      en: { reference: 'Ecclesiastes 1:14', text: 'I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.' }
+      en: { reference: 'Ecclesiastes 1:14', text: 'I have seen all the things that are done under the sun, and have found them all to be futile, a pursuit of the wind.' }
     },
     mediaHub: {
       zh: {
@@ -95,7 +95,7 @@ export const bibleRegistry = [
     descriptionEn: 'The Gospel of John reveals Jesus Christ as the Son of God, the source of life, true light, the way, the truth, and the life.',
     keyVerse: {
       zh: { reference: '约翰福音 1:4-5', text: '生命在他里头，这生命就是人的光。光照在黑暗里，黑暗却不接受光。' },
-      en: { reference: 'John 1:4-5', text: 'In him was life, and that life was the light of all mankind. The light shines in the darkness, and the darkness has not overcome it.' }
+      en: { reference: 'John 1:4-5', text: 'In Him was life, and that life was the light of men. The Light shines in the darkness, and the darkness has not overcome it.' }
     },
     mediaHub: {
       zh: {
@@ -150,7 +150,7 @@ export const bibleRegistry = [
     descriptionEn: 'Eleven selected Psalms — not the praise of perfect believers, but real people crying out fear, protest, and hope to God, echoing the honesty of Ecclesiastes “under the sun.”',
     keyVerse: {
       zh: { reference: '诗篇 34:18', text: '耶和华靠近伤心的人，拯救灵性痛悔的人。' },
-      en: { reference: 'Psalm 34:18', text: 'The Lord is close to the brokenhearted and saves those who are crushed in spirit.' }
+      en: { reference: 'Psalm 34:18', text: 'The LORD is near to the brokenhearted; He saves the contrite in spirit.' }
     },
     mediaHub: {
       zh: {
@@ -205,7 +205,7 @@ export const bibleRegistry = [
     descriptionEn: 'Job explores righteous suffering, human limitation, divine silence, and faith under the sovereignty of God.',
     keyVerse: {
       zh: { reference: '约伯记 1:21', text: '赏赐的是耶和华，收取的也是耶和华；耶和华的名是应当称颂的。' },
-      en: { reference: 'Job 1:21', text: 'The Lord gave and the Lord has taken away; may the name of the Lord be praised.' }
+      en: { reference: 'Job 1:21', text: 'The LORD gave, and the LORD has taken away. Blessed be the name of the LORD.' }
     },
     bgColor: 'from-[#1A2A3A] to-[#12161A]',
     accentColor: '#B8C7D9',
@@ -242,7 +242,7 @@ export const bibleRegistry = [
     descriptionEn: 'The Gospel of Matthew presents Jesus as the promised Messianic King who fulfills the Law and the Prophets and calls people into the life of the kingdom.',
     keyVerse: {
       zh: { reference: '马太福音 4:17', text: '天国近了，你们应当悔改！' },
-      en: { reference: 'Matthew 4:17', text: 'Repent, for the kingdom of heaven has come near.' }
+      en: { reference: 'Matthew 4:17', text: 'Repent, for the kingdom of heaven is near.' }
     },
     bgColor: 'from-[#2B2615] to-[#12161A]',
     accentColor: '#D8C27A',

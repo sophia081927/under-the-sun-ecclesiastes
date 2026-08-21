@@ -37,6 +37,7 @@ const UI = {
     guided: '也可以从这里开始:',
     scriptureLabel: '相关经文', prayerLabel: '祷告',
     narrationReady: '真人女声祷告', narrationInProduction: '真人祷告朗读正在制作中',
+    narrationAi: 'AI 女声朗读 · 真人版制作中', ttsListen: '朗读祷告', ttsStop: '停止朗读',
     ambientReady: '安静祷告背景', ambientPlay: '播放', ambientPause: '暂停',
     close: '关闭祷告'
   },
@@ -50,6 +51,7 @@ const UI = {
     guided: 'You can also begin here:',
     scriptureLabel: 'Scripture', prayerLabel: 'Prayer',
     narrationReady: 'Human female prayer narration', narrationInProduction: 'Human prayer narration is in production',
+    narrationAi: 'AI narration · human recording in production', ttsListen: 'Read the prayer aloud', ttsStop: 'Stop',
     ambientReady: 'Quiet prayer background', ambientPlay: 'Play', ambientPause: 'Pause',
     close: 'Close Prayer'
   }
@@ -191,6 +193,40 @@ function stopActiveAmbient() {
   if (_activeAmbient) { try { _activeAmbient.pause(); _activeAmbient.currentTime = 0; } catch (e) {} _activeAmbient = null; }
 }
 
+/* ---- TTS fallback (spoken prayer) — used ONLY when no real MP3 is present.
+   A real recording at audio/prayers/<topic>-<lang>.mp3 always wins and auto-upgrades. */
+function ttsSupported() { return ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window); }
+function pickPrayerVoice(lang) {
+  try {
+    const vs = window.speechSynthesis.getVoices() || [];
+    const want = lang === 'zh' ? 'zh' : 'en';
+    const pool = vs.filter((v) => (v.lang || '').toLowerCase().indexOf(want) === 0);
+    if (!pool.length) return null;                 // never assign a wrong-language voice (keeps EN from going silent)
+    const fem = pool.filter((v) => /female|zira|huihui|tingting|xiaoxiao|yaoyao|hanhan|mei|susan|linda|hazel|aria|jenny/i.test(v.name || ''));
+    return fem[0] || pool[0];
+  } catch (e) { return null; }
+}
+function stopActiveSpeech() {
+  if (ttsSupported()) { try { window.speechSynthesis.cancel(); } catch (e) {} }
+}
+/* Speak an ordered list of text segments, one utterance each, then call done(). */
+function speakSegments(segments, lang, onDone) {
+  stopActiveSpeech();
+  const voice = pickPrayerVoice(lang);
+  const list = (segments || []).filter(Boolean);
+  let i = 0;
+  (function next() {
+    if (i >= list.length) { onDone && onDone(); return; }
+    const u = new SpeechSynthesisUtterance(list[i]);
+    u.lang = lang === 'zh' ? 'zh-CN' : 'en-US';
+    if (voice) u.voice = voice;
+    u.rate = 0.9;
+    u.onend = () => { i++; next(); };
+    u.onerror = () => { i++; next(); };
+    window.speechSynthesis.speak(u);
+  })();
+}
+
 /* ---- render bookkeeping: each board render gets a token stamped on its target
    so a superseded typewriter / audio probe never writes into a newer board ---- */
 let _gen = 0;
@@ -214,16 +250,33 @@ function typeInto(target, token, el, text, totalMs, done) {
   })();
 }
 
-function mountNarration(slot, path, lang, target, token) {
+function mountNarration(slot, path, lang, target, token, speakText) {
   const t = UI[lang];
   slot.innerHTML = `<div class="pray-audio"><span class="pray-badge">${esc(t.narrationInProduction)}</span></div>`;
-  if (!path) return;
   probeAudio(path).then((audio) => {
-    if (!audio || target.dataset.prayerGen !== token || !slot.isConnected) return;
-    slot.innerHTML = `<div class="pray-audio"><span class="pray-badge ready">${esc(t.narrationReady)}</span></div>`;
-    audio.className = 'pray-player';
-    audio.controls = true; // spoken narration does not loop
-    slot.querySelector('.pray-audio').appendChild(audio);
+    if (target.dataset.prayerGen !== token || !slot.isConnected) return;
+    if (audio) {
+      // Real human-voice MP3 present → play it (wins over TTS).
+      slot.innerHTML = `<div class="pray-audio"><span class="pray-badge ready">${esc(t.narrationReady)}</span></div>`;
+      audio.className = 'pray-player';
+      audio.controls = true; // spoken narration does not loop
+      slot.querySelector('.pray-audio').appendChild(audio);
+      return;
+    }
+    // No MP3 yet → synthetic female voice so the prayer can be heard now.
+    if (!ttsSupported() || !(speakText && speakText.length)) return; // keep the calm "in production" badge
+    slot.innerHTML = `<div class="pray-audio"><span class="pray-badge">${esc(t.narrationAi)}</span>` +
+      `<button type="button" class="pray-ambient-btn" data-el="ttsbtn"><span class="ic">▷</span><span data-el="ttslabel">${esc(t.ttsListen)}</span></button></div>`;
+    const btn = slot.querySelector('[data-el="ttsbtn"]');
+    const lbl = slot.querySelector('[data-el="ttslabel"]');
+    const ic = btn.querySelector('.ic');
+    let speaking = false;
+    const reset = () => { speaking = false; lbl.textContent = t.ttsListen; ic.textContent = '▷'; };
+    btn.addEventListener('click', () => {
+      if (speaking) { stopActiveSpeech(); reset(); return; }
+      speaking = true; lbl.textContent = t.ttsStop; ic.textContent = '❚❚';
+      speakSegments(speakText, lang, () => { if (slot.isConnected && target.dataset.prayerGen === token) reset(); });
+    });
   });
 }
 
@@ -274,6 +327,7 @@ export function renderPrayerBoard(target, response, lang, opts) {
   const token = String(++_gen);
   target.dataset.prayerGen = token;
   stopActiveAmbient();
+  stopActiveSpeech();
 
   const path = L === 'en' ? r.audioPathEn : r.audioPathZh;
   const ambientPath = L === 'en' ? r.ambientPathEn : r.ambientPathZh;
@@ -284,7 +338,7 @@ export function renderPrayerBoard(target, response, lang, opts) {
       <div class="pray-sect"><div class="pray-slabel">${esc(t.scriptureLabel)}</div><div class="pray-verse" data-el="scr"></div></div>
       <div class="pray-sect"><div class="pray-slabel">${esc(t.prayerLabel)}</div><div class="pray-body" data-el="bdy"></div></div>
       <div class="pray-tail" data-el="tail">
-        ${path ? `<div class="pray-audiowrap" data-el="narration"></div>` : ''}
+        ${crisis ? '' : `<div class="pray-audiowrap" data-el="narration"></div>`}
         ${ambientPath ? `<div data-el="ambient"></div>` : ''}
         <div class="pray-close"><button type="button" class="pray-close-btn" data-el="close">${esc(t.close)}</button></div>
       </div>
@@ -295,13 +349,15 @@ export function renderPrayerBoard(target, response, lang, opts) {
 
   function closeBoard() {
     stopActiveAmbient();
+    stopActiveSpeech();
     if (target.dataset.prayerGen === token) { target.dataset.prayerGen = ''; target.innerHTML = ''; }
     if (typeof opts.onClose === 'function') opts.onClose();
   }
   function revealTail() {
     if (target.dataset.prayerGen !== token) return;
     tail.style.opacity = '1';
-    if (path) mountNarration(pick('narration'), path, L, target, token);
+    const nslot = pick('narration');
+    if (nslot) mountNarration(nslot, path, L, target, token, [r.scripture, r.prayerBody]);
     if (ambientPath) mountAmbient(pick('ambient'), ambientPath, L, target, token); // auto-plays the soft loop
     const cb = pick('close');
     if (cb) cb.addEventListener('click', closeBoard);

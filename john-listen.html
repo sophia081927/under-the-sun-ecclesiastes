@@ -414,10 +414,11 @@ function makeSentences(chapter, lang){
 /* ---------- audio availability UI — NO browser TTS ---------- */
 function setAudioBadge(state){
   var b=document.getElementById('audioBadge'); if(!b) return;
-  b.className='badge '+(state==='ready'?'ready':'calib');
-  b.innerHTML = state==='ready'
-    ? '<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'
-    : '<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
+  var cls='calib', html='<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
+  if(state==='ready'){ cls='ready'; html='<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'; }
+  else if(state==='tts'){ cls='calib'; html='<span class="en">AI narration · human recording in production</span><span class="zh">AI 女声朗读 · 真人版制作中</span>'; }
+  b.className='badge '+cls;
+  b.innerHTML = html;
   b.style.display='inline-flex';
 }
 function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }
@@ -450,6 +451,44 @@ function tryMP3(path){
   });
 }
 
+/* ---------- TTS fallback provider — used ONLY when no real MP3 yet ----------
+   Reads the chapter's sentence blocks aloud with the browser's speech engine,
+   same interface as MP3Provider. Real MP3s win (tryMP3 first); drop one into
+   audio/john/ and it auto-upgrades. */
+function ttsSupported(){ return ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window); }
+function pickVoice(lang){
+  try{
+    var vs=window.speechSynthesis.getVoices()||[]; var want=(lang==='zh')?'zh':'en';
+    var pool=vs.filter(function(v){ return (v.lang||'').toLowerCase().indexOf(want)===0; });
+    if(!pool.length) return null;
+    var fem=pool.filter(function(v){ return /female|zira|huihui|tingting|xiaoxiao|yaoyao|hanhan|mei|susan|linda|hazel|aria|jenny/i.test(v.name||''); });
+    return fem[0]||pool[0];
+  }catch(e){ return null; }
+}
+function TTSProvider(blocks, lang){
+  var self=this; self.kind='tts'; self.onprogress=self.onsentence=self.onend=function(){};
+  var flat=[]; blocks.forEach(function(b){ (b.sentences||[]).forEach(function(s){ flat.push(s); }); });
+  var idx=0, rate=0.9, speaking=false, voice=pickVoice(lang);
+  function synth(){ return window.speechSynthesis; }
+  function step(){
+    if(!speaking) return;
+    if(idx>=flat.length){ speaking=false; self.onprogress(1, flat.length+' / '+flat.length); self.onend(); return; }
+    self.onsentence(idx); self.onprogress(flat.length?idx/flat.length:0, (idx+1)+' / '+flat.length);
+    var u=new SpeechSynthesisUtterance(flat[idx]); u.lang=(lang==='zh')?'zh-CN':'en-US';
+    if(voice) u.voice=voice; u.rate=rate;
+    u.onend=function(){ if(!speaking) return; idx++; step(); };
+    u.onerror=function(){ if(!speaking) return; idx++; step(); };
+    synth().speak(u);
+  }
+  function speakFrom(i){ try{ synth().cancel(); }catch(e){} idx=i; speaking=true; step(); }
+  self.load=function(){ voice=pickVoice(lang); return true; };
+  self.play=function(){ if(!speaking){ if(idx>=flat.length) idx=0; speakFrom(idx); } };
+  self.pause=function(){ speaking=false; try{ synth().cancel(); }catch(e){} };
+  self.stop=function(){ speaking=false; idx=0; try{ synth().cancel(); }catch(e){} };
+  self.setRate=function(r){ rate=r; };
+  self.seekFrac=function(f){ var i=Math.max(0,Math.min(flat.length-1,Math.round(f*(flat.length-1||0)))); speakFrom(i); };
+}
+
 /* ============================================================
    PLAYER — orchestrates provider + UI
    ============================================================ */
@@ -480,9 +519,23 @@ var Player = {
       this.provider.setRate(this.rate);
       document.getElementById('mini').classList.add('show');
       if(autoplay!==false) this.play();
+    } else if(ttsSupported()){
+      /* Real human-voice MP3 not present yet → synthetic female voice so the
+         chapter is audible now; a real MP3 auto-upgrades it later. */
+      var tts=new TTSProvider(this.blocks, lang); tts.load();
+      this.provider=tts; setAudioBadge('tts'); hideCalibration();
+      this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%';
+        document.getElementById('miniTime').textContent=label||''; };
+      this.provider.onsentence=function(gi){ highlightSentence(gi); };
+      this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+        if(self.queueMode){ if(self.queue.length){ var n=self.queue.shift(); location.hash='chapter-'+CHAPTERS[n].num; self.load(n,true); }
+          else { self.queueMode=false; } return; }
+        if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); } };
+      this.provider.setRate(this.rate);
+      document.getElementById('mini').classList.add('show');
+      if(autoplay!==false) this.play();
     } else {
-      /* Real human-voice MP3 not present yet → NO browser TTS. Show a calm
-         calibration state; the chapter text stays readable in the transcript. */
+      /* No audio support at all → calm calibration state; text stays readable. */
       this.provider=null; this.playing=false; this.queueMode=false; this.queue=[]; setPlayIcon(false);
       setAudioBadge('calibrating'); showCalibration();
       document.getElementById('mini').classList.remove('show');

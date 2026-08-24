@@ -113,6 +113,14 @@
   .chap .cnum{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:8px}
   .chap .ctitle{font-size:clamp(20px,4vw,26px);line-height:1.25;color:var(--ink);font-weight:400}
   .chap .cfocus{margin-top:8px;font-size:15.5px;color:var(--sky-soft);font-style:italic;line-height:1.6}
+  .deeptag{display:inline-block;margin-top:11px;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sky);
+    border:1px solid var(--sky-line);border-radius:20px;padding:3px 11px}
+  .cverse{margin-top:16px;border-left:2px solid var(--sky);padding:5px 0 5px 16px}
+  .cverse .ref{font-size:12.5px;color:var(--sky-soft);font-style:italic;margin-bottom:5px}
+  .cverse .vt{font-size:16.5px;color:var(--ink);line-height:1.85}
+  .sect.med .q{position:relative;padding-left:16px;margin-bottom:9px}
+  .sect.med .q:last-child{margin-bottom:0}
+  .sect.med .q:before{content:'✦';position:absolute;left:0;color:var(--sky);font-size:12px;top:3px}
   .sect{margin-top:18px}
   .sect .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.9;margin-bottom:7px}
   .sect .body{font-size:15.5px;color:var(--muted);line-height:1.85}
@@ -316,19 +324,43 @@ var SECTIONS = [
   { id:'s8', label:{zh:'第 21–22 章',en:'Revelation 21–22'},title:{zh:'新天新地',en:'A New Heaven and a New Earth'} }
 ];
 
-/* helper to keep chapter objects compact */
-function C(n, sec, t, focus, hap, god, life, ref, pr){
-  return { n:n, sec:sec, t:t, focus:focus, hap:hap, god:god, life:life, ref:ref, pr:pr };
+/* helper to keep chapter objects compact. `extra` (optional) carries the
+   deepened fields a chapter gains once the sermon series covers it:
+   { deep:true, verse:{ref,zh,en}, bg:{zh,en}, more:{zh,en}, sermon:{zh,en} }.
+   `ref` may be a single string {zh,en} or an array {zh:[...],en:[...]}. */
+function C(n, sec, t, focus, hap, god, life, ref, pr, extra){
+  var o = { n:n, sec:sec, t:t, focus:focus, hap:hap, god:god, life:life, ref:ref, pr:pr };
+  if(extra){ for(var k in extra){ if(Object.prototype.hasOwnProperty.call(extra,k)) o[k]=extra[k]; } }
+  return o;
 }
 var REV = [
   C(1,'s1',
     {zh:'荣耀的基督',en:'The Glorified Christ'},
     {zh:'不要惧怕——基督掌管过去、现在与未来。',en:'Do not be afraid — Christ holds past, present, and future.'},
-    {zh:'约翰在拔摩海岛上,看见荣耀中复活的耶稣行走在众教会中间。耶稣按手在他身上说:“不要惧怕。”',en:'Exiled on Patmos, John sees the risen Jesus in glory, walking among the churches. Jesus lays His hand on him and says, “Do not be afraid.”'},
-    {zh:'耶稣是首先的、末后的,是那位曾死、现在又活着直到永远的主;整卷书首先是“耶稣基督的启示”。',en:'Jesus is the First and the Last, the One who was dead and is alive forevermore; the whole book is first of all “the revelation of Jesus Christ.”'},
-    {zh:'当未来令你害怕时,先看见那位站在时间两端、仍活着的基督,再看你的处境。',en:'When the future frightens you, see first the living Christ who stands at both ends of time — then look at your situation.'},
-    {zh:'你在惧怕什么?把它放在“不要惧怕,我是首先的、末后的”这句话旁边。',en:'What are you afraid of? Set it beside the words, “Do not be afraid; I am the First and the Last.”'},
-    {zh:'荣耀的主耶稣,你活着直到永远,也掌管我不能掌管的未来。求你今天挪去我的惧怕,让我在你面前安稳。',en:'Glorified Lord Jesus, You live forever and hold the future I cannot hold. Take away my fear today, and let me rest secure before You.'}),
+    {zh:'全书以恩典的问安与颂赞开始,耶稣自称“阿拉法、俄梅戛”(首先与末后)。约翰因信仰被放逐在拔摩海岛,在主日听见身后有大声音;他转过身,看见七个金灯台,灯台中间有一位“好像人子”的——身穿长袍,头发雪白,眼目如火焰,脚像发光的铜,声音如众水,右手拿着七星,口中出来一把两刃利剑,面貌如烈日。约翰一看见就仆倒在他脚前,像死了一样。耶稣用右手按着他说:“不要惧怕!我是首先的,我是末后的,又是那存活的;我曾死过,现在又活了,直活到永永远远,并且拿着死亡和阴间的钥匙。”七灯台就是七个教会,七星是教会的使者。',
+     en:'The book opens with a greeting of grace and a doxology; Jesus calls Himself “the Alpha and the Omega” (the First and the Last). John, exiled on Patmos for his faith, hears a loud voice behind him on the Lord’s Day; he turns and sees seven golden lampstands, and among them one “like a son of man” — in a long robe, hair white as snow, eyes like blazing fire, feet like glowing bronze, a voice like rushing waters, seven stars in His right hand, a sharp two-edged sword from His mouth, His face like the sun. John falls at His feet as though dead. Jesus lays His right hand on him: “Do not be afraid. I am the First and the Last, the Living One; I was dead, and now I am alive for ever and ever, and I hold the keys of death and Hades.” The lampstands are the seven churches; the stars, their messengers.'},
+    {zh:'耶稣是复活、荣耀、永活的主:祂胜过死亡、握有“死亡和阴间的钥匙”,又“行走在众教会中间”,与祂的百姓同在。而祂对一个吓得仆倒的门徒说的第一句话,不是定罪,而是“不要惧怕”。',
+     en:'Jesus is the risen, glorified, ever-living Lord: He has conquered death and holds “the keys of death and Hades,” and He walks “among the lampstands,” present with His people. And His first word to a disciple who has fallen down in terror is not condemnation but, “Do not be afraid.”'},
+    {zh:'当未来或死亡令你害怕时,要先看见的不是那威胁,而是那位已经握着死亡钥匙、仍然活着的基督。祂“行走在众教会中间”意味着:你并不是独自面对——祂此刻就在祂百姓中间。',
+     en:'When the future or death frightens you, the first thing to see is not the threat but the living Christ who already holds the keys of death. That He “walks among the churches” means you are not facing it alone — He is present among His people right now.'},
+    {zh:'你在惧怕什么?把它放在“不要惧怕,我是首先的、末后的”这句话旁边。',
+     en:'What are you afraid of? Set it beside the words, “Do not be afraid; I am the First and the Last.”'},
+    {zh:'荣耀复活的主耶稣,你是首先的、末后的,你曾死过、现在又活着直到永远,并且拿着死亡和阴间的钥匙。我承认自己常被未来和死亡吓住。求你今天把手按在我身上,对我说“不要惧怕”;让我在你活着的同在里得安稳,带着盼望去过今天。',
+     en:'Risen and glorified Lord Jesus, You are the First and the Last; You were dead and are alive forever, and You hold the keys of death and Hades. I admit I am often frightened by the future and by death. Lay Your hand on me today and say, “Do not be afraid”; let me rest in Your living presence and walk through today in hope.'},
+    { deep:true,
+      verse:{ ref:{zh:'启示录 1:17-18',en:'Revelation 1:17-18'},
+              zh:'不要惧怕!我是首先的,我是末后的,又是那存活的;我曾死过,现在又活了,直活到永永远远,并且拿着死亡和阴间的钥匙。',
+              en:'Do not be afraid. I am the First and the Last. I am the Living One; I was dead, and now look, I am alive for ever and ever! And I hold the keys of death and Hades.' },
+      bg:{ zh:'《启示录》约成书于第一世纪末,写给小亚细亚(今土耳其西部)七个真实的教会;他们正面对压力、被边缘化,有的地方甚至遭受逼迫。作者约翰自己也“为神的道”被放逐在拔摩海岛。在这样的恐惧里,这卷书不是先给出一张灾难时间表,而是先给出一个异象:荣耀中复活的耶稣。这就是全书的框架——无论后面来什么,先看清是谁在掌管这一切。',
+           en:'Revelation was written near the end of the first century to seven real churches in Asia Minor (today western Turkey), facing pressure, marginalization, and in places persecution. John himself was exiled to the island of Patmos “because of the word of God.” Into that fear, the book does not begin with a timeline of disasters but with a vision — the risen Jesus in glory. This is the frame for everything that follows: whatever comes next, first see who holds it all.' },
+      more:{ zh:'第一章的形象都是象征,many取自旧约(但以理书里的“人子”、灯台、口中的利剑),描绘基督的圣洁、权柄、洞察,以及祂话语的能力;不必把每个细节都当作字面描写。最要紧的一幅图是:七灯台就是众教会,而基督“行走在灯台中间”——祂不是遥远的神,而是走在祂百姓当中的主。',
+             en:'The imagery of chapter 1 is symbolic, much of it drawn from the Old Testament (Daniel’s “son of man,” the lampstands, the sword from His mouth), portraying Christ’s holiness, authority, penetrating knowledge, and the power of His word; the details are not meant to be read as a literal photograph. The most important picture is this: the seven lampstands are the churches, and Christ “walks among them” — He is not a distant God but the Lord present among His people.' },
+      ref:{ zh:['你现在最怕面对的“未来”或“结局”是什么?试着把它放在“我拿着死亡和阴间的钥匙”这句话旁边。',
+                '如果荣耀的基督此刻正“行走在众教会中间”,这对你所在的教会、或你有时孤单的信仰,意味着什么?',
+                '耶稣对仆倒在地的约翰说的第一句话是“不要惧怕”。你有没有把神想象得比祂实际上更严厉?'],
+            en:['What “future” or “ending” do you most fear right now? Try setting it beside the words, “I hold the keys of death and Hades.”',
+                'If the glorified Christ is even now “walking among the churches,” what does that mean for your church — or for your sometimes-lonely faith?',
+                'Jesus’ first word to John, fallen on the ground, is “Do not be afraid.” Have you pictured God as harsher than He actually is?'] } }),
 
   C(2,'s2',
     {zh:'给以弗所、士每拿、别迦摩、推雅推喇的信',en:'Letters to Ephesus, Smyrna, Pergamum, Thyatira'},
@@ -557,11 +589,22 @@ function render(){
   }).join('');
 
   // chapters grouped by section
+  var lblVerse=L==='zh'?'核心经文':'Key verse';
+  var lblBg  = L==='zh'?'背景':'Background';
   var lblHap = L==='zh'?'这一章发生了什么':'What happens in this chapter';
   var lblGod = L==='zh'?'这告诉我们关于神什么':'What this reveals about God';
   var lblLife= L==='zh'?'这对今天的生活意味着什么':'What this means for my life today';
+  var lblMore= L==='zh'?'更深一层':'Going deeper';
   var lblRef = L==='zh'?'今日默想':'Reflection';
   var lblPr  = L==='zh'?'祷告':'Prayer';
+  var deepTag= L==='zh'?'导读已加深':'Expanded guide';
+  function refBody(c){
+    var r=c.ref[L];
+    if(Object.prototype.toString.call(r)==='[object Array]'){
+      return r.map(function(q){ return '<div class="q">'+esc(q)+'</div>'; }).join('');
+    }
+    return esc(r);
+  }
   var html = '';
   SECTIONS.forEach(function(sec){
     html += '<div class="secthead"><div class="sl">'+esc(sec.label[L])+'</div><div class="st">'+esc(sec.title[L])+'</div></div>';
@@ -570,10 +613,14 @@ function render(){
         + '<div class="cnum">'+(L==='zh'?('启示录 '+c.n+' 章'):('Revelation '+c.n))+'</div>'
         + '<h2 class="ctitle">'+esc(c.t[L])+'</h2>'
         + '<div class="cfocus">'+esc(c.focus[L])+'</div>'
+        + (c.deep?('<span class="deeptag">'+deepTag+'</span>'):'')
+        + (c.verse?('<div class="cverse"><div class="ref">'+esc(c.verse.ref[L])+'</div><div class="vt">'+esc(c.verse[L])+'</div></div>'):'')
+        + (c.bg?('<div class="sect"><div class="lbl">'+lblBg+'</div><div class="body">'+esc(c.bg[L])+'</div></div>'):'')
         + '<div class="sect"><div class="lbl">'+lblHap+'</div><div class="body">'+esc(c.hap[L])+'</div></div>'
         + '<div class="sect"><div class="lbl">'+lblGod+'</div><div class="body">'+esc(c.god[L])+'</div></div>'
         + '<div class="sect"><div class="lbl">'+lblLife+'</div><div class="body">'+esc(c.life[L])+'</div></div>'
-        + '<div class="sect med"><div class="lbl">'+lblRef+'</div><div class="body">'+esc(c.ref[L])+'</div></div>'
+        + (c.more?('<div class="sect"><div class="lbl">'+lblMore+'</div><div class="body">'+esc(c.more[L])+'</div></div>'):'')
+        + '<div class="sect med"><div class="lbl">'+lblRef+'</div><div class="body">'+refBody(c)+'</div></div>'
         + '<div class="sect pray"><div class="lbl">'+lblPr+'</div><div class="body">'+esc(c.pr[L])+'</div></div>'
         + readLinks(c.n, L)
         + '</section>';

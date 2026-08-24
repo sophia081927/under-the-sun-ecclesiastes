@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SHNR24DPH7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="聆听启示录 · Listen">
+<title>Listen · Revelation · 聆听启示录</title>
+<meta name="description" content="Listen to Revelation chapter by chapter in Chinese or English — an audio meditation on the victory and hope of Jesus. 聆听启示录,中文或英文,逐章默想耶稣的得胜与盼望。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/revelation-listen.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    /* Revelation identity — royal gold */
+    --sky:#e6c260; --sky-soft:#f0d78a;
+    --line:rgba(230,194,96,.26); --line-soft:rgba(236,231,221,.10);
+    --hl:rgba(230,194,96,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;
+    line-height:1.6;-webkit-font-smoothing:antialiased;padding-bottom:96px}
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);color:var(--muted);text-transform:uppercase}
+  .topbar .mark{color:var(--sky-soft);border:none;text-decoration:none;white-space:nowrap}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.nav{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.nav:hover{color:var(--sky-soft)}
+  .lang-toggle{border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sky);color:#14161a;font-weight:700}
+
+  .wrap{max-width:720px;margin:0 auto;padding:96px 22px 20px}
+  .hero{text-align:center;margin-bottom:8px}
+  .hero .kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:12px}
+  .hero h1{font-size:clamp(26px,5.2vw,38px);font-weight:400}
+  .hero p{margin-top:12px;color:var(--muted);font-size:15px;line-height:1.7}
+  .hint{margin-top:16px;font-size:13px;color:var(--faint);line-height:1.7;text-align:center}
+
+  .controls{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;align-items:center;margin:18px 0 6px}
+  .controls button{font-family:inherit;cursor:pointer;border-radius:30px;border:1px solid var(--line);background:var(--bg2);color:var(--ink);
+    font-size:14px;padding:11px 20px;min-height:44px;transition:all .2s}
+  .controls .primary{background:var(--sky);color:#14161a;border-color:var(--sky);font-weight:700}
+  .controls .primary:hover{background:var(--sky-soft)}
+  .controls .rate{min-width:64px}
+  .controls label{font-size:13px;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+
+  .list{margin-top:22px;display:flex;flex-direction:column;gap:2px}
+  .list .row{display:flex;align-items:flex-start;gap:12px;padding:14px 12px;border-radius:8px;cursor:pointer;border:1px solid transparent;transition:all .2s}
+  .list .row:hover{background:var(--bg2);border-color:var(--line-soft)}
+  .list .row.playing{background:var(--bg2);border-color:var(--line)}
+  .list .row .n{color:var(--sky);font-size:13px;min-width:56px;padding-top:2px;letter-spacing:.04em}
+  .list .row .meta .t{font-size:16.5px;color:var(--ink)}
+  .list .row .meta .th{font-size:13.5px;color:var(--muted);margin-top:3px;font-style:italic;line-height:1.5}
+
+  .now{margin-top:26px;background:var(--bg2);border:1px solid var(--line-soft);border-radius:12px;padding:22px 20px;display:none}
+  .now.show{display:block}
+  .now .eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sky);margin-bottom:8px}
+  .now h2{font-size:20px;font-weight:400;margin-bottom:12px}
+  .transcript .blk{margin-bottom:16px}
+  .transcript .lbl{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--sun);opacity:.8;margin-bottom:6px}
+  .transcript .sent{font-size:17px;line-height:1.95;color:var(--muted);transition:color .3s,background .3s;border-radius:4px;padding:1px 3px}
+  .transcript .sent.on{color:var(--ink);background:var(--hl)}
+  .transcript .med{color:var(--sky-soft);font-style:italic}
+  .badge{margin-top:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;border-radius:30px;padding:5px 12px;align-items:center;gap:6px}
+  .badge.ready{color:#14161a;background:var(--sky-soft)}
+  .badge.calib{color:var(--sky-soft);background:transparent;border:1px solid var(--line)}
+  .calib{display:none;margin:18px 0;padding:24px 20px;text-align:center;background:rgba(230,194,96,.05);border:1px solid var(--line-soft);border-radius:12px}
+  .calib.show{display:block}
+  .calib .calib-msg{font-size:15.5px;color:var(--sky-soft);letter-spacing:.02em;line-height:1.7}
+  .calib .calib-btn{margin-top:14px;font-family:inherit;font-size:13px;color:var(--faint);background:transparent;border:1px solid var(--line-soft);border-radius:30px;padding:11px 20px;min-height:44px;cursor:not-allowed;opacity:.65}
+
+  .mini{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(24,27,32,.96);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:none}
+  .mini.show{display:flex;align-items:center;gap:12px;max-width:720px;margin:0 auto}
+  .mini .play{width:46px;height:46px;border-radius:50%;border:none;background:var(--sky);color:#14161a;font-size:18px;cursor:pointer;flex:none}
+  .mini .info{flex:1;min-width:0}
+  .mini .info .t{font-size:13.5px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mini .prog{height:4px;background:var(--bg3);border-radius:3px;margin-top:6px;overflow:hidden;cursor:pointer}
+  .mini .prog .fill{height:100%;width:0;background:var(--sky)}
+  .mini .time{font-size:11px;color:var(--faint);margin-top:4px}
+
+  footer{border-top:1px solid var(--line-soft);padding:30px 22px;text-align:center;color:var(--faint);font-size:12.5px}
+  footer a{color:var(--sky-soft);text-decoration:none}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="nav" href="revelation.html"><span class="en">Read</span><span class="zh">阅读</span></a>
+    <a class="nav" href="ask.html"><span class="en">Ask</span><span class="zh">提问</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker"><span class="en">Listen · Revelation</span><span class="zh">聆听 · 启示录</span></div>
+    <h1><span class="en">Let Revelation be read to you</span><span class="zh">让启示录读给你听</span></h1>
+    <p><span class="en">Twenty-two chapters, in Chinese or English. Tap one and your device reads a short meditation aloud — right now.</span><span class="zh">二十二章,中文或英文。点一章,设备即刻把一段简短的默想读给你听。</span></p>
+    <div class="hint"><span class="en">These are short chapter meditations, not the full text. Read the full chapter on the <a href="revelation.html" style="color:var(--sky-soft)">reading page</a>.</span><span class="zh">这里是每章的简短默想,不是全文。完整经文请在<a href="revelation.html" style="color:var(--sky-soft)">阅读页</a>查看。</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="primary" id="playAllBtn" onclick="Player.toggleAll()"><span class="en">▶ Play all</span><span class="zh">▶ 连续播放</span></button>
+    <button class="rate" id="rateBtn" onclick="Player.cycleRate()">0.85x</button>
+    <label><input type="checkbox" id="autoNext" checked> <span class="en">Auto-continue</span><span class="zh">自动续播</span></label>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="now" id="now">
+    <div class="eyebrow" id="nowEyebrow"></div>
+    <h2 id="nowTitle"></h2>
+    <span id="audioBadge" class="badge" style="display:none"></span>
+    <div id="calib" class="calib" role="status">
+      <div class="calib-msg"><span class="en">Human female narration is being produced and will be available soon.</span><span class="zh">真人女声朗读正在制作中，即将上线。</span></div>
+      <button type="button" class="calib-btn" disabled aria-disabled="true"><span class="en">🎙️ Listen via Professional Audio Gateway</span><span class="zh">🎙️ 步入官方有声书阁听书</span></button>
+    </div>
+    <div class="transcript" id="transcript"></div>
+  </div>
+</div>
+
+<div class="mini" id="mini">
+  <button class="play" id="miniPlay" onclick="Player.toggle()">▶</button>
+  <div class="info">
+    <div class="t" id="miniTitle"></div>
+    <div class="prog" id="prog" onclick="Player.seekAt(event)"><div class="fill" id="fill"></div></div>
+    <div class="time" id="miniTime"></div>
+  </div>
+</div>
+
+<footer>
+  <span class="en">Revelation · audio meditation. <a href="revelation.html">Read the text →</a></span>
+  <span class="zh">启示录 · 聆听默想。<a href="revelation.html">阅读全文 →</a></span>
+</footer>
+
+<script>
+/* ============================================================
+   Revelation audio — MP3-first with a synthetic-voice fallback. If a real
+   human-voice MP3 exists at audio/revelation/revelation-NN-<lang>.mp3 it plays
+   via <audio>; otherwise the browser's speech engine reads the meditation
+   aloud (a real MP3 auto-upgrades it later). No external API.
+   Spoken content is a short chapter meditation, not verbatim Scripture.
+   ============================================================ */
+var CHAPTERS = [
+  { num:1, title:{zh:'启示录 1 · 荣耀的基督',en:'Revelation 1 · The Glorified Christ'},
+    intro:{zh:'不要惧怕——基督掌管过去、现在与未来。',en:'Do not be afraid — Christ holds past, present, and future.'},
+    body:{zh:'约翰在拔摩海岛上,看见荣耀中复活的耶稣行走在众教会中间。耶稣按手在他身上说:不要惧怕。祂是首先的、末后的,是那位曾死、现在又活着直到永远的主。整卷书首先是耶稣基督的启示。',en:'Exiled on Patmos, John sees the risen Jesus in glory, walking among the churches. Jesus lays His hand on him and says, do not be afraid. He is the First and the Last, the One who was dead and is alive forevermore. The whole book is first of all the revelation of Jesus Christ.'},
+    med:{zh:'默想:你在惧怕什么?把它放在“不要惧怕,我是首先的、末后的”这句话旁边。',en:'Reflect: what are you afraid of? Set it beside the words, do not be afraid, I am the First and the Last.'} },
+  { num:2, title:{zh:'启示录 2 · 给四个教会的信',en:'Revelation 2 · Letters to Four Churches'},
+    intro:{zh:'省察、悔改、警醒、忠心。',en:'Examine yourself, repent, stay watchful, remain faithful.'},
+    body:{zh:'耶稣对以弗所、士每拿、别迦摩、推雅推喇四个真实的教会说话。祂称赞他们所做的好,也指出他们离弃起初的爱、容让妥协,并呼召他们悔改、忠心到底。耶稣认识每一间教会真实的光景。',en:'Jesus speaks to four real churches: Ephesus, Smyrna, Pergamum, and Thyatira. He commends what is good, names where they have left their first love or tolerated compromise, and calls them to repent and be faithful to the end. Jesus knows each church as it really is.'},
+    med:{zh:'默想:如果耶稣今天写一封信给你,祂会称赞什么,又会温柔地提醒你什么?',en:'Reflect: if Jesus wrote you a letter today, what would He commend, and where would He gently call you back?'} },
+  { num:3, title:{zh:'启示录 3 · 我站在门外叩门',en:'Revelation 3 · I Stand at the Door'},
+    intro:{zh:'不冷不热的信仰,需要被唤醒。',en:'A lukewarm faith needs to be awakened.'},
+    body:{zh:'耶稣呼召有名无实的撒狄醒过来,坚固软弱却忠心的非拉铁非,又责备自以为富足、实则不冷不热的老底嘉。祂说:我站在门外叩门。祂的责备背后,是不放弃的爱与邀请。',en:'Jesus calls alive-in-name-only Sardis to wake up, strengthens weak-but-faithful Philadelphia, and rebukes self-satisfied, lukewarm Laodicea, saying, I stand at the door and knock. Behind His rebuke is a love that will not give up.'},
+    med:{zh:'默想:你此刻的信仰更接近火热、冷淡,还是不冷不热?耶稣正在叩哪一扇门?',en:'Reflect: is your faith closer to hot, cold, or lukewarm right now? Which door is Jesus knocking on?'} },
+  { num:4, title:{zh:'启示录 4 · 天上的宝座',en:'Revelation 4 · The Throne in Heaven'},
+    intro:{zh:'真正掌权的是神——祂配得敬拜。',en:'God is the One truly reigning — He is worthy of worship.'},
+    body:{zh:'一扇门在天上开了。约翰看见神荣耀的宝座,以及环绕宝座、昼夜不住敬拜的活物与长老。在一切权势之上,有一个真正的宝座;宇宙的中心不是混乱,而是那位配得敬拜的神。',en:'A door stands open in heaven. John sees God’s glorious throne, and around it living creatures and elders who worship day and night. Above every power there is a real throne; the center of the universe is not chaos but the God who is worthy of worship.'},
+    med:{zh:'默想:今天有哪一个“宝座”——权力、金钱、舆论——在你心里争夺神的位置?',en:'Reflect: what throne — power, money, opinion — is competing for God’s place in your heart today?'} },
+  { num:5, title:{zh:'启示录 5 · 配得的羔羊',en:'Revelation 5 · The Worthy Lamb'},
+    intro:{zh:'耶稣——被杀的羔羊——配得一切颂赞。',en:'Jesus — the slain Lamb — is worthy of all praise.'},
+    body:{zh:'没有人配展开神手中的书卷,约翰哭了。长老说:犹大支派的狮子已经得胜。约翰却看见一只像是被杀过的羔羊,祂配得。神得胜的方式出人意料:不是靠武力,而是靠羔羊舍己的爱与牺牲。',en:'No one is worthy to open the scroll, and John weeps. An elder says: the Lion of Judah has triumphed. Yet what John sees is a Lamb, looking as if it had been slain, and He is worthy. God’s way of winning is surprising: not force, but the Lamb’s self-giving love.'},
+    med:{zh:'默想:“被杀的羔羊”这幅图,如何改变你对“得胜”和“力量”的理解?',en:'Reflect: how does the image of the slain Lamb change your idea of winning and of power?'} },
+  { num:6, title:{zh:'启示录 6 · 揭开七印',en:'Revelation 6 · The Seven Seals Opened'},
+    intro:{zh:'世界动荡,但羔羊仍在掌权。',en:'The world shakes, yet the Lamb still reigns.'},
+    body:{zh:'羔羊逐一揭开书卷的封印,带出战争、饥荒、死亡与苦难的异象;殉道者呼喊“要等到几时”。即使在最混乱的画面里,主导权仍在羔羊手中;历史没有脱离神的掌管。',en:'The Lamb opens the seals one by one, unveiling visions of war, famine, death, and suffering; martyrs cry out, how long. Even in the most chaotic scenes, the initiative remains in the Lamb’s hand; history has not slipped out of God’s control.'},
+    med:{zh:'默想:当世界的坏消息压过来,你更容易相信“一切失控”,还是“羔羊仍掌权”?',en:'Reflect: when bad news presses in, which do you more easily believe — everything is out of control, or the Lamb still reigns?'} },
+  { num:7, title:{zh:'启示录 7 · 神认得属祂的人',en:'Revelation 7 · God Knows His Own'},
+    intro:{zh:'神认得属祂的人,并要擦去他们的眼泪。',en:'God knows His own — and will wipe away their tears.'},
+    body:{zh:'在审判之间,神先盖印保守属祂的人;约翰又看见各国各族数不清的大群人,站在宝座前敬拜。神应许:羔羊要牧养他们,神要擦去他们一切的眼泪。',en:'Between the judgments, God first seals and protects His own; then John sees a countless multitude from every nation standing before the throne in worship. God promises: the Lamb will shepherd them, and God will wipe every tear from their eyes.'},
+    med:{zh:'默想:“神要擦去他们一切的眼泪”——这对你此刻正在流的眼泪意味着什么?',en:'Reflect: God will wipe away every tear — what does that mean for the tears you are shedding right now?'} },
+  { num:8, title:{zh:'启示录 8 · 七号的开始',en:'Revelation 8 · The Trumpets Begin'},
+    intro:{zh:'审判也是给世界的悔改呼召。',en:'Judgment is also a call to the world to repent.'},
+    body:{zh:'第七印揭开后,天上有一段静默;然后七位天使预备吹号,带出一连串警告性的灾祸。神的审判有节制、有目的;这些警告是要唤醒人回转,而不是单纯的毁灭。',en:'When the seventh seal is opened there is silence in heaven; then seven angels prepare to sound, releasing a series of warning judgments. God’s judgments are measured and purposeful; these warnings aim to wake people to turn back, not merely to destroy.'},
+    med:{zh:'默想:在你的生活里,神最近可能借着什么“号声”在呼唤你回转?',en:'Reflect: what trumpet might God be using lately to call you to turn back?'} },
+  { num:9, title:{zh:'启示录 9 · 号声中的黑暗',en:'Revelation 9 · Darkness Under the Trumpets'},
+    intro:{zh:'即便审判临到,人心仍需悔改。',en:'Even under judgment, the heart still needs to repent.'},
+    body:{zh:'更多号声带来可怕的异象与痛苦;然而经文说,人仍然不悔改,不肯离开自己手所造的。神看重的不只是外在的震撼,更是人心真实的转向;顽梗是比灾祸更深的问题。',en:'More trumpets bring terrifying visions and torment; yet the text notes that people still would not repent or turn from the works of their hands. God cares not only about outward shock but about the heart’s real turning; hardness is a deeper problem than disaster.'},
+    med:{zh:'默想:有没有一件事,你宁可继续硬撑,也不愿交给神、承认需要改变?',en:'Reflect: is there something you would rather keep gritting through than hand to God, admitting it needs to change?'} },
+  { num:10, title:{zh:'启示录 10 · 小书卷',en:'Revelation 10 · The Little Scroll'},
+    intro:{zh:'神的话又甜又苦,却要被吃下去并传讲。',en:'God’s word is both sweet and bitter — yet must be eaten and spoken.'},
+    body:{zh:'约翰领受一卷小书卷,吃下去口中甘甜、肚里发苦,并被吩咐要再次说预言。神的话语带来真实的安慰,也带来沉重的托付与警戒;两者都是恩典。',en:'John takes a little scroll and eats it, sweet in his mouth, bitter in his stomach, and is told he must prophesy again. God’s word brings real comfort and a heavy, sobering trust; both are grace.'},
+    med:{zh:'默想:神的话里,有没有一句很甜、又有一句发苦却是你需要听的?',en:'Reflect: in God’s word, is there a line that is sweet, and one that is bitter but that you need to hear?'} },
+  { num:11, title:{zh:'启示录 11 · 两个见证人',en:'Revelation 11 · The Two Witnesses'},
+    intro:{zh:'见证会遭遇抵挡,但神必为祂的见证辩护。',en:'Witness meets opposition, but God vindicates His witnesses.'},
+    body:{zh:'两个见证人忠心作见证、遭遇逼迫甚至被杀,神却使他们复活;天上宣告:世上的国成了我主基督的国。即使见证暂时被压制,神的国最终必然公开得胜。',en:'Two witnesses testify faithfully, are opposed and even killed, yet God raises them; heaven declares: the kingdom of the world has become the kingdom of our Lord and of His Christ. Even when testimony is crushed, His kingdom finally prevails.'},
+    med:{zh:'默想:你有没有因为怕被反对,而不敢作某个该作的见证?',en:'Reflect: is there a witness you have held back from, for fear of opposition?'} },
+  { num:12, title:{zh:'启示录 12 · 妇人与龙',en:'Revelation 12 · The Woman and the Dragon'},
+    intro:{zh:'表面冲突的背后,有一场属灵争战。',en:'Behind the visible conflict lies a spiritual battle.'},
+    body:{zh:'一个大异象:妇人、孩子与红龙。龙想吞吃孩子却失败;经文说,弟兄胜过它,是因羔羊的血和自己所见证的道。世上许多冲突的深处是属灵争战,但邪恶的权势早已被羔羊的血所胜过。',en:'A great sign: a woman, a child, and a red dragon. The dragon tries to devour the child and fails; believers overcome him by the blood of the Lamb and the word of their testimony. Beneath many conflicts is a spiritual battle, but evil is already overcome by the blood of the Lamb.'},
+    med:{zh:'默想:你最近的挣扎,有没有可能不只是情绪或环境,还是一场需要属灵眼光的争战?',en:'Reflect: might your recent struggle be not only mood or circumstance, but a battle that needs spiritual sight?'} },
+  { num:13, title:{zh:'启示录 13 · 两个兽',en:'Revelation 13 · The Two Beasts'},
+    intro:{zh:'抵挡神的权势会要求人效忠——但它不配。',en:'Powers that oppose God demand allegiance — but they are not worthy of it.'},
+    body:{zh:'从海里、地里上来两个兽,行使权柄、迷惑众人、要求敬拜和效忠,并以印记施压,这里出现“666”。邪恶常披着权力与秩序的外衣,要求人把最终的忠诚献给它;唯有神配得这样的效忠。',en:'Two beasts rise from sea and land, exercising authority, deceiving many, demanding worship and allegiance, and pressuring people with a mark; here appears the number 666. Evil often wears the clothing of power and order, demanding ultimate loyalty; only God is worthy of it.'},
+    med:{zh:'默想:在你的生活里,有什么正在悄悄要求本该只属于神的那份忠诚?',en:'Reflect: what in your life is quietly asking for the loyalty that belongs to God alone?'} },
+  { num:14, title:{zh:'启示录 14 · 羔羊与跟随祂的人',en:'Revelation 14 · The Lamb and His Followers'},
+    intro:{zh:'忠心跟随羔羊的人,终必与祂同站。',en:'Those who faithfully follow the Lamb will stand with Him at last.'},
+    body:{zh:'羔羊站在锡安山上,与属祂的人在一起;天使宣告永远的福音,呼召人敬畏神,并预告收割的时候。历史正走向一个收割的终点;神记念每一个忠心跟随羔羊的人。',en:'The Lamb stands on Mount Zion with His people; an angel proclaims the eternal gospel, calling people to fear God, and the harvest is foretold. History is moving toward a harvest; God remembers everyone who faithfully follows the Lamb.'},
+    med:{zh:'默想:如果“跟随羔羊”只落实为今天的一个具体行动,那会是什么?',en:'Reflect: if following the Lamb came down to one concrete action today, what would it be?'} },
+  { num:15, title:{zh:'启示录 15 · 最后审判之前',en:'Revelation 15 · Before the Final Judgment'},
+    intro:{zh:'神的审判是圣洁与公义的,不是任性的。',en:'God’s judgment is holy and just — never arbitrary.'},
+    body:{zh:'约翰看见得胜的人在玻璃海边歌唱,又看见七位天使拿着盛满神忿怒的七碗,预备倾倒。审判之前是敬拜与颂赞;神的公义与祂的圣洁、信实是一致的。',en:'John sees the victorious singing beside a sea of glass, and seven angels holding seven bowls full of God’s wrath, about to be poured out. Worship comes before judgment; God’s justice is of one piece with His holiness and faithfulness.'},
+    med:{zh:'默想:“神会审判一切不义”——这对你曾经历或目睹的某个不公,带来安慰还是不安?',en:'Reflect: God will judge all injustice — for some wrong you have suffered or seen, does that bring comfort or unease?'} },
+  { num:16, title:{zh:'启示录 16 · 七碗',en:'Revelation 16 · The Seven Bowls'},
+    intro:{zh:'邪恶不会永远逍遥;它有尽头。',en:'Evil will not go free forever; it has an end.'},
+    body:{zh:'七碗的忿怒被倾倒,是审判系列的高潮;经文再次点出,即便如此,许多人仍不悔改。神最终不会对邪恶视而不见;祂的忍耐是给人悔改的空间,而不是纵容。',en:'The seven bowls of wrath are poured out, the climax of the judgment series; again the text notes that even so, many will not repent. God will not finally look away from evil; His patience is room to repent, not permission to continue.'},
+    med:{zh:'默想:“恶有尽头”这句话,如何影响你今天面对世界不公时的心态?',en:'Reflect: how does evil has an end shape the way you face the world’s injustice today?'} },
+  { num:17, title:{zh:'启示录 17 · 大巴比伦',en:'Revelation 17 · Babylon the Great'},
+    intro:{zh:'不要把最终的安全感建立在世界的权力上。',en:'Do not build your ultimate security on worldly power.'},
+    body:{zh:'约翰看见大巴比伦——一个象征骄傲、权力与败坏的体系,外表华丽,却与神为敌。凡与神为敌的骄傲与权势,无论看起来多么强大,都不是可靠的根基。',en:'John sees Babylon the Great, a system symbolizing pride, power, and corruption, dazzling on the outside yet set against God. Every proud power set against God, however strong it looks, is not a foundation you can trust.'},
+    med:{zh:'默想:如果你诚实地看,你此刻的安全感更多来自“世界的巴比伦”,还是来自神?',en:'Reflect: honestly, does your security come more from the world’s Babylon, or from God?'} },
+  { num:18, title:{zh:'启示录 18 · 巴比伦的倾覆',en:'Revelation 18 · The Fall of Babylon'},
+    intro:{zh:'看似不可动摇的,终将过去。',en:'What looks unshakable will finally pass away.'},
+    body:{zh:'那看似永不倒塌的巴比伦在一时之间倾覆;倚靠它的人哀哭,天上却因神的公义而欢呼。凡人手所建、抵挡神的荣华都不能长存;唯有神的国存到永远。',en:'The seemingly indestructible Babylon falls in a single hour; those who trusted it mourn, while heaven rejoices at God’s justice. Every human-built splendor set against God is temporary; only God’s kingdom lasts forever.'},
+    med:{zh:'默想:有没有一样你一直当作“永远靠得住”的东西,其实并不长久?',en:'Reflect: is there something you have treated as permanently reliable that is not, in fact, lasting?'} },
+  { num:19, title:{zh:'启示录 19 · 羔羊的婚宴与得胜的骑士',en:'Revelation 19 · The Wedding and the Rider'},
+    intro:{zh:'邪恶不会永远存在;基督必要得胜。',en:'Evil will not last forever; Christ will triumph.'},
+    body:{zh:'天上响起敬拜:羔羊的婚宴到了。随后基督被描绘为骑白马、称为信实真实的得胜之君,战胜抵挡神的权势。历史的结局不是邪恶的胜利,而是基督公开、决定性的得胜,以及祂与百姓的团聚。',en:'Heaven erupts in worship: the wedding of the Lamb has come. Then Christ appears as the victorious King on a white horse, called Faithful and True, overcoming the powers set against God. The end of history is not evil’s victory but Christ’s open, decisive triumph.'},
+    med:{zh:'默想:如果你真的相信“结局是基督得胜”,今天的哪一份重担会轻一点?',en:'Reflect: if you truly believed the ending is Christ’s victory, which burden today would feel lighter?'} },
+  { num:20, title:{zh:'启示录 20 · 最后的审判',en:'Revelation 20 · The Final Judgment'},
+    intro:{zh:'神的公义最终必然实现。',en:'God’s justice will finally be done.'},
+    body:{zh:'经文提到“一千年”(基督徒对其有不同理解),邪恶被彻底了结,死亡与阴间被扔进火湖,案卷展开,人人按其所行受审。神必彻底、公正地处理一切的恶与死亡本身;没有不义会被永远掩盖。',en:'The text speaks of a thousand years (understood differently by Christians), evil is finally ended, death and Hades are thrown into the lake of fire, the books are opened, and each is judged by what they have done. God will deal thoroughly and justly with all evil, and with death itself.'},
+    med:{zh:'默想:“死亡本身最终被了结”——这对你面对死亡的恐惧或哀伤,意味着什么?',en:'Reflect: death itself is finally ended — what does that mean for your fear or grief around death?'} },
+  { num:21, title:{zh:'启示录 21 · 新天新地',en:'Revelation 21 · A New Heaven and a New Earth'},
+    intro:{zh:'神与人同住,不再有眼泪。',en:'God dwells with His people — and there are no more tears.'},
+    body:{zh:'约翰看见新天新地和新耶路撒冷;有声音宣告:神要与人同住,擦去他们一切的眼泪,不再有死亡、悲哀、哭号、疼痛。神说:看哪,我将一切都更新了。圣经故事的终点不是毁灭,而是更新与团聚。',en:'John sees a new heaven and a new earth and the New Jerusalem; a voice declares: God will dwell with His people and wipe away every tear — no more death, mourning, crying, or pain. God says, behold, I am making all things new. The story ends not in destruction but in renewal.'},
+    med:{zh:'默想:如果你真的相信“神要擦去一切的眼泪”,你会带着怎样的盼望面对今天的疼痛?',en:'Reflect: if you truly believed God will wipe away every tear, with what hope would you face today’s pain?'} },
+  { num:22, title:{zh:'启示录 22 · 生命水的河与生命树',en:'Revelation 22 · The River and the Tree of Life'},
+    intro:{zh:'万物更新——耶稣说:我必快来。',en:'All things made new — Jesus says, I am coming soon.'},
+    body:{zh:'生命水的河从神的宝座流出,生命树再次出现,叶子医治万民;圣经以呼求作结:主耶稣啊,我愿你来。整本圣经从伊甸的生命树开始,到这里以医治与更新收尾。启示录不是以恐惧结束,而是以医治、盼望和“我必快来”的应许结束。',en:'The river of the water of life flows from God’s throne, the tree of life reappears, its leaves for the healing of the nations; the Bible ends with a cry: come, Lord Jesus. The whole Bible begins with the tree of life in Eden and ends here with healing. Revelation ends not in fear but in healing, hope, and the promise, I am coming soon.'},
+    med:{zh:'默想:读到这最后一章,你心里留下的更多是恐惧,还是“神使万物更新”的盼望?',en:'Reflect: having reached this final chapter, what remains in you more — fear, or the hope that God makes all things new?'} }
+];
+CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/revelation/revelation-'+String(c.num).padStart(2,'0')+'-zh.mp3',
+                                          en:'audio/revelation/revelation-'+String(c.num).padStart(2,'0')+'-en.mp3' }; });
+
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+
+/* ---------- audio availability UI ---------- */
+function setAudioBadge(state){
+  var b=document.getElementById('audioBadge'); if(!b) return;
+  var cls='calib', html='<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
+  if(state==='ready'){ cls='ready'; html='<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'; }
+  else if(state==='tts'){ cls='calib'; html='<span class="en">AI narration · human recording in production</span><span class="zh">AI 女声朗读 · 真人版制作中</span>'; }
+  b.className='badge '+cls;
+  b.innerHTML = html;
+  b.style.display='inline-flex';
+}
+function showCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.add('show'); }
+function hideCalibration(){ var e=document.getElementById('calib'); if(e) e.classList.remove('show'); }
+
+function makeBlocks(ch, lang){
+  var v=function(o){return o[lang]||o.zh;};
+  var parts=[
+    {label:{zh:'导读',en:'Intro'}, text:v(ch.intro)},
+    {label:{zh:'本章',en:'This chapter'}, text:v(ch.body)},
+    {label:{zh:'默想',en:'Reflect'}, text:v(ch.med), cls:'med'}
+  ];
+  return parts.map(function(p){
+    var s=(p.text||'').split(/(?<=[。!?;；.!?])\s*/).map(function(x){return x.trim();}).filter(Boolean);
+    if(!s.length) s=[p.text];
+    return {label:p.label, cls:p.cls||'', sentences:s};
+  });
+}
+
+function MP3Provider(audio){
+  var self=this; self.kind='mp3'; self.onprogress=self.onsentence=self.onend=function(){}; self.el=audio;
+  audio.ontimeupdate=function(){ if(audio.duration){ self.onprogress(audio.currentTime/audio.duration, fmt(audio.currentTime)+' / '+fmt(audio.duration)); } };
+  audio.onended=function(){ self.onend(); };
+  self.load=function(){ return true; };
+  self.play=function(){ audio.play(); }; self.pause=function(){ audio.pause(); };
+  self.stop=function(){ audio.pause(); audio.currentTime=0; };
+  self.setRate=function(r){ audio.playbackRate=r; };
+  self.seekFrac=function(f){ if(audio.duration) audio.currentTime=f*audio.duration; };
+  function fmt(s){ s=Math.floor(s||0); return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2); }
+}
+function tryMP3(path){ return new Promise(function(res){ var a=new Audio(),done=false; a.preload='metadata';
+  a.oncanplay=a.onloadedmetadata=function(){ if(!done){done=true;res(new MP3Provider(a));} };
+  a.onerror=function(){ if(!done){done=true;res(null);} }; a.src=path;
+  setTimeout(function(){ if(!done){done=true;res(null);} },2500); }); }
+
+/* ---------- TTS fallback provider — used ONLY when no real MP3 yet ----------
+   Real MP3s win (tryMP3 first); drop one into audio/revelation/ to auto-upgrade. */
+function ttsSupported(){ return ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window); }
+function pickVoice(lang){
+  try{
+    var vs=window.speechSynthesis.getVoices()||[]; var want=(lang==='zh')?'zh':'en';
+    var pool=vs.filter(function(v){ return (v.lang||'').toLowerCase().indexOf(want)===0; });
+    if(!pool.length) return null;
+    var fem=pool.filter(function(v){ return /female|zira|huihui|tingting|xiaoxiao|yaoyao|hanhan|mei|susan|linda|hazel|aria|jenny/i.test(v.name||''); });
+    return fem[0]||pool[0];
+  }catch(e){ return null; }
+}
+function TTSProvider(blocks, lang){
+  var self=this; self.kind='tts'; self.onprogress=self.onsentence=self.onend=function(){};
+  var flat=[]; blocks.forEach(function(b){ (b.sentences||[]).forEach(function(s){ flat.push(s); }); });
+  var idx=0, rate=0.9, speaking=false, voice=pickVoice(lang);
+  function synth(){ return window.speechSynthesis; }
+  function step(){
+    if(!speaking) return;
+    if(idx>=flat.length){ speaking=false; self.onprogress(1, flat.length+' / '+flat.length); self.onend(); return; }
+    self.onsentence(idx); self.onprogress(flat.length?idx/flat.length:0, (idx+1)+' / '+flat.length);
+    var u=new SpeechSynthesisUtterance(flat[idx]); u.lang=(lang==='zh')?'zh-CN':'en-US';
+    if(voice) u.voice=voice; u.rate=rate;
+    u.onend=function(){ if(!speaking) return; idx++; step(); };
+    u.onerror=function(){ if(!speaking) return; idx++; step(); };
+    synth().speak(u);
+  }
+  function speakFrom(i){ try{ synth().cancel(); }catch(e){} idx=i; speaking=true; step(); }
+  self.load=function(){ voice=pickVoice(lang); return true; };
+  self.play=function(){ if(!speaking){ if(idx>=flat.length) idx=0; speakFrom(idx); } };
+  self.pause=function(){ speaking=false; try{ synth().cancel(); }catch(e){} };
+  self.stop=function(){ speaking=false; idx=0; try{ synth().cancel(); }catch(e){} };
+  self.setRate=function(r){ rate=r; };
+  self.seekFrac=function(f){ var i=Math.max(0,Math.min(flat.length-1,Math.round(f*(flat.length-1||0)))); speakFrom(i); };
+}
+
+var Player = {
+  current:null, provider:null, rate:0.85, rates:[0.75,0.85,1,1.15,1.25], playing:false, blocks:null, allMode:false,
+  async load(i, autoplay){
+    this.stop(); this.current=i;
+    var ch=CHAPTERS[i], lang=curLang();
+    this.blocks=makeBlocks(ch, lang);
+    renderNow(i);
+    markPlayingRow(i);
+    document.getElementById('now').classList.add('show');
+    document.getElementById('miniTitle').textContent=ch.title[lang];
+    var self=this;
+    var mp3=await tryMP3(ch.audio[lang]);
+    if(mp3){
+      this.provider=mp3; setAudioBadge('ready'); hideCalibration();
+      this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%'; document.getElementById('miniTime').textContent=label||''; };
+      this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+        if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+        else { self.allMode=false; setAllBtn(); self.provider&&self.provider.stop&&self.provider.stop(); } };
+      this.provider.setRate(this.rate);
+      document.getElementById('mini').classList.add('show');
+      if(autoplay!==false) this.play();
+    } else if(ttsSupported()){
+      /* Real human-voice MP3 not present yet → synthetic female voice so the
+         meditation is audible now; a real MP3 auto-upgrades it later. */
+      var tts=new TTSProvider(this.blocks, lang); tts.load();
+      this.provider=tts; setAudioBadge('tts'); hideCalibration();
+      this.provider.onprogress=function(f,label){ document.getElementById('fill').style.width=(f*100)+'%'; document.getElementById('miniTime').textContent=label||''; };
+      this.provider.onsentence=function(gi){ highlightSentence(gi); };
+      this.provider.onend=function(){ self.playing=false; setPlayIcon(false);
+        if(document.getElementById('autoNext').checked && self.current<CHAPTERS.length-1){ self.playFrom(self.current+1); }
+        else { self.allMode=false; setAllBtn(); } };
+      this.provider.setRate(this.rate);
+      document.getElementById('mini').classList.add('show');
+      if(autoplay!==false) this.play();
+    } else {
+      /* No audio support at all → calm calibration state; text stays readable. */
+      this.provider=null; this.playing=false; this.allMode=false; setAllBtn(); setPlayIcon(false);
+      setAudioBadge('calibrating'); showCalibration();
+      document.getElementById('mini').classList.remove('show');
+    }
+  },
+  play(){ if(!this.provider) return; this.playing=true; setPlayIcon(true); this.provider.play(); },
+  pause(){ if(!this.provider) return; this.playing=false; setPlayIcon(false); this.provider.pause(); },
+  toggle(){ if(this.current==null){ this.playFrom(0); return; } if(!this.provider) return; this.playing?this.pause():this.play(); },
+  toggleAll(){ if(this.allMode && this.playing){ this.pause(); return; } this.allMode=true; setAllBtn(); if(this.current==null) this.playFrom(0); else this.play(); },
+  stop(){ if(this.provider){ this.provider.stop&&this.provider.stop(); } this.playing=false; setPlayIcon(false); },
+  playFrom(i){ this.load(i, true); },
+  cycleRate(){ var i=(this.rates.indexOf(this.rate)+1)%this.rates.length; this.rate=this.rates[i];
+    document.getElementById('rateBtn').textContent=this.rate+'x'; if(this.provider) this.provider.setRate(this.rate); },
+  seekAt(ev){ if(!this.provider) return; var r=document.getElementById('prog').getBoundingClientRect();
+    var f=(ev.clientX-r.left)/r.width; this.provider.seekFrac(Math.max(0,Math.min(1,f))); }
+};
+function markPlayingRow(i){ document.querySelectorAll('.list .row').forEach(function(r,ri){ r.classList.toggle('playing', ri===i); }); }
+function setAllBtn(){ var b=document.getElementById('playAllBtn'); if(!b) return;
+  b.innerHTML = Player.allMode ? '<span class="en">⏸ Playing all</span><span class="zh">⏸ 连续播放中</span>' : '<span class="en">▶ Play all</span><span class="zh">▶ 连续播放</span>'; }
+function setPlayIcon(on){ var m=document.getElementById('miniPlay'); if(m) m.textContent=on?'⏸':'▶'; }
+
+function renderList(){
+  var l=curLang();
+  document.getElementById('list').innerHTML = CHAPTERS.map(function(c,i){
+    return '<div class="row" onclick="Player.playFrom('+i+')">'
+      + '<div class="n">'+(l==='zh'?('启 '+c.num):('Rev '+c.num))+'</div>'
+      + '<div class="meta"><div class="t">'+ c.title[l].replace(/^启示录 \d+ · /,'').replace(/^Revelation \d+ · /,'') +'</div>'
+      + '<div class="th">'+ c.intro[l] +'</div></div></div>';
+  }).join('');
+  if(Player.current!=null) markPlayingRow(Player.current);
+}
+function renderNow(i){
+  var c=CHAPTERS[i], l=curLang();
+  document.getElementById('nowEyebrow').textContent = l==='zh'?'正在聆听':'Now listening';
+  document.getElementById('nowTitle').textContent = c.title[l];
+  var blocks=Player.blocks||makeBlocks(c,l);
+  document.getElementById('transcript').innerHTML = blocks.map(function(b,bi){
+    return '<div class="blk"><div class="lbl">'+b.label[l]+'</div>'
+      + b.sentences.map(function(s,si){ return '<span class="sent '+(b.cls||'')+'" data-i="'+bi+'-'+si+'">'+s+'</span>'; }).join(' ')
+      + '</div>';
+  }).join('');
+}
+function highlightSentence(gi){
+  var flat=[]; (Player.blocks||[]).forEach(function(b,bi){ b.sentences.forEach(function(s,si){ flat.push(bi+'-'+si); }); });
+  var key=flat[gi];
+  document.querySelectorAll('.transcript .sent').forEach(function(el){ el.classList.toggle('on', el.dataset.i===key); });
+  var on=document.querySelector('.transcript .sent.on'); if(on) on.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+var I18N_TITLE={ en:'Listen · Revelation · Under the Sun', zh:'聆听启示录 · 日光之下' };
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang=(l==='zh')?'zh-CN':'en';
+  document.title=l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  setAllBtn(); renderList();
+  if(Player.current!=null){ Player.blocks=makeBlocks(CHAPTERS[Player.current], l); renderNow(Player.current);
+    document.getElementById('miniTitle').textContent=CHAPTERS[Player.current].title[l]; }
+}
+(function(){
+  var p=new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+})();
+</script>
+</body>
+</html>

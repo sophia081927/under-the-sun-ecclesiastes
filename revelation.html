@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SHNR24DPH7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="启示录 · Revelation">
+<title>Revelation · 启示录 · 日光之下</title>
+<meta name="description" content="Revelation points not to fear but to Jesus — victory, comfort, and hope, and God making all things new. 启示录的中心不是恐惧,而是耶稣:得胜、安慰、盼望,以及神使万物更新。">
+<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/revelation.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Under the Sun · 日光之下">
+<meta property="og:title" content="Revelation · 启示录">
+<meta property="og:description" content="Seeing the victory, comfort, and hope of Jesus in troubled times. 在动荡中看见耶稣的得胜、安慰与盼望。">
+<meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/revelation.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    /* Revelation identity — royal gold */
+    --sky:#e6c260; --sky-soft:#f0d78a;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+    --sky-line:rgba(230,194,96,.28);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
+    color:var(--muted);text-transform:uppercase}
+  .topbar .mark{color:var(--sky-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.nav{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.nav:hover{color:var(--sky-soft)}
+  .lang-toggle{border:1px solid var(--sky-line);border-radius:30px;overflow:hidden;display:flex;font-family:inherit;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sky);color:#14161a;font-weight:700}
+  @media(max-width:600px){.topbar{letter-spacing:.1em;padding:12px 16px}.topbar .nav.hideS{display:none}.topbar .mark{font-size:11px}}
+
+  .hero{max-width:760px;margin:0 auto;padding:104px 22px 8px;text-align:center}
+  .hero .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,6vw,48px);line-height:1.15;color:var(--ink);font-weight:400}
+  .hero .sub{margin-top:12px;font-size:15px;color:var(--sky-soft);font-style:italic;line-height:1.6}
+  .hero .intro{margin-top:24px;font-size:16px;color:var(--muted);line-height:1.85;text-align:left;
+    border-left:2px solid var(--sky-line);padding-left:18px}
+
+  section.band{max-width:760px;margin:0 auto;padding:34px 22px 0}
+  .bandhead{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--sky);margin-bottom:4px}
+  .bandtitle{font-size:clamp(20px,4vw,26px);color:var(--ink);font-weight:400;line-height:1.3;margin-bottom:16px}
+
+  /* 7 themes */
+  .themes{display:grid;gap:12px}
+  @media(min-width:640px){.themes{grid-template-columns:1fr 1fr}}
+  .theme{background:var(--bg2);border:1px solid var(--line-soft);border-radius:11px;padding:16px 18px}
+  .theme .tt{font-size:16px;color:var(--sky-soft);line-height:1.4}
+  .theme .tb{margin-top:7px;font-size:14.5px;color:var(--muted);line-height:1.75}
+
+  /* reading route */
+  .route{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;background:var(--bg2);border:1px solid var(--sky-line);
+    border-radius:12px;padding:18px 20px}
+  .route .step{font-size:15px;color:var(--ink);white-space:nowrap}
+  .route .arrow{color:var(--sky);font-size:13px}
+  .route .cap{flex-basis:100%;margin-top:8px;font-size:14px;color:var(--muted);line-height:1.75}
+
+  /* symbol guide */
+  .symbols{display:grid;gap:10px}
+  .symbol{border-left:2px solid var(--sky);padding:4px 0 4px 15px}
+  .symbol .sy{font-size:15.5px;color:var(--ink)}
+  .symbol .sd{margin-top:3px;font-size:14px;color:var(--muted);line-height:1.7}
+  .symbol .sn{margin-top:4px;font-size:12.5px;color:var(--faint);font-style:italic}
+
+  /* interpretive principle */
+  .principle{background:rgba(230,194,96,.05);border:1px solid var(--sky-line);border-radius:12px;padding:20px 22px}
+  .principle .body{font-size:15px;color:var(--muted);line-height:1.85}
+  .principle .body strong{color:var(--sky-soft);font-weight:400}
+
+  /* chapter quick nav */
+  .pnav{max-width:760px;margin:26px auto 0;padding:0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .pnav a{font-size:13px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;
+    padding:7px 13px;text-decoration:none;transition:all .2s;min-height:36px;display:inline-flex;align-items:center}
+  .pnav a:hover{border-color:var(--sky);color:var(--sky-soft);background:rgba(230,194,96,.06)}
+
+  main{max-width:760px;margin:0 auto;padding:8px 22px 90px}
+  .secthead{margin-top:40px;padding-top:22px;border-top:1px solid var(--sky-line)}
+  .secthead .sl{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky)}
+  .secthead .st{margin-top:6px;font-size:clamp(19px,3.6vw,24px);color:var(--sky-soft);font-weight:400;line-height:1.3}
+
+  .chap{padding:30px 0 26px;border-top:1px solid var(--line-soft);scroll-margin-top:76px}
+  .chap .cnum{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--sky);margin-bottom:8px}
+  .chap .ctitle{font-size:clamp(20px,4vw,26px);line-height:1.25;color:var(--ink);font-weight:400}
+  .chap .cfocus{margin-top:8px;font-size:15.5px;color:var(--sky-soft);font-style:italic;line-height:1.6}
+  .sect{margin-top:18px}
+  .sect .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sun);opacity:.9;margin-bottom:7px}
+  .sect .body{font-size:15.5px;color:var(--muted);line-height:1.85}
+  .sect.med{background:rgba(230,194,96,.05);border:1px solid var(--line-soft);border-radius:10px;padding:16px 18px;margin-top:18px}
+  .sect.med .lbl{color:var(--sky)}.sect.med .body{color:var(--ink)}
+  .sect.pray .lbl{color:var(--sun-soft)}.sect.pray .body{color:var(--ink);font-style:italic}
+  .readrow{margin-top:16px;display:flex;flex-wrap:wrap;gap:9px}
+  .readrow a{font-size:13px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:8px 15px;
+    text-decoration:none;transition:all .2s;min-height:38px;display:inline-flex;align-items:center;gap:6px}
+  .readrow a:hover{border-color:var(--sky);color:var(--sky-soft);background:rgba(230,194,96,.06)}
+
+  .endcta{max-width:760px;margin:0 auto;padding:20px 22px 70px;text-align:center}
+  .endcta .card{background:var(--bg2);border:1px solid var(--sky-line);border-radius:12px;padding:30px 24px}
+  .endcta h3{font-size:20px;color:var(--sky-soft);font-weight:400;line-height:1.4}
+  .endcta p{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.75}
+  .endcta a.ask{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--sky);color:#14161a;
+    border-radius:30px;padding:12px 26px;font-size:15px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:background .2s;min-height:46px}
+  .endcta a.ask:hover{background:var(--sky-soft)}
+  .endcta .back{display:block;margin-top:18px;font-size:13px;color:var(--faint);text-decoration:none;letter-spacing:.06em}
+  .endcta .back:hover{color:var(--sky-soft)}
+
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;
+    background:rgba(24,27,32,.94);backdrop-filter:blur(12px);border-top:1px solid var(--sky-line);
+    padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a{flex:1;background:none;border:none;color:var(--muted);font-family:inherit;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;letter-spacing:.03em;padding:5px 2px;min-height:50px;text-decoration:none}
+  .tabbar a:hover{color:var(--sky-soft)}
+  .tabbar a.active{color:var(--sky)}
+  .tabbar .ic{font-size:18px;line-height:1}
+  @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:66px}}
+
+  footer{border-top:1px solid var(--line-soft);padding:36px 22px;text-align:center;color:var(--faint)}
+  footer .mark{color:var(--sky-soft);font-size:15px;letter-spacing:.06em}
+  footer p{margin-top:12px;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="nav hideS" href="index.html"><span class="en">Library</span><span class="zh">书阁</span></a>
+    <a class="nav hideS" href="psalms.html"><span class="en">Psalms</span><span class="zh">诗篇</span></a>
+    <a class="nav" href="revelation-listen.html"><span class="en">Listen ♪</span><span class="zh">聆听 ♪</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="kicker"><span class="en">The Book of Revelation</span><span class="zh">新约末卷 · 启示录</span></div>
+  <h1><span class="en">Revelation</span><span class="zh">启示录</span></h1>
+  <div class="sub">
+    <span class="en">Seeing the victory, comfort, and hope of Jesus in troubled times</span>
+    <span class="zh">在动荡中看见耶稣的得胜、安慰与盼望</span>
+  </div>
+  <p class="intro">
+    <span class="en">Revelation is the last book of the New Testament and the climax of the whole biblical story. It is full of visions, symbols, judgment, conflict, and prophecy — which is why it is often thought of as a hard, even frightening book. But its center is not fear. It is first of all “the revelation of Jesus Christ.” To believers under pressure, suffering, and uncertainty it says: however chaotic the world looks, God still reigns; Jesus finally wins; evil does not get the last word; and God will wipe away tears, death, and pain, and make all things new. So reading Revelation is not mainly about knowing “what will happen” — it is about learning how to live today: watchful, faithful, patient, praying, and following Jesus in hope.</span>
+    <span class="zh">《启示录》是新约圣经的最后一卷书,也是圣经整个故事的高潮与终章。书中充满异象、象征、审判、争战与预言,因此常被认为是一卷难以理解、甚至令人害怕的书。但它的中心并不是恐惧——它首先是“耶稣基督的启示”。它告诉身处压力、苦难和不确定中的信徒:无论世界看起来多么混乱,神仍然掌权;耶稣基督最终得胜;邪恶不会拥有最后的话语;神最终要除去眼泪、死亡和痛苦,并使万物更新。因此,阅读《启示录》不只是为了知道“将来会发生什么”,更是为了学习今天该怎样生活:警醒、忠心、忍耐、祷告,并怀着盼望跟随耶稣。</span>
+  </p>
+</header>
+
+<!-- 7 core themes -->
+<section class="band">
+  <div class="bandhead"><span class="en">What this book tells us</span><span class="zh">这卷书告诉我们什么</span></div>
+  <div class="bandtitle"><span class="en">Seven threads running through Revelation</span><span class="zh">贯穿全书的七条主线</span></div>
+  <div class="themes" id="themes"></div>
+</section>
+
+<!-- reading route -->
+<section class="band">
+  <div class="bandhead"><span class="en">The core reading path</span><span class="zh">核心阅读路线</span></div>
+  <div class="bandtitle"><span class="en">Where Revelation is taking you</span><span class="zh">启示录要带你去的地方</span></div>
+  <div class="route" id="route"></div>
+</section>
+
+<!-- symbol navigation -->
+<section class="band">
+  <div class="bandhead"><span class="en">Understanding the symbols</span><span class="zh">理解导航 · 象征</span></div>
+  <div class="bandtitle"><span class="en">A light guide to Revelation’s imagery</span><span class="zh">启示录象征的轻导航</span></div>
+  <div class="symbols" id="symbols"></div>
+</section>
+
+<!-- interpretive principle -->
+<section class="band">
+  <div class="bandhead"><span class="en">How we read it</span><span class="zh">我们怎样解读</span></div>
+  <div class="bandtitle"><span class="en">Humility before the symbols</span><span class="zh">在象征面前存谦卑</span></div>
+  <div class="principle">
+    <div class="body">
+      <span class="en">Revelation is full of symbols — seven seals, trumpets, and bowls, the beast, 666, the dragon, Babylon, Armageddon, the millennium. This site will <strong>not</strong> tell you that a symbol “must” stand for a particular modern nation or political figure, or that a certain war “proves” a prophecy has been fulfilled. Where sincere Christians have long understood a passage differently, we say so plainly, briefly note the main views, and then return to what the text says most clearly: <strong>God reigns, Christ wins, and believers are called to stay watchful and faithful, waiting in hope.</strong></span>
+      <span class="zh">《启示录》充满象征——七印、七号、七碗、兽、666、龙、巴比伦、哈米吉多顿、千禧年。本站在解释这些内容时,<strong>不会</strong>武断地告诉你某个象征“一定”代表某个现代国家或政治人物,也不会说某场战争“证明”某个预言已经应验。对于基督徒之间长期存在不同理解的经文,我们会明确说明、简要介绍主要观点,然后回到经文本身最清楚的信息:<strong>神掌权、基督得胜,信徒当警醒忠心,怀着盼望等候。</strong></span>
+    </div>
+  </div>
+</section>
+
+<nav class="pnav" id="pnav" aria-label="chapter quick jump"></nav>
+
+<main id="list"></main>
+
+<div class="endcta">
+  <div class="card">
+    <h3><span class="en">Reading Revelation and feeling afraid, or full of questions?</span><span class="zh">读启示录时感到害怕,或满心疑问?</span></h3>
+    <p><span class="en">Bring your real question — fear about the future, suffering, doubt — and receive gentle, Scripture-centered guidance.</span><span class="zh">带着你真实的问题——对未来的恐惧、苦难、疑惑——得到一份温柔、扎根圣经的回应。</span></p>
+    <a class="ask" href="ask.html"><span class="en">Ask from Scripture →</span><span class="zh">用圣经回应我 →</span></a>
+    <a class="back" href="index.html"><span class="en">← Back to the Library</span><span class="zh">← 返回书阁</span></a>
+  </div>
+</div>
+
+<nav class="tabbar" aria-label="quick navigation">
+  <a href="index.html"><span class="ic">📚</span><span><span class="en">Library</span><span class="zh">书阁</span></span></a>
+  <a href="revelation.html" class="active"><span class="ic">📖</span><span><span class="en">Revelation</span><span class="zh">启示录</span></span></a>
+  <a href="ask.html"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
+  <a href="revelation-listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+</nav>
+
+<footer>
+  <div class="mark">日光之下 · under the sun</div>
+  <p>
+    <span class="en">Revelation, chapter by chapter, in parallel Chinese &amp; English. Reading guides deepen week by week alongside the sermon series. · MVP demo.</span>
+    <span class="zh">启示录,逐章中英并列。导读与默想随讲道系列一周一周加深。· MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+/* ============================================================
+   REVELATION — full 22-chapter scaffold. Each chapter carries the
+   platform's Understanding & Reflection framework (what happens /
+   what it reveals about God / what it means today / reflection /
+   prayer) plus a link to the full chapter text. Reading guides
+   deepen week by week alongside the sermon series. Symbols are
+   handled with interpretive humility (see the principle above).
+   ============================================================ */
+
+var THEMES = [
+  { t:{zh:'耶稣是主',en:'Jesus Is Lord'},
+    b:{zh:'历史并没有失控。即使世界充满战争、苦难、权力和不确定,最终掌权的仍然是神。',
+       en:'History is not out of control. Even amid war, suffering, power, and uncertainty, God is the One who finally reigns.'} },
+  { t:{zh:'保持警醒',en:'Be Watchful'},
+    b:{zh:'不要因为环境、诱惑或安逸而失去信仰的方向。在复杂的世界里保持清醒,知道自己真正相信什么、跟随谁。',
+       en:'Do not lose your bearings through pressure, temptation, or comfort. Stay clear-eyed about what you truly believe and whom you follow.'} },
+  { t:{zh:'持守忠心',en:'Remain Faithful'},
+    b:{zh:'即使面对压力,也不要放弃信仰。忠心并不意味着没有困难,而是在困难中仍然选择跟随神。',
+       en:'Even under pressure, do not give up your faith. Faithfulness is not the absence of hardship, but choosing to follow God within it.'} },
+  { t:{zh:'忍耐等候',en:'Persevere'},
+    b:{zh:'有些事情不会立刻改变。信仰的一部分,就是在还没有看到答案的时候,仍然相信、祷告和等候。',
+       en:'Some things will not change at once. Part of faith is still believing, praying, and waiting before you see the answer.'} },
+  { t:{zh:'不要活在恐惧中',en:'Do Not Live in Fear'},
+    b:{zh:'《启示录》包含审判和灾难,但它写给信徒的目的不是制造恐惧,而是在混乱中带来盼望。',
+       en:'Revelation contains judgment and disaster, but its purpose for believers is not to create fear — it is to bring hope in the middle of chaos.'} },
+  { t:{zh:'耶稣最终得胜',en:'Jesus Wins'},
+    b:{zh:'邪恶不是故事的结局,死亡不是故事的结局,痛苦也不是故事的结局。最终的结局是神的得胜与更新。',
+       en:'Evil is not the end of the story. Death is not the end. Pain is not the end. The end is God’s victory and renewal.'} },
+  { t:{zh:'万物更新',en:'All Things Made New'},
+    b:{zh:'神要擦去人的眼泪,死亡、悲哀、哭号和疼痛都要过去。神说:“看哪,我将一切都更新了。”',
+       en:'God will wipe away every tear; death, mourning, crying, and pain will pass away. God says, “Behold, I am making all things new.”'} }
+];
+
+var ROUTE = [
+  {zh:'启示',en:'Revelation'},{zh:'耶稣基督',en:'Jesus Christ'},{zh:'警醒',en:'Watchfulness'},
+  {zh:'忠心',en:'Faithfulness'},{zh:'忍耐',en:'Perseverance'},{zh:'盼望',en:'Hope'},
+  {zh:'得胜',en:'Victory'},{zh:'万物更新',en:'All Things Made New'}
+];
+var ROUTE_CAP = {
+  zh:'愿你读完《启示录》以后留下的不是恐惧,而是:无论世界发生什么,神仍然掌权;因此我可以警醒、祷告、忠心、忍耐,并且怀着盼望继续生活。',
+  en:'May you leave Revelation not with fear but with this: whatever happens in the world, God still reigns — so I can stay watchful, pray, remain faithful, persevere, and keep living in hope.'
+};
+
+var SYMBOLS = [
+  { sy:{zh:'七印 · 七号 · 七碗',en:'Seven Seals · Trumpets · Bowls'},
+    sd:{zh:'一连串以“七”为单位的异象,描写世界经历的审判、动荡与苦难,并一次次呼召人悔改。',
+        en:'Series of visions in sevens, portraying the judgment, upheaval, and suffering the world passes through — and repeated calls to repent.'} },
+  { sy:{zh:'龙',en:'The Dragon'},
+    sd:{zh:'代表撒但——那与神、与神百姓为敌的邪恶权势。',
+        en:'Represents Satan — the evil power set against God and against God’s people.'} },
+  { sy:{zh:'兽 · 666',en:'The Beast · 666'},
+    sd:{zh:'象征抵挡神、要求人效忠的邪恶权势与体制;“666”是一个象征性的数字。',
+        en:'Symbolizes evil power and systems that oppose God and demand allegiance; “666” is a symbolic number.'} },
+  { sy:{zh:'巴比伦',en:'Babylon'},
+    sd:{zh:'象征人类骄傲、权力、财富与败坏的集合体;它最终倾覆。',
+        en:'Symbolizes the whole system of human pride, power, wealth, and corruption — which finally falls.'} },
+  { sy:{zh:'哈米吉多顿',en:'Armageddon'},
+    sd:{zh:'象征善恶之间最终的决战之地。',
+        en:'Symbolizes the place of the final confrontation between good and evil.'} },
+  { sy:{zh:'千禧年',en:'The Millennium'},
+    sd:{zh:'启示录20章提到的“一千年”,基督徒对其含义有不同理解。',
+        en:'The “thousand years” of Revelation 20; Christians understand its meaning in different ways.'} }
+];
+var SYMBOL_NOTE = { zh:'基督徒传统对此存在不同理解——重点不是争论细节,而是看见神掌权、基督得胜。',
+                    en:'Christian tradition understands this in different ways — the point is not to argue the details, but to see that God reigns and Christ wins.' };
+
+var SECTIONS = [
+  { id:'s1', label:{zh:'第 1 章',en:'Revelation 1'},        title:{zh:'荣耀的基督',en:'The Risen and Glorified Jesus'} },
+  { id:'s2', label:{zh:'第 2–3 章',en:'Revelation 2–3'},    title:{zh:'给七个教会的信',en:'Letters to the Seven Churches'} },
+  { id:'s3', label:{zh:'第 4–5 章',en:'Revelation 4–5'},    title:{zh:'天上的宝座与羔羊',en:'The Throne and the Lamb'} },
+  { id:'s4', label:{zh:'第 6–11 章',en:'Revelation 6–11'},  title:{zh:'七印与七号',en:'Seals and Trumpets'} },
+  { id:'s5', label:{zh:'第 12–14 章',en:'Revelation 12–14'},title:{zh:'属灵争战',en:'The Spiritual Battle'} },
+  { id:'s6', label:{zh:'第 15–18 章',en:'Revelation 15–18'},title:{zh:'审判与巴比伦的倾覆',en:'Judgment and the Fall of Babylon'} },
+  { id:'s7', label:{zh:'第 19–20 章',en:'Revelation 19–20'},title:{zh:'基督得胜',en:'The Victory of Christ'} },
+  { id:'s8', label:{zh:'第 21–22 章',en:'Revelation 21–22'},title:{zh:'新天新地',en:'A New Heaven and a New Earth'} }
+];
+
+/* helper to keep chapter objects compact */
+function C(n, sec, t, focus, hap, god, life, ref, pr){
+  return { n:n, sec:sec, t:t, focus:focus, hap:hap, god:god, life:life, ref:ref, pr:pr };
+}
+var REV = [
+  C(1,'s1',
+    {zh:'荣耀的基督',en:'The Glorified Christ'},
+    {zh:'不要惧怕——基督掌管过去、现在与未来。',en:'Do not be afraid — Christ holds past, present, and future.'},
+    {zh:'约翰在拔摩海岛上,看见荣耀中复活的耶稣行走在众教会中间。耶稣按手在他身上说:“不要惧怕。”',en:'Exiled on Patmos, John sees the risen Jesus in glory, walking among the churches. Jesus lays His hand on him and says, “Do not be afraid.”'},
+    {zh:'耶稣是首先的、末后的,是那位曾死、现在又活着直到永远的主;整卷书首先是“耶稣基督的启示”。',en:'Jesus is the First and the Last, the One who was dead and is alive forevermore; the whole book is first of all “the revelation of Jesus Christ.”'},
+    {zh:'当未来令你害怕时,先看见那位站在时间两端、仍活着的基督,再看你的处境。',en:'When the future frightens you, see first the living Christ who stands at both ends of time — then look at your situation.'},
+    {zh:'你在惧怕什么?把它放在“不要惧怕,我是首先的、末后的”这句话旁边。',en:'What are you afraid of? Set it beside the words, “Do not be afraid; I am the First and the Last.”'},
+    {zh:'荣耀的主耶稣,你活着直到永远,也掌管我不能掌管的未来。求你今天挪去我的惧怕,让我在你面前安稳。',en:'Glorified Lord Jesus, You live forever and hold the future I cannot hold. Take away my fear today, and let me rest secure before You.'}),
+
+  C(2,'s2',
+    {zh:'给以弗所、士每拿、别迦摩、推雅推喇的信',en:'Letters to Ephesus, Smyrna, Pergamum, Thyatira'},
+    {zh:'省察、悔改、警醒、忠心。',en:'Examine yourself, repent, stay watchful, remain faithful.'},
+    {zh:'耶稣对四个真实的教会说话:称赞他们所做的好,也指出他们离弃起初的爱、容让妥协,并呼召他们悔改、忠心到底。',en:'Jesus speaks to four real churches: He commends what is good, names where they have left their first love or tolerated compromise, and calls them to repent and be faithful to the end.'},
+    {zh:'耶稣认识每一间教会、每一个人真实的光景;祂的话语既严正又满有怜悯。',en:'Jesus knows each church — each person — as they really are; His words are both searching and full of mercy.'},
+    {zh:'信仰会慢慢冷却或悄悄妥协。今天正是回到“起初的爱”、重新对齐的时候。',en:'Faith can quietly cool or drift into compromise. Today is the time to return to your “first love” and realign.'},
+    {zh:'如果耶稣今天写一封信给你,你猜祂会称赞什么、又会温柔地提醒你什么?',en:'If Jesus wrote you a letter today, what do you think He would commend — and where would He gently call you back?'},
+    {zh:'主啊,你认识我真实的光景。求你挑旺我起初的爱,指出我不愿面对的妥协,给我悔改和忠心的心。',en:'Lord, You know me as I really am. Rekindle my first love, show me the compromise I avoid, and give me a heart to repent and stay faithful.'}),
+
+  C(3,'s2',
+    {zh:'给撒狄、非拉铁非、老底嘉的信',en:'Letters to Sardis, Philadelphia, Laodicea'},
+    {zh:'不冷不热的信仰,需要被唤醒。',en:'A lukewarm faith needs to be awakened.'},
+    {zh:'耶稣呼召“有名无实”的撒狄醒过来,坚固软弱却忠心的非拉铁非,并责备自以为富足、实则不冷不热的老底嘉——祂说:“我站在门外叩门。”',en:'Jesus calls “alive in name only” Sardis to wake up, strengthens weak-but-faithful Philadelphia, and rebukes self-satisfied, lukewarm Laodicea — saying, “I stand at the door and knock.”'},
+    {zh:'耶稣渴望与人真实相交;祂的责备背后,是不放弃的爱与邀请。',en:'Jesus longs for real fellowship; behind His rebuke is a love that will not give up, and an open invitation.'},
+    {zh:'留意信仰里“看起来还好、其实已经凉了”的地方,回应那扇一直被叩响的门。',en:'Notice where your faith “looks fine but has gone cold,” and answer the door that keeps being knocked on.'},
+    {zh:'你此刻的信仰更接近火热、冷淡,还是不冷不热?耶稣正在叩哪一扇门?',en:'Is your faith right now closer to hot, cold, or lukewarm? Which door is Jesus knocking on?'},
+    {zh:'主耶稣,你仍站在门外叩门。我不愿只有信仰的名分,却失去与你的相交。求你唤醒我,我为你开门。',en:'Lord Jesus, You still stand and knock. I do not want the name of faith without fellowship with You. Wake me — I open the door.'}),
+
+  C(4,'s3',
+    {zh:'天上的宝座',en:'The Throne in Heaven'},
+    {zh:'真正掌权的是神——祂配得敬拜。',en:'God is the One truly reigning — He is worthy of worship.'},
+    {zh:'一扇门在天上开了。约翰看见神荣耀的宝座,以及环绕宝座、昼夜不住敬拜的活物与长老。',en:'A door stands open in heaven. John sees God’s glorious throne, and around it living creatures and elders who worship day and night.'},
+    {zh:'在一切权势之上,有一个真正的宝座;宇宙的中心不是混乱,而是那位配得敬拜的神。',en:'Above every power there is a real throne; the center of the universe is not chaos but the God who is worthy of worship.'},
+    {zh:'当地上的“宝座”(权力、金钱、舆论)让你焦虑时,抬头看那唯一真正的宝座。',en:'When earthly “thrones” — power, money, opinion — make you anxious, lift your eyes to the one true throne.'},
+    {zh:'今天有哪一个“宝座”在你心里争夺神的位置?',en:'What “throne” is competing for God’s place in your heart today?'},
+    {zh:'坐在宝座上的神,你在万有之上掌权。求你把我心里的焦虑,换成对你的敬畏与敬拜。',en:'God on the throne, You reign above all things. Trade the anxiety in my heart for awe and worship of You.'}),
+
+  C(5,'s3',
+    {zh:'配得展开书卷的羔羊',en:'The Lamb Worthy to Open the Scroll'},
+    {zh:'耶稣——被杀的羔羊——配得一切颂赞。',en:'Jesus — the slain Lamb — is worthy of all praise.'},
+    {zh:'没有人配展开神手中的书卷;约翰哭了。然后长老说:看哪,犹大支派的狮子已经得胜。约翰却看见一只“像是被杀过的羔羊”——祂配得。',en:'No one is worthy to open the scroll in God’s hand, and John weeps. Then an elder says: the Lion of Judah has triumphed. Yet what John sees is a Lamb, “looking as if it had been slain” — and He is worthy.'},
+    {zh:'神得胜的方式出人意料:不是靠压倒性的武力,而是靠羔羊舍己的爱与牺牲。',en:'God’s way of winning is surprising: not by overwhelming force, but by the Lamb’s self-giving love and sacrifice.'},
+    {zh:'你以为“得胜”必须靠强势;羔羊却告诉你,舍己的爱才是真正的能力。',en:'You may assume winning requires strength; the Lamb shows that self-giving love is the true power.'},
+    {zh:'“被杀的羔羊”这幅图,如何改变你对“得胜”“力量”的理解?',en:'How does the image of the slain Lamb change your idea of “winning” and “power”?'},
+    {zh:'被杀又得胜的羔羊,你用舍己的爱赢得了我。求你教我以你的方式去爱、去得胜。',en:'Slain and victorious Lamb, You won me by self-giving love. Teach me to love and to overcome Your way.'}),
+
+  C(6,'s4',
+    {zh:'揭开七印',en:'The Seven Seals Opened'},
+    {zh:'世界动荡,但羔羊仍在掌权。',en:'The world shakes, yet the Lamb still reigns.'},
+    {zh:'羔羊逐一揭开书卷的封印,带出战争、饥荒、死亡与苦难的异象;殉道者呼喊“要等到几时”。',en:'The Lamb opens the seals one by one, unveiling visions of war, famine, death, and suffering; martyrs cry out, “How long?”'},
+    {zh:'即使在最混乱的画面里,主导权仍在羔羊手中;历史没有脱离神的掌管。',en:'Even in the most chaotic scenes, the initiative remains in the Lamb’s hand; history has not slipped out of God’s control.'},
+    {zh:'新闻里的动荡会让人恐慌。这一章提醒:混乱不等于失控,羔羊仍在掀开每一页。',en:'The turmoil in the news can breed panic. This chapter reminds us: chaos is not the same as out-of-control — the Lamb still turns each page.'},
+    {zh:'当世界的坏消息压过来时,你更容易相信“一切失控”还是“羔羊仍掌权”?',en:'When bad news presses in, which do you more easily believe — “everything is out of control,” or “the Lamb still reigns”?'},
+    {zh:'掌权的羔羊,世界动荡时求你安定我的心。我虽不明白“要等到几时”,仍要信靠你的时间。',en:'Reigning Lamb, steady my heart when the world shakes. Though I do not understand “how long,” I trust Your timing.'}),
+
+  C(7,'s4',
+    {zh:'被印的百姓与得胜的大群人',en:'The Sealed and the Great Multitude'},
+    {zh:'神认得属祂的人,并要擦去他们的眼泪。',en:'God knows His own — and will wipe away their tears.'},
+    {zh:'在审判之间,神先“盖印”保守属祂的人;约翰又看见各国各族数不清的大群人,站在宝座前敬拜。',en:'Between the judgments, God first “seals” and protects His own; then John sees a countless multitude from every nation standing before the throne in worship.'},
+    {zh:'神在患难中记念属祂的人,并应许:羔羊要牧养他们,神要擦去他们一切的眼泪。',en:'God remembers His own in tribulation, and promises: the Lamb will shepherd them, and God will wipe every tear from their eyes.'},
+    {zh:'你也许觉得自己渺小、被遗忘;这一章说,神认得你,也数算你的眼泪。',en:'You may feel small and forgotten; this chapter says God knows you, and counts your tears.'},
+    {zh:'“神要擦去他们一切的眼泪”——这句话对你此刻正在流的眼泪意味着什么?',en:'“God will wipe away every tear” — what does that mean for the tears you are shedding right now?'},
+    {zh:'牧养群羊的神,你没有忘记我。求你保守我属你,擦去我在暗处流的眼泪。',en:'Shepherding God, You have not forgotten me. Keep me as Your own, and wipe the tears I cry in secret.'}),
+
+  C(8,'s4',
+    {zh:'七号的开始',en:'The Trumpets Begin'},
+    {zh:'审判也是给世界的悔改呼召。',en:'Judgment is also a call to the world to repent.'},
+    {zh:'第七印揭开后,天上有一段静默;然后七位天使预备吹号,带出一连串警告性的灾祸。',en:'When the seventh seal is opened there is silence in heaven; then seven angels prepare to sound, releasing a series of warning judgments.'},
+    {zh:'神的审判有节制、有目的;这些警告是要唤醒人回转,而不是单纯的毁灭。',en:'God’s judgments are measured and purposeful; these warnings aim to wake people to turn back, not merely to destroy.'},
+    {zh:'警告的号声也是恩典——它给人回转的机会。你有没有忽略某个提醒?',en:'A warning trumpet is also grace — it gives room to turn back. Is there a warning you have been ignoring?'},
+    {zh:'在你的生活里,神最近可能借着什么“号声”在呼唤你回转?',en:'What “trumpet” might God be using lately to call you to turn back?'},
+    {zh:'公义又忍耐的神,你的警告里藏着怜悯。求你软化我的心,让我在还有时间的时候回转。',en:'Just and patient God, mercy hides inside Your warnings. Soften my heart to turn back while there is still time.'}),
+
+  C(9,'s4',
+    {zh:'号声中的黑暗',en:'Darkness Under the Trumpets'},
+    {zh:'即便审判临到,人心仍需悔改。',en:'Even under judgment, the human heart still needs to repent.'},
+    {zh:'更多号声带来可怕的异象与痛苦;然而经文说,人仍然不悔改,不肯离开自己手所造的。',en:'More trumpets bring terrifying visions and torment; yet the text notes that people still would not repent or turn from the works of their hands.'},
+    {zh:'神看重的不只是外在的震撼,更是人心真实的转向;顽梗是比灾祸更深的问题。',en:'God cares not only about outward shock but about the heart’s real turning; hardness is a deeper problem than disaster.'},
+    {zh:'苦难本身不会自动改变人心;真正的改变,是选择转向神。',en:'Suffering alone does not automatically change a heart; real change is choosing to turn to God.'},
+    {zh:'有没有一件事,你宁可继续硬撑,也不愿交给神、承认需要改变?',en:'Is there something you would rather keep gritting through than hand to God, admitting it needs to change?'},
+    {zh:'鉴察人心的主,求你不让我的心刚硬。趁我还听得见,让我今天就转向你。',en:'Lord who searches hearts, do not let mine grow hard. While I can still hear, let me turn to You today.'}),
+
+  C(10,'s4',
+    {zh:'小书卷',en:'The Little Scroll'},
+    {zh:'神的话又甜又苦,却要被“吃下去”并传讲。',en:'God’s word is both sweet and bitter — yet it must be “eaten” and spoken.'},
+    {zh:'约翰领受一卷小书卷,吃下去口中甘甜、肚里发苦,并被吩咐要再次说预言。',en:'John takes a little scroll and eats it — sweet in his mouth, bitter in his stomach — and is told he must prophesy again.'},
+    {zh:'神的话语带来真实的安慰(甜),也带来沉重的托付与警戒(苦);两者都是恩典。',en:'God’s word brings real comfort (sweet) and a heavy, sobering trust (bitter); both are grace.'},
+    {zh:'真实地领受神的话,意味着连它使你不安的部分也一并接受、并去活出来。',en:'To truly receive God’s word means accepting even the parts that unsettle you — and living them out.'},
+    {zh:'神的话里,有没有一句“很甜”、又有一句“发苦”却是你需要听的?',en:'In God’s word, is there a line that is “sweet” — and one that is “bitter” but that you need to hear?'},
+    {zh:'赐话语的主,求你让我不只挑选甘甜的部分,也领受那使我谦卑的部分,并忠心传讲。',en:'God who gives the word, let me not only pick the sweet parts but receive what humbles me, and speak it faithfully.'}),
+
+  C(11,'s4',
+    {zh:'两个见证人',en:'The Two Witnesses'},
+    {zh:'见证会遭遇抵挡,但神必为祂的见证辩护。',en:'Witness meets opposition, but God vindicates His witnesses.'},
+    {zh:'两个见证人忠心作见证、遭遇逼迫甚至被杀,神却使他们复活;天上宣告:世上的国成了我主基督的国。',en:'Two witnesses testify faithfully, are opposed and even killed, yet God raises them; heaven declares: the kingdom of the world has become the kingdom of our Lord and of His Christ.'},
+    {zh:'神掌管祂见证人的命运;即使见证暂时被压制,神的国最终必然公开得胜。',en:'God governs the fate of His witnesses; even when testimony is temporarily crushed, His kingdom finally, publicly prevails.'},
+    {zh:'为信仰站出来常会遇到反对。这一章给出长线视角:最后的话语属于神的国。',en:'Standing up for faith often meets resistance. This chapter gives the long view: the last word belongs to God’s kingdom.'},
+    {zh:'你有没有因为怕被反对,而不敢作某个该作的见证?',en:'Is there a witness you have held back from, for fear of opposition?'},
+    {zh:'掌管万国的主,你的国必要得胜。求你给我勇气作忠心的见证,把结果交在你手中。',en:'Lord over the nations, Your kingdom will prevail. Give me courage to witness faithfully, and to leave the outcome in Your hands.'}),
+
+  C(12,'s5',
+    {zh:'妇人与龙',en:'The Woman and the Dragon'},
+    {zh:'表面冲突的背后,有一场属灵争战。',en:'Behind the visible conflict lies a spiritual battle.'},
+    {zh:'一个大异象:妇人、孩子与红龙。龙想吞吃孩子却失败;经文说,弟兄胜过它,是因羔羊的血和自己所见证的道。',en:'A great sign: a woman, a child, and a red dragon. The dragon tries to devour the child and fails; the text says believers overcome him by the blood of the Lamb and the word of their testimony.'},
+    {zh:'世上许多冲突的深处是属灵争战;但邪恶的权势早已被羔羊的血所胜过。',en:'Beneath many conflicts is a spiritual battle; but the power of evil is already overcome by the blood of the Lamb.'},
+    {zh:'当你感到被某种“看不见的压制”缠住时,记得得胜之道是羔羊的血,而不是你的完美。',en:'When you feel gripped by an unseen “pressure,” remember the victory is by the Lamb’s blood — not by your perfection.'},
+    {zh:'你最近的挣扎,有没有可能不只是情绪或环境,还是一场需要属灵眼光的争战?',en:'Might your recent struggle be not only mood or circumstance, but a battle that needs spiritual sight?'},
+    {zh:'得胜的羔羊,我不能靠自己胜过黑暗。求你用你的血遮盖我,赐我得胜的信心。',en:'Victorious Lamb, I cannot overcome darkness by myself. Cover me with Your blood and give me overcoming faith.'}),
+
+  C(13,'s5',
+    {zh:'两个兽',en:'The Two Beasts'},
+    {zh:'抵挡神的权势会要求人效忠——但它不配。',en:'Powers that oppose God demand allegiance — but they are not worthy of it.'},
+    {zh:'从海里、地里上来两个兽,行使权柄、迷惑众人、要求敬拜和效忠,并以“印记”施压;这里出现“666”。',en:'Two beasts rise from sea and land, exercising authority, deceiving many, demanding worship and allegiance, and pressuring people with a “mark”; here appears the number “666.”'},
+    {zh:'邪恶常披着权力与秩序的外衣,要求人把最终的忠诚献给它;唯有神配得这样的效忠。',en:'Evil often wears the clothing of power and order, demanding ultimate loyalty; only God is worthy of such allegiance.'},
+    {zh:'今天没有人举着“兽”的牌子,但仍有许多东西悄悄要求你最终的忠诚。你把它给了谁?',en:'No one today carries a sign reading “the beast,” yet many things quietly demand your ultimate loyalty. To whom are you giving it?'},
+    {zh:'在你的生活里,有什么正在悄悄要求本该只属于神的那份忠诚?',en:'What in your life is quietly asking for the loyalty that belongs to God alone?'},
+    {zh:'独一的主,唯有你配得我最终的忠诚。求你让我看清那些冒充的权势,单单跟随你。',en:'Only Lord, You alone are worthy of my ultimate loyalty. Help me see through counterfeit powers and follow You alone.'}),
+
+  C(14,'s5',
+    {zh:'羔羊与跟随祂的人',en:'The Lamb and Those Who Follow Him'},
+    {zh:'忠心跟随羔羊的人,终必与祂同站。',en:'Those who faithfully follow the Lamb will stand with Him at last.'},
+    {zh:'羔羊站在锡安山上,与属祂的人在一起;天使宣告永远的福音,呼召人敬畏神,并预告收割的时候。',en:'The Lamb stands on Mount Zion with His people; an angel proclaims the eternal gospel, calling people to fear God, and the time of harvest is foretold.'},
+    {zh:'历史正走向一个收割的终点;神记念每一个忠心跟随羔羊的人。',en:'History is moving toward a harvest; God remembers everyone who faithfully follows the Lamb.'},
+    {zh:'忠心不是一时的激情,而是“一直跟随羔羊”。今天的一小步,也算在其中。',en:'Faithfulness is not a burst of passion but “following the Lamb” over time. Today’s small step counts too.'},
+    {zh:'如果“跟随羔羊”只落实为今天的一个具体行动,那会是什么?',en:'If “following the Lamb” came down to one concrete action today, what would it be?'},
+    {zh:'羔羊我的主,愿我一生跟随你到底。求你在我软弱时扶住我,使我终能与你同站。',en:'Lamb, my Lord, may I follow You to the end. Hold me when I am weak, that I may stand with You at last.'}),
+
+  C(15,'s6',
+    {zh:'最后的审判之前',en:'Before the Final Judgment'},
+    {zh:'神的审判是圣洁与公义的,不是任性的。',en:'God’s judgment is holy and just — never arbitrary.'},
+    {zh:'约翰看见得胜的人在“玻璃海”边歌唱,又看见七位天使拿着盛满神忿怒的七碗,预备倾倒。',en:'John sees the victorious singing beside a “sea of glass,” and seven angels holding seven bowls full of God’s wrath, about to be poured out.'},
+    {zh:'审判之前是敬拜与颂赞;神的公义与祂的圣洁、信实是一致的。',en:'Worship and praise come before judgment; God’s justice is of one piece with His holiness and faithfulness.'},
+    {zh:'我们本能地害怕“审判”,但圣经里的审判意味着:不义终将被认真对待,受害者不被遗忘。',en:'We instinctively fear “judgment,” but in Scripture it means: injustice will finally be taken seriously, and the wronged are not forgotten.'},
+    {zh:'“神会审判一切不义”——这对你曾经历或目睹的某个不公,带来的是安慰还是不安?',en:'“God will judge all injustice” — for some wrong you have suffered or seen, does that bring comfort or unease?'},
+    {zh:'圣洁公义的神,你必按公义审判一切。求你让我信靠你的公正,把伸冤交给你。',en:'Holy and just God, You will judge all things rightly. Help me trust Your justice and leave vengeance to You.'}),
+
+  C(16,'s6',
+    {zh:'七碗',en:'The Seven Bowls'},
+    {zh:'邪恶不会永远逍遥;它有尽头。',en:'Evil will not go free forever; it has an end.'},
+    {zh:'七碗的忿怒被倾倒,是审判系列的高潮;经文再次点出,即便如此,许多人仍不悔改。',en:'The seven bowls of wrath are poured out — the climax of the judgment series; again the text notes that even so, many will not repent.'},
+    {zh:'神最终不会对邪恶视而不见;祂的忍耐是给人悔改的空间,而不是纵容。',en:'God will not finally look away from evil; His patience is room to repent, not permission to continue.'},
+    {zh:'当你看见世上的恶似乎无人追究时,这一章说:有终点,神必处理。',en:'When evil in the world seems to go unanswered, this chapter says: there is an end — God will deal with it.'},
+    {zh:'“恶有尽头”这句话,如何影响你今天面对世界的不公时的心态?',en:'How does “evil has an end” shape the way you face the world’s injustice today?'},
+    {zh:'公义的主,你必了结一切的恶。求你在我灰心于世界的黑暗时,坚固我对你公义的盼望。',en:'Just Lord, You will bring evil to an end. When the world’s darkness discourages me, strengthen my hope in Your justice.'}),
+
+  C(17,'s6',
+    {zh:'大巴比伦',en:'Babylon the Great'},
+    {zh:'不要把最终的安全感建立在世界的权力上。',en:'Do not build your ultimate security on worldly power.'},
+    {zh:'约翰看见“大巴比伦”——一个象征骄傲、权力与败坏的体系,外表华丽,却与神为敌。',en:'John sees “Babylon the Great” — a system symbolizing pride, power, and corruption, dazzling on the outside yet set against God.'},
+    {zh:'凡与神为敌的骄傲与权势,无论看起来多么强大,都不是可靠的根基。',en:'Every proud power set against God, however strong it looks, is not a foundation you can trust.'},
+    {zh:'“巴比伦”提醒我们检视:我真正倚靠的,是会倾覆的世界体系,还是那不动摇的神?',en:'“Babylon” prompts us to examine: am I really leaning on a world system that will fall, or on the God who does not move?'},
+    {zh:'如果你诚实地看,你此刻的安全感更多来自“世界的巴比伦”,还是来自神?',en:'Honestly, does your sense of security come more from the world’s “Babylon,” or from God?'},
+    {zh:'永不动摇的神,求你挪去我对权力与财富虚假的倚靠,让我把根基单单立在你身上。',en:'Unshakable God, take away my false reliance on power and wealth, and let me build my foundation on You alone.'}),
+
+  C(18,'s6',
+    {zh:'巴比伦的倾覆',en:'The Fall of Babylon'},
+    {zh:'看似不可动摇的,终将过去。',en:'What looks unshakable will finally pass away.'},
+    {zh:'那看似永不倒塌的“巴比伦”在一时之间倾覆;倚靠它的人哀哭,天上却因神的公义而欢呼。',en:'The seemingly indestructible “Babylon” falls in a single hour; those who trusted it mourn, while heaven rejoices at God’s justice.'},
+    {zh:'凡人手所建、抵挡神的荣华都不能长存;唯有神的国存到永远。',en:'Every human-built splendor set against God is temporary; only God’s kingdom lasts forever.'},
+    {zh:'你所焦虑、所羡慕、所惧怕的许多“庞然大物”,在永恒的尺度里其实是会过去的。',en:'Many of the “giants” you fear or envy are, on an eternal scale, passing away.'},
+    {zh:'有没有一样你一直当作“永远靠得住”的东西,其实并不长久?',en:'Is there something you have treated as “permanently reliable” that is not, in fact, lasting?'},
+    {zh:'永恒的神,唯有你的国存到永远。求你把我的心从会过去的事物上挪开,安放在你里面。',en:'Eternal God, only Your kingdom endures. Move my heart off what will pass, and settle it in You.'}),
+
+  C(19,'s7',
+    {zh:'羔羊的婚宴与得胜的骑士',en:'The Wedding of the Lamb and the Rider'},
+    {zh:'邪恶不会永远存在;基督必要得胜。',en:'Evil will not last forever; Christ will triumph.'},
+    {zh:'天上响起敬拜:羔羊的婚宴到了。随后基督被描绘为骑白马、称为“信实真实”的得胜之君,战胜抵挡神的权势。',en:'Heaven erupts in worship: the wedding of the Lamb has come. Then Christ appears as the victorious King on a white horse, called “Faithful and True,” overcoming the powers set against God.'},
+    {zh:'历史的结局不是邪恶的胜利,而是基督公开、决定性的得胜与祂与百姓的团聚。',en:'The end of history is not evil’s victory but Christ’s open, decisive triumph — and His reunion with His people.'},
+    {zh:'在长期的等候与失望中,这一章给你终点的确据:结局已定,是得胜与婚宴。',en:'In long waiting and disappointment, this chapter gives you the assurance of the ending: it is settled — victory and a wedding feast.'},
+    {zh:'如果你真的相信“结局是基督得胜”,今天的哪一份重担会轻一点?',en:'If you truly believed “the ending is Christ’s victory,” which burden today would feel lighter?'},
+    {zh:'信实真实的君王,你必要得胜。在我等到疲惫时,求你用这确定的结局坚固我的心。',en:'Faithful and True King, You will triumph. When waiting wears me down, steady my heart with this certain ending.'}),
+
+  C(20,'s7',
+    {zh:'最后的审判',en:'The Final Judgment'},
+    {zh:'神的公义最终必然实现。',en:'God’s justice will finally be done.'},
+    {zh:'经文提到“一千年”(基督徒对其有不同理解),邪恶被彻底了结,死亡与阴间被扔进火湖,案卷展开,人人按其所行受审。',en:'The text speaks of “a thousand years” (understood differently by Christians), evil is finally ended, death and Hades are thrown into the lake of fire, the books are opened, and each is judged by what they have done.'},
+    {zh:'神必彻底、公正地处理一切的恶与死亡本身;没有不义会被永远掩盖。',en:'God will deal thoroughly and justly with all evil — and with death itself; no injustice is hidden forever.'},
+    {zh:'关于“千禧年”的细节,基督徒有不同理解;经文最清楚的信息是:神的公义终必成就。',en:'Christians hold different views on the details of the “millennium”; the clearest message is that God’s justice will surely be accomplished.'},
+    {zh:'“死亡本身最终被了结”——这对你面对死亡的恐惧或哀伤,意味着什么?',en:'“Death itself is finally ended” — what does that mean for your fear or grief around death?'},
+    {zh:'公义的审判者,你必了结罪恶与死亡。求你除去我对审判的惧怕,让我在基督里坦然无惧。',en:'Righteous Judge, You will end sin and death. Take away my dread of judgment, and let me stand unafraid in Christ.'}),
+
+  C(21,'s8',
+    {zh:'新天新地',en:'A New Heaven and a New Earth'},
+    {zh:'神与人同住,不再有眼泪。',en:'God dwells with His people — and there are no more tears.'},
+    {zh:'约翰看见新天新地和新耶路撒冷;有声音宣告:神要与人同住,擦去他们一切的眼泪,不再有死亡、悲哀、哭号、疼痛。神说:“看哪,我将一切都更新了。”',en:'John sees a new heaven and a new earth and the New Jerusalem; a voice declares: God will dwell with His people and wipe away every tear — no more death, mourning, crying, or pain. God says, “Behold, I am making all things new.”'},
+    {zh:'圣经故事的终点不是毁灭,而是更新与团聚:神亲自与人同住。',en:'The Bible’s story ends not in destruction but in renewal and reunion: God Himself dwelling with His people.'},
+    {zh:'无论今天有多少眼泪,这一章给出确据:眼泪、死亡、疼痛都有一个尽头。',en:'However many tears today holds, this chapter gives assurance: tears, death, and pain all have an end.'},
+    {zh:'如果你真的相信“神要擦去一切的眼泪”,你会带着怎样的盼望面对今天的疼痛?',en:'If you truly believed “God will wipe away every tear,” with what hope would you face today’s pain?'},
+    {zh:'使万物更新的神,你应许亲手擦去我的眼泪。求你把这永恒的盼望种在我心里,让我今天有力量活下去。',en:'God who makes all things new, You promise to wipe away my tears with Your own hand. Plant this eternal hope in me, and give me strength to live today.'}),
+
+  C(22,'s8',
+    {zh:'生命水的河与生命树',en:'The River of Life and the Tree of Life'},
+    {zh:'万物更新——耶稣说:“我必快来。”',en:'All things made new — Jesus says, “I am coming soon.”'},
+    {zh:'生命水的河从神的宝座流出,生命树再次出现,叶子医治万民;圣经以呼求作结:“主耶稣啊,我愿你来!”',en:'The river of the water of life flows from God’s throne, the tree of life reappears, its leaves for the healing of the nations; the Bible ends with a cry: “Come, Lord Jesus!”'},
+    {zh:'整本圣经从伊甸的生命树开始,到这里以医治与更新收尾;神的心意始终是与人同在、使人得医治。',en:'The whole Bible begins with the tree of life in Eden and ends here with healing and renewal; God’s heart has always been to dwell with people and to heal.'},
+    {zh:'启示录不是以恐惧结束,而是以医治、盼望和“我必快来”的应许结束。',en:'Revelation ends not in fear but in healing, hope, and the promise, “I am coming soon.”'},
+    {zh:'读到这最后一章,你心里留下的更多是恐惧,还是“神使万物更新”的盼望?',en:'Having reached this final chapter, what remains in you more — fear, or the hope that “God makes all things new”?'},
+    {zh:'快要再来的主耶稣,谢谢你让整个故事以医治和盼望作结。愿我今天就带着“主啊,我愿你来”的心活着。',en:'Lord Jesus, coming soon, thank You that the whole story ends in healing and hope. Let me live today with the cry, “Come, Lord Jesus.”'})
+];
+
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+var I18N_TITLE = { en:'Revelation · The victory and hope of Jesus · Under the Sun', zh:'启示录 · 耶稣的得胜与盼望 · 日光之下' };
+
+function readLinks(n, L){
+  var zhUrl = 'https://www.biblegateway.com/passage/?search=' + encodeURIComponent('启示录 '+n) + '&version=CUVS';
+  var enUrl = 'https://www.biblegateway.com/passage/?search=' + encodeURIComponent('Revelation '+n) + '&version=NIV';
+  var url = (L==='zh') ? zhUrl : enUrl;
+  var readFull = (L==='zh') ? ('读启示录第 '+n+' 章全文 →') : ('Read Revelation '+n+' in full →');
+  return '<div class="readrow"><a href="'+url+'" target="_blank" rel="noopener">📖 '+readFull+'</a></div>';
+}
+
+function render(){
+  var L = curLang();
+
+  // 7 themes
+  document.getElementById('themes').innerHTML = THEMES.map(function(x){
+    return '<div class="theme"><div class="tt">'+esc(x.t[L])+'</div><div class="tb">'+esc(x.b[L])+'</div></div>';
+  }).join('');
+
+  // reading route
+  var steps = ROUTE.map(function(s){ return '<span class="step">'+esc(s[L])+'</span>'; }).join('<span class="arrow">→</span>');
+  document.getElementById('route').innerHTML = steps + '<div class="cap">'+esc(ROUTE_CAP[L])+'</div>';
+
+  // symbol guide
+  document.getElementById('symbols').innerHTML = SYMBOLS.map(function(x){
+    return '<div class="symbol"><div class="sy">'+esc(x.sy[L])+'</div><div class="sd">'+esc(x.sd[L])+'</div>'
+      + '<div class="sn">'+esc(SYMBOL_NOTE[L])+'</div></div>';
+  }).join('');
+
+  // quick jump
+  document.getElementById('pnav').innerHTML = REV.map(function(c){
+    return '<a href="#rev-'+c.n+'">'+(L==='zh'?('启 '+c.n):('Rev '+c.n))+'</a>';
+  }).join('');
+
+  // chapters grouped by section
+  var lblHap = L==='zh'?'这一章发生了什么':'What happens in this chapter';
+  var lblGod = L==='zh'?'这告诉我们关于神什么':'What this reveals about God';
+  var lblLife= L==='zh'?'这对今天的生活意味着什么':'What this means for my life today';
+  var lblRef = L==='zh'?'今日默想':'Reflection';
+  var lblPr  = L==='zh'?'祷告':'Prayer';
+  var html = '';
+  SECTIONS.forEach(function(sec){
+    html += '<div class="secthead"><div class="sl">'+esc(sec.label[L])+'</div><div class="st">'+esc(sec.title[L])+'</div></div>';
+    REV.filter(function(c){return c.sec===sec.id;}).forEach(function(c){
+      html += '<section class="chap" id="rev-'+c.n+'">'
+        + '<div class="cnum">'+(L==='zh'?('启示录 '+c.n+' 章'):('Revelation '+c.n))+'</div>'
+        + '<h2 class="ctitle">'+esc(c.t[L])+'</h2>'
+        + '<div class="cfocus">'+esc(c.focus[L])+'</div>'
+        + '<div class="sect"><div class="lbl">'+lblHap+'</div><div class="body">'+esc(c.hap[L])+'</div></div>'
+        + '<div class="sect"><div class="lbl">'+lblGod+'</div><div class="body">'+esc(c.god[L])+'</div></div>'
+        + '<div class="sect"><div class="lbl">'+lblLife+'</div><div class="body">'+esc(c.life[L])+'</div></div>'
+        + '<div class="sect med"><div class="lbl">'+lblRef+'</div><div class="body">'+esc(c.ref[L])+'</div></div>'
+        + '<div class="sect pray"><div class="lbl">'+lblPr+'</div><div class="body">'+esc(c.pr[L])+'</div></div>'
+        + readLinks(c.n, L)
+        + '</section>';
+    });
+  });
+  document.getElementById('list').innerHTML = html;
+}
+
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.title = l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  render();
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) el.scrollIntoView(); }
+}
+
+(function(){
+  var p = new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) setTimeout(function(){el.scrollIntoView();},60); }
+})();
+</script>
+</body>
+</html>

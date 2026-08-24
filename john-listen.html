@@ -399,7 +399,7 @@ function themeOf(id){ return THEMES.filter(function(t){return t.id===id;})[0]; }
 
 /* ============================================================
    AUDIO PROVIDERS — swappable. MP3Provider is tried first when a
-   file is present; otherwise a calm calibration state is shown (no browser TTS).
+   file is present; otherwise device speech synthesis provides an honestly labeled fallback.
    Both expose the same tiny interface the Player depends on:
      load(chapter, lang), play(), pause(), setRate(r),
      seekFrac(f), and callbacks: onprogress(frac,label), onsentence(i), onend()
@@ -420,12 +420,12 @@ function makeSentences(chapter, lang){
   return blocks;
 }
 
-/* ---------- audio availability UI — NO browser TTS ---------- */
+/* ---------- audio availability UI — MP3 first, synthesized speech fallback ---------- */
 function setAudioBadge(state){
   var b=document.getElementById('audioBadge'); if(!b) return;
   var cls='calib', html='<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
   if(state==='ready'){ cls='ready'; html='<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'; }
-  else if(state==='tts'){ cls='calib'; html='<span class="en">AI narration · human recording in production</span><span class="zh">AI 女声朗读 · 真人版制作中</span>'; }
+  else if(state==='tts'){ cls='calib'; html='<span class="en">Synthesized narration · human recording in production</span><span class="zh">AI 合成朗读 · 真人录音制作中</span>'; }
   b.className='badge '+cls;
   b.innerHTML = html;
   b.style.display='inline-flex';

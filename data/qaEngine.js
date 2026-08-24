@@ -68,7 +68,7 @@ export const qaRegistry = [
     id: 'anxiety', priority: 2,
     keywordsZh: ['焦虑','害怕','压力','担心','忧愁','忧虑','睡不着','恐惧','不安','紧张','惊慌','放不下'],
     keywordsEn: ['anxious','anxiety','fear','afraid','fearful','stress','stressed','worry','worried','cannot sleep',"can't sleep",'nervous','panic','overwhelmed'],
-    relatedBooks: ['john','psalms'],
+    relatedBooks: ['john','psalms','revelation'],
     variants: [
       { verse: { zh: '【腓立比书 4:6-7】“应当一无挂虑,只要凡事借着祷告、祈求和感谢,将你们所要的告诉神。神所赐出人意外的平安,必在基督耶稣里保守你们的心怀意念。”', en: '【Philippians 4:6-7】“Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.” (NIV)' } },
       { verse: { zh: '【马太福音 6:34】“所以,不要为明天忧虑,因为明天自有明天的忧虑;一天的难处一天当就够了。”', en: '【Matthew 6:34】“Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.” (NIV)' } }
@@ -148,7 +148,7 @@ export const qaRegistry = [
     id: 'insecurity', priority: 5,
     keywordsZh: ['没有安全感','不安全','害怕失去','没人保护','缺乏安全感','心里不踏实','怕被抛弃','孤单无助'],
     keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
-    relatedBooks: ['john','psalms'],
+    relatedBooks: ['john','psalms','revelation'],
     variants: [
       { verse: { zh: '【以赛亚书 41:10】“你不要害怕,因为我与你同在;不要惊惶,因为我是你的神。我必坚固你,我必帮助你;我必用我公义的右手扶持你。”', en: '【Isaiah 41:10】“So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.” (NIV)' } },
       { verse: { zh: '【约翰福音 10:27-29】“我的羊听我的声音,我也认识他们,他们也跟着我。我又赐给他们永生;他们永不灭亡,谁也不能从我手里把他们夺去。”', en: '【John 10:27-29】“My sheep listen to my voice; I know them, and they follow me. I give them eternal life, and they shall never perish; no one will snatch them out of my hand.” (NIV)' } }
@@ -175,7 +175,7 @@ export const qaRegistry = [
     id: 'meaning', priority: 6,
     keywordsZh: ['人生的意义','生命的意义','活着的意义','为什么活着','人生目的','人生的目的','我为什么活着','意义是什么'],
     keywordsEn: ['meaning of life','purpose of life','why am i here','why am i alive','why do i exist','life purpose','what is the meaning','reason to live'],
-    relatedBooks: ['ecclesiastes'],
+    relatedBooks: ['ecclesiastes','revelation'],
     variants: [
       { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)' } },
       { verse: { zh: '【约翰福音 17:3】“认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。”', en: '【John 17:3】“Now this is eternal life: that they know you, the only true God, and Jesus Christ, whom you have sent.” (NIV)' } }
@@ -301,7 +301,7 @@ export const qaRegistry = [
     id: 'suffering', priority: 11,
     keywordsZh: ['痛苦','苦难','受苦','为什么是我','患难','绝望','撑不下去','难熬','折磨','走不出','看不到希望','很苦','熬不住'],
     keywordsEn: ['suffering','suffer','pain','why me','hardship','despair','hopeless','no hope','going through','painful','trial','hurting'],
-    relatedBooks: ['john','ecclesiastes','psalms'],
+    relatedBooks: ['john','ecclesiastes','psalms','revelation'],
     zh: {
       title: '当你正在受苦',
       verse: '【约翰福音 16:33】“我将这些事告诉你们,是要叫你们在我里面有平安。在世上你们有苦难,但你们可以放心,我已经胜了世界。”',
@@ -324,7 +324,7 @@ export const qaRegistry = [
     id: 'death', priority: 12,
     keywordsZh: ['死','死亡','离世','去世','过世','怕死','死后','人死后','人都会死','活着有什么意义','没了'],
     keywordsEn: ['death','die','dying','mortal','pass away','passed away','afraid to die','everyone dies','what happens when we die','after death'],
-    relatedBooks: ['ecclesiastes','john'],
+    relatedBooks: ['ecclesiastes','john','revelation'],
     zh: {
       title: '当你面对死亡的问题',
       verse: '【约翰福音 11:25】“耶稣对她说:复活在我,生命也在我。信我的人虽然死了,也必复活。”',
@@ -462,7 +462,7 @@ export const qaRegistry = [
     id: 'grief', priority: 18,
     keywordsZh: ['失去亲人','失去了亲人','亲人去世','走不出来','太想念','哀伤'],
     keywordsEn: ['lost a loved one','grieving','someone died','miss them so much'],
-    relatedBooks: ['john','psalms'],
+    relatedBooks: ['john','psalms','revelation'],
     zh: {
       title: '当你失去了所爱的人',
       verse: '【马太福音 5:4】“哀恸的人有福了,因为他们必得安慰。”',

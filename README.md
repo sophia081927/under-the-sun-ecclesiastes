@@ -23,6 +23,7 @@ Homepage question → the *hevel* (vapor, not "vanity") insight → the same-vio
 
 ## Notes
 
-- All Scripture quoted is KJV and the Chinese Union Version (和合本) — both public domain.
+- New Scripture modules use the Chinese Union Version (新标点和合本) and the World English Bible (WEB), both public domain. Earlier Ecclesiastes/John material retains KJV. The Psalms NIV excerpts are a documented legacy item to migrate or license before expansion.
+- 《启示录》采用公共领域的新标点和合本（简体）与 World English Bible（WEB）。传道书与约翰福音暂时保留 KJV；诗篇中的 NIV 精选经文属于待处理的历史遗留，不应扩展到新的完整书卷。
 - The slide images contain text baked in; for web deployment they should be compressed.
 - This is an MVP demo. The "Ask Anything" assistant currently uses a small built-in, verse-grounded set; the production version is a retrieval-augmented model constrained to the Ecclesiastes corpus.

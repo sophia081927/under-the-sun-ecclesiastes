@@ -52,7 +52,8 @@ const PILLS = {
 const BOOK_LINKS = {
   ecclesiastes: { zh: '读传道书', en: 'Read Ecclesiastes', href: 'ecclesiastes.html' },
   john: { zh: '读约翰福音', en: 'Read John', href: 'john.html' },
-  psalms: { zh: '读诗篇', en: 'Read Psalms', href: 'psalms.html' }
+  psalms: { zh: '读诗篇', en: 'Read Psalms', href: 'psalms.html' },
+  revelation: { zh: '读启示录', en: 'Read Revelation', href: 'revelation.html' }
 };
 
 const LOADING_MS = 700;

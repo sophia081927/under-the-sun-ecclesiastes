@@ -164,8 +164,8 @@
 
 <script>
 /* ============================================================
-   Psalms audio — HTML5 MP3 only (NO browser TTS). If a real human-voice MP3
-   exists at audio/psalms/psalm-NN-<lang>.mp3 it plays via <audio>;
+   Psalms audio — MP3 first, with device speech synthesis as a labeled fallback.
+   If a real human-voice MP3 exists at audio/psalms/psalm-NN-<lang>.mp3 it plays via <audio>;
    otherwise a calm "narration in calibration" state is shown (no synthesized
    speech, no autoplay, no external API).
    ============================================================ */
@@ -220,14 +220,14 @@ CHAPTERS.forEach(function(c){ c.audio = { zh:'audio/psalms/psalm-'+String(c.num)
 
 function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
 
-/* ---------- audio availability UI — NO browser TTS ----------
+/* ---------- audio availability UI — MP3 first, synthesized speech fallback
    MP3-first: if a real human-voice MP3 loads, play it; otherwise show a calm
    calibration state (no synthesized speech). */
 function setAudioBadge(state){
   var b=document.getElementById('audioBadge'); if(!b) return;
   var cls='calib', html='<span class="en">Human narration in production</span><span class="zh">真人朗读制作中</span>';
   if(state==='ready'){ cls='ready'; html='<span class="en">Human female narration</span><span class="zh">真人女声朗读</span>'; }
-  else if(state==='tts'){ cls='calib'; html='<span class="en">AI narration · human recording in production</span><span class="zh">AI 女声朗读 · 真人版制作中</span>'; }
+  else if(state==='tts'){ cls='calib'; html='<span class="en">Synthesized narration · human recording in production</span><span class="zh">AI 合成朗读 · 真人录音制作中</span>'; }
   b.className='badge '+cls;
   b.innerHTML = html;
   b.style.display='inline-flex';

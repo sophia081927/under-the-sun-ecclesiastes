@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SHNR24DPH7');</script>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14131a">
+  <title>聆听启示录 · Listen to Revelation</title>
+  <meta name="description" content="中英双语聆听启示录。合成朗读清楚标注，真人录音可在未来无缝加入。">
+  <link rel="canonical" href="https://lightoflifebible.org/revelation-listen.html">
+  <style>
+    :root{--bg:#14131a;--bg2:#1c1924;--ink:#f1ede5;--muted:#a9a1ad;--faint:#746d79;--gold:#e4c97a;--gold2:#f0dfa9;--line:rgba(228,201,122,.24);--soft:rgba(241,237,229,.1)}
+    *{box-sizing:border-box;margin:0;padding:0}body{background:radial-gradient(800px 500px at 50% -120px,rgba(116,80,151,.22),transparent 70%),var(--bg);color:var(--ink);font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.75;padding-bottom:50px}.zh{display:inline}.en{display:none}body:not(.lang-zh) .zh{display:none}body:not(.lang-zh) .en{display:inline}a{color:inherit}
+    .top{display:flex;justify-content:space-between;align-items:center;padding:13px 18px;border-bottom:1px solid var(--soft);position:sticky;top:0;background:rgba(20,19,26,.94);backdrop-filter:blur(14px);z-index:5}.top a{text-decoration:none;color:var(--gold);font-size:12px;letter-spacing:.12em}.toggle{display:flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}.toggle button{border:0;background:transparent;color:var(--muted);padding:7px 12px}.toggle button.active{background:var(--gold);color:#17141c;font-weight:700}
+    main{max-width:760px;margin:auto;padding:60px 22px}.eyebrow{font-size:12px;color:var(--gold);letter-spacing:.2em;text-transform:uppercase}.title{font-size:clamp(30px,7vw,48px);font-weight:400;margin-top:9px}.summary{color:var(--muted);margin-top:13px}.badge{display:inline-flex;margin-top:18px;padding:7px 12px;border-radius:30px;background:rgba(228,201,122,.08);border:1px solid var(--line);color:var(--gold2);font-size:12px}
+    .player{margin-top:30px;padding:24px;background:var(--bg2);border:1px solid var(--line);border-radius:14px}.controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.play{width:58px;height:58px;border:0;border-radius:50%;background:var(--gold);color:#17141c;font-size:22px;cursor:pointer}.rate,.stop{border:1px solid var(--soft);background:transparent;color:var(--muted);border-radius:30px;padding:9px 14px;min-height:42px;cursor:pointer}.status{color:var(--muted);font-size:13px}.progress{height:4px;background:var(--soft);margin-top:20px;border-radius:4px;overflow:hidden}.progress i{display:block;width:0;height:100%;background:var(--gold);transition:width .2s}
+    .transcript{margin-top:28px;display:grid;gap:14px}.block{border-left:2px solid var(--gold);padding-left:16px}.block h2{font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.13em}.block p{margin-top:7px;color:var(--muted);font-size:16px}.notice{margin-top:28px;color:var(--faint);font-size:12.5px;padding:13px 15px;border:1px solid var(--soft);border-radius:8px}.nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px}.nav a{border:1px solid var(--soft);border-radius:30px;padding:10px 15px;text-decoration:none;color:var(--gold2);font-size:13px}.disabled{opacity:.55}.chapter-select{margin-top:25px;width:100%;background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:12px;font:inherit}
+  </style>
+</head>
+<body class="lang-zh">
+  <header class="top"><a id="readLink" href="revelation.html?ch=1">← <span class="zh">返回阅读</span><span class="en">Back to reading</span></a><div class="toggle"><button id="btnZh" onclick="setLang('zh')">中文</button><button id="btnEn" onclick="setLang('en')">EN</button></div></header>
+  <main>
+    <div class="eyebrow"><span class="zh">聆听启示录</span><span class="en">Listen to Revelation</span></div>
+    <h1 class="title" id="title"></h1><p class="summary" id="summary"></p><div class="badge" id="badge"></div>
+    <select class="chapter-select" id="chapterSelect" aria-label="Choose chapter"></select>
+    <section class="player" id="player">
+      <div class="controls"><button class="play" id="play" aria-label="Play">▶</button><button class="stop" id="stop"><span class="zh">停止</span><span class="en">Stop</span></button><button class="rate" id="rate">1x</button><span class="status" id="status"></span></div>
+      <div class="progress"><i id="bar"></i></div><div class="transcript" id="transcript"></div>
+    </section>
+    <div class="notice"><span class="zh">当前使用设备自带的合成语音朗读，并非真人录音。真人录音文件准备好后，本页会自动优先播放真人版本。未完成的章节目前只朗读概览，不会把概览冒充圣经正文。</span><span class="en">This page currently uses your device’s synthesized voice, not a human recording. When a human recording becomes available, it will be preferred automatically. Incomplete chapters read only the overview and never present it as Scripture.</span></div>
+    <nav class="nav" id="nav"></nav>
+  </main>
+  <script type="module">
+    import { revelationChapters } from './data/books/revelation/index.js';
+    import { toListenBlocks } from './components/chapterReader.js';
+    const params=new URLSearchParams(location.search);let chapter=Number(params.get('ch')||1);if(!Number.isInteger(chapter)||chapter<1||chapter>22)chapter=1;
+    const meta=revelationChapters[chapter-1];let data=null,lang='zh',playing=false,rate=1,utterances=[],utteranceIndex=0,audio=null,humanReady=false;
+    const $=id=>document.getElementById(id);$('readLink').href=`revelation.html?ch=${chapter}`;
+    $('chapterSelect').innerHTML=revelationChapters.map(c=>`<option value="${c.n}" ${c.n===chapter?'selected':''}>${c.n}. ${c.titleZh} · ${c.titleEn}${c.status==='full'?' ✓':''}</option>`).join('');
+    $('chapterSelect').addEventListener('change',e=>location.href=`revelation-listen.html?ch=${e.target.value}`);
+    function blocks(){return data?toListenBlocks(data,lang):[{label:lang==='zh'?`启示录第 ${chapter} 章概览`:`Revelation ${chapter} overview`,text:meta.summary[lang]},{label:lang==='zh'?'盼望锚点':'Anchor of hope',text:meta.comfortAnchor[lang]}]}
+    function render(){
+      $('title').textContent=lang==='zh'?`启示录第 ${chapter} 章 · ${meta.titleZh}`:`Revelation ${chapter} · ${meta.titleEn}`;$('summary').textContent=meta.summary[lang];
+      $('badge').textContent=humanReady?(lang==='zh'?'真人朗读':'Human narration'):(lang==='zh'?'设备合成朗读 · 可添加真人录音':'Device synthesized narration · human audio can be added');
+      $('status').textContent=lang==='zh'?(data?'准备聆听完整经文':'本章完整内容正在预备'):(data?'Full chapter ready':'Full chapter in preparation');
+      $('transcript').innerHTML=blocks().map(b=>`<article class="block"><h2>${b.label}</h2><p>${b.text}</p></article>`).join('');
+      $('nav').innerHTML=`${chapter>1?`<a href="revelation-listen.html?ch=${chapter-1}">← ${lang==='zh'?`第 ${chapter-1} 章`:`Chapter ${chapter-1}`}</a>`:'<span></span>'}${chapter<22?`<a href="revelation-listen.html?ch=${chapter+1}">${lang==='zh'?`第 ${chapter+1} 章`:`Chapter ${chapter+1}`} →</a>`:'<span></span>'}`;
+    }
+    function ttsSupported(){return 'speechSynthesis' in window&&'SpeechSynthesisUtterance' in window}
+    function stop(){playing=false;if(ttsSupported()){try{speechSynthesis.cancel()}catch(e){}}if(audio){audio.pause();audio.currentTime=0}utterances=[];utteranceIndex=0;$('play').textContent='▶';$('bar').style.width='0'}
+    function preferredVoice(){if(!ttsSupported())return null;const prefix=lang==='zh'?'zh':'en';return speechSynthesis.getVoices().find(v=>(v.lang||'').toLowerCase().startsWith(prefix))||null}
+    function speechTexts(){if(data){return data.verses.map(v=>v[lang]).concat([data.comfortAnchor[lang],data.prayer[lang]])}return blocks().map(b=>`${b.label}. ${b.text}`)}
+    function speak(){stop();if(!ttsSupported()){$('status').textContent=lang==='zh'?'此设备暂不支持合成朗读':'Synthesized speech is unavailable on this device';return}const voice=preferredVoice();utterances=speechTexts().map(text=>{const u=new SpeechSynthesisUtterance(text);u.lang=lang==='zh'?'zh-CN':'en-US';u.rate=rate;if(voice)u.voice=voice;return u});utteranceIndex=0;playing=true;$('play').textContent='⏸';playNext()}
+    function playNext(){if(!playing||utteranceIndex>=utterances.length){stop();return}const u=utterances[utteranceIndex];u.onend=()=>{utteranceIndex++;$('bar').style.width=`${Math.round(utteranceIndex/utterances.length*100)}%`;playNext()};u.onerror=stop;speechSynthesis.speak(u)}
+    function humanSource(){return `audio/revelation/chapter-${String(chapter).padStart(2,'0')}-${lang}.mp3`}
+    function playHuman(){stop();audio=new Audio(humanSource());audio.playbackRate=rate;audio.addEventListener('ended',stop);audio.play().then(()=>{playing=true;$('play').textContent='⏸'}).catch(()=>{humanReady=false;render();speak()})}
+    function checkHuman(){fetch(humanSource(),{method:'HEAD'}).then(r=>{humanReady=r.ok;render()}).catch(()=>{humanReady=false})}
+    $('play').addEventListener('click',()=>{if(playing){stop()}else if(humanReady){playHuman()}else{speak()}});$('stop').addEventListener('click',stop);
+    $('rate').addEventListener('click',()=>{const rates=[1,1.25,1.5,.8];rate=rates[(rates.indexOf(rate)+1)%rates.length];$('rate').textContent=`${rate}x`;if(audio)audio.playbackRate=rate});
+    window.setLang=l=>{stop();lang=l;document.body.classList.toggle('lang-zh',l==='zh');document.documentElement.lang=l==='zh'?'zh-CN':'en';$('btnZh').classList.toggle('active',l==='zh');$('btnEn').classList.toggle('active',l==='en');try{localStorage.setItem('bible_lang',l)}catch(e){}render();if(data)checkHuman()};
+    let saved;try{saved=localStorage.getItem('bible_lang')}catch(e){}const q=params.get('lang');setLang(q==='zh'||q==='en'?q:(saved||((navigator.language||'').toLowerCase().startsWith('zh')?'zh':'en')));
+    if(meta.status==='full'){
+      try{const mod=await import(`./data/books/revelation/ch${String(chapter).padStart(2,'0')}.js`);data=mod.default;render();checkHuman()}
+      catch(error){console.error('Unable to load Revelation audio data',error);$('status').textContent=lang==='zh'?'本章暂时无法载入':'This chapter could not be loaded';$('play').disabled=true}
+    }
+  </script>
+</body>
+</html>

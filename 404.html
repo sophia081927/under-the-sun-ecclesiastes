@@ -24,10 +24,11 @@
 <script>
   (function () {
     var segs = location.pathname.split('/').filter(Boolean); // [repo, ...rest]
-    var repo = segs.length ? segs[0] : '';
-    var rest = segs.slice(1).join('/');                       // e.g. "john/listen"
+    var onGitHubPages = /\.github\.io$/i.test(location.hostname);
+    var repo = onGitHubPages && segs.length ? segs[0] : '';
+    var rest = (onGitHubPages ? segs.slice(1) : segs).join('/'); // e.g. "revelation/8"
     var base = '/' + (repo ? repo + '/' : '');
-    var target = base + 'index.html' + (rest ? '#/' + rest : '') + location.search;
+    var target = base + 'index.html' + location.search + (rest ? '#/' + rest : '');
     location.replace(target);
   })();
 </script>

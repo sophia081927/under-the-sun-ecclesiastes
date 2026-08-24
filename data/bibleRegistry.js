@@ -179,7 +179,7 @@ export const bibleRegistry = [
   },
   {
     id: 'job',
-    order: 4,
+    order: 5,
     slug: 'job',
     titleZh: '约伯记',
     titleEn: 'Job',
@@ -216,7 +216,7 @@ export const bibleRegistry = [
   },
   {
     id: 'matthew',
-    order: 5,
+    order: 6,
     slug: 'matthew',
     titleZh: '马太福音',
     titleEn: 'Matthew',
@@ -250,6 +250,44 @@ export const bibleRegistry = [
     languages: ['zh', 'en'],
     audioEnabled: false,
     features: { read: false, listen: false, ask: false, reflection: false, worship: false, bilingual: true, study: false, deck: false }
+  },
+  {
+    id: 'revelation',
+    order: 4,
+    slug: 'revelation',
+    titleZh: '启示录',
+    titleEn: 'Revelation',
+    status: 'active',
+    safeHash: '#/revelation',
+    listenHash: '#/revelation/listen',
+    worshipHash: null,
+    route: '/revelation',
+    listenRoute: '/revelation/listen',
+    worshipRoute: null,
+    page: 'revelation.html',
+    listen: 'revelation-listen.html',
+    worship: null,
+    study: null,
+    deck: null,
+    chapters: 22,
+    bookType: 'Apocalyptic Prophecy',
+    bookTypeZh: '启示文学',
+    themeZh: '耶稣掌权、警醒、忠心、忍耐、盼望、得胜、万物更新',
+    themeEn: 'Jesus reigns, watchfulness, faithfulness, endurance, hope, victory, and all things made new',
+    taglineZh: '在动荡中，看见耶稣带来的安慰与盼望。',
+    taglineEn: 'The comfort and hope Jesus brings in troubled times.',
+    descriptionZh: '启示录让受压的教会看见：神仍然掌权，羔羊已经得胜，邪恶不会拥有最后的话语，神最终要使万物更新。',
+    descriptionEn: 'Revelation shows pressured churches that God still reigns, the Lamb has conquered, evil will not have the last word, and God will make all things new.',
+    keyVerse: {
+      zh: { reference: '启示录 21:5', text: '看哪，我将一切都更新了！' },
+      en: { reference: 'Revelation 21:5', text: 'Behold, I am making all things new.' }
+    },
+    bgColor: 'from-[#241B33] to-[#12161A]',
+    accentColor: '#E4C97A',
+    audioPathBase: 'audio/revelation/',
+    languages: ['zh', 'en'],
+    audioEnabled: true,
+    features: { read: true, listen: true, ask: true, reflection: true, worship: false, bilingual: true, study: false, deck: false }
   }
 ];
 
@@ -270,11 +308,19 @@ export const featureLabels = {
 export const resolveHash = (hash) => {
   const clean = String(hash || '').replace(/^#\/?/, '').replace(/\/+$/, '');
   if (!clean) return null;
-  const [slug, view] = clean.split('/');
+  const [slug, segment2, segment3] = clean.split('/');
   const book = getBookBySlug(slug);
   if (!book) return null;
-  if (view === 'listen') return book.listen || book.page || null;
-  if (view === 'worship') return book.worship || book.page || null;
+  if (/^\d+$/.test(segment2 || '')) {
+    const chapter = Number(segment2);
+    if (book.chapters && chapter >= 1 && chapter <= book.chapters) {
+      const file = segment3 === 'listen' ? book.listen : book.page;
+      return file ? `${file}?ch=${chapter}` : null;
+    }
+    return book.page || null;
+  }
+  if (segment2 === 'listen') return book.listen || book.page || null;
+  if (segment2 === 'worship') return book.worship || book.page || null;
   return book.page || null;
 };
 

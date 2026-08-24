@@ -1,6 +1,7 @@
-const esc = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({
+export const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (c) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
 }[c]));
+const esc = escapeHtml;
 
 export function currentLanguage() {
   return document.body.classList.contains('lang-zh') ? 'zh' : 'en';

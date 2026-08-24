@@ -5,6 +5,7 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
   <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SHNR24DPH7');</script>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#14131a">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="聆听启示录">
   <title>聆听启示录 · Listen to Revelation</title>
   <meta name="description" content="中英双语聆听启示录。合成朗读清楚标注，真人录音可在未来无缝加入。">
   <link rel="canonical" href="https://lightoflifebible.org/revelation-listen.html">
@@ -52,15 +53,14 @@
     function speechTexts(){if(data){return data.verses.map(v=>v[lang]).concat([data.comfortAnchor[lang],data.prayer[lang]])}return blocks().map(b=>`${b.label}. ${b.text}`)}
     function speak(){stop();if(!ttsSupported()){$('status').textContent=lang==='zh'?'此设备暂不支持合成朗读':'Synthesized speech is unavailable on this device';return}const voice=preferredVoice();utterances=speechTexts().map(text=>{const u=new SpeechSynthesisUtterance(text);u.lang=lang==='zh'?'zh-CN':'en-US';u.rate=rate;if(voice)u.voice=voice;return u});utteranceIndex=0;playing=true;$('play').textContent='⏸';playNext()}
     function playNext(){if(!playing||utteranceIndex>=utterances.length){stop();return}const u=utterances[utteranceIndex];u.onend=()=>{utteranceIndex++;$('bar').style.width=`${Math.round(utteranceIndex/utterances.length*100)}%`;playNext()};u.onerror=stop;speechSynthesis.speak(u)}
-    function humanSource(){return `audio/revelation/chapter-${String(chapter).padStart(2,'0')}-${lang}.mp3`}
+    function humanSource(){return data&&data.audio&&data.audio[lang]?data.audio[lang]:''}
     function playHuman(){stop();audio=new Audio(humanSource());audio.playbackRate=rate;audio.addEventListener('ended',stop);audio.play().then(()=>{playing=true;$('play').textContent='⏸'}).catch(()=>{humanReady=false;render();speak()})}
-    function checkHuman(){fetch(humanSource(),{method:'HEAD'}).then(r=>{humanReady=r.ok;render()}).catch(()=>{humanReady=false})}
     $('play').addEventListener('click',()=>{if(playing){stop()}else if(humanReady){playHuman()}else{speak()}});$('stop').addEventListener('click',stop);
     $('rate').addEventListener('click',()=>{const rates=[1,1.25,1.5,.8];rate=rates[(rates.indexOf(rate)+1)%rates.length];$('rate').textContent=`${rate}x`;if(audio)audio.playbackRate=rate});
-    window.setLang=l=>{stop();lang=l;document.body.classList.toggle('lang-zh',l==='zh');document.documentElement.lang=l==='zh'?'zh-CN':'en';$('btnZh').classList.toggle('active',l==='zh');$('btnEn').classList.toggle('active',l==='en');try{localStorage.setItem('bible_lang',l)}catch(e){}render();if(data)checkHuman()};
+    window.setLang=l=>{stop();lang=l;humanReady=Boolean(data&&data.audio&&data.audio[l]);document.body.classList.toggle('lang-zh',l==='zh');document.documentElement.lang=l==='zh'?'zh-CN':'en';$('btnZh').classList.toggle('active',l==='zh');$('btnEn').classList.toggle('active',l==='en');try{localStorage.setItem('bible_lang',l)}catch(e){}render()};
     let saved;try{saved=localStorage.getItem('bible_lang')}catch(e){}const q=params.get('lang');setLang(q==='zh'||q==='en'?q:(saved||((navigator.language||'').toLowerCase().startsWith('zh')?'zh':'en')));
     if(meta.status==='full'){
-      try{const mod=await import(`./data/books/revelation/ch${String(chapter).padStart(2,'0')}.js`);data=mod.default;render();checkHuman()}
+      try{const mod=await import(`./data/books/revelation/ch${String(chapter).padStart(2,'0')}.js`);data=mod.default;humanReady=Boolean(data.audio&&data.audio[lang]);render()}
       catch(error){console.error('Unable to load Revelation audio data',error);$('status').textContent=lang==='zh'?'本章暂时无法载入':'This chapter could not be loaded';$('play').disabled=true}
     }
   </script>

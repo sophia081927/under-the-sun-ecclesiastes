@@ -209,6 +209,14 @@ function pickPrayerVoice(lang) {
 function stopActiveSpeech() {
   if (ttsSupported()) { try { window.speechSynthesis.cancel(); } catch (e) {} }
 }
+/* iOS/Safari unlock: prime speechSynthesis inside the first user gesture so any
+   later spoken prayer is permitted (and voices are warmed up). */
+let _prayerTtsPrimed = false;
+function primePrayerTTS() {
+  if (_prayerTtsPrimed || !ttsSupported()) return;
+  _prayerTtsPrimed = true;
+  try { const u = new SpeechSynthesisUtterance(' '); u.volume = 0; window.speechSynthesis.speak(u); } catch (e) {}
+}
 /* Speak an ordered list of text segments, one utterance each, then call done(). */
 function speakSegments(segments, lang, onDone) {
   stopActiveSpeech();
@@ -381,6 +389,8 @@ export function mountPrayerCare(container, opts) {
   if (!container) return;
   opts = opts || {};
   injectStyles();
+  // Prime speech on the first tap anywhere, so a later spoken prayer works on iOS.
+  ['pointerdown', 'touchend', 'click'].forEach((ev) => document.addEventListener(ev, primePrayerTTS, true));
 
   let lastRequest = null;
   let lastId = null;

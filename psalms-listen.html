@@ -303,6 +303,14 @@ function TTSProvider(blocks, lang){
   self.seekFrac=function(f){ var i=Math.max(0,Math.min(flat.length-1,Math.round(f*(flat.length-1||0)))); speakFrom(i); };
 }
 
+/* iOS/Safari unlock: speechSynthesis.speak() is only permitted after it has first
+   run inside a user gesture. The player begins speech AFTER an async MP3 probe,
+   which loses the gesture on iOS — so prime the engine on the very first tap. */
+var _ttsPrimed=false;
+function primeTTS(){ if(_ttsPrimed || !ttsSupported()) return; _ttsPrimed=true;
+  try{ var u=new SpeechSynthesisUtterance(' '); u.volume=0; window.speechSynthesis.speak(u); }catch(e){} }
+['pointerdown','touchend','click'].forEach(function(ev){ document.addEventListener(ev, primeTTS, true); });
+
 var Player = {
   current:null, provider:null, rate:0.85, rates:[0.75,0.85,1,1.15,1.25], playing:false, blocks:null, allMode:false,
   async load(i, autoplay){

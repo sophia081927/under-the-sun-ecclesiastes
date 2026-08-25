@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SHNR24DPH7');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="圣经地图 · Bible Map">
+<title>Bible Overview · 圣经地图 · 66 卷全览</title>
+<meta name="description" content="A one-page map of the whole Bible: 66 books (Old Testament 39, New Testament 27), grouped by kind, each with a one-line summary. 整本圣经一页看懂:66 卷,旧约 39 + 新约 27,按类别分组,每卷一句话概要。">
+<link rel="canonical" href="https://lightoflifebible.org/bible-overview.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bible Library · 圣经书阁">
+<meta property="og:title" content="Bible Overview · 圣经地图">
+<meta property="og:description" content="66 books, one page, one line each — the whole Bible at a glance. 66 卷,一页看懂整本圣经。">
+<meta property="og:url" content="https://lightoflifebible.org/bible-overview.html">
+<style>
+  :root{
+    --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
+    --ink:#ece7dd; --muted:#9a948a; --faint:#6f6a62;
+    --sun:#d9a441; --sun-soft:#e8c77e;
+    --ot:#d9a441; --ot-soft:#e8c77e;
+    --nt:#a8c5d6; --nt-soft:#c6dbe6;
+    --line:rgba(217,164,65,.22); --line-soft:rgba(236,231,221,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);
+    font-family:Georgia,"Times New Roman","Songti SC","Noto Serif SC",serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .zh{display:none}
+  body.lang-zh .en{display:none}
+  body.lang-zh .zh{display:block}
+  body.lang-zh span.en,body.lang-zh a.en{display:none}
+  body.lang-zh span.zh,body.lang-zh a.zh{display:inline}
+  span.zh,a.zh{display:none}
+  span.en,a.en{display:inline}
+
+  .topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:14px;
+    padding:14px 22px;font-size:13px;letter-spacing:.16em;background:linear-gradient(var(--bg),rgba(20,22,26,.72),transparent);
+    color:var(--muted);text-transform:uppercase}
+  .topbar .mark{color:var(--sun-soft);border:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-decoration:none}
+  .topbar .right{display:flex;align-items:center;gap:14px}
+  .topbar a.nav{border:none;color:var(--muted);font-size:12px;letter-spacing:.14em;text-decoration:none}
+  .topbar a.nav:hover{color:var(--sun-soft)}
+  .lang-toggle{border:1px solid var(--line);border-radius:30px;overflow:hidden;display:flex;font-family:inherit;flex:none}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;font-size:12px;letter-spacing:.12em;font-family:inherit;transition:all .2s}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  @media(max-width:600px){.topbar{letter-spacing:.1em;padding:12px 16px}.topbar .nav.hideS{display:none}.topbar .mark{font-size:11px}}
+
+  .hero{max-width:820px;margin:0 auto;padding:104px 22px 8px;text-align:center}
+  .hero .kicker{font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin-bottom:16px}
+  .hero h1{font-size:clamp(30px,6vw,48px);line-height:1.15;color:var(--ink);font-weight:400}
+  .hero .sub{margin-top:12px;font-size:15px;color:var(--sun-soft);font-style:italic;line-height:1.6}
+  .hero .intro{margin-top:22px;font-size:16px;color:var(--muted);line-height:1.85;text-align:left;
+    border-left:2px solid var(--line);padding-left:18px}
+
+  .counts{max-width:820px;margin:26px auto 0;padding:0 22px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+  .count{flex:1;min-width:150px;background:var(--bg2);border:1px solid var(--line-soft);border-radius:12px;padding:16px 18px;text-align:center}
+  .count .n{font-size:30px;color:var(--sun-soft);line-height:1}
+  .count .l{margin-top:7px;font-size:12.5px;color:var(--muted);letter-spacing:.04em}
+  .count.nt .n{color:var(--nt-soft)}
+
+  .jump{max-width:820px;margin:22px auto 0;padding:0 22px;display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+  .jump a{font-size:12.5px;color:var(--muted);border:1px solid var(--line-soft);border-radius:30px;padding:7px 13px;
+    text-decoration:none;transition:all .2s;min-height:34px;display:inline-flex;align-items:center}
+  .jump a:hover{border-color:var(--sun);color:var(--sun-soft);background:rgba(217,164,65,.06)}
+
+  main{max-width:820px;margin:0 auto;padding:10px 22px 90px}
+
+  .testament{margin-top:40px}
+  .testament .thead{padding:14px 0 6px;border-bottom:1px solid var(--line);margin-bottom:6px}
+  .testament .teyebrow{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--sun)}
+  .testament.nt .teyebrow{color:var(--nt)}
+  .testament .ttitle{font-size:clamp(22px,4.4vw,30px);color:var(--ink);font-weight:400;margin-top:4px}
+  .testament .tnote{margin-top:6px;font-size:14px;color:var(--muted);line-height:1.7}
+
+  .group{margin-top:26px;scroll-margin-top:76px}
+  .group .glabel{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:4px}
+  .group .gname{font-size:17px;color:var(--sun-soft)}
+  .testament.nt .group .gname{color:var(--nt-soft)}
+  .group .gcount{font-size:12px;color:var(--faint);letter-spacing:.08em}
+  .group .gnote{font-size:13.5px;color:var(--muted);font-style:italic;line-height:1.6;margin-bottom:10px}
+
+  .book{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:11px 0;border-top:1px solid var(--line-soft)}
+  .book:first-of-type{border-top:none}
+  .book .bn{color:var(--faint);font-size:12px;padding-top:4px;min-width:20px;text-align:right;font-variant-numeric:tabular-nums}
+  .book .bmain .name{font-size:16.5px;color:var(--ink)}
+  .book .bmain .name .alt{color:var(--faint);font-size:13.5px;margin-left:7px}
+  .book .bmain .name a{color:var(--sun-soft);text-decoration:none;border-bottom:1px solid var(--line)}
+  .testament.nt .book .bmain .name a{color:var(--nt-soft);border-bottom-color:var(--nt-line,rgba(168,197,214,.3))}
+  .book .bmain .name a:hover{color:var(--ink)}
+  .book .bmain .name .live{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--sun);border:1px solid var(--line);border-radius:20px;padding:1px 7px;margin-left:8px;vertical-align:middle}
+  .book .bmain .sum{margin-top:4px;font-size:14.5px;color:var(--muted);line-height:1.7}
+
+  .endcta{max-width:820px;margin:0 auto;padding:26px 22px 70px;text-align:center}
+  .endcta .card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:30px 24px}
+  .endcta h3{font-size:20px;color:var(--sun-soft);font-weight:400;line-height:1.4}
+  .endcta p{margin-top:10px;font-size:14.5px;color:var(--muted);line-height:1.75}
+  .endcta a.ask{display:inline-flex;align-items:center;gap:8px;margin-top:18px;background:var(--sun);color:#14161a;
+    border-radius:30px;padding:12px 26px;font-size:15px;font-weight:700;letter-spacing:.02em;text-decoration:none;transition:background .2s;min-height:46px}
+  .endcta a.ask:hover{background:var(--sun-soft)}
+  .endcta .back{display:block;margin-top:18px;font-size:13px;color:var(--faint);text-decoration:none;letter-spacing:.06em}
+  .endcta .back:hover{color:var(--sun-soft)}
+
+  footer{border-top:1px solid var(--line-soft);padding:36px 22px;text-align:center;color:var(--faint)}
+  footer .mark{color:var(--sun-soft);font-size:15px;letter-spacing:.06em}
+  footer p{margin-top:12px;font-size:12.5px;line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a class="mark" href="index.html">日光之下 · under the sun</a>
+  <div class="right">
+    <a class="nav hideS" href="index.html"><span class="en">Library</span><span class="zh">书阁</span></a>
+    <a class="nav" href="ask.html"><span class="en">Ask</span><span class="zh">提问</span></a>
+    <div class="lang-toggle">
+      <button id="btnEn" class="active" onclick="setLang('en')">EN</button>
+      <button id="btnZh" onclick="setLang('zh')">中文</button>
+    </div>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="kicker"><span class="en">The whole Bible at a glance</span><span class="zh">一页看懂整本圣经</span></div>
+  <h1><span class="en">Bible Overview</span><span class="zh">圣经地图</span></h1>
+  <div class="sub">
+    <span class="en">66 books, one story — from creation to new creation, all pointing to Jesus.</span>
+    <span class="zh">66 卷,一个故事——从创造到万物更新,全都指向耶稣。</span>
+  </div>
+  <p class="intro">
+    <span class="en">The Bible is not one book but a library of 66 — 39 in the Old Testament (before Jesus) and 27 in the New (about Jesus and His church). They were written over many centuries by many people, yet together they tell a single story: God creating, a world gone wrong, and God’s long rescue that arrives in Jesus Christ. This page is a simple map: the main groups of books, and one line on what each book is about. If you’ve never read the Bible, start here — then step into any book on the shelf.</span>
+    <span class="zh">圣经不是一本书,而是一整套 66 卷的“图书馆”——旧约 39 卷(耶稣以前),新约 27 卷(关于耶稣和祂的教会)。它们由许多人、跨越许多世纪写成,却共同讲述同一个故事:神的创造、世界的堕落,以及神漫长的拯救——最终在耶稣基督里成全。这一页是一张简单的地图:各类书卷的分组,以及每一卷“主要讲什么”的一句话。如果你从未读过圣经,就从这里开始,然后走进书架上任何一卷。</span>
+  </p>
+</header>
+
+<div class="counts">
+  <div class="count"><div class="n">66</div><div class="l"><span class="en">books in all</span><span class="zh">卷 · 全书</span></div></div>
+  <div class="count"><div class="n">39</div><div class="l"><span class="en">Old Testament</span><span class="zh">旧约</span></div></div>
+  <div class="count nt"><div class="n">27</div><div class="l"><span class="en">New Testament</span><span class="zh">新约</span></div></div>
+</div>
+
+<nav class="jump" id="jump" aria-label="jump to a group"></nav>
+
+<main id="list"></main>
+
+<div class="endcta">
+  <div class="card">
+    <h3><span class="en">Not sure where to begin?</span><span class="zh">不确定从哪一卷开始?</span></h3>
+    <p><span class="en">A gentle first path: the Gospel of John (who Jesus is), then Psalms (how to pray), then Ecclesiastes (honest questions about life). Or just ask.</span><span class="zh">一条温柔的入门路线:约翰福音(认识耶稣)→ 诗篇(学习祷告)→ 传道书(诚实面对人生)。或者,直接来问。</span></p>
+    <a class="ask" href="ask.html"><span class="en">Ask from Scripture →</span><span class="zh">用圣经回应我 →</span></a>
+    <a class="back" href="index.html"><span class="en">← Back to the Library</span><span class="zh">← 返回书阁</span></a>
+  </div>
+</div>
+
+<footer>
+  <div class="mark">日光之下 · under the sun</div>
+  <p>
+    <span class="en">A one-page map of all 66 books. One line each; explore the full text on the shelf. · MVP demo.</span>
+    <span class="zh">66 卷全书的一页地图。每卷一句话;完整内容请到书架上细读。· MVP 演示版。</span>
+  </p>
+</footer>
+
+<script>
+/* ============================================================
+   BIBLE OVERVIEW — all 66 books, grouped, with a one-line summary each.
+   Books already live on this site link to their page (marked "在架 / on the shelf").
+   ============================================================ */
+function B(zh,en,sumZh,sumEn,page){ return {zh:zh,en:en,sum:{zh:sumZh,en:sumEn},page:page||null}; }
+
+var DATA = [
+  { id:'ot', kind:'ot', name:{zh:'旧约 · 39 卷',en:'Old Testament · 39 books'},
+    note:{zh:'耶稣降生以前:创造、堕落、神拣选一个民族,并一次次应许那位要来的拯救者。',
+          en:'Before Jesus: creation, the fall, God choosing a people, and repeated promises of a coming Rescuer.'},
+    groups:[
+      { name:{zh:'摩西五经 · 律法书',en:'The Law (Pentateuch)'}, count:5,
+        note:{zh:'圣经的根基:起源、出埃及、律法与神与祂子民立约。',en:'The foundation: origins, the exodus, the Law, and God’s covenant with His people.'},
+        books:[
+          B('创世记','Genesis','万物、人类与以色列的起源;创造、堕落,以及借亚伯拉罕一家展开的应许。','Beginnings: creation, humanity’s fall, and God’s covenant promise through Abraham’s family.'),
+          B('出埃及记','Exodus','神领以色列脱离为奴之地,颁下律法,并住在他们中间。','God rescues Israel from slavery, gives the Law, and comes to dwell among them.'),
+          B('利未记','Leviticus','献祭、洁净与圣洁的条例——罪人如何亲近圣洁的神。','Sacrifice, purity, and holiness — how sinful people may draw near a holy God.'),
+          B('民数记','Numbers','以色列在旷野漂流四十年;在他们反复的失败中,神依然信实。','Israel’s forty years in the wilderness; God stays faithful through their repeated failures.'),
+          B('申命记','Deuteronomy','摩西临终的讲论,呼召新一代爱神、遵行祂的诫命。','Moses’ farewell sermons, calling a new generation to love God and keep His commands.')
+        ] },
+      { name:{zh:'历史书',en:'History'}, count:12,
+        note:{zh:'从进入应许之地,到列王兴衰,再到被掳与归回。',en:'From entering the promised land, through the rise and fall of kings, to exile and return.'},
+        books:[
+          B('约书亚记','Joshua','神带领以色列进入并得着所应许之地。','God leads Israel into the promised land and gives it to them.'),
+          B('士师记','Judges','悖逆、被压、呼求、被救——一次次循环中,神仍兴起拯救者。','A cycle of rebellion, oppression, and rescue as God keeps raising up deliverers.'),
+          B('路得记','Ruth','苦难中的忠诚与救赎;一个外邦女子进入弥赛亚的家谱。','Loyalty and redemption in hard times; a foreign woman enters the Messiah’s line.'),
+          B('撒母耳记上','1 Samuel','以色列求立君王;扫罗兴衰,少年大卫被膏。','Israel demands a king; Saul rises and falls, and young David is anointed.'),
+          B('撒母耳记下','2 Samuel','大卫作王——他的得胜、失败,以及神给他永远的应许。','David’s reign — his victories, his failures, and God’s everlasting promise to him.'),
+          B('列王纪上','1 Kings','所罗门的荣华与圣殿;随后王国分裂,衰落开始。','Solomon’s glory and temple; then the kingdom divides and decline begins.'),
+          B('列王纪下','2 Kings','南北两国持续背道,最终被掳离开家园。','The two kingdoms keep turning away and are finally carried into exile.'),
+          B('历代志上','1 Chronicles','从亚当到大卫重述以色列的历史,聚焦敬拜与应许。','Israel’s story retold from Adam to David, centered on worship and covenant.'),
+          B('历代志下','2 Chronicles','圣殿、诸王与被掳,末了留下归回的盼望。','The temple, the kings, and exile — ending with a hope of return.'),
+          B('以斯拉记','Ezra','被掳的百姓归回,重建圣殿,重新寻回神的话。','The exiles return, rebuild the temple, and recover God’s word.'),
+          B('尼希米记','Nehemiah','重建耶路撒冷的城墙,并更新与神所立的约。','Rebuilding Jerusalem’s walls and renewing the people’s covenant with God.'),
+          B('以斯帖记','Esther','神虽从未被提名,却在暗中保守祂被掳的子民。','God is never named, yet works unseen to preserve His people in exile.')
+        ] },
+      { name:{zh:'智慧书 · 诗歌书',en:'Poetry & Wisdom'}, count:5,
+        note:{zh:'关于苦难、祷告、智慧与人生意义的诚实之书。',en:'Honest books about suffering, prayer, wisdom, and the meaning of life.'},
+        books:[
+          B('约伯记','Job','义人为何受苦?在无解的痛苦中遇见神自己。','Why do the righteous suffer? Meeting God Himself in unexplained pain.'),
+          B('诗篇','Psalms','真实向神倾诉的祷告与诗歌——喜乐、哀哭、悔改与盼望。','Prayers and songs poured out to God — joy, lament, repentance, and hope.','psalms.html'),
+          B('箴言','Proverbs','敬畏耶和华是智慧的开端;给日常生活的属天智慧。','The fear of the Lord is the beginning of wisdom — heaven’s wisdom for daily life.'),
+          B('传道书','Ecclesiastes','日光之下一切都是虚空;意义唯在敬畏神。','All is fleeting “under the sun”; meaning is found only in the fear of God.','ecclesiastes.html'),
+          B('雅歌','Song of Songs','一首爱情之歌,也映照神与祂子民之间的爱。','A song of love that also reflects the love between God and His people.')
+        ] },
+      { name:{zh:'大先知书',en:'Major Prophets'}, count:5,
+        note:{zh:'篇幅较长的先知书:审判、盼望,以及那要来的弥赛亚。',en:'The longer prophetic books: judgment, hope, and the Messiah to come.'},
+        books:[
+          B('以赛亚书','Isaiah','审判与拯救,预言那位受苦又得胜的弥赛亚。','Judgment and salvation, foretelling the suffering yet triumphant Messiah.'),
+          B('耶利米书','Jeremiah','落泪的先知呼召悖逆的国悔改,并应许一个新约。','The weeping prophet calls a rebellious nation to repent, and promises a new covenant.'),
+          B('耶利米哀歌','Lamentations','为耶路撒冷的倾覆哀哭,却仍抓住每早晨新的怜悯。','Grief over Jerusalem’s fall, still clinging to mercies that are new every morning.'),
+          B('以西结书','Ezekiel','奇异的异象:神的荣耀离开又归回,枯骨复活成军。','Strange visions: God’s glory departs and returns, and dry bones come to life.'),
+          B('但以理书','Daniel','在异邦帝国仍忠心;神掌管万国与历史的结局。','Faithfulness in a foreign empire; God rules the nations and the end of history.')
+        ] },
+      { name:{zh:'小先知书',en:'Minor Prophets'}, count:12,
+        note:{zh:'十二卷较短的先知书:呼召公义、悔改,与不离弃的爱。',en:'Twelve shorter prophets: calls to justice, repentance, and God’s relentless love.'},
+        books:[
+          B('何西阿书','Hosea','用不离弃的婚姻,描画神对不忠子民的爱。','God’s love for an unfaithful people, pictured through a marriage that will not quit.'),
+          B('约珥书','Joel','蝗灾如审判的警号;呼召归回,应许圣灵浇灌。','A locust plague as a warning; a call to return and a promise of God’s Spirit.'),
+          B('阿摩司书','Amos','神要求公义;敬拜不能代替对穷人的公平。','God demands justice; worship cannot replace fairness to the poor.'),
+          B('俄巴底亚书','Obadiah','对以东骄傲的审判;神必伸张公义。','Judgment on Edom’s pride; God will set things right.'),
+          B('约拿书','Jonah','一个不情愿的先知,与神对仇敌出人意外的怜悯。','A reluctant prophet and God’s surprising mercy — even for enemies.'),
+          B('弥迦书','Micah','神向你所要的:行公义、好怜悯、存谦卑与神同行。','What God asks: act justly, love mercy, and walk humbly with your God.'),
+          B('那鸿书','Nahum','尼尼微的倾覆;神是受欺压者的避难所,也不以有罪为无罪。','Nineveh’s fall; God is a refuge for the oppressed and will not leave guilt unpunished.'),
+          B('哈巴谷书','Habakkuk','与神诚实地争辩,最终学会“义人必因信得生”。','Honest wrestling with God, ending in “the righteous shall live by faith.”'),
+          B('西番雅书','Zephaniah','耶和华的日子临近——审判之后是喜乐的复兴。','The day of the Lord is near — judgment, then joyful restoration.'),
+          B('哈该书','Haggai','催促归回的百姓重建圣殿,先求神的国。','Urging the returned exiles to rebuild the temple and put God first.'),
+          B('撒迦利亚书','Zechariah','异象与应许,指向那位要来的君王弥赛亚。','Visions and promises pointing to the coming Messianic King.'),
+          B('玛拉基书','Malachi','旧约最后的话:责备冷淡的心,应许那要来的使者。','The Old Testament’s last word: rebuking cold hearts, promising the messenger to come.')
+        ] }
+    ] },
+  { id:'nt', kind:'nt', name:{zh:'新约 · 27 卷',en:'New Testament · 27 books'},
+    note:{zh:'耶稣的降生、死与复活,以及祂的教会如何将这好消息带向万邦。',
+          en:'The coming, death, and resurrection of Jesus — and how His church carries the good news to the nations.'},
+    groups:[
+      { name:{zh:'四福音',en:'The Gospels'}, count:4,
+        note:{zh:'从四个角度讲述同一位耶稣的生平、教导、受死与复活。',en:'Four portraits of the one Jesus — His life, teaching, death, and resurrection.'},
+        books:[
+          B('马太福音','Matthew','耶稣是应许的君王弥赛亚,成全了律法与先知。','Jesus as the promised King and Messiah who fulfills the Law and the Prophets.'),
+          B('马可福音','Mark','简洁有力:耶稣是行动中的仆人,为众人舍命。','Fast and vivid: Jesus the servant who acts, and gives His life for many.'),
+          B('路加福音','Luke','面向万人的救主,格外顾念被忽略、被弃绝的人。','The Savior for all people, with special care for the overlooked and outcast.'),
+          B('约翰福音','John','耶稣是道成肉身的神子——是生命、真光、道路、真理。','Jesus the Word made flesh, the Son of God — life, true light, the way and the truth.','john.html')
+        ] },
+      { name:{zh:'历史书',en:'History'}, count:1,
+        note:{zh:'教会的诞生与福音的扩展。',en:'The birth of the church and the spread of the gospel.'},
+        books:[
+          B('使徒行传','Acts','圣灵降临,教会诞生,福音从耶路撒冷传到万邦。','The Spirit comes, the church is born, and the gospel spreads to the nations.')
+        ] },
+      { name:{zh:'保罗书信',en:'Paul’s Letters'}, count:13,
+        note:{zh:'保罗写给各教会与个人的信,阐明福音并教导如何跟随基督。',en:'Paul’s letters to churches and individuals, explaining the gospel and how to follow Christ.'},
+        books:[
+          B('罗马书','Romans','福音的根基:人人都犯了罪,唯因信基督得称为义。','The gospel explained: all have sinned, and are made right with God by faith in Christ.'),
+          B('哥林多前书','1 Corinthians','在混乱的教会中活出爱、合一与真实的属灵。','Living out love, unity, and true spirituality in a divided church.'),
+          B('哥林多后书','2 Corinthians','在软弱与苦难中,经历神的能力与安慰。','God’s power and comfort made real in weakness and suffering.'),
+          B('加拉太书','Galatians','因信不因律法——福音自由的宣告。','Freedom in the gospel: made right by faith, not by keeping the law.'),
+          B('以弗所书','Ephesians','在基督里的新身份,以及教会合而为一的奥秘。','Our new identity in Christ and the mystery of the church made one.'),
+          B('腓立比书','Philippians','苦难中的喜乐;基督是我活着的意义。','Joy in hardship; Christ is the meaning of life itself.'),
+          B('歌罗西书','Colossians','基督至高无上——万有都在祂里面得以完全。','The supremacy of Christ, in whom everything holds together and is complete.'),
+          B('帖撒罗尼迦前书','1 Thessalonians','在盼望中生活,等候基督再来。','Living in hope while waiting for Christ’s return.'),
+          B('帖撒罗尼迦后书','2 Thessalonians','在患难与等候中站立得稳,不灰心。','Standing firm and not losing heart amid trouble and waiting.'),
+          B('提摩太前书','1 Timothy','教会的次序、领袖与健全的教导。','Order, leadership, and sound teaching in the church.'),
+          B('提摩太后书','2 Timothy','保罗临终的嘱托:忠心传道,持守真道。','Paul’s final charge: keep the faith and preach the word faithfully.'),
+          B('提多书','Titus','健全的教义结出敬虔的生活。','Sound doctrine that produces a godly life.'),
+          B('腓利门书','Philemon','一封关于饶恕与接纳的私人信——福音改变关系。','A personal letter on forgiveness and welcome — the gospel reshapes relationships.')
+        ] },
+      { name:{zh:'普通书信 · 大公书信',en:'General Letters'}, count:8,
+        note:{zh:'写给广大信徒的信,论到真信心、受苦、盼望与真理。',en:'Letters to believers everywhere — on real faith, suffering, hope, and truth.'},
+        books:[
+          B('希伯来书','Hebrews','耶稣胜过一切——更美的大祭司、更美的约。','Jesus is greater than all — a better high priest and a better covenant.'),
+          B('雅各书','James','真信心必有行为;信仰要活在日常里。','Real faith shows itself in action; belief lived out in daily life.'),
+          B('彼得前书','1 Peter','在受苦与被排斥中,持守盼望与圣洁。','Holding on to hope and holiness while suffering and marginalized.'),
+          B('彼得后书','2 Peter','提防假教师,在真理中长进。','Guarding against false teachers and growing in the truth.'),
+          B('约翰一书','1 John','认识神、彼此相爱,并确知你有永生。','Knowing God, loving one another, and being sure you have eternal life.'),
+          B('约翰二书','2 John','在真理中行,也在爱中儆醒。','Walking in truth and staying watchful in love.'),
+          B('约翰三书','3 John','款待并支持那些忠心服事真理的人。','Hospitality and support for those who faithfully serve the truth.'),
+          B('犹大书','Jude','为所信的真道竭力争辩,在恩典中站稳。','Contend for the faith once entrusted to us, and stand firm in grace.')
+        ] },
+      { name:{zh:'预言书 · 启示',en:'Prophecy'}, count:1,
+        note:{zh:'圣经的终章:审判、盼望,以及神使万物更新。',en:'The Bible’s finale: judgment, hope, and God making all things new.'},
+        books:[
+          B('启示录','Revelation','无论世界多混乱,神仍掌权;基督得胜,万物更新。','However chaotic the world, God reigns; Christ wins and makes all things new.','revelation.html')
+        ] }
+    ] }
+];
+
+function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+var I18N_TITLE = { en:'Bible Overview · 66 books at a glance', zh:'圣经地图 · 66 卷全览' };
+
+function groupId(ti,gi){ return 'g-'+ti+'-'+gi; }
+
+function render(){
+  var L = curLang();
+  // jump nav
+  var jump = '';
+  DATA.forEach(function(T,ti){
+    T.groups.forEach(function(g,gi){
+      jump += '<a href="#'+groupId(ti,gi)+'">'+esc(g.name[L])+'</a>';
+    });
+  });
+  document.getElementById('jump').innerHTML = jump;
+
+  // main list
+  var html = '';
+  DATA.forEach(function(T,ti){
+    html += '<section class="testament '+T.kind+'">'
+      + '<div class="thead"><div class="teyebrow">'+(L==='zh'?(T.kind==='ot'?'旧约':'新约'):(T.kind==='ot'?'Old Testament':'New Testament'))+'</div>'
+      + '<h2 class="ttitle">'+esc(T.name[L])+'</h2>'
+      + '<div class="tnote">'+esc(T.note[L])+'</div></div>';
+    T.groups.forEach(function(g,gi){
+      html += '<div class="group" id="'+groupId(ti,gi)+'">'
+        + '<div class="glabel"><span class="gname">'+esc(g.name[L])+'</span><span class="gcount">'+g.count+(L==='zh'?' 卷':(g.count>1?' books':' book'))+'</span></div>'
+        + '<div class="gnote">'+esc(g.note[L])+'</div>';
+      g.books.forEach(function(b,bi){
+        var nameZh = b.zh, nameEn = b.en;
+        var primary = (L==='zh')? nameZh : nameEn;
+        var alt = (L==='zh')? nameEn : nameZh;
+        var liveTag = b.page ? ('<span class="live">'+(L==='zh'?'在架':'on the shelf')+'</span>') : '';
+        var nameHtml = b.page
+          ? ('<a href="'+b.page+'">'+esc(primary)+'</a>'+liveTag)
+          : (esc(primary));
+        html += '<div class="book">'
+          + '<div class="bn">'+(bi+1)+'</div>'
+          + '<div class="bmain"><div class="name">'+nameHtml+'<span class="alt">'+esc(alt)+'</span></div>'
+          + '<div class="sum">'+esc(b.sum[L])+'</div></div>'
+          + '</div>';
+      });
+      html += '</div>';
+    });
+    html += '</section>';
+  });
+  document.getElementById('list').innerHTML = html;
+}
+
+function setLang(l){
+  document.body.classList.toggle('lang-zh', l==='zh');
+  document.getElementById('btnEn').classList.toggle('active', l==='en');
+  document.getElementById('btnZh').classList.toggle('active', l==='zh');
+  document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.title = l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
+  try{ localStorage.setItem('bible_lang', l); }catch(e){}
+  render();
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) el.scrollIntoView(); }
+}
+
+(function(){
+  var p = new URLSearchParams(location.search);
+  var saved=null; try{ saved=localStorage.getItem('bible_lang'); }catch(e){}
+  var nl=(navigator.language||'').toLowerCase();
+  var q=p.get('lang');
+  var lang=(q==='zh'||q==='en')?q:(saved||(nl.indexOf('zh')===0?'zh':'en'));
+  setLang(lang);
+  if(location.hash){ var el=document.querySelector(location.hash); if(el) setTimeout(function(){el.scrollIntoView();},60); }
+})();
+</script>
+</body>
+</html>

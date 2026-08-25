@@ -89,6 +89,21 @@
     <div id="biblical-qa"></div>
   </section>
 
+  <!-- Whole-Bible map: one-page overview of all 66 books (placed before the shelf) -->
+  <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-10">
+    <a href="bible-overview.html" class="block rounded-2xl border border-[#D4AF37]/30 bg-gradient-to-br from-[#241a10] to-[#12161A] p-6 md:p-7 hover:border-[#D4AF37]/60 transition-all">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <div class="text-[10px] font-mono tracking-[0.22em] uppercase text-[#D4AF37]" data-i18n="mapKicker"></div>
+          <h2 class="font-serif text-xl md:text-2xl font-bold text-[#F4F1EA] mt-2" data-i18n="mapTitle"></h2>
+          <p class="text-gray-400 text-sm leading-relaxed font-light mt-2" data-i18n="mapDesc"></p>
+        </div>
+        <i data-lucide="map" class="h-6 w-6 text-[#D4AF37] flex-none"></i>
+      </div>
+      <div class="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold tracking-wider uppercase text-[#D4AF37]" data-i18n="mapCta"></div>
+    </a>
+  </section>
+
   <!-- Books (rendered from data/bibleRegistry.js) -->
   <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-16 grid gap-5 md:grid-cols-2" id="books"></section>
 
@@ -121,6 +136,9 @@
           askEyebrow: '本站核心 · 随便问', askTitle: '用圣经回应我的问题',
           askSub: '带着你真实的问题、疑惑与挣扎而来——关于空虚、焦虑、爱、苦难、盼望,或如何开始认识神——从传道书、约翰福音、诗篇与启示录得到温柔、扎根圣经的回应。',
           askBtn: '开始提问',
+          mapKicker: '先看整体', mapTitle: '圣经地图 · 66 卷全览',
+          mapDesc: '第一次接触圣经?一页看懂:全书 66 卷(旧约 39 + 新约 27),分成哪几大类,每一卷主要讲什么。',
+          mapCta: '打开圣经地图 →',
           enter: '进入', listen: '聆听', soon: '译注校准中', comingType: '书卷筹备中' },
     en: { kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
           sub: 'A calm, growing bilingual space for reading Scripture. No pressure to believe — only an invitation to read honestly.',
@@ -128,6 +146,9 @@
           askEyebrow: 'The heart of this site · Ask', askTitle: 'Ask from Scripture',
           askSub: 'Bring your real questions, doubts, and struggles — about emptiness, anxiety, love, suffering, hope, or how to begin knowing God — and receive gentle, Scripture-centered guidance from Ecclesiastes, John, Psalms, and Revelation.',
           askBtn: 'Start asking',
+          mapKicker: 'Start with the big picture', mapTitle: 'Bible Overview · all 66 books',
+          mapDesc: 'New to the Bible? See it on one page: 66 books (39 Old Testament + 27 New), how they group, and what each one is about.',
+          mapCta: 'Open the Bible map →',
           enter: 'Enter', listen: 'Listen', soon: 'Coming Soon', comingType: 'In preparation' },
   };
 

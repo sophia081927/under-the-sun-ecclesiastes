@@ -79,6 +79,8 @@ export default {
   "sources": {
     "zh": "新标点和合本（简体，公共领域）· 来源 eBible.org",
     "en": "World English Bible (WEB, Public Domain) · via eBible.org",
-    "sourceUrl": "https://ebible.org/eng-web/REV03.htm"
+    "sourceUrl": "https://ebible.org/eng-web/REV03.htm",
+    "zhUrl": "https://ebible.org/cmn-cu89s/REV03.htm",
+    "enUrl": "https://ebible.org/eng-web/REV03.htm"
   }
 };

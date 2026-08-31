@@ -28,7 +28,7 @@
       <div class="controls"><button class="play" id="play" aria-label="Play">▶</button><button class="stop" id="stop"><span class="zh">停止</span><span class="en">Stop</span></button><button class="rate" id="rate">1x</button><span class="status" id="status"></span></div>
       <div class="progress"><i id="bar"></i></div><div class="transcript" id="transcript"></div>
     </section>
-    <div class="notice"><span class="zh">当前使用设备自带的合成语音朗读，并非真人录音。真人录音文件准备好后，本页会自动优先播放真人版本。未完成的章节目前只朗读概览，不会把概览冒充圣经正文。</span><span class="en">This page currently uses your device’s synthesized voice, not a human recording. When a human recording becomes available, it will be preferred automatically. Incomplete chapters read only the overview and never present it as Scripture.</span></div>
+    <div class="notice"><span class="zh"><b>朗读经文版本</b> · 中文：《新标点和合本》（简体）；英文：World English Bible Classic（WEB）。<a id="sourceLink" href="revelation.html?ch=1" style="color:var(--gold2)">查看本章经文及来源</a><br>本页以设备合成语音朗读，并非真人录音。完整章节朗读经文、盼望说明与祷告（后两项为本站整理，不属于圣经译文）；仅有概览的章节目前只朗读简介与盼望，不是完整圣经正文。真人录音准备好后会自动优先播放。</span><span class="en"><b>Scripture read on this page</b> · Chinese: Chinese Union Version, New Punctuation (Simplified); English: World English Bible Classic (WEB). <a id="sourceLinkEn" href="revelation.html?ch=1" style="color:var(--gold2)">Read this chapter and view its sources</a><br>This page uses device-generated speech, not a human recording. Completed chapters read Scripture, the hope note, and prayer (the latter two are prepared for this site and are not part of the Bible translation); overview-only chapters currently read only the summary and hope, not the complete biblical text. A human recording, when available, is preferred automatically.</span></div>
     <nav class="nav" id="nav"></nav>
   </main>
   <script type="module">
@@ -37,6 +37,7 @@
     const params=new URLSearchParams(location.search);let chapter=Number(params.get('ch')||1);if(!Number.isInteger(chapter)||chapter<1||chapter>22)chapter=1;
     const meta=revelationChapters[chapter-1];let data=null,lang='zh',playing=false,rate=1,utterances=[],utteranceIndex=0,audio=null,humanReady=false;
     const $=id=>document.getElementById(id);$('readLink').href=`revelation.html?ch=${chapter}`;
+    ['sourceLink','sourceLinkEn'].forEach(id=>{const el=$(id);if(el)el.href=`revelation.html?ch=${chapter}`;});
     $('chapterSelect').innerHTML=revelationChapters.map(c=>`<option value="${c.n}" ${c.n===chapter?'selected':''}>${c.n}. ${c.titleZh} · ${c.titleEn}${c.status==='full'?' ✓':''}</option>`).join('');
     $('chapterSelect').addEventListener('change',e=>location.href=`revelation-listen.html?ch=${e.target.value}`);
     function blocks(){return data?toListenBlocks(data,lang):[{label:lang==='zh'?`启示录第 ${chapter} 章概览`:`Revelation ${chapter} overview`,text:meta.summary[lang]},{label:lang==='zh'?'盼望锚点':'Anchor of hope',text:meta.comfortAnchor[lang]}]}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#12161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>诗篇 · 图解 · The Arc of Lament</title>
+<meta name="description" content="哀歌的情绪弧线：呼求 → 倾诉 → 转折 → 信靠，以诗篇13为例。The emotional arc of lament — with Psalm 13.">
+<style>
+  :root{--bg:#12161a;--bg2:#1a2e3a;--ink:#e8eef2;--muted:#9aa7b0;--faint:#6f7a82;--accent:#a8c5d6;--accent-soft:#c5dae6;--line:rgba(168,197,214,.24);--line-soft:rgba(232,238,242,.10);--warm:#d9a441}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:radial-gradient(120% 55% at 50% -8%, rgba(168,197,214,.07), transparent 60%),var(--bg);color:var(--ink);
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.85;-webkit-font-smoothing:antialiased;padding-bottom:88px}
+  .wrap{max-width:820px;margin:0 auto;padding:0 20px}
+  a{color:var(--accent-soft);text-decoration:none}
+  .top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 18px;background:linear-gradient(var(--bg),rgba(18,22,26,.82),transparent);font-size:13px}
+  .top .back{color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);font-family:inherit;font-size:12px;padding:7px 13px;cursor:pointer;min-height:34px}
+  .lang-toggle button.active{background:var(--accent);color:#12161a;font-weight:700}
+  .hero{text-align:center;padding:40px 20px 6px}
+  .hero .ky{color:var(--accent);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:14px}
+  .hero h1{font-size:clamp(26px,6.4vw,38px);font-weight:600;line-height:1.2}
+  .hero p{color:var(--muted);margin-top:14px;font-size:15px;max-width:600px;margin-left:auto;margin-right:auto}
+  .chart{margin:26px auto 8px;max-width:820px}
+  .chart svg{width:100%;height:auto;display:block;overflow:visible}
+  .stages{display:grid;gap:14px;margin:20px 0 8px}
+  @media(min-width:640px){.stages{grid-template-columns:1fr 1fr}}
+  .stage{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:rgba(26,46,58,.32)}
+  .stage .st-head{display:flex;align-items:baseline;gap:10px;margin-bottom:8px}
+  .stage .st-n{width:26px;height:26px;flex:none;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+    font-size:13px;color:#12161a;font-weight:700}
+  .stage .st-title{font-size:17px;font-weight:600}
+  .stage .st-ref{color:var(--accent);font-size:12.5px;margin-left:auto}
+  .stage .st-verse{color:var(--accent-soft);font-size:14px;line-height:1.7;font-style:italic;margin:6px 0 8px}
+  .stage .st-desc{color:var(--muted);font-size:14px;line-height:1.7}
+  .note{color:var(--faint);font-size:13.5px;line-height:1.85;border-top:1px solid var(--line-soft);margin-top:22px;padding:20px 2px 0}
+  footer{text-align:center;color:var(--faint);font-size:12px;padding:34px 20px 10px;border-top:1px solid var(--line-soft)}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;background:rgba(20,24,30,.94);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a{flex:1;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;padding:5px 2px;min-height:50px}
+  .tabbar .ic{font-size:18px}
+  @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:70px}}
+</style>
+</head>
+<body class="lang-zh">
+  <div class="top">
+    <a class="back" href="psalms.html">‹ <span class="lz">诗篇精选</span><span class="le" style="display:none">Psalms</span></a>
+    <div class="lang-toggle"><button id="bz" class="active" onclick="setLang('zh')">中文</button><button id="be" onclick="setLang('en')">EN</button></div>
+  </div>
+
+  <div class="hero">
+    <div class="ky" id="ky"></div>
+    <h1 id="h1"></h1>
+    <p id="intro"></p>
+  </div>
+
+  <div class="wrap">
+    <div class="chart">
+      <svg viewBox="0 0 820 360" role="img" aria-labelledby="svgTitle">
+        <title id="svgTitle">Lament emotional arc</title>
+        <defs>
+          <linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#7d94a3"/><stop offset="55%" stop-color="#a8c5d6"/><stop offset="100%" stop-color="#d9a441"/>
+          </linearGradient>
+        </defs>
+        <!-- baseline -->
+        <line x1="40" y1="300" x2="800" y2="300" stroke="rgba(232,238,242,.10)" stroke-width="1"/>
+        <text x="46" y="330" fill="#6f7a82" font-size="12" id="axLow"></text>
+        <text x="740" y="330" fill="#6f7a82" font-size="12" id="axHigh"></text>
+        <!-- the lament curve: cry (mid) -> pour out (lowest) -> turn (rising) -> trust (highest) -->
+        <path d="M120,190 C200,250 250,285 320,285 C400,285 430,150 500,140 C560,132 600,80 700,70"
+              fill="none" stroke="url(#arcGrad)" stroke-width="3.5" stroke-linecap="round"/>
+        <!-- nodes -->
+        <g id="nodes"></g>
+      </svg>
+    </div>
+
+    <div class="stages" id="stages"></div>
+
+    <p class="note" id="note"></p>
+  </div>
+
+  <footer>日光之下 · under the sun · <a href="index.html" id="lib"></a></footer>
+  <nav class="tabbar">
+    <a href="psalms.html"><span class="ic">📖</span><span id="tb1"></span></a>
+    <a href="psalms-listen.html"><span class="ic">♪</span><span id="tb2"></span></a>
+    <a href="psalms-worship.html"><span class="ic">✦</span><span id="tb3"></span></a>
+    <a href="index.html"><span class="ic">☰</span><span id="tb4"></span></a>
+  </nav>
+
+<script>
+  // 四个阶段的坐标（与曲线对应）+ 颜色
+  const NODES = [
+    { x:120, y:190, color:'#8fa6b4' },
+    { x:320, y:285, color:'#7d94a3' },
+    { x:500, y:140, color:'#a8c5d6' },
+    { x:700, y:70,  color:'#d9a441' },
+  ];
+  const DATA = {
+    zh: {
+      ky:'图解 · 哀歌的情绪弧线', h1:'哀歌，是有方向的',
+      intro:'圣经里的哀歌很少停在痛苦本身。它常常走过一条弧线：从向神呼求，到诚实倾诉，再到一个「但是」的转折，最后落在信靠里。以最短的哀歌——诗篇13篇——为例。',
+      axLow:'情绪低谷', axHigh:'重新信靠',
+      stages:[
+        { t:'呼求', ref:'诗 13:1-2', verse:'“耶和华啊，你忘记我要到几时呢？要到永远吗？”', desc:'哀歌敢于把「你到底在哪里」直接说给神听。这不是不敬，而是一种深处的信任——只有还相信神会听的人，才会这样喊。' },
+        { t:'倾诉', ref:'诗 13:3-4', verse:'“求你看顾我，应允我……免得我的仇敌说：我胜了他。”', desc:'把具体的害怕、疲惫、处境一一摊开。情绪在这里落到最低——不急着转正能量，先让痛苦被说出来。' },
+        { t:'转折', ref:'诗 13:5', verse:'“但我倚靠你的慈爱；我的心因你的救恩快乐。”', desc:'一个小小的「但是」。处境未必改变，改变的是诗人把目光从难处转向神的慈爱。转折往往不是感觉，而是选择。' },
+        { t:'信靠', ref:'诗 13:6', verse:'“我要向耶和华歌唱，因他用厚恩待我。”', desc:'落在信靠与感恩里。不是假装一切都好，而是在还没看见全部答案时，仍然选择向神歌唱。' },
+      ],
+      note:'这条弧线不是公式，也不是必须走完的任务。有的日子，你可能只走到「倾诉」就停了——那也没关系，神听得见每一段。诗篇替你开口，也允许你慢慢来。',
+      lib:'圣经书阁', tb:['阅读','聆听','敬拜','书阁'],
+    },
+    en: {
+      ky:'Diagram · The Arc of Lament', h1:'Lament has a direction',
+      intro:'The laments of Scripture rarely stop at the pain itself. They often move along an arc: from crying out to God, to pouring out honestly, to a "but" that turns, and finally resting in trust. Here is the shortest lament — Psalm 13 — as the pattern.',
+      axLow:'Lowest point', axHigh:'Renewed trust',
+      stages:[
+        { t:'Cry Out', ref:'Ps 13:1-2', verse:'“How long, O LORD? Will You forget me forever?”', desc:'Lament dares to say "where are You?" straight to God. This is not irreverence but deep trust — only someone who still believes God hears would cry like this.' },
+        { t:'Pour Out', ref:'Ps 13:3-4', verse:'“Consider me and respond… lest my enemy say, ‘I have prevailed.’”', desc:'The specific fears, exhaustion, and circumstances are laid bare. The emotion sinks to its lowest here — no rush to be positive; the pain is spoken first.' },
+        { t:'The Turn', ref:'Ps 13:5', verse:'“But I have trusted in Your loving devotion; my heart will rejoice in Your salvation.”', desc:'A small "but." The circumstances may not change; what changes is that the psalmist turns his gaze from the trouble to God’s love. The turn is often not a feeling, but a choice.' },
+        { t:'Trust', ref:'Ps 13:6', verse:'“I will sing to the LORD, for He has been good to me.”', desc:'It lands in trust and gratitude — not pretending all is well, but choosing to sing to God before the whole answer is seen.' },
+      ],
+      note:'This arc is not a formula, nor a task you must complete. Some days you may only reach "pour out" and stop there — that is okay too; God hears every stage. The Psalms give you a voice, and they let you take your time.',
+      lib:'Bible Library', tb:['Read','Listen','Worship','Library'],
+    }
+  };
+
+  let lang='zh';
+  function render(){
+    const d = DATA[lang];
+    document.documentElement.lang = lang==='zh'?'zh-CN':'en';
+    document.body.classList.toggle('lang-zh', lang==='zh');
+    document.getElementById('bz').classList.toggle('active',lang==='zh');
+    document.getElementById('be').classList.toggle('active',lang==='en');
+    document.querySelector('.lz').style.display = lang==='zh'?'inline':'none';
+    document.querySelector('.le').style.display = lang==='zh'?'none':'inline';
+    document.getElementById('ky').textContent=d.ky;
+    document.getElementById('h1').textContent=d.h1;
+    document.getElementById('intro').textContent=d.intro;
+    document.getElementById('axLow').textContent=d.axLow;
+    document.getElementById('axHigh').textContent=d.axHigh;
+    document.getElementById('lib').textContent=d.lib;
+    document.title = (lang==='zh'?'诗篇 · 图解':'Psalms · Diagram');
+    ['tb1','tb2','tb3','tb4'].forEach((id,i)=>document.getElementById(id).textContent=d.tb[i]);
+    // SVG 节点 + 阶段标签
+    const ns='http://www.w3.org/2000/svg';
+    const g=document.getElementById('nodes'); g.innerHTML='';
+    d.stages.forEach((s,i)=>{
+      const n=NODES[i];
+      const c=document.createElementNS(ns,'circle');
+      c.setAttribute('cx',n.x); c.setAttribute('cy',n.y); c.setAttribute('r',9);
+      c.setAttribute('fill',n.color); c.setAttribute('stroke','#12161a'); c.setAttribute('stroke-width','2');
+      g.appendChild(c);
+      const label=document.createElementNS(ns,'text');
+      const above = n.y > 160;
+      label.setAttribute('x',n.x); label.setAttribute('y', above ? n.y+30 : n.y-18);
+      label.setAttribute('text-anchor','middle'); label.setAttribute('fill','#e8eef2');
+      label.setAttribute('font-size','16'); label.setAttribute('font-weight','600');
+      label.textContent=(i+1)+'. '+s.t;
+      g.appendChild(label);
+      const ref=document.createElementNS(ns,'text');
+      ref.setAttribute('x',n.x); ref.setAttribute('y', above ? n.y+48 : n.y-36);
+      ref.setAttribute('text-anchor','middle'); ref.setAttribute('fill','#9aa7b0'); ref.setAttribute('font-size','12');
+      ref.textContent=s.ref;
+      g.appendChild(ref);
+    });
+    // 阶段卡片
+    const wrap=document.getElementById('stages'); wrap.innerHTML='';
+    d.stages.forEach((s,i)=>{
+      const el=document.createElement('div'); el.className='stage';
+      el.innerHTML =
+        '<div class="st-head"><span class="st-n" style="background:'+NODES[i].color+'">'+(i+1)+'</span>'+
+        '<span class="st-title">'+s.t+'</span><span class="st-ref">'+s.ref+'</span></div>'+
+        '<div class="st-verse">'+s.verse+'</div>'+
+        '<div class="st-desc">'+s.desc+'</div>';
+      wrap.appendChild(el);
+    });
+    document.getElementById('note').textContent=d.note;
+  }
+  window.setLang=(l)=>{lang=l;try{localStorage.setItem('bible_lang',l);}catch(e){}render();};
+  let saved=null;try{saved=localStorage.getItem('bible_lang');}catch(e){}
+  const nl=(navigator.language||'').toLowerCase(); lang=saved||(nl.indexOf('zh')===0?'zh':'en'); render();
+</script>
+</body>
+</html>

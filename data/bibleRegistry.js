@@ -139,7 +139,7 @@ export const bibleRegistry = [
     listen: 'psalms-listen.html',
     worship: 'psalms-worship.html',
     study: null,
-    deck: null,
+    deck: 'psalms-diagram.html',
     bookType: 'Poetry & Worship',
     bookTypeZh: '诗歌书',
     themeZh: '真实向神喊话：恐惧、忧闷、悔改、避难、同在',
@@ -175,7 +175,7 @@ export const bibleRegistry = [
     audioPathBase: 'audio/psalms/',
     languages: ['zh', 'en'],
     audioEnabled: true,
-    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: false }
+    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: true }
   },
   {
     id: 'job',

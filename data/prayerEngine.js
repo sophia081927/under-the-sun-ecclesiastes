@@ -215,6 +215,111 @@ export const prayerRegistry = [
       scripture: 'John 14:6 — Jesus answered, “I am the way and the truth and the life.”',
       prayerBody: 'Lord Jesus, I may not fully know You yet, but I bring my real self before You. Reveal to me who You are. Help me know You as the Way, the Truth, and the Life. Lead me out of confusion, doubt, and darkness—not merely to know facts about You, but to truly know You, trust You, and follow You. If my heart is still afraid or uncertain, guide me with Your gentleness and light. In the name of Jesus Christ, Amen.'
     }
+  },
+
+  {
+    id: 'gratitude',
+    priority: 6,
+    keywordsZh: ['感恩', '感谢', '谢谢神', '数算恩典', '蒙福', '感恩节', '知足', '赞美'],
+    keywordsEn: ['thanksgiving', 'thankful', 'grateful', 'gratitude', 'thank god', 'blessed', 'praise'],
+    audioPathZh: 'audio/prayers/gratitude-zh.mp3',
+    audioPathEn: 'audio/prayers/gratitude-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
+    zh: {
+      title: '为感恩的心代祷',
+      scripture: '【帖撒罗尼迦前书 5:18】“凡事谢恩，因为这是神在基督耶稣里向你们所定的旨意。”',
+      prayerBody: '天父，谢谢你。在忙碌与担忧之中，我常常忘记数算你的恩典。今天我要停下来，向你献上感恩：谢谢你赐下生命、气息和今天的一切；谢谢你在我看得见和看不见的地方一直保守我；谢谢你即使在困难里，也从未离开我。求你给我一颗知足、感恩的心，让我不只在顺利时感谢你，也学会在还没看见答案时仍然信靠、仍然赞美。愿我的感恩成为对你的敬拜。奉主耶稣基督的名祷告，阿们。'
+    },
+    en: {
+      title: 'A Prayer of Thanksgiving',
+      scripture: '1 Thessalonians 5:18 — “Give thanks in all circumstances; for this is God’s will for you in Christ Jesus.”',
+      prayerBody: 'Heavenly Father, thank You. In the rush and worry of life I so often forget to count Your gifts. Today I stop to give thanks: for life, breath, and everything in this day; for the ways You have kept me, seen and unseen; for never leaving me, even in hardship. Give me a contented, grateful heart—one that thanks You not only when things go well, but learns to trust and praise You even before I see the answer. Let my gratitude become worship. In the name of Jesus Christ, Amen.'
+    }
+  },
+
+  {
+    id: 'grief_loss',
+    priority: 5,
+    keywordsZh: ['丧失', '去世', '离世', '过世', '走了', '失去', '思念', '哀伤', '悲伤', '难过', '失去了', '亲人离世', '走不出来'],
+    keywordsEn: ['grief', 'grieving', 'loss', 'passed away', 'mourning', 'lost someone', 'bereaved', 'heartbroken'],
+    audioPathZh: 'audio/prayers/grief-loss-zh.mp3',
+    audioPathEn: 'audio/prayers/grief-loss-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
+    zh: {
+      title: '为哀伤与失去中的心代祷',
+      scripture: '【诗篇 34:18】“耶和华靠近伤心的人，拯救灵性痛悔的人。”',
+      prayerBody: '慈爱的天父，我把这颗正在哀伤、正在思念的心带到你面前。失去所爱的痛，没有人能轻描淡写地带过，你也从不轻看。求你靠近这颗破碎的心，像你所应许的，靠近伤心的人。求你接住每一滴眼泪；在夜深难眠、思念涌上来的时候，用你的同在环绕我。求你给我空间去哀伤，也给我盼望：在基督里，死亡不是最后的话语，你必擦去一切的眼泪。求你一天一天地扶持我走过这段路。奉主耶稣基督的名祷告，阿们。'
+    },
+    en: {
+      title: 'A Prayer in Grief and Loss',
+      scripture: 'Psalm 34:18 — “The Lord is close to the brokenhearted and saves those who are crushed in spirit.”',
+      prayerBody: 'Loving Father, I bring this grieving, aching heart to You. The pain of losing someone loved cannot be brushed aside, and You never make light of it. Draw near to this broken heart, just as You promised to be close to the brokenhearted. Catch every tear. In the sleepless nights when the missing comes flooding back, surround me with Your presence. Give me room to grieve, and give me hope: in Christ, death is not the final word, and You will wipe away every tear. Hold me up, one day at a time, as I walk through this. In the name of Jesus Christ, Amen.'
+    }
+  },
+
+  {
+    id: 'guilt_forgiveness',
+    priority: 5,
+    keywordsZh: ['内疚', '自责', '罪疚', '羞愧', '后悔', '悔改', '饶恕', '原谅', '做错了', '良心不安', '亏欠'],
+    keywordsEn: ['guilt', 'guilty', 'shame', 'ashamed', 'regret', 'repent', 'forgive', 'forgiveness', 'conscience'],
+    audioPathZh: 'audio/prayers/guilt-forgiveness-zh.mp3',
+    audioPathEn: 'audio/prayers/guilt-forgiveness-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
+    zh: {
+      title: '为内疚与寻求饶恕的心代祷',
+      scripture: '【约翰一书 1:9】“我们若认自己的罪，神是信实的，是公义的，必要赦免我们的罪，洗净我们一切的不义。”',
+      prayerBody: '天父，我带着心里的内疚和自责来到你面前。有些事我反复想起，越想越沉重，甚至怀疑自己还能不能被接纳。谢谢你不是等我先变好才爱我，而是差你的儿子为我死。我承认我的过错，不再遮掩，也不再靠自己去偿还。求你照你的应许，赦免我、洗净我，把不断自我控告的重担从我心里挪去。求你也给我勇气去修复我能修复的关系，并靠你的恩典重新开始。奉主耶稣基督的名祷告，阿们。'
+    },
+    en: {
+      title: 'A Prayer for Guilt and Forgiveness',
+      scripture: '1 John 1:9 — “If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.”',
+      prayerBody: 'Father, I come with the guilt and self-blame I carry. Some things replay in my mind and grow heavier each time, until I wonder whether I can still be accepted. Thank You that You did not wait for me to become good before loving me—You gave Your Son to die for me. I confess my wrong; I stop hiding it, and I stop trying to pay for it myself. According to Your promise, forgive me, cleanse me, and lift the weight of constant self-accusation from my heart. Give me courage to repair what I can, and by Your grace, to begin again. In the name of Jesus Christ, Amen.'
+    }
+  },
+
+  {
+    id: 'provision_finances',
+    priority: 5,
+    keywordsZh: ['经济压力', '经济', '财务', '金钱', '债务', '欠债', '负债', '债', '账单', '失业', '没工作', '收入', '缺乏', '供应', '养家', '付不起', '房租', '没钱'],
+    keywordsEn: ['finances', 'financial', 'money', 'debt', 'bills', 'provision', 'provide', 'unemployed', 'income', 'rent', 'afford'],
+    audioPathZh: 'audio/prayers/provision-finances-zh.mp3',
+    audioPathEn: 'audio/prayers/provision-finances-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
+    zh: {
+      title: '为经济压力与供应的需要代祷',
+      scripture: '【腓立比书 4:19】“我的神必照他荣耀的丰富，在基督耶稣里，使你们一切所需用的都充足。”',
+      prayerBody: '供应的主，我把压在心头的经济重担交给你。数字、账单、债务和不确定的未来，常让我夜里睡不着。你知道我的每一样需要，甚至在我开口以前。求你按你荣耀的丰富，供应我一切所需用的；也求你除去我心里的惊慌，让我不被金钱辖制，而是学习信靠你。求你赐我智慧去规划、诚实去面对、勤劳去付出，也求你亲自开路——工作、帮助、出人意外的供应。愿我在缺乏或丰足中，都以你为我的满足。奉主耶稣基督的名祷告，阿们。'
+    },
+    en: {
+      title: 'A Prayer for Provision and Financial Pressure',
+      scripture: 'Philippians 4:19 — “And my God will meet all your needs according to the riches of his glory in Christ Jesus.”',
+      prayerBody: 'God my provider, I hand You the financial weight pressing on my heart. The numbers, the bills, the debt, and the uncertain future often keep me awake at night. You know every need before I even ask. According to the riches of Your glory, supply what I truly need; and take away the panic inside me, so that money does not rule me and I learn to trust You. Give me wisdom to plan, honesty to face things, and diligence to work—and open the way Yourself: through provision, help, and unexpected grace. Whether in need or plenty, let me find my enough in You. In the name of Jesus Christ, Amen.'
+    }
+  },
+
+  {
+    id: 'loved_ones',
+    priority: 6,
+    keywordsZh: ['父母', '爸爸', '妈妈', '家人', '亲人', '长辈', '朋友', '为我的父母', '为家人', '为朋友', '所爱的人', '为他祷告', '为她祷告'],
+    keywordsEn: ['parents', 'mother', 'father', 'my mom', 'my dad', 'family member', 'friend', 'loved one', 'pray for my family'],
+    audioPathZh: 'audio/prayers/loved-ones-zh.mp3',
+    audioPathEn: 'audio/prayers/loved-ones-en.mp3',
+    ambientPathZh: AMBIENT_ZH,
+    ambientPathEn: AMBIENT_EN,
+    zh: {
+      title: '为你所爱的人代祷',
+      scripture: '【雅各书 5:16】“……义人祈祷所发的力量是大有功效的。”',
+      prayerBody: '天父，我为我所爱的人来到你面前——我的父母、家人、朋友，那些在我心上、我却无法替他们承担一切的人。你比我更爱他们，也比我更有能力帮助他们。求你保守他们的身体、心灵和脚步；在他们软弱时扶持，在他们迷失时寻回，在他们受伤时医治。若他们还不认识你，求你亲自向他们显明你的爱。我把自己无法掌控的，都交在你信实的手中。奉主耶稣基督的名祷告，阿们。'
+    },
+    en: {
+      title: 'A Prayer for Someone You Love',
+      scripture: 'James 5:16 — “…The prayer of a righteous person is powerful and effective.”',
+      prayerBody: 'Father, I bring before You the people I love—my parents, my family, my friends—those who are on my heart but whose burdens I cannot carry for them. You love them more than I do and are far more able to help them. Guard their bodies, their hearts, and their steps. Hold them up when they are weak, find them when they wander, heal them where they hurt. If they do not yet know You, reveal Your love to them Yourself. I place all I cannot control into Your faithful hands. In the name of Jesus Christ, Amen.'
+    }
   }
 ];
 

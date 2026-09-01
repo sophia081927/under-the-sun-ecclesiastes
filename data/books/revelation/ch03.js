@@ -1,7 +1,7 @@
 export default {
   "n": 3,
-  "titleZh": "给三个教会的信",
-  "titleEn": "To Three Churches",
+  "titleZh": "给七个教会的信 · 撒狄／非拉铁非／老底嘉",
+  "titleEn": "Letters to the Seven Churches · Sardis, Philadelphia, Laodicea",
   "status": "full",
   "summary": {
     "zh": "后三封信记在第3章：撒狄、非拉铁非和老底嘉。耶稣呼召沉睡的教会警醒，鼓励力量微小的人持守，也邀请自以为富足的人承认需要、向祂回转。",

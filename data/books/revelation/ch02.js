@@ -1,7 +1,7 @@
 export default {
   "n": 2,
-  "titleZh": "给四个教会的信",
-  "titleEn": "To Four Churches",
+  "titleZh": "给七个教会的信 · 以弗所／士每拿／别迦摩／推雅推喇",
+  "titleEn": "Letters to the Seven Churches · Ephesus, Smyrna, Pergamum, Thyatira",
   "status": "full",
   "summary": {
     "zh": "约翰奉命把所看见的写给亚细亚七个教会（启1:9–11）。第2章收录前四封信：耶稣看见以弗所、士每拿、别迦摩和推雅推喇的劳苦与患难，也指出失落的爱心和被容让的罪，呼召他们回转并持守。",

@@ -260,15 +260,15 @@ export const bibleRegistry = [
     status: 'active',
     safeHash: '#/revelation',
     listenHash: '#/revelation/listen',
-    worshipHash: null,
+    worshipHash: '#/revelation/worship',
     route: '/revelation',
     listenRoute: '/revelation/listen',
-    worshipRoute: null,
+    worshipRoute: '/revelation/worship',
     page: 'revelation.html',
     listen: 'revelation-listen.html',
-    worship: null,
+    worship: 'revelation-worship.html',
     study: null,
-    deck: null,
+    deck: 'revelation-deck-zh.html',
     chapters: 22,
     bookType: 'Apocalyptic Prophecy',
     bookTypeZh: '启示文学',
@@ -282,12 +282,30 @@ export const bibleRegistry = [
       zh: { reference: '启示录 21:5', text: '看哪，我将一切都更新了！' },
       en: { reference: 'Revelation 21:5', text: 'Behold, I am making all things new.' }
     },
+    mediaHub: {
+      zh: {
+        audioTitle: '启示录第一章 · 深度听书解经',
+        audioGuide: '🎧 点击聆听：荣耀的基督在教会中间，对惧怕的人说"不要惧怕"。',
+        worshipTitle: '《Revelation Song · 启示录之歌》',
+        worshipGuide: '🎵 在宝座前俯伏敬拜，与万民同声高唱"圣哉，圣哉，圣哉"。',
+        spotifyLink: 'https://open.spotify.com/search/Revelation%20Song',
+        youtubeLink: 'https://www.youtube.com/results?search_query=Revelation+Song+worship'
+      },
+      en: {
+        audioTitle: 'Revelation Chapter 1 · Audio Commentary',
+        audioGuide: '🎧 Click to listen: the glorified Christ among the churches says, "Do not be afraid."',
+        worshipTitle: 'Revelation Song',
+        worshipGuide: '🎵 Fall before the throne and join every nation singing "Holy, holy, holy."',
+        spotifyLink: 'https://open.spotify.com/search/Revelation%20Song',
+        youtubeLink: 'https://www.youtube.com/results?search_query=Revelation+Song+worship'
+      }
+    },
     bgColor: 'from-[#241B33] to-[#12161A]',
     accentColor: '#E4C97A',
     audioPathBase: 'audio/revelation/',
     languages: ['zh', 'en'],
     audioEnabled: true,
-    features: { read: true, listen: true, ask: true, reflection: true, worship: false, bilingual: true, study: false, deck: false }
+    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: true }
   }
 ];
 

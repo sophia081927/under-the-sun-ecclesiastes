@@ -382,6 +382,17 @@ export function resolvePrayerById(id, lang) {
   return resolvePrayer(t, L);
 }
 
+/* Crisis-only gate for the AI prayer path: returns a ready-to-render crisis
+   prayer object when the input trips the crisis detector, else null. Lets the
+   frontend show immediate 988/911 help WITHOUT the keyword fallback. */
+export function getPrayerCrisis(userInput, currentLanguage = 'zh') {
+  const input = (userInput || '').trim().toLowerCase();
+  const lang = currentLanguage === 'en' ? 'en' : 'zh';
+  if (!input) return null;
+  const c = detectCrisis(input, lang);
+  return c ? toPrayerCrisis(c) : null;
+}
+
 /* Main entry.
    (1) crisis first. (2) LONGEST matched keyword wins across all topics; a tie
    on matched-keyword length is broken by the topic's `priority` (lower wins).

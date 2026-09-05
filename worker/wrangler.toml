@@ -1,0 +1,13 @@
+# Cloudflare Worker config for the prayer generator.
+# Deploy with:  npx wrangler deploy   (after `npx wrangler secret put ANTHROPIC_API_KEY`)
+# Or just paste prayer-worker.js into the Cloudflare dashboard — see PRAYER_AI_SETUP.md.
+
+name = "lol-prayer"
+main = "prayer-worker.js"
+compatibility_date = "2026-01-01"
+
+# Optional non-secret variables (the API key is a SECRET, set separately — never put it here):
+[vars]
+MODEL = "claude-opus-5"
+EFFORT = "medium"
+# ALLOWED_ORIGINS = "https://lightoflifebible.org,https://www.lightoflifebible.org,https://sophia081927.github.io"

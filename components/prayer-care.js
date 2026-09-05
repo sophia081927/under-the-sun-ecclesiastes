@@ -24,7 +24,8 @@
    the page's current language (zh or en).
    ============================================================ */
 
-import { getPrayerResponse, resolvePrayerById } from '../data/prayerEngine.js';
+import { getPrayerCrisis } from '../data/prayerEngine.js';
+import { requestAIPrayer, prayerApiConfigured } from '../data/prayerClient.js';
 
 const UI = {
   zh: {
@@ -39,7 +40,15 @@ const UI = {
     narrationReady: '真人女声祷告', narrationInProduction: '真人祷告朗读正在制作中',
     narrationAi: 'AI 女声朗读 · 真人版制作中', ttsListen: '朗读祷告', ttsStop: '停止朗读',
     ambientReady: '安静祷告背景', ambientPlay: '播放', ambientPause: '暂停',
-    close: '关闭祷告'
+    close: '关闭祷告',
+    understandingLabel: '回应', versesLabel: '相关经文', explanationLabel: '为什么是这些经文',
+    encourageLabel: '一个温柔的下一步', safetyLabel: '请立刻寻求帮助',
+    loadingText: '正在按你的处境，从整本圣经为你预备经文与祷告…',
+    errorTitle: '这次没能生成祷告', ttsPrayer: '朗读这段祷告',
+    errorBody: '暂时连不上祷告服务，请稍后再试一次。我们不会用一段固定经文来搪塞你。',
+    retry: '再试一次',
+    comingTitle: 'AI 祷告功能正在开通中',
+    comingBody: '这个功能正在接入，很快就能根据你写下的具体处境，从整本圣经为你预备相关经文、简短解释和一段真诚的祷告。'
   },
   en: {
     eyebrow: 'Prayer Sanctuary Board · a quiet intercession',
@@ -53,7 +62,15 @@ const UI = {
     narrationReady: 'Human female prayer narration', narrationInProduction: 'Human prayer narration is in production',
     narrationAi: 'AI narration · human recording in production', ttsListen: 'Read the prayer aloud', ttsStop: 'Stop',
     ambientReady: 'Quiet prayer background', ambientPlay: 'Play', ambientPause: 'Pause',
-    close: 'Close Prayer'
+    close: 'Close Prayer',
+    understandingLabel: 'A word for you', versesLabel: 'Scripture', explanationLabel: 'Why these Scriptures',
+    encourageLabel: 'A gentle next step', safetyLabel: 'Please reach out now',
+    loadingText: 'Drawing on the whole Bible to prepare Scripture and a prayer for your situation…',
+    errorTitle: 'The prayer could not be generated this time', ttsPrayer: 'Read this prayer aloud',
+    errorBody: 'We could not reach the prayer service just now — please try again in a moment. We will not fill in with a canned verse.',
+    retry: 'Try again',
+    comingTitle: 'AI prayer is being switched on',
+    comingBody: 'We are connecting this feature. Soon it will read the situation you describe and draw on the whole Bible to prepare relevant Scripture, a short explanation, and a heartfelt prayer.'
   }
 };
 
@@ -132,7 +149,30 @@ const CSS = `
 .pray-close-btn{background:transparent;border:1px solid var(--pr-soft);color:var(--pr-muted);border-radius:30px;
   padding:9px 22px;font-family:inherit;font-size:13.5px;letter-spacing:.04em;cursor:pointer;transition:all .2s}
 .pray-close-btn:hover{border-color:var(--pr-sun);color:var(--pr-sun2)}
-@media(max-width:540px){.pray-box{padding:20px 16px}.pray-card{padding:22px 17px}}
+/* ---- AI 5-part board ---- */
+.pray-lead{font-size:16px;line-height:1.8;color:var(--pr-ink);text-align:center;margin-bottom:6px}
+.pray-vitem{margin-bottom:14px}
+.pray-vitem:last-child{margin-bottom:0}
+.pray-vref{margin-top:6px;font-size:12.5px;letter-spacing:.02em;color:var(--pr-sun);opacity:.9}
+.pray-plain{font-size:15.5px;color:var(--pr-ink);line-height:1.8}
+.pray-encourage{font-size:15px;color:var(--pr-sun2);line-height:1.8}
+.pray-safety{margin-top:18px;background:rgba(224,133,91,.12);border:1px solid rgba(224,133,91,.5);
+  border-radius:10px;padding:16px 18px}
+.pray-safety .pray-slabel{color:var(--pr-warn)}
+.pray-safety .pray-plain{color:var(--pr-ink)}
+.pray-tts{margin-top:20px;display:flex;justify-content:center}
+/* ---- states: loading / error / coming-soon ---- */
+.pray-state{background:var(--pr-bg2);border:1px solid var(--pr-soft);border-radius:12px;padding:26px 24px;
+  text-align:center;animation:prRise .5s ease}
+.pray-state .s-title{font-size:18px;color:var(--pr-sun2);font-weight:600;margin-bottom:10px;line-height:1.4}
+.pray-state.err .s-title{color:var(--pr-warn)}
+.pray-state .s-body{font-size:14.5px;color:var(--pr-muted);line-height:1.75}
+.pray-spinner{width:26px;height:26px;margin:2px auto 16px;border:2px solid var(--pr-soft);
+  border-top-color:var(--pr-sun);border-radius:50%;animation:prSpin .9s linear infinite}
+@keyframes prSpin{to{transform:rotate(360deg)}}
+.pray-retry{margin-top:16px}
+@media(prefers-reduced-motion:reduce){.pray-spinner{animation-duration:2.4s}}
+@media(max-width:540px){.pray-box{padding:20px 16px}.pray-card{padding:22px 17px}.pray-state{padding:22px 17px}}
 @media(prefers-reduced-motion:reduce){.pray-card{animation:none}.pray-typing::after{display:none}}
 `;
 
@@ -385,6 +425,92 @@ export function renderPrayerBoard(target, response, lang, opts) {
   return { close: closeBoard };
 }
 
+/* Render the AI 5-part prayer (understanding → verses → explanation → prayer →
+   encouragement, plus a crisis safety block when needed) into `target`.
+   `data` is the object returned by requestAIPrayer(). */
+export function renderAIPrayerBoard(target, data, lang, opts) {
+  if (!target || !data) return;
+  opts = opts || {};
+  injectStyles();
+  const L = lang === 'en' ? 'en' : 'zh';
+  const t = UI[L];
+  const crisis = !!data.crisis;
+  const token = String(++_gen);
+  target.dataset.prayerGen = token;
+  stopActiveAmbient();
+  stopActiveSpeech();
+
+  const verses = (data.verses || []).filter((v) => v && (v.text || v.ref)).map((v) =>
+    `<div class="pray-vitem"><div class="pray-verse">${esc(v.text)}</div>` +
+    `<div class="pray-vref">— ${esc(v.ref)}${v.version ? ' · ' + esc(v.version) : ''}</div></div>`).join('');
+
+  const sect = (label, inner) => `<div class="pray-sect"><div class="pray-slabel">${esc(label)}</div>${inner}</div>`;
+
+  target.innerHTML = `
+    <div class="pray-card${crisis ? ' crisis' : ''}">
+      ${crisis && data.safety ? `<div class="pray-safety"><div class="pray-slabel">${esc(t.safetyLabel)}</div><div class="pray-plain">${esc(data.safety)}</div></div>` : ''}
+      ${data.understanding ? `<div class="pray-lead">${esc(data.understanding)}</div>` : ''}
+      ${verses ? sect(t.versesLabel, verses) : ''}
+      ${data.explanation ? sect(t.explanationLabel, `<div class="pray-plain">${esc(data.explanation)}</div>`) : ''}
+      ${sect(t.prayerLabel, `<div class="pray-body">${esc(data.prayer)}</div>`)}
+      ${data.encouragement ? sect(t.encourageLabel, `<div class="pray-encourage">${esc(data.encouragement)}</div>`) : ''}
+      <div class="pray-tail" style="opacity:1">
+        <div class="pray-tts">
+          <button type="button" class="pray-ambient-btn" data-el="tts"><span class="ic">▷</span><span data-el="ttslabel">${esc(t.ttsPrayer)}</span></button>
+        </div>
+        <div class="pray-close"><button type="button" class="pray-close-btn" data-el="close">${esc(t.close)}</button></div>
+      </div>
+    </div>`;
+
+  const pick = (n) => target.querySelector(`[data-el="${n}"]`);
+  function closeBoard() {
+    stopActiveSpeech();
+    if (target.dataset.prayerGen === token) { target.dataset.prayerGen = ''; target.innerHTML = ''; }
+    if (typeof opts.onClose === 'function') opts.onClose();
+  }
+  const cb = pick('close'); if (cb) cb.addEventListener('click', closeBoard);
+
+  const ttsBtn = pick('tts');
+  if (ttsBtn && ttsSupported()) {
+    const lbl = pick('ttslabel'); const ic = ttsBtn.querySelector('.ic');
+    let speaking = false;
+    const reset = () => { speaking = false; lbl.textContent = t.ttsPrayer; ic.textContent = '▷'; };
+    ttsBtn.addEventListener('click', () => {
+      if (speaking) { stopActiveSpeech(); reset(); return; }
+      speaking = true; lbl.textContent = t.ttsStop; ic.textContent = '❚❚';
+      speakSegments([data.prayer], L, () => { if (ttsBtn.isConnected && target.dataset.prayerGen === token) reset(); });
+    });
+  } else if (ttsBtn) {
+    ttsBtn.remove();
+  }
+  smoothScroll(target.querySelector('.pray-card'));
+  return { close: closeBoard };
+}
+
+/* Loading / error / coming-soon states. kind: 'loading' | 'error' | 'coming'. */
+function renderPrayerState(target, kind, lang, opts) {
+  if (!target) return;
+  opts = opts || {};
+  injectStyles();
+  const t = UI[lang === 'en' ? 'en' : 'zh'];
+  const token = String(++_gen);
+  target.dataset.prayerGen = token;
+  stopActiveSpeech();
+  if (kind === 'loading') {
+    target.innerHTML = `<div class="pray-state"><div class="pray-spinner"></div><div class="s-body">${esc(t.loadingText)}</div></div>`;
+    return;
+  }
+  if (kind === 'coming') {
+    target.innerHTML = `<div class="pray-state"><div class="s-title">${esc(t.comingTitle)}</div><div class="s-body">${esc(t.comingBody)}</div></div>`;
+    return;
+  }
+  // error
+  target.innerHTML = `<div class="pray-state err"><div class="s-title">${esc(t.errorTitle)}</div><div class="s-body">${esc(t.errorBody)}</div>` +
+    `<div class="pray-retry"><button type="button" class="pray-btn" data-el="retry">${esc(t.retry)}</button></div></div>`;
+  const rb = target.querySelector('[data-el="retry"]');
+  if (rb && typeof opts.onRetry === 'function') rb.addEventListener('click', opts.onRetry);
+}
+
 export function mountPrayerCare(container, opts) {
   if (!container) return;
   opts = opts || {};
@@ -393,7 +519,8 @@ export function mountPrayerCare(container, opts) {
   ['pointerdown', 'touchend', 'click'].forEach((ev) => document.addEventListener(ev, primePrayerTTS, true));
 
   let lastRequest = null;
-  let lastId = null;
+  let lastMode = null;      // 'crisis' | 'coming' | 'ai'
+  let inflight = null;      // AbortController for the current AI request
 
   container.classList.add('pray-root');
   container.innerHTML = `
@@ -424,8 +551,9 @@ export function mountPrayerCare(container, opts) {
   input.addEventListener('input', updateClear);
   clearBtn.addEventListener('click', () => { input.value = ''; updateClear(); input.focus(); });
 
+  function reset() { lastMode = null; lastRequest = null; if (inflight) { try { inflight.abort(); } catch (e) {} inflight = null; } }
   function boardOpts() {
-    return { onClose: () => { lastId = null; lastRequest = null; input.value = ''; updateClear(); input.focus(); } };
+    return { onClose: () => { reset(); input.value = ''; updateClear(); input.focus(); } };
   }
 
   function pray(q) {
@@ -433,9 +561,32 @@ export function mountPrayerCare(container, opts) {
     const request = (q != null ? q : input.value || '').trim();
     if (!request) return;
     lastRequest = request;
-    const r = getPrayerResponse(request, lang);
-    lastId = r.id;
-    renderPrayerBoard(answer, r, lang, boardOpts());
+    if (inflight) { try { inflight.abort(); } catch (e) {} inflight = null; }
+
+    // 1) Crisis first — immediate, offline, reliable (988/911). Never waits on the network.
+    const crisis = getPrayerCrisis(request, lang);
+    if (crisis) { lastMode = 'crisis'; renderPrayerBoard(answer, crisis, lang, boardOpts()); return; }
+
+    // 2) Worker not deployed yet → honest "being switched on" (never a fake / canned answer).
+    if (!prayerApiConfigured()) { lastMode = 'coming'; renderPrayerState(answer, 'coming', lang); return; }
+
+    // 3) Real AI prayer.
+    lastMode = 'ai';
+    const ctrl = ('AbortController' in window) ? new AbortController() : null;
+    inflight = ctrl;
+    renderPrayerState(answer, 'loading', lang);
+    requestAIPrayer(request, lang, { signal: ctrl ? ctrl.signal : undefined })
+      .then((data) => {
+        if (inflight !== ctrl) return;          // superseded by a newer request
+        inflight = null;
+        renderAIPrayerBoard(answer, data, lang, boardOpts());
+      })
+      .catch((err) => {
+        if (err && err.code === 'aborted') return;
+        if (inflight !== ctrl) return;
+        inflight = null;
+        renderPrayerState(answer, 'error', lang, { onRetry: () => pray(request) });
+      });
   }
 
   function renderChrome() {
@@ -458,8 +609,9 @@ export function mountPrayerCare(container, opts) {
       b.addEventListener('click', () => { input.value = b.textContent; updateClear(); pray(b.textContent); });
       chips.appendChild(b);
     });
-    // re-render the current prayer in the new language (same prayer id, re-typed)
-    if (lastId) renderPrayerBoard(answer, resolvePrayerById(lastId, lang), lang, boardOpts());
+    // re-render the current prayer in the new language (crisis re-rendered offline;
+    // an AI prayer is re-requested so its wording comes back in the new language)
+    if (lastRequest && lastMode) pray(lastRequest);
   }
 
   btn.addEventListener('click', () => pray());

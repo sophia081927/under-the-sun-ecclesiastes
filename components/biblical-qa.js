@@ -19,8 +19,9 @@
    ============================================================ */
 
 import { getBiblicalResponse, resolveById, getCrisisResponse, getFallbackResponse } from '../data/qaEngine.js';
-import { isPrayerRequest, getPrayerResponse } from '../data/prayerEngine.js';
-import { renderPrayerBoard } from './prayer-care.js';
+import { isPrayerRequest, getPrayerCrisis } from '../data/prayerEngine.js';
+import { renderPrayerBoard, renderAIPrayerBoard, renderPrayerState } from './prayer-care.js';
+import { requestAIPrayer, prayerApiConfigured } from '../data/prayerClient.js';
 
 const UI = {
   zh: {
@@ -221,6 +222,23 @@ export function mountBiblicalQA(container, opts) {
     smoothScroll(answer.querySelector('.bqa-card'));
   }
 
+  let prayerController = null;
+  async function showPrayer(question, lang) {
+    prayerController?.abort();
+    const ctrl = new AbortController(); prayerController = ctrl;
+    answer.classList.add('pray-root');
+    const onClose = () => { ctrl.abort(); lastPrayer = null; };
+    const crisis = getPrayerCrisis(question, lang);
+    if (crisis) { renderPrayerBoard(answer, crisis, lang, { onClose }); return; }
+    if (!prayerApiConfigured()) { renderPrayerState(answer, 'coming', lang); return; }
+    renderPrayerState(answer, 'loading', lang);
+    try {
+      const data = await requestAIPrayer(question, lang, { signal: ctrl.signal });
+      if (!ctrl.signal.aborted) renderAIPrayerBoard(answer, data, lang, { onClose });
+    } catch (e) {
+      if (!ctrl.signal.aborted) renderPrayerState(answer, 'error', lang, { onRetry: () => showPrayer(question, detectLang(opts)) });
+    }
+  }
   let loadTimer = 0;
   function renderLoading(lang) {
     const t = UI[lang];
@@ -234,13 +252,15 @@ export function mountBiblicalQA(container, opts) {
     const question = (q != null ? q : input.value || '').trim();
     if (!question) return;
     lastQuestion = question;
+    prayerController?.abort();
+    answer.classList.remove('pray-root');
     if (loadTimer) { clearTimeout(loadTimer); loadTimer = 0; }
 
     // Prayer intercept — when the reader asks for prayer ("为我祷告 / pray"),
     // morph the outcome box into the Prayer Sanctuary Board rather than a Q&A card.
     if (isPrayerRequest(question)) {
       lastResp = null; lastPrayer = question;
-      renderPrayerBoard(answer, getPrayerResponse(question, lang), lang, { onClose: () => { lastPrayer = null; } });
+      showPrayer(question, lang);
       return;
     }
 
@@ -286,13 +306,13 @@ export function mountBiblicalQA(container, opts) {
       chips.appendChild(b);
     });
     // re-render the last answer in the new language (same verse, no re-rotation)
-    if (lastPrayer) renderPrayerBoard(answer, getPrayerResponse(lastPrayer, lang), lang, { onClose: () => { lastPrayer = null; } });
+    if (lastPrayer) showPrayer(lastPrayer, lang);
     else if (lastResp) renderCard(lastQuestion, reresolve(lastResp, lang), lang);
   }
 
   btn.addEventListener('click', () => ask());
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(); }
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); ask(); }
   });
 
   renderChrome();

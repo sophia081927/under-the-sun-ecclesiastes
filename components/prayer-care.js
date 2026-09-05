@@ -45,7 +45,7 @@ const UI = {
     encourageLabel: '一个温柔的下一步', safetyLabel: '请立刻寻求帮助',
     loadingText: '正在按你的处境，从整本圣经为你预备经文与祷告…',
     errorTitle: '这次没能生成祷告', ttsPrayer: '朗读这段祷告',
-    errorBody: '暂时连不上祷告服务，请稍后再试一次。我们不会用一段固定经文来搪塞你。',
+    errorBody: '祷告服务暂时无法完成请求，请稍后重试。',
     retry: '再试一次',
     comingTitle: 'AI 祷告功能正在开通中',
     comingBody: '这个功能正在接入，很快就能根据你写下的具体处境，从整本圣经为你预备相关经文、简短解释和一段真诚的祷告。'
@@ -67,7 +67,7 @@ const UI = {
     encourageLabel: 'A gentle next step', safetyLabel: 'Please reach out now',
     loadingText: 'Drawing on the whole Bible to prepare Scripture and a prayer for your situation…',
     errorTitle: 'The prayer could not be generated this time', ttsPrayer: 'Read this prayer aloud',
-    errorBody: 'We could not reach the prayer service just now — please try again in a moment. We will not fill in with a canned verse.',
+    errorBody: 'The prayer service could not complete your request. Please try again in a moment.',
     retry: 'Try again',
     comingTitle: 'AI prayer is being switched on',
     comingBody: 'We are connecting this feature. Soon it will read the situation you describe and draw on the whole Bible to prepare relevant Scripture, a short explanation, and a heartfelt prayer.'
@@ -488,7 +488,7 @@ export function renderAIPrayerBoard(target, data, lang, opts) {
 }
 
 /* Loading / error / coming-soon states. kind: 'loading' | 'error' | 'coming'. */
-function renderPrayerState(target, kind, lang, opts) {
+export function renderPrayerState(target, kind, lang, opts) {
   if (!target) return;
   opts = opts || {};
   injectStyles();
@@ -532,7 +532,7 @@ export function mountPrayerCare(container, opts) {
     <div class="pray-box">
       <div class="pray-label" data-k="inputLabel"></div>
       <div class="pray-inputwrap">
-        <textarea class="pray-input" data-el="input" rows="3"></textarea>
+        <textarea class="pray-input" data-el="input" rows="3" maxlength="1000"></textarea>
         <button type="button" class="pray-clear" data-el="clear" aria-label="Clear">×</button>
       </div>
       <div class="pray-go"><button class="pray-btn" data-el="btn"></button></div>
@@ -597,6 +597,7 @@ export function mountPrayerCare(container, opts) {
       n.textContent = t[k] || '';
     });
     input.placeholder = t.placeholder;
+    input.setAttribute('aria-label', t.inputLabel);
     btn.textContent = t.submitButton;
     clearBtn.setAttribute('aria-label', lang === 'zh' ? '清除' : 'Clear');
     updateClear();
@@ -616,7 +617,7 @@ export function mountPrayerCare(container, opts) {
 
   btn.addEventListener('click', () => pray());
   input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); pray(); }
+    if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); pray(); }
   });
 
   renderChrome();

@@ -1,3 +1,4 @@
+import { validPrayer } from './prayerSchema.js';
 /* prayerClient.js — talks to the prayer Worker.
    ------------------------------------------------------------
    Sends the reader's real words to the server-side proxy (which calls Claude)
@@ -15,19 +16,28 @@ export async function requestAIPrayer(input, lang, opts) {
   opts = opts || {};
   if (!prayerApiConfigured()) throw fail('not_configured');
   const payload = {
-    input: String(input || '').slice(0, 1000),
+    input: String(input || '').trim(),
     lang: lang === 'en' ? 'en' : 'zh',
   };
+  if (!payload.input) throw fail('empty_input');
+  if (payload.input.length > 1000) throw fail('input_too_long');
+  const ctrl = new AbortController();
+  let timedOut = false;
+  const abort = () => ctrl.abort();
+  if (opts.signal?.aborted) throw fail('aborted');
+  opts.signal?.addEventListener('abort', abort, { once: true });
+  const timer = setTimeout(() => { timedOut = true; ctrl.abort(); }, 50000);
+  try {
   let res;
   try {
     res = await fetch(String(PRAYER_API_ENDPOINT).trim(), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
-      signal: opts.signal,
+      signal: ctrl.signal,
     });
   } catch (e) {
-    if (e && e.name === 'AbortError') throw fail('aborted');
+    if (ctrl.signal.aborted) throw fail(timedOut ? 'timeout' : 'aborted');
     throw fail('network');
   }
   if (!res.ok) {
@@ -37,6 +47,7 @@ export async function requestAIPrayer(input, lang, opts) {
   }
   let data;
   try { data = await res.json(); } catch (e) { throw fail('parse'); }
-  if (!data || !data.prayer || !Array.isArray(data.verses)) throw fail('format');
+  if (!validPrayer(data, payload.lang)) throw fail('format');
   return data;
+  } finally { clearTimeout(timer); opts.signal?.removeEventListener('abort', abort); }
 }

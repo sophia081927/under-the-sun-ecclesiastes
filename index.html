@@ -65,6 +65,7 @@
       <i data-lucide="library" class="h-5 w-5 text-[#D4AF37]"></i>
       <span class="font-serif text-base md:text-lg tracking-widest uppercase font-bold text-[#D4AF37]">圣经书阁 <span class="text-gray-500 font-sans font-light hidden sm:inline">| Bible Library</span></span>
     </div>
+    <a data-guide-link href="website-guide.html" data-i18n="guideNav" style="color:#e6c776;font-size:13px;padding:8px">使用指南</a>
     <div class="inline-flex border border-[#D4AF37]/40 rounded-full overflow-hidden text-xs">
       <button id="btnZh" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('zh')">中文</button>
       <button id="btnEn" class="px-3.5 py-2 min-h-[36px] tracking-wider text-gray-400" onclick="setLang('en')">EN</button>
@@ -77,6 +78,13 @@
     <span class="text-xs font-mono tracking-[0.3em] text-[#D4AF37] uppercase mb-4 block" data-i18n="kicker"></span>
     <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-5 tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#F4F1EA] to-gray-400" data-i18n="title"></h1>
     <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light" data-i18n="sub"></p>
+  </section>
+
+  <section style="width:100%;max-width:896px;margin:0 auto;padding:0 24px 32px">
+    <a data-guide-link href="website-guide.html" style="display:block;padding:22px 24px;border:1px solid #8f783d;border-radius:16px;background:#1b2228;text-decoration:none">
+      <strong data-i18n="guideTitle" style="display:block;color:#e6c776;font-size:20px">第一次来？查看网站使用指南 →</strong>
+      <span data-i18n="guideDesc" style="display:block;color:#c6cbd0;margin-top:6px">13 张图带你了解怎样使用网站 · 中英文介绍 · 可下载 PPT</span>
+    </a>
   </section>
 
   <!-- Pray with Scripture (Intercessory Prayer Engine · a gentle care room, placed before Q&A) -->
@@ -130,7 +138,7 @@
   window.addEventListener('hashchange', gotoHash);
 
   const UI = {
-    zh: { kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
+    zh: { guideNav: '使用指南', guideTitle: '第一次来？查看网站使用指南 →', guideDesc: '13 张图带你了解怎样使用网站 · 中英文介绍 · 可下载 PPT', kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
           sub: '一个可以慢慢生长的中英双语读经空间。不急着说服你相信,只邀请你诚实地读。',
           more: '更多书卷将陆续加入',
           askEyebrow: '本站核心 · 随便问', askTitle: '用圣经回应我的问题',
@@ -140,7 +148,7 @@
           mapDesc: '第一次接触圣经?一页看懂:全书 66 卷(旧约 39 + 新约 27),分成哪几大类,每一卷主要讲什么。',
           mapCta: '打开圣经地图 →',
           enter: '进入', listen: '聆听', soon: '译注校准中', comingType: '书卷筹备中' },
-    en: { kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
+    en: { guideNav: 'How to use', guideTitle: 'New here? Explore the website guide →', guideDesc: '13 slides to help you get started · Chinese & English · Download the PPT', kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
           sub: 'A calm, growing bilingual space for reading Scripture. No pressure to believe — only an invitation to read honestly.',
           more: 'More Scripture volumes will be added gradually',
           askEyebrow: 'The heart of this site · Ask', askTitle: 'Ask from Scripture',
@@ -214,6 +222,7 @@
 
   function render() {
     const t = UI[lang];
+    document.querySelectorAll('[data-guide-link]').forEach(a => { a.href = lang === 'zh' ? 'website-guide.html' : 'website-guide-en.html'; });
     document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
     document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n] || ''; });
     document.getElementById('btnZh').classList.toggle('text-[#D4AF37]', lang === 'zh');

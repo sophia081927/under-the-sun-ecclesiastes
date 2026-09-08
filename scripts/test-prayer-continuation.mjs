@@ -1,0 +1,7 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import worker from '../worker/prayer-worker.js';
+const env={ANTHROPIC_API_KEY:'test',PRAYER_RATE_LIMITER:{limit:async()=>({success:true})},SCRIPTURE_ASSETS:{fetch:async()=>new Response(JSON.stringify({'35':'Jesus wept.'}))}};
+const req=context=>new Request('https://example.test',{method:'POST',body:JSON.stringify({input:'My interview is tomorrow',lang:'en',context})});
+const data={crisis:false,understanding:'An interview is approaching.',verses:[{book:'JHN',chapter:11,verseStart:35}],explanation:'Care.',prayer:'Please help me prepare.',encouragement:'Practice one interview answer today.',safety:''};
+test('prior topic and notes reach model as data and today action is mandatory',async()=>{let payload;globalThis.fetch=async(url,opts)=>{payload=JSON.parse(opts.body);return new Response(JSON.stringify({stop_reason:'end_turn',content:[{type:'text',text:JSON.stringify(data)}]}));};assert.equal((await worker.fetch(req({topic:'Job search',previousPrayer:'Help me search',updates:['A friend introduced me']}),env)).status,200);assert.match(payload.messages[0].content,/A friend introduced me/);assert.match(payload.system,/TODAY/);data.encouragement='';assert.equal((await worker.fetch(req(null),env)).status,502);});
+test('oversized history rejected before AI call',async()=>{globalThis.fetch=()=>{throw Error('must not reach model');};assert.equal((await worker.fetch(req({topic:'x',previousPrayer:'x',updates:['x'.repeat(1001)]}),env)).status,400);});

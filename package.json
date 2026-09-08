@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:prayer": "node scripts/build-prayer-worker.mjs",
+    "test:prayer": "node --test scripts/test-scripture-resolver.mjs scripts/test-prayer-corpus.mjs scripts/test-prayer-offline.mjs scripts/test-prayer-continuation.mjs scripts/test-prayer-journal.mjs"
+  }
+}

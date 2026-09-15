@@ -114,6 +114,7 @@
   footer{border-top:1px solid var(--line-soft);padding:36px 22px;text-align:center;color:var(--faint)}
   footer .mark{color:var(--sky-soft);font-size:15px;letter-spacing:.06em}
   footer p{margin-top:12px;font-size:12.5px;line-height:1.7}
+.psalms-extra{max-width:760px;margin:28px auto;padding:0 22px}.psalms-extra .extra-inner{border:1px solid var(--sky-line);border-radius:14px;background:var(--bg2);padding:22px}.psalms-extra h2{font-size:23px;margin:6px 0 12px;line-height:1.5}.psalms-extra p{color:var(--muted);font-size:15px;line-height:1.8}.psalms-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.psalms-actions a,.psalm-guide{display:inline-flex;align-items:center;min-height:44px;padding:8px 16px;border:1px solid var(--sky-line);border-radius:24px;color:var(--sky-soft);font-size:13px}.psalm-guide{margin-top:18px}a:focus-visible,button:focus-visible{outline:3px solid var(--sky);outline-offset:3px}
 </style>
 </head>
 <body>
@@ -168,11 +169,13 @@
   <span class="zh">经文 · 中文:和合本 · 英文:World English Bible(WEB)——公有领域,来源 <a href="https://ebible.org/eng-web/" target="_blank" rel="noopener" style="color:var(--sky-soft)">eBible.org</a>。此为经文选读;默想与“连接”说明由本站整理,不属于圣经译文。</span>
 </div>
 
+<section class="psalms-extra" id="fulldeck"><div class="extra-inner"><h2><span class="zh">一页一页，走进诗篇的祷告</span><span class="en">Explore the prayers of the Psalms</span></h2><p><span class="zh">用17页中文图解，认识本站精选的11篇诗篇。在惧怕、忧闷、悔改与盼望中，找到可以向神说的话。</span><span class="en">A 17-slide Chinese visual guide to the eleven selections on this site. The reading page is available in English.</span></p><div class="psalms-actions"><a href="psalms-deck-zh.html"><span class="zh">查看中文完整图解 →</span><span class="en">View Chinese visual guide →</span></a><a href="downloads/psalms-selected-zh.pptx" download><span class="zh">下载中文版 PPT</span><span class="en">Download Chinese PPT</span></a></div><div class="psalms-actions"><a href="psalms.html#pnav"><span class="zh">阅读</span><span class="en">Read</span></a><a href="psalms-listen.html"><span class="zh">聆听</span><span class="en">Listen</span></a><a href="psalms-worship.html"><span class="zh">敬拜音乐</span><span class="en">Worship music</span></a><a href="ask.html"><span class="zh">提问</span><span class="en">Ask</span></a></div></div></section>
 <nav class="pnav" id="pnav" aria-label="psalm quick jump"></nav>
 
 <main id="list"></main>
 
-<div class="endcta">
+<section class="psalms-extra" id="worship"><div class="extra-inner"><h2><span class="zh">用一首诗歌，继续祷告</span><span class="en">Continue your prayer through a song</span></h2><p><span class="zh">读完诗篇139篇，可以听赞美之泉《展开清晨的翅膀》（中文）；读完46篇或91篇，可以听 Selah 的 You Are My Hiding Place（英文）。</span><span class="en">After Psalm 46 or 91, listen to “You Are My Hiding Place” by Selah (English). After Psalm 139, try “Wings of the Dawn” by Stream of Praise (Mandarin).</span></p><p><span class="zh">歌曲与诗篇按主题搭配。进入敬拜页，可查看官方录音、经文链接和默想。</span><span class="en">These are thematic pairings. Visit the worship page for official recordings, Scripture links, and reflection.</span></p><div class="psalms-actions"><a href="psalms-worship.html"><span class="zh">进入敬拜音乐 →</span><span class="en">Open worship music →</span></a></div></div></section>
+<div class="endcta" id="ask">
   <div class="card">
     <h3><span class="en">Bring the question you can't put into a prayer</span><span class="zh">把你还组织不成祷告的那个问题,带来</span></h3>
     <p><span class="en">Type your real question — fear, doubt, grief, loneliness — and receive gentle, Scripture-centered guidance.</span><span class="zh">写下你真实的问题——恐惧、怀疑、哀伤、孤独——得到一份温柔、扎根圣经的回应。</span></p>
@@ -244,7 +247,7 @@ var PSALMS = [
   { num:42, title:{zh:'忧闷的灵魂',en:'A Downcast Soul'},
     theme:{zh:'可以一边低落,一边对自己的灵魂诚实说话。',en:'You can be downcast and still speak honestly to your own soul.'},
     verses:[
-      {ref:{zh:'诗篇 42:5,11',en:'Psalm 42:5, 11 (WEB)'},
+      {ref:{zh:'诗篇 42:5',en:'Psalm 42:5 (WEB)'},
        zh:'我的心哪,你为何忧闷?为何在我里面烦躁?应当仰望神,因他笑脸帮助我;我还要称赞他。',
        en:'Why are you in despair, my soul? Why are you disturbed within me? Hope in God! For I shall still praise him for the saving help of his presence.'}
     ],
@@ -256,10 +259,10 @@ var PSALMS = [
   { num:46, title:{zh:'避难所',en:'Our Refuge'},
     theme:{zh:'世界摇动时,有一处不动摇的所在。',en:'When the world shakes, there is a place that does not.'},
     verses:[
-      {ref:{zh:'诗篇 46:1-2',en:'Psalm 46:1-2 (WEB)'},
-       zh:'神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。所以,地虽改变,山虽摇动到海心,其中的水虽砰訇翻腾,山虽因海涨而战抖,我们也不害怕。',
+      {ref:{zh:'诗篇 46:1–3（节选）',en:'Psalm 46:1-2 (WEB)'},
+       zh:'神是我们的避难所,是我们的力量,是我们在患难中随时的帮助。所以,地虽改变,山虽摇动到海心,其中的水虽匉訇翻腾,山虽因海涨而战抖,我们也不害怕。',
        en:'God is our refuge and strength, a very present help in trouble. Therefore we won’t be afraid, though the earth changes, though the mountains are shaken into the heart of the seas;'},
-      {ref:{zh:'诗篇 46:10',en:'Psalm 46:10 (WEB)'},
+      {ref:{zh:'诗篇 46:10（前半节）',en:'Psalm 46:10 (WEB)'},
        zh:'你们要休息,要知道我是神!',
        en:'“Be still, and know that I am God. I will be exalted among the nations. I will be exalted on the earth.”'}
     ],
@@ -349,7 +352,7 @@ var PSALMS = [
       {ref:{zh:'诗篇 139:1-3',en:'Psalm 139:1-3 (WEB)'},
        zh:'耶和华啊,你已经鉴察我,认识我。我坐下,我起来,你都晓得;你从远处知道我的意念。我行路,我躺卧,你都细察;你也深知我一切所行的。',
        en:'Yahweh, you have searched me, and you know me. You know my sitting down and my rising up. You perceive my thoughts from afar. You search out my path and my lying down, and are acquainted with all my ways.'},
-      {ref:{zh:'诗篇 139:7-10',en:'Psalm 139:7-10 (WEB)'},
+      {ref:{zh:'诗篇 139:7、9–10',en:'Psalm 139:7-10 (WEB)'},
        zh:'我往哪里去躲避你的灵?我往哪里逃、躲避你的面?……我若展开清晨的翅膀,飞到海极居住,就是在那里,你的手必引导我;你的右手也必扶持我。',
        en:'Where could I go from your Spirit? Or where could I flee from your presence? If I ascend up into heaven, you are there. If I make my bed in Sheol, behold, you are there! If I take the wings of the dawn, and settle in the uttermost parts of the sea, even there your hand will lead me, and your right hand will hold me.'},
       {ref:{zh:'诗篇 139:23-24',en:'Psalm 139:23-24 (WEB)'},
@@ -387,6 +390,7 @@ function render(){
       + '<div class="verses">'+verses+'</div>'
       + '<div class="sect"><div class="lbl">'+lblConnect+'</div><div class="body">'+esc(p.connect[L])+'</div></div>'
       + '<div class="sect med"><div class="lbl">'+lblMed+'</div><div class="body">'+esc(p.meditate[L])+'</div></div>'
+      + '<a class="psalm-guide" href="psalms-deck-zh.html#slide-'+(PSALMS.indexOf(p)+4)+'">'+(L==='zh'?'查看本篇图解 →':'View this psalm in the Chinese guide →')+'</a>'
       + '</section>';
   }).join('');
 }
@@ -399,6 +403,7 @@ function setLang(l){
   document.title = l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
   try{ localStorage.setItem('bible_lang', l); }catch(e){}
   render();
+  document.querySelectorAll('a[href]').forEach(function(a){var u=new URL(a.href);if(u.origin===location.origin && ['psalms.html','psalms-listen.html','psalms-worship.html','ask.html','index.html','ecclesiastes.html','bible-overview.html'].includes(u.pathname.split('/').pop())){u.searchParams.set('lang',l);a.href=u.href;}});
   // preserve hash target after re-render
   if(location.hash){ var el=document.querySelector(location.hash); if(el) el.scrollIntoView(); }
 }

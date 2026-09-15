@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
@@ -11,16 +11,102 @@
   gtag('config', 'G-SHNR24DPH7');
 </script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>诗篇 · Psalms</title>
-<!-- Psalms has no separate worship page yet; send visitors to the Psalms book so
-     the registry's #/psalms/worship reference resolves gracefully (no 404). -->
-<link rel="canonical" href="https://lightoflifebible.org/psalms.html">
-<meta http-equiv="refresh" content="0; url=psalms.html">
-<script>location.replace('psalms.html' + (location.search || '') );</script>
-<style>body{background:#14161a;color:#9a948a;font-family:Georgia,serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0}a{color:#c6dbe6}</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#14161a">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<title>诗篇精选 · 敬拜 · Psalms Worship</title>
+<meta name="description" content="诗篇敬拜音乐：中文与英文官方录音、经文阅读和默想。Psalms worship music with official recordings and reflections.">
+<style>
+  :root{--bg:#14161a;--bg2:#1b1e24;--ink:#ece7dd;--muted:#9a948a;--faint:#6f6a62;--sun:#a8c5d6;--sun-soft:#c6dbe6;--line:rgba(217,164,65,.22);--line-soft:rgba(236,231,221,.10)}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:radial-gradient(120% 55% at 50% -8%, rgba(217,164,65,.06), transparent 60%),var(--bg);color:var(--ink);
+    font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.85;-webkit-font-smoothing:antialiased;padding-bottom:88px}
+  .wrap{max-width:680px;margin:0 auto;padding:0 20px}
+  a{color:var(--sun-soft);text-decoration:none}
+  .top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;
+    padding:13px 18px;background:linear-gradient(var(--bg),rgba(20,22,26,.82),transparent);font-size:13px}
+  .top .back{color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .lang-toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+  .lang-toggle button{background:transparent;border:none;color:var(--muted);font-family:inherit;font-size:12px;padding:7px 13px;cursor:pointer;min-height:34px}
+  .lang-toggle button.active{background:var(--sun);color:#14161a;font-weight:700}
+  .hero{text-align:center;padding:44px 20px 8px}
+  .hero .ky{color:var(--sun);font-size:12px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:16px}
+  .hero h1{font-size:clamp(28px,7vw,40px);font-weight:600;line-height:1.2}
+  .hero p{color:var(--muted);margin-top:16px;font-size:15.5px;max-width:520px;margin-left:auto;margin-right:auto}
+  section.blk{padding:26px 0}
+  h2.sec{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--sun);margin:26px 0 4px}
+  footer{text-align:center;color:var(--faint);font-size:12px;padding:36px 20px 10px;border-top:1px solid var(--line-soft)}
+  .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;background:rgba(24,27,32,.94);backdrop-filter:blur(12px);
+    border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom));justify-content:space-around}
+  .tabbar a{flex:1;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;padding:5px 2px;min-height:50px}
+  .tabbar a:hover{color:var(--sun-soft)} .tabbar .ic{font-size:18px}
+  @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:70px}}
+</style>
 </head>
-<body>
-  <p>正在前往《诗篇》… · Redirecting to Psalms… <a href="psalms.html">点此继续 / Continue →</a></p>
+<body class="lang-zh" data-book="psalms">
+  <div class="top">
+    <a class="back" href="psalms.html">‹ <span class="lz">诗篇精选</span><span class="le" style="display:none">Psalms</span></a>
+    <div class="lang-toggle"><button id="bz" class="active" onclick="setLang('zh')">中文</button><button id="be" onclick="setLang('en')">EN</button></div>
+  </div>
+  <div class="hero">
+    <div class="ky" id="ky"></div>
+    <h1 id="h1"></h1>
+    <p id="intro"></p>
+  </div>
+  <div class="wrap">
+    <h2 class="sec" id="tracksHead"></h2>
+    <section class="blk"><div id="tracks"></div></section>
+  </div>
+  <footer>生命之光 · the light of life · <a href="index.html" id="lib"></a></footer>
+  <nav class="tabbar">
+    <a href="psalms.html"><span class="ic">📖</span><span id="tb1"></span></a>
+    <a href="psalms-listen.html"><span class="ic">♪</span><span id="tb2"></span></a>
+    <a href="psalms-deck-zh.html"><span class="ic">✦</span><span id="tb3"></span></a>
+    <a href="index.html"><span class="ic">☰</span><span id="tb4"></span></a>
+  </nav>
+
+<script type="module">
+  import { getBookById } from './data/bibleRegistry.js';
+  import { renderWorshipTracks } from './components/worshipPanel.js';
+  import { psalmsWorship } from './data/worship/psalmsWorship.js';
+
+  const BOOK = 'psalms';
+  const book = getBookById(BOOK);
+  const T = { zh:{ ky:'敬拜模式', worship:'敬拜', tracks:'按主题聆听', lib:'圣经书阁', tb:['阅读','聆听','中文图解','书阁'] },
+              en:{ ky:'Worship mode', worship:'Worship', tracks:'Listen by theme', lib:'Bible Library', tb:['Read','Listen','Deck (Chinese)','Library'] } };
+  let lang='zh';
+  function render(){
+    const t=T[lang], acc=book.accentColor||'#D4AF37';
+    document.documentElement.lang = lang==='zh'?'zh-CN':'en';
+    document.body.classList.toggle('lang-zh', lang==='zh');
+    document.getElementById('bz').classList.toggle('active',lang==='zh');
+    document.getElementById('be').classList.toggle('active',lang==='en');
+    document.querySelector('.lz').style.display = lang==='zh'?'inline':'none';
+    document.querySelector('.le').style.display = lang==='zh'?'none':'inline';
+    document.getElementById('ky').textContent=t.ky;
+    document.getElementById('h1').textContent=(lang==='zh'?book.titleZh:book.titleEn)+' · '+t.worship;
+    document.getElementById('intro').textContent = psalmsWorship.intro[lang]||'';
+    document.getElementById('tracksHead').textContent=t.tracks;
+    document.getElementById('lib').textContent=t.lib;
+    ['tb1','tb2','tb3','tb4'].forEach((id,i)=>document.getElementById(id).textContent=t.tb[i]);
+    document.title=(lang==='zh'?book.titleZh:book.titleEn)+' · '+t.worship;
+    const ordered = [...psalmsWorship.tracks].sort((a,b)=>Number(b.language===lang)-Number(a.language===lang));
+    renderWorshipTracks(document.getElementById('tracks'), {...psalmsWorship, tracks:ordered}, lang, acc);
+    document.querySelectorAll('.wp-track').forEach((card,i)=>{
+      const track=ordered[i];card.id=track.id;
+      const links=card.querySelector('.wp-links');
+      const source=document.createElement('a');source.className='wp-link';source.href=track.sourceLink;source.target='_blank';source.rel='noopener';source.textContent=lang==='zh'?'官方来源 ↗':'Official source ↗';links.append(source);
+      track.psalms.forEach(num=>{const a=document.createElement('a');a.className='wp-link';a.href='psalms.html?lang='+lang+'#psalm-'+num;a.textContent=(lang==='zh'?'读诗篇 ':'Read Psalm ')+num;links.append(a)});
+      card.querySelector('a[href*="youtube.com"]').textContent=lang==='zh'?'官方录音 · YouTube ↗':'Official recording · YouTube ↗';
+    });
+    document.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href);if(u.origin===location.origin && ['psalms.html','psalms-listen.html','index.html','psalms-worship.html'].includes(u.pathname.split('/').pop())){u.searchParams.set('lang',lang);a.href=u.href}});
+  }
+  window.setLang=(l)=>{lang=l;try{localStorage.setItem('bible_lang',l);}catch(e){}render();};
+  let saved=null;try{saved=localStorage.getItem('bible_lang');}catch(e){}
+  const q=new URLSearchParams(location.search).get('lang');const nl=(navigator.language||'').toLowerCase();lang=['zh','en'].includes(q)?q:(['zh','en'].includes(saved)?saved:(nl.indexOf('zh')===0?'zh':'en'));render();
+  if(location.hash){document.getElementById(location.hash.slice(1))?.scrollIntoView();}
+</script>
 </body>
 </html>

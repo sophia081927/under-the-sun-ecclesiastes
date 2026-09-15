@@ -139,7 +139,8 @@ export const bibleRegistry = [
     listen: 'psalms-listen.html',
     worship: 'psalms-worship.html',
     study: null,
-    deck: null,
+    deck: 'psalms-deck-zh.html',
+    deckLanguages: ['zh'],
     bookType: 'Poetry & Worship',
     bookTypeZh: '诗歌书',
     themeZh: '真实向神喊话：恐惧、忧闷、悔改、避难、同在',
@@ -156,18 +157,18 @@ export const bibleRegistry = [
       zh: {
         audioTitle: '诗篇精选 · 聆听',
         audioGuide: '🎧 点击聆听：在恐惧、忧闷与避难中，向神诚实地喊话。',
-        worshipTitle: '《你是我的避难所》',
-        worshipGuide: '🎵 神是我们的避难所，是我们在患难中随时的帮助。',
-        spotifyLink: 'https://open.spotify.com/search/你是我的避难所',
-        youtubeLink: 'https://www.youtube.com/results?search_query=你是我的避难所+赞美诗'
+        worshipTitle: '《展开清晨的翅膀》 · 中文录音',
+        worshipGuide: '读完诗篇139篇，用诗歌继续默想神的认识、引导和扶持。',
+        spotifyLink: '',
+        youtubeLink: 'https://www.youtube.com/watch?v=qLCYbDytY74'
       },
       en: {
         audioTitle: 'Psalms · Listen',
         audioGuide: '🎧 Click to listen: honest cries to God in fear, sorrow, and refuge.',
-        worshipTitle: 'You Are My Hiding Place',
+        worshipTitle: 'You Are My Hiding Place · Selah · English',
         worshipGuide: '🎵 God is our refuge and strength, an ever-present help in trouble.',
-        spotifyLink: 'https://open.spotify.com/search/You+Are+My+Hiding+Place',
-        youtubeLink: 'https://www.youtube.com/results?search_query=You+Are+My+Hiding+Place+worship'
+        spotifyLink: '',
+        youtubeLink: 'https://www.youtube.com/watch?v=iukRJ9Wnr6A'
       }
     },
     bgColor: 'from-[#1A2E3A] to-[#12161A]',
@@ -175,7 +176,7 @@ export const bibleRegistry = [
     audioPathBase: 'audio/psalms/',
     languages: ['zh', 'en'],
     audioEnabled: true,
-    features: { read: true, listen: true, ask: true, reflection: true, worship: false, bilingual: true, study: false, deck: false }
+    features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: true }
   },
   {
     id: 'job',

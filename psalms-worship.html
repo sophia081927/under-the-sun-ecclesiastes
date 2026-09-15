@@ -43,7 +43,7 @@
   .tabbar a{flex:1;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;padding:5px 2px;min-height:50px}
   .tabbar a:hover{color:var(--sun-soft)} .tabbar .ic{font-size:18px}
   @media(max-width:700px){.tabbar{display:flex}body{padding-bottom:70px}}
-</style>
+.music-filters{display:flex;flex-wrap:wrap;gap:16px;margin-top:20px}.music-filters label{display:flex;flex-direction:column;gap:6px;flex:1;min-width:140px;color:#c6dbe6;font-size:13px}.music-filters select{background:#1b1e24;color:#ece7dd;border:1px solid #526675;border-radius:8px;padding:10px;font:inherit;min-height:44px}#musicCount{color:#b2b8bd;font-size:13px;margin-top:12px}.wp-artist{color:#a4adb5!important}.wp-track{scroll-margin-top:80px}a:focus-visible,button:focus-visible,select:focus-visible{outline:3px solid #a8c5d6;outline-offset:3px}</style>
 </head>
 <body class="lang-zh" data-book="psalms">
   <div class="top">
@@ -56,7 +56,7 @@
     <p id="intro"></p>
   </div>
   <div class="wrap">
-    <h2 class="sec" id="tracksHead"></h2>
+    <h2 class="sec" id="tracksHead"></h2><div class="music-filters"><label><span id="audioLabel"></span><select id="audioFilter"><option value="all"></option><option value="zh"></option><option value="en"></option></select></label><label><span id="psalmLabel"></span><select id="psalmFilter"><option value="all"></option><option value="23">23</option><option value="27">27</option><option value="34">34</option><option value="42">42</option><option value="46">46</option><option value="51">51</option><option value="73">73</option><option value="90">90</option><option value="91">91</option><option value="121">121</option><option value="139">139</option></select></label></div><p id="musicCount" role="status" aria-live="polite"></p>
     <section class="blk"><div id="tracks"></div></section>
   </div>
   <footer>生命之光 · the light of life · <a href="index.html" id="lib"></a></footer>
@@ -77,6 +77,9 @@
   const T = { zh:{ ky:'敬拜模式', worship:'敬拜', tracks:'按主题聆听', lib:'圣经书阁', tb:['阅读','聆听','中文图解','书阁'] },
               en:{ ky:'Worship mode', worship:'Worship', tracks:'Listen by theme', lib:'Bible Library', tb:['Read','Listen','Deck (Chinese)','Library'] } };
   let lang='zh';
+  const audioFilter=document.getElementById('audioFilter'),psalmFilter=document.getElementById('psalmFilter');
+  const initialPsalm=new URLSearchParams(location.search).get('psalm');if([...psalmFilter.options].some(o=>o.value===initialPsalm))psalmFilter.value=initialPsalm;
+  [audioFilter,psalmFilter].forEach(el=>el.addEventListener('change',render));
   function render(){
     const t=T[lang], acc=book.accentColor||'#D4AF37';
     document.documentElement.lang = lang==='zh'?'zh-CN':'en';
@@ -92,14 +95,20 @@
     document.getElementById('lib').textContent=t.lib;
     ['tb1','tb2','tb3','tb4'].forEach((id,i)=>document.getElementById(id).textContent=t.tb[i]);
     document.title=(lang==='zh'?book.titleZh:book.titleEn)+' · '+t.worship;
-    const ordered = [...psalmsWorship.tracks].sort((a,b)=>Number(b.language===lang)-Number(a.language===lang));
+    document.getElementById('audioLabel').textContent=lang==='zh'?'录音语言':'Recording language';
+    document.getElementById('psalmLabel').textContent=lang==='zh'?'关联诗篇':'Related psalm';
+    ['all','zh','en'].forEach((v,i)=>audioFilter.options[i].textContent=(lang==='zh'?['全部语言','中文录音','英文录音']:['All languages','Mandarin recordings','English recordings'])[i]);
+    psalmFilter.options[0].textContent=lang==='zh'?'全部篇章':'All psalms';
+    const ordered = psalmsWorship.tracks.filter(t=>(audioFilter.value==='all'||t.language===audioFilter.value)&&(psalmFilter.value==='all'||t.psalms.includes(Number(psalmFilter.value)))).sort((a,b)=>Number(b.language===lang)-Number(a.language===lang));
+    document.getElementById('musicCount').textContent=lang==='zh'?'显示 '+ordered.length+' / '+psalmsWorship.tracks.length+' 首 · 点击官方链接收听':'Showing '+ordered.length+' / '+psalmsWorship.tracks.length+' songs · Listen through official links';
     renderWorshipTracks(document.getElementById('tracks'), {...psalmsWorship, tracks:ordered}, lang, acc);
     document.querySelectorAll('.wp-track').forEach((card,i)=>{
       const track=ordered[i];card.id=track.id;
       const links=card.querySelector('.wp-links');
       const source=document.createElement('a');source.className='wp-link';source.href=track.sourceLink;source.target='_blank';source.rel='noopener';source.textContent=lang==='zh'?'官方来源 ↗':'Official source ↗';links.append(source);
       track.psalms.forEach(num=>{const a=document.createElement('a');a.className='wp-link';a.href='psalms.html?lang='+lang+'#psalm-'+num;a.textContent=(lang==='zh'?'读诗篇 ':'Read Psalm ')+num;links.append(a)});
-      card.querySelector('a[href*="youtube.com"]').textContent=lang==='zh'?'官方录音 · YouTube ↗':'Official recording · YouTube ↗';
+      const video=card.querySelector('a[href*="youtube.com"]');if(video)video.textContent=lang==='zh'?'官方录音 · YouTube ↗':'Official recording · YouTube ↗';
+      if(track.listenLink){const a=document.createElement('a');a.className='wp-link';a.href=track.listenLink;a.target='_blank';a.rel='noopener';a.textContent=lang==='zh'?'官方收听 · Bandcamp ↗':'Listen on Bandcamp ↗';links.prepend(a);}
     });
     document.querySelectorAll('a[href]').forEach(a=>{const u=new URL(a.href);if(u.origin===location.origin && ['psalms.html','psalms-listen.html','index.html','psalms-worship.html'].includes(u.pathname.split('/').pop())){u.searchParams.set('lang',lang);a.href=u.href}});
   }

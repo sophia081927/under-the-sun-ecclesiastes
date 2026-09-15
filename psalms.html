@@ -174,7 +174,7 @@
 
 <main id="list"></main>
 
-<section class="psalms-extra" id="worship"><div class="extra-inner"><h2><span class="zh">用一首诗歌，继续祷告</span><span class="en">Continue your prayer through a song</span></h2><p><span class="zh">读完诗篇139篇，可以听赞美之泉《展开清晨的翅膀》（中文）；读完46篇或91篇，可以听 Selah 的 You Are My Hiding Place（英文）。</span><span class="en">After Psalm 46 or 91, listen to “You Are My Hiding Place” by Selah (English). After Psalm 139, try “Wings of the Dawn” by Stream of Praise (Mandarin).</span></p><p><span class="zh">歌曲与诗篇按主题搭配。进入敬拜页，可查看官方录音、经文链接和默想。</span><span class="en">These are thematic pairings. Visit the worship page for official recordings, Scripture links, and reflection.</span></p><div class="psalms-actions"><a href="psalms-worship.html"><span class="zh">进入敬拜音乐 →</span><span class="en">Open worship music →</span></a></div></div></section>
+<section class="psalms-extra" id="worship"><div class="extra-inner"><h2><span class="zh">用一首诗歌，继续祷告</span><span class="en">Continue your prayer through a song</span></h2><p><span class="zh">读完诗篇139篇，可以听赞美之泉《展开清晨的翅膀》（中文）；读完46篇或91篇，可以听 Selah 的 You Are My Hiding Place（英文）。</span><span class="en">After Psalm 46 or 91, listen to “You Are My Hiding Place” by Selah (English). After Psalm 139, try “Wings of the Dawn” by Stream of Praise (Mandarin).</span></p><p><span class="zh">歌曲与诗篇按主题搭配。敬拜页已收录21首中英文歌曲，可按篇章和录音语言筛选，查看官方录音、经文链接和默想。</span><span class="en">These are thematic pairings. Browse 21 Mandarin and English songs by psalm and recording language, with official recordings, Scripture links, and reflection.</span></p><div class="psalms-actions"><a href="psalms-worship.html"><span class="zh">进入敬拜音乐 →</span><span class="en">Open worship music →</span></a></div></div></section>
 <div class="endcta" id="ask">
   <div class="card">
     <h3><span class="en">Bring the question you can't put into a prayer</span><span class="zh">把你还组织不成祷告的那个问题,带来</span></h3>
@@ -391,6 +391,7 @@ function render(){
       + '<div class="sect"><div class="lbl">'+lblConnect+'</div><div class="body">'+esc(p.connect[L])+'</div></div>'
       + '<div class="sect med"><div class="lbl">'+lblMed+'</div><div class="body">'+esc(p.meditate[L])+'</div></div>'
       + '<a class="psalm-guide" href="psalms-deck-zh.html#slide-'+(PSALMS.indexOf(p)+4)+'">'+(L==='zh'?'查看本篇图解 →':'View this psalm in the Chinese guide →')+'</a>'
+      + '<a class="psalm-guide" href="psalms-worship.html?lang='+L+'&psalm='+p.num+'">'+(L==='zh'?'听本篇相关诗歌 →':'Songs for this psalm →')+'</a>'
       + '</section>';
   }).join('');
 }

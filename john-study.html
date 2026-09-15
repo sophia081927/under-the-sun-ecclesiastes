@@ -19,7 +19,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <title>The Light of Life · 生命之光 · A Guided Journey through John</title>
 <meta name="description" content="A guided, bilingual journey through the Gospel of John — the Word, the Light, the seven signs, the seven I AM sayings, the cross, and the resurrection. 生命之光:《约翰福音》双语导览。">
-<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/john-study.html">
+<link rel="canonical" href="https://lightoflifebible.org/john-study.html">
 <style>
   :root{
     --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
@@ -423,7 +423,7 @@
   <h2 class="head"><span class="en">Keep going, gently</span><span class="zh">温柔地,继续走</span></h2>
   <div class="nav-cards">
     <a href="john.html"><span><span class="en">The Gospel of John — full site</span><span class="zh">约翰福音 · 主站(含 Ask 问答、敬拜)</span></span><span class="go">→</span></a>
-    <a href="john-deck-en.html"><span><span class="en">The visual deck (15 slides)</span><span class="zh">完整图解(15 页)</span></span><span class="go">→</span></a>
+    <a data-john-deck href="john-deck-zh.html"><span><span class="en">The visual deck (15 slides)</span><span class="zh">完整图解(15 页)</span></span><span class="go">→</span></a>
     <a href="ecclesiastes.html?lang=zh"><span><span class="en">Book one — Ecclesiastes</span><span class="zh">第一卷 · 传道书</span></span><span class="go">→</span></a>
     <a href="index.html"><span><span class="en">Bible Library — home</span><span class="zh">圣经书阁 · 首页</span></span><span class="go">→</span></a>
   </div>
@@ -432,13 +432,13 @@
 </div>
 
 <footer>
-  <span class="en">Scripture: Chinese Union Version (和合本) &amp; NIV/KJV, public domain. Content adapted from "The Light of Life." · MVP</span>
-  <span class="zh">经文:和合本(公有领域)。内容改编自《生命之光》导览。· 演示版</span>
+  <span class="en">Scripture excerpts are identified by passage reference. Reflections and prayers are editorial material adapted from "The Light of Life."</span>
+  <span class="zh">中文经文选自和合本，出处见各段标注。默想与祷告为整理内容，改编自《生命之光》导览。</span>
 </footer>
 
 <nav class="tabbar" aria-label="quick navigation">
   <a href="john.html"><span class="ic">📖</span><span><span class="en">Read</span><span class="zh">阅读</span></span></a>
-  <a href="listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
+  <a href="john-listen.html"><span class="ic">♪</span><span><span class="en">Listen</span><span class="zh">聆听</span></span></a>
   <a href="john.html#ask"><span class="ic">✍</span><span><span class="en">Ask</span><span class="zh">提问</span></span></a>
   <a href="#s1"><span class="ic">✦</span><span><span class="en">Study</span><span class="zh">导览</span></span></a>
   <button type="button" onclick="shareThis()"><span class="ic">↗</span><span><span class="en">Share</span><span class="zh">分享</span></span></button>
@@ -446,6 +446,17 @@
 
 <script>
   function setLang(l){
+    l = l === 'en' ? 'en' : 'zh';
+    document.querySelector('[data-john-deck]').setAttribute('href', 'john-deck-' + l + '.html');
+    document.querySelectorAll('a[href]').forEach(function(a){
+      var raw = a.getAttribute('href');
+      if (!raw || raw.charAt(0) === '#') return;
+      var u = new URL(raw, location.href);
+      if (u.origin === location.origin && ['john.html','john-listen.html','ecclesiastes.html','index.html'].includes(u.pathname.split('/').pop())) {
+        u.searchParams.set('lang', l);
+        a.setAttribute('href', u.pathname.split('/').pop() + u.search + u.hash);
+      }
+    });
     document.body.classList.toggle('lang-zh', l==='zh');
     document.documentElement.lang = l==='zh' ? 'zh-CN' : 'en';
     document.getElementById('btnZh').classList.toggle('active', l==='zh');

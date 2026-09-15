@@ -169,7 +169,7 @@
   <span class="zh">经文 · 中文:和合本 · 英文:World English Bible(WEB)——公有领域,来源 <a href="https://ebible.org/eng-web/" target="_blank" rel="noopener" style="color:var(--sky-soft)">eBible.org</a>。此为经文选读;默想与“连接”说明由本站整理,不属于圣经译文。</span>
 </div>
 
-<section class="psalms-extra" id="fulldeck"><div class="extra-inner"><h2><span class="zh">一页一页，走进诗篇的祷告</span><span class="en">Explore the prayers of the Psalms</span></h2><p><span class="zh">用17页中文图解，认识本站精选的11篇诗篇。在惧怕、忧闷、悔改与盼望中，找到可以向神说的话。</span><span class="en">A 17-slide Chinese visual guide to the eleven selections on this site. The reading page is available in English.</span></p><div class="psalms-actions"><a href="psalms-deck-zh.html"><span class="zh">查看中文完整图解 →</span><span class="en">View Chinese visual guide →</span></a><a href="downloads/psalms-selected-zh.pptx" download><span class="zh">下载中文版 PPT</span><span class="en">Download Chinese PPT</span></a></div><div class="psalms-actions"><a href="psalms.html#pnav"><span class="zh">阅读</span><span class="en">Read</span></a><a href="psalms-listen.html"><span class="zh">聆听</span><span class="en">Listen</span></a><a href="psalms-worship.html"><span class="zh">敬拜音乐</span><span class="en">Worship music</span></a><a href="ask.html"><span class="zh">提问</span><span class="en">Ask</span></a></div></div></section>
+<section class="psalms-extra" id="fulldeck"><div class="extra-inner"><h2><span class="zh">一页一页，走进诗篇的祷告</span><span class="en">Explore the prayers of the Psalms</span></h2><p><span class="zh">用17页中文图解，认识本站精选的11篇诗篇。在惧怕、忧闷、悔改与盼望中，找到可以向神说的话。</span><span class="en">A 17-slide visual guide to the eleven selections on this site, available in English and Chinese.</span></p><div class="psalms-actions"><a data-psalms-deck href="psalms-deck-zh.html"><span class="zh">查看中文完整图解 →</span><span class="en">View English visual guide →</span></a><a data-psalms-download href="downloads/psalms-selected-zh.pptx" download><span class="zh">下载中文版 PPT</span><span class="en">Download English PPT</span></a></div><div class="psalms-actions"><a href="psalms.html#pnav"><span class="zh">阅读</span><span class="en">Read</span></a><a href="psalms-listen.html"><span class="zh">聆听</span><span class="en">Listen</span></a><a href="psalms-worship.html"><span class="zh">敬拜音乐</span><span class="en">Worship music</span></a><a href="ask.html"><span class="zh">提问</span><span class="en">Ask</span></a></div></div></section>
 <nav class="pnav" id="pnav" aria-label="psalm quick jump"></nav>
 
 <main id="list"></main>
@@ -390,7 +390,7 @@ function render(){
       + '<div class="verses">'+verses+'</div>'
       + '<div class="sect"><div class="lbl">'+lblConnect+'</div><div class="body">'+esc(p.connect[L])+'</div></div>'
       + '<div class="sect med"><div class="lbl">'+lblMed+'</div><div class="body">'+esc(p.meditate[L])+'</div></div>'
-      + '<a class="psalm-guide" href="psalms-deck-zh.html#slide-'+(PSALMS.indexOf(p)+4)+'">'+(L==='zh'?'查看本篇图解 →':'View this psalm in the Chinese guide →')+'</a>'
+      + '<a class="psalm-guide" href="psalms-deck-'+L+'.html#slide-'+(PSALMS.indexOf(p)+4)+'">'+(L==='zh'?'查看本篇图解 →':'View this psalm in the guide →')+'</a>'
       + '<a class="psalm-guide" href="psalms-worship.html?lang='+L+'&psalm='+p.num+'">'+(L==='zh'?'听本篇相关诗歌 →':'Songs for this psalm →')+'</a>'
       + '</section>';
   }).join('');
@@ -401,6 +401,8 @@ function setLang(l){
   document.getElementById('btnEn').classList.toggle('active', l==='en');
   document.getElementById('btnZh').classList.toggle('active', l==='zh');
   document.documentElement.lang = (l==='zh')?'zh-CN':'en';
+  document.querySelector('[data-psalms-deck]').href='psalms-deck-'+l+'.html';
+  document.querySelector('[data-psalms-download]').href='downloads/psalms-selected-'+l+'.pptx';
   document.title = l==='zh'?I18N_TITLE.zh:I18N_TITLE.en;
   try{ localStorage.setItem('bible_lang', l); }catch(e){}
   render();

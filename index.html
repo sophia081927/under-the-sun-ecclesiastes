@@ -180,7 +180,7 @@
     // feature chips (from feature flags) — everything the book offers beyond "Read/Enter"
     const chipFor = (f) => {
       const meta = featureLabels[f];
-      const href = f === 'ask' ? (b.page + '#ask') : (meta.key ? b[meta.key] : null);
+      const href = f === 'ask' ? (b.page + '#ask') : (f === 'deck' && b.deckByLanguage ? b.deckByLanguage[lang] : (meta.key ? b[meta.key] : null));
       if (!href) return '';
       const featureLabel = f === 'deck' && b.deckLanguages && b.deckLanguages.length === 1 && b.deckLanguages[0] === 'zh'
         ? (lang === 'zh' ? '中文图解' : 'Deck (Chinese)') : meta[lang];
@@ -244,7 +244,8 @@
   if (!gotoHash()) {
     let saved = null; try { saved = localStorage.getItem('bible_lang'); } catch (e) {}
     const nl = (navigator.language || '').toLowerCase();
-    lang = saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en');
+    const requestedLang = new URLSearchParams(location.search).get('lang');
+    lang = (requestedLang === 'zh' || requestedLang === 'en') ? requestedLang : (saved || (nl.indexOf('zh') === 0 ? 'zh' : 'en'));
     render();
     // mount the reusable Biblical Q&A component (auto-syncs language via <html lang>)
     mountPrayerCare(document.getElementById('prayer-care'));

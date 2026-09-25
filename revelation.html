@@ -50,7 +50,7 @@
       <a href="#chapters"><span class="zh">章节</span><span class="en">Chapters</span></a>
       <a id="listenLink" href="revelation-listen.html?ch=1"><span class="zh">聆听 ♪</span><span class="en">Listen ♪</span></a>
       <a href="revelation-worship.html"><span class="zh">敬拜</span><span class="en">Worship</span></a>
-      <a href="revelation-deck-zh.html"><span class="zh">图解</span><span class="en">Deck</span></a>
+      <a id="deckNav" href="revelation-deck-zh.html"><span class="zh">图解</span><span class="en">Deck</span></a>
       <div class="lang-toggle"><button id="btnZh" onclick="setLang('zh')">中文</button><button id="btnEn" onclick="setLang('en')">EN</button></div>
     </div>
   </header>
@@ -78,6 +78,7 @@
     </p>
   </section>
   <section class="chapter-panel" id="chapters">
+    <p id="coverageNote" style="color:var(--muted);font-size:14px;line-height:1.8;margin-bottom:16px"></p>
     <div class="panel-head"><h2><span class="zh">22章阅读导航</span><span class="en">22-Chapter Reading Guide</span></h2><div class="legend"><span class="zh">金点：完整内容</span><span class="en">Gold dot: complete</span></div></div>
     <nav class="chapter-grid" id="chapterGrid" aria-label="Revelation chapters"></nav>
   </section>
@@ -94,6 +95,8 @@
     import { renderChapterNav, renderFullChapter, renderOutline, chapterHref, escapeHtml } from './components/chapterReader.js';
     import { mountBiblicalQA } from './components/biblical-qa.js';
 
+    const fullNumbers = revelationChapters.filter(c => c.status === 'full').map(c => c.n);
+    document.getElementById('coverageNote').innerHTML = '<span class="zh">全卷 22 章概览；第 ' + fullNumbers.join('、') + ' 章含经文与详细导读，其余章节逐步完善。</span><span class="en">Overviews for all 22 chapters; Scripture and detailed notes for chapters ' + fullNumbers.join(', ') + '. Other chapters are being developed.</span>';
     const params = new URLSearchParams(location.search);
     let chapter = Number(params.get('ch') || 1);
     if (!Number.isInteger(chapter) || chapter < 1 || chapter > 22) chapter = 1;
@@ -111,6 +114,9 @@
     document.getElementById('chapterHead').innerHTML = `<div class="num"><span class="zh">启示录第 ${chapter} 章</span><span class="en">Revelation ${chapter}</span></div><h1><span class="zh">${e(meta.titleZh)}</span><span class="en">${e(meta.titleEn)}</span></h1><p class="summary"><span class="zh">${e(meta.summary.zh)}</span><span class="en">${e(meta.summary.en)}</span></p><div class="comfort"><span class="zh">${e(meta.comfortAnchor.zh)}</span><span class="en">${e(meta.comfortAnchor.en)}</span></div><div class="chapter-actions"><a href="revelation-listen.html?ch=${chapter}"><span class="zh">♪ 聆听本章</span><span class="en">♪ Listen</span></a><a href="revelation-worship.html"><span class="zh">🎵 敬拜</span><span class="en">🎵 Worship</span></a><a href="#ask"><span class="zh">提出生活问题</span><span class="en">Ask a life question</span></a></div>`;
 
     window.setLang = function(l){
+      document.getElementById('deckNav').href = `revelation-deck-${l}.html`;
+      document.getElementById('listenLink').href = `revelation-listen.html?ch=${chapter}&lang=${l}`;
+      document.getElementById('mobileListen').href = `revelation-listen.html?ch=${chapter}&lang=${l}`;
       document.body.classList.toggle('lang-zh', l === 'zh');
       document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
       document.getElementById('btnZh').classList.toggle('active', l === 'zh');

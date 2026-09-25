@@ -26,6 +26,7 @@ import { requestAIPrayer, prayerApiConfigured } from '../data/prayerClient.js';
 const UI = {
   zh: {
     title: '用圣经回应人生问题',
+    notice: '这里按问题主题匹配预先编写的经文与默想，未必覆盖所有问题。若输入祷告请求，将调用 AI 服务，请避免填写个人识别信息。', noticeLink: '内容与隐私说明',
     subtitle: '你可以把真实的问题、焦虑、疑惑和生命处境带到这里。',
     inputLabel: '你想问什么?',
     placeholder: '倾吐你此刻内心的真实处境与困惑...',
@@ -36,6 +37,7 @@ const UI = {
   },
   en: {
     title: 'Biblical Q&A',
+    notice: 'Questions are matched by topic to prepared Scripture and reflections; coverage is limited. Prayer requests use an AI service. Please leave out identifying information.', noticeLink: 'Content & privacy',
     subtitle: 'Bring your real questions, struggles, doubts, and life situations into the light of Scripture.',
     inputLabel: 'What would you like to ask?',
     placeholder: 'Pour out your real heart and inquiry here...',
@@ -174,6 +176,7 @@ export function mountBiblicalQA(container, opts) {
         <textarea class="bqa-input" data-el="input" rows="3"></textarea>
         <button type="button" class="bqa-clear" data-el="clear" aria-label="Clear question">×</button>
       </div>
+      <p style="font-size:12px;line-height:1.8;color:#b7bec8;margin:12px 0"><span data-k="notice"></span> <a data-el="notice-link" data-k="noticeLink" href="about.html" style="color:#e6c776;text-decoration:underline"></a></p>
       <div class="bqa-go"><button class="bqa-btn" data-el="btn"></button></div>
       <div class="bqa-guided">
         <div class="g-hint" data-k="guided"></div>
@@ -293,8 +296,10 @@ export function mountBiblicalQA(container, opts) {
     });
     // keep the big title distinct from the eyebrow: eyebrow shows a short kicker
     const eb = container.querySelector('[data-k="eyebrow"]');
-    if (eb) eb.textContent = lang === 'zh' ? '本站核心 · 随便问' : 'The heart of this site · Ask';
+    if (eb) eb.textContent = lang === 'zh' ? '经文与默想 · 按主题探索' : 'Scripture & reflection · Explore by topic';
     input.placeholder = t.placeholder;
+    input.setAttribute('aria-label', t.inputLabel);
+    el('notice-link').href = 'about.html?lang=' + lang + '#privacy';
     btn.textContent = t.button;
     clearBtn.setAttribute('aria-label', lang === 'zh' ? '清除问题' : 'Clear question');
     updateClear();

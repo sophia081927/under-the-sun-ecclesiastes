@@ -32,6 +32,7 @@ const UI = {
   zh: {
     eyebrow: '圣经代祷关怀舱 · 安静的代祷',
     title: '用圣经为我祷告',
+    notice: '祷告文字由 AI 辅助生成，请结合经文阅读。提交后，你的输入会发送给 AI 服务；请避免填写姓名、联系方式等识别信息。', noticeLink: '内容与隐私说明',
     subtitle: '把此刻真实的重担带到神面前，让神的话语引导一段安静的祷告。',
     inputLabel: '你此刻想为什么祷告?',
     placeholder: '例如：请为我的婚姻祷告；请为我的未来祷告；请为我的孩子祷告...',
@@ -54,6 +55,7 @@ const UI = {
   en: {
     eyebrow: 'Prayer Sanctuary Board · a quiet intercession',
     title: 'Pray with Scripture',
+    notice: 'Prayer wording is AI-assisted; read it alongside Scripture. Submitting sends your input to an AI service. Please leave out names, contact details and other identifying information.', noticeLink: 'Content & privacy',
     subtitle: 'Bring your real burden before God, and let Scripture guide a quiet prayer.',
     inputLabel: 'What would you like prayer for?',
     placeholder: 'For example: Please pray for my marriage; please pray for my future; please pray for my child...',
@@ -538,6 +540,7 @@ export function mountPrayerCare(container, opts) {
         <textarea class="pray-input" data-el="input" rows="3" maxlength="1000"></textarea>
         <button type="button" class="pray-clear" data-el="clear" aria-label="Clear">×</button>
       </div>
+      <p style="font-size:12px;line-height:1.8;color:#b7bec8;margin:12px 0"><span data-k="notice"></span> <a data-el="notice-link" data-k="noticeLink" href="about.html" style="color:#e6c776;text-decoration:underline"></a></p>
       <div class="pray-go"><button class="pray-btn" data-el="btn"></button></div>
       <div class="pray-guided">
         <div class="g-hint" data-k="guided"></div>
@@ -609,6 +612,8 @@ export function mountPrayerCare(container, opts) {
       n.textContent = t[k] || '';
     });
     input.placeholder = t.placeholder;
+    input.setAttribute('aria-label', t.inputLabel);
+    el('notice-link').href = 'about.html?lang=' + lang + '#privacy';
     input.setAttribute('aria-label', t.inputLabel);
     btn.textContent = t.submitButton;
     clearBtn.setAttribute('aria-label', lang === 'zh' ? '清除' : 'Clear');

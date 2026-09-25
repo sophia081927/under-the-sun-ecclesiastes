@@ -21,7 +21,7 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="书阁 Library">
-<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/listen.html">
+<link rel="canonical" href="https://lightoflifebible.org/listen.html">
 <style>
   :root{
     --bg:#14161a; --bg2:#1b1e24; --bg3:#22262e;
@@ -186,6 +186,7 @@
     <span class="sub"><span class="en">read · listen · reflect</span><span class="zh">读 · 听 · 默想</span></span>
   </h1>
   <p class="tag"><span class="en">Not to be read in a hurry — to be heard, slowly.</span><span class="zh">不必急着读完,慢慢听就好。</span></p>
+  <p class="tag"><span class="zh">当前可使用设备合成语音；真人录音仍在制作中。声音与连续播放效果因设备而异。</span><span class="en">Device-generated speech is available; human recordings are still in production. Voices and continuous playback vary by device.</span></p>
   <div class="scenes" id="scenes"></div>
   <div class="listen-lang">
     <button id="llZh" onclick="setLang('zh')">🎧 中文聆听</button>
@@ -193,7 +194,7 @@
   </div>
   <div class="bigplay">
     <button onclick="Player.playFrom(0)"><span class="en">▶ Start English Listening</span><span class="zh">▶ 开始中文聆听</span></button>
-    <div class="bigplay-sub"><span class="en">Reads all 12 chapters aloud · tap any chapter to jump in</span><span class="zh">从第一章起连续朗读 12 章 · 点任意章节可跳听</span></div>
+    <div class="bigplay-sub"><span class="en">Guided reflections across 12 chapters · selected verses, not a full Bible reading</span><span class="zh">全 12 章导读与默想 · 含经文选段，非逐字全文朗读</span></div>
   </div>
 </div>
 
@@ -255,6 +256,8 @@
 var LANG_KEY='bible_lang';
 function curLang(){ return document.body.classList.contains('lang-zh') ? 'zh' : 'en'; }
 function setLang(l){
+  var back = document.querySelector('.back');
+  if(back){var target=new URL(back.href);target.searchParams.set('lang',l);back.href=target.href;}
   document.body.classList.toggle('lang-zh', l==='zh');
   document.documentElement.lang = l==='zh' ? 'zh-CN' : 'en';
   document.getElementById('btnZh').classList.toggle('active', l==='zh');
@@ -640,7 +643,8 @@ function applyHash(){
 (function(){
   var saved=null; try{ saved=localStorage.getItem(LANG_KEY);}catch(e){}
   var nl=(navigator.language||'').toLowerCase();
-  setLang(saved || (nl.indexOf('zh')===0?'zh':'en'));
+  var requested = new URLSearchParams(location.search).get('lang');
+  setLang(requested==='zh'||requested==='en' ? requested : (saved==='zh'||saved==='en' ? saved : (nl.indexOf('zh')===0?'zh':'en')));
   renderScenes(); renderLists();
   applyHash();
   window.addEventListener('hashchange', applyHash);

@@ -21,19 +21,19 @@
 <meta name="apple-mobile-web-app-title" content="书阁 Library">
 <title>The Gospel of John · 约翰福音:生命之光</title>
 <meta name="description" content="The Gospel of John: the Light of Life. Where Ecclesiastes exposes the emptiness of life under the sun, John leads to Jesus — the light, the living water, the resurrection and the life. 约翰福音:生命之光——从《传道书》的空,走向那位真正的生命之光。">
-<link rel="canonical" href="https://sophia081927.github.io/under-the-sun-ecclesiastes/john.html">
+<link rel="canonical" href="https://lightoflifebible.org/john.html">
 
 <!-- Social share cards (WeChat / Facebook / X link previews) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Bible Library · 圣经书阁">
 <meta property="og:title" content="The Gospel of John · 约翰福音:生命之光">
 <meta property="og:description" content="If Ecclesiastes exposes the emptiness of life under the sun, the Gospel of John leads us to the true Light of Life. 约翰福音:生命之光。">
-<meta property="og:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/bridge.webp">
-<meta property="og:url" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/john.html">
+<meta property="og:image" content="https://lightoflifebible.org/images/en/bridge.webp">
+<meta property="og:url" content="https://lightoflifebible.org/john.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Gospel of John · 约翰福音:生命之光">
 <meta name="twitter:description" content="The Light of Life — where Ecclesiastes' honest questions find their answer. 从《传道书》的诚实之问,走向生命之光。">
-<meta name="twitter:image" content="https://sophia081927.github.io/under-the-sun-ecclesiastes/images/en/bridge.webp">
+<meta name="twitter:image" content="https://lightoflifebible.org/images/en/bridge.webp">
 
 <!-- Structured data -->
 <script type="application/ld+json">
@@ -41,7 +41,7 @@
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Bible Library · 圣经书阁",
-  "url": "https://sophia081927.github.io/under-the-sun-ecclesiastes/",
+  "url": "https://lightoflifebible.org/",
   "inLanguage": ["zh-CN", "en"],
   "description": "A quiet, bilingual reading room for the Bible, book by book — Ecclesiastes and the Gospel of John. 一个安静的中英双语圣经导读:《传道书》与《约翰福音》。",
   "about": { "@type": "Book", "name": "The Gospel of John · 约翰福音" }
@@ -507,12 +507,14 @@
         </div>
       </div>
       <div class="src">
-        <span class="en">Text: KJV (public domain) &amp; Chinese Union Version (和合本). Verses 2, 6–8, 10, 13 omitted for length — the full chapter is one click away in a finished build.</span>
-        <span class="zh">经文:KJV(公有领域)与和合本。为篇幅略去第 2、6–8、10、13 节——完整章节在正式版本中一键可读。</span>
+        <span class="en">Text: KJV (public domain) &amp; Chinese Union Version (和合本). Selected verses from John 1; verses 2, 6–8, 10, 13 are omitted and verse 14 is abridged in English.</span>
+        <span class="zh">经文:KJV(公有领域)与和合本。本页选读约翰福音第一章；为篇幅略去第 2、6–8、10、13 节，英文第 14 节为节选。</span>
       </div>
     </div>
   </div>
 </section>
+
+<section style="padding:24px 0"><div class="wrap" style="border:1px solid var(--line);border-radius:12px;padding:24px"><h2 class="head"><span class="zh">停留一分钟，再向前一步</span><span class="en">Pause for a minute, then take one step</span></h2><p class="lead"><span class="zh">刚才哪一句话让你停下来？把它记下来，想一想它与你今天的生活有什么关系。你可以用自己的话祷告，也可以打开祷告工具；生成后可选择保存到祷告本。</span><span class="en">Which line made you pause? Write it down and consider how it meets your life today. Pray in your own words, or open the prayer tool; you can choose to save the generated prayer to your journal.</span></p><a href="#prayer-care-section"><span class="zh">带着这段经文祷告 →</span><span class="en">Respond in prayer →</span></a></div></section>
 
 <!-- ============ CORE THEMES ============ -->
 <section id="themes">
@@ -983,6 +985,7 @@ Waking or sleeping, Thy presence my light.</span><span class="zh">成为我异�
     zh: "约翰福音:生命之光。《传道书》揭开日光之下的空,《约翰福音》把我们带向那位真正的生命之光——温和、不说教,适合慕道与华人家庭。"
   };
   function setLang(l){
+    setPane(l==='zh' ? 'cuv' : 'kjv');
     document.body.classList.toggle('lang-zh', l==='zh');
     document.getElementById('btnEn').classList.toggle('active', l==='en');
     document.getElementById('btnZh').classList.toggle('active', l==='zh');

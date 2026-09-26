@@ -32,8 +32,9 @@
    We never invent a verse.
 
    TRANSLATION ATTRIBUTION: Chinese verses use 和合本 (public domain — no
-   attribution). English verses append their translation abbreviation, e.g.
-   "(NIV)", consistently everywhere.
+   attribution). English verses use the World English Bible (public domain,
+   text drawn verbatim from worker/scripture-assets/en) and append "(WEB)"
+   consistently everywhere.
    ============================================================ */
 
 export const qaRegistry = [
@@ -43,8 +44,8 @@ export const qaRegistry = [
     keywordsEn: ['empty','emptiness','meaningless','no meaning','pointless','vanity','not satisfied','unsatisfied','chasing the wind'],
     relatedBooks: ['ecclesiastes','john'],
     variants: [
-      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)' } },
-      { verse: { zh: '【约翰福音 4:13-14】“凡喝这水的还要再渴;人若喝我所赐的水就永远不渴。我所赐的水要在他里头成为泉源,直涌到永生。”', en: '【John 4:13-14】“Everyone who drinks this water will be thirsty again, but whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.” (NIV)' } }
+      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in their hearts, yet so that man can’t find out the work that God has done from the beginning even to the end.” (WEB)' } },
+      { verse: { zh: '【约翰福音 4:13-14】“凡喝这水的还要再渴;人若喝我所赐的水就永远不渴。我所赐的水要在他里头成为泉源,直涌到永生。”', en: '【John 4:13-14】“Jesus answered her, ‘Everyone who drinks of this water will thirst again, but whoever drinks of the water that I will give him will never thirst again; but the water that I will give him will become in him a well of water springing up to eternal life.’” (WEB)' } }
     ],
     zh: {
       title: '当你感到空虚',
@@ -56,8 +57,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Empty',
-      verse: '【Ecclesiastes 1:14】“I have seen all the things that are done under the sun; all of them are meaningless, a chasing after the wind.” (NIV)',
-      explanation: 'The Bible honestly shows that life “under the sun” cannot fully satisfy the human soul. Achievement, money, relationships, or status may still leave us empty. This emptiness does not simply mean you have failed; it may be a reminder that your soul was made for eternity and for God Himself — Ecclesiastes 3:11 says God “has set eternity in the human heart.”',
+      verse: '【Ecclesiastes 1:14】“I have seen all the works that are done under the sun; and behold, all is vanity and a chasing after wind.” (WEB)',
+      explanation: 'The Bible honestly shows that life “under the sun” cannot fully satisfy the human soul. Achievement, money, relationships, or status may still leave us empty. This emptiness does not simply mean you have failed; it may be a reminder that your soul was made for eternity and for God Himself — Ecclesiastes 3:11 says God “has also set eternity in their hearts.”',
       reflection: 'What is one thing you have chased recently that still left you feeling empty after you received it?',
       nextStep: 'You may continue reading Ecclesiastes chapters 1 and 3, and then read John to encounter Jesus, the true light and life.',
       prayer: 'Lord Jesus, comfort my weary and empty heart. Lead me from chasing the wind under the sun to finding true life and eternity in You. Amen.'
@@ -70,8 +71,8 @@ export const qaRegistry = [
     keywordsEn: ['anxious','anxiety','fear','afraid','fearful','stress','stressed','worry','worried','cannot sleep',"can't sleep",'nervous','panic','overwhelmed'],
     relatedBooks: ['john','psalms','revelation'],
     variants: [
-      { verse: { zh: '【腓立比书 4:6-7】“应当一无挂虑,只要凡事借着祷告、祈求和感谢,将你们所要的告诉神。神所赐出人意外的平安,必在基督耶稣里保守你们的心怀意念。”', en: '【Philippians 4:6-7】“Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.” (NIV)' } },
-      { verse: { zh: '【马太福音 6:34】“所以,不要为明天忧虑,因为明天自有明天的忧虑;一天的难处一天当就够了。”', en: '【Matthew 6:34】“Therefore do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.” (NIV)' } }
+      { verse: { zh: '【腓立比书 4:6-7】“应当一无挂虑,只要凡事借着祷告、祈求和感谢,将你们所要的告诉神。神所赐出人意外的平安,必在基督耶稣里保守你们的心怀意念。”', en: '【Philippians 4:6-7】“In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God. And the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus.” (WEB)' } },
+      { verse: { zh: '【马太福音 6:34】“所以,不要为明天忧虑,因为明天自有明天的忧虑;一天的难处一天当就够了。”', en: '【Matthew 6:34】“Therefore don’t be anxious for tomorrow, for tomorrow will be anxious for itself. Each day’s own evil is sufficient.” (WEB)' } }
     ],
     zh: {
       title: '当你焦虑害怕',
@@ -83,8 +84,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Anxious',
-      verse: '【John 14:27】“Peace I leave with you; my peace I give you. I do not give to you as the world gives. Do not let your hearts be troubled and do not be afraid.” (NIV)',
-      explanation: 'The peace of the world often depends on circumstances: money, grades, relationships, health, and a controllable future. But the peace Jesus gives is deeper. It is rooted in His presence and His authority over tomorrow. He did not say “don’t worry, it’s nothing,” but “in this world you will have trouble. But take heart! I have overcome the world” (John 16:33).',
+      verse: '【John 14:27】“Peace I leave with you. My peace I give to you; not as the world gives, I give to you. Don’t let your heart be troubled, neither let it be fearful.” (WEB)',
+      explanation: 'The peace of the world often depends on circumstances: money, grades, relationships, health, and a controllable future. But the peace Jesus gives is deeper. It is rooted in His presence and His authority over tomorrow. He did not say “don’t worry, it’s nothing,” but “In the world you have trouble; but cheer up! I have overcome the world” (John 16:33).',
       reflection: 'What is the biggest worry weighing on your heart today? Are you willing to bring it to Jesus in prayer?',
       nextStep: 'You may read John chapter 14 slowly and reflect on the peace Jesus promises. You can also open the Listen page and let these words be read gently to you.',
       prayer: 'Lord Jesus, my heart feels anxious and heavy. Please give me Your peace and help me entrust my tomorrow into Your hands. Amen.'
@@ -97,8 +98,8 @@ export const qaRegistry = [
     keywordsEn: ['god love','does god love','does god love me','god really love','loved by god','god care','am i loved','no one loves','no one loves me','worth loving','worthy of love','unlovable','god still love'],
     relatedBooks: ['john'],
     variants: [
-      { verse: { zh: '【罗马书 5:8】“惟有基督在我们还作罪人的时候为我们死,神的爱就在此向我们显明了。”', en: '【Romans 5:8】“But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.” (NIV)' } },
-      { verse: { zh: '【约翰一书 4:9-10】“神差他独生子到世间来,使我们借着他得生,神爱我们的心在此就显明了。不是我们爱神,乃是神爱我们,差他的儿子为我们的罪作了挽回祭,这就是爱了。”', en: '【1 John 4:9-10】“This is how God showed his love among us: He sent his one and only Son into the world that we might live through him. This is love: not that we loved God, but that he loved us and sent his Son as an atoning sacrifice for our sins.” (NIV)' } }
+      { verse: { zh: '【罗马书 5:8】“惟有基督在我们还作罪人的时候为我们死,神的爱就在此向我们显明了。”', en: '【Romans 5:8】“But God commends his own love toward us, in that while we were yet sinners, Christ died for us.” (WEB)' } },
+      { verse: { zh: '【约翰一书 4:9-10】“神差他独生子到世间来,使我们借着他得生,神爱我们的心在此就显明了。不是我们爱神,乃是神爱我们,差他的儿子为我们的罪作了挽回祭,这就是爱了。”', en: '【1 John 4:9-10】“By this God’s love was revealed in us, that God has sent his only born Son into the world that we might live through him. In this is love, not that we loved God, but that he loved us, and sent his Son as the atoning sacrifice for our sins.” (WEB)' } }
     ],
     zh: {
       title: '当你怀疑神是否爱你',
@@ -110,8 +111,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Doubt God Loves You',
-      verse: '【John 15:9】“As the Father has loved me, so have I loved you. Now remain in my love.” (NIV)',
-      explanation: 'The Bible answers “does God love me?” not with an empty reassurance but with a costly action: God gave His one and only Son (John 3:16), and “God demonstrates his own love for us in this: While we were still sinners, Christ died for us” (Romans 5:8). Notice the word — “the world.” Not “the good enough,” but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
+      verse: '【John 15:9】“Even as the Father has loved me, I also have loved you. Remain in my love.” (WEB)',
+      explanation: 'The Bible answers “does God love me?” not with an empty reassurance but with a costly action: God gave His one and only Son (John 3:16), and “God commends his own love toward us, in that while we were yet sinners, Christ died for us” (Romans 5:8). Notice the word — “the world.” Not “the good enough,” but the world, which includes you, right now, asking this question. You do not have to become lovable first in order to be loved.',
       reflection: 'Do you often feel you must first become better, or do certain things, before you can be loved by God?',
       nextStep: 'Begin with John chapter 3, then John 15; you may also read 1 John 4:9–10 to see how God’s love reached us first.',
       prayer: 'God, I so often doubt whether I am worth loving. Help me truly know — not just in my head but in my heart — that You love me, enough to give Your Son. Help me remain in Your love. Amen.'
@@ -133,7 +134,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Want to Know Jesus',
-      verse: '【John 3:16】“For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.” (NIV)',
+      verse: '【John 3:16】“For God so loved the world, that he gave his only born Son, that whoever believes in him should not perish, but have eternal life.” (WEB)',
       explanation: 'The Gospel of John shows that God is not distant or indifferent. Through Jesus Christ, God entered our world to bring life, light, forgiveness, and eternal hope. Knowing Jesus does not begin with passing a test — it begins with looking, at who this person is. You do not need to resolve every doubt before you begin.',
       reflection: 'If Jesus truly is the light and life from God, where would you like to begin knowing Him?',
       nextStep: 'You may begin with John chapter 1 and discover who Jesus is. The Library also has a John study guide that walks you through it.',
@@ -150,8 +151,8 @@ export const qaRegistry = [
     keywordsEn: ['insecure','insecurity','no sense of security','unsafe','afraid of losing','afraid of being abandoned','not protected','feel alone'],
     relatedBooks: ['john','psalms','revelation'],
     variants: [
-      { verse: { zh: '【以赛亚书 41:10】“你不要害怕,因为我与你同在;不要惊惶,因为我是你的神。我必坚固你,我必帮助你;我必用我公义的右手扶持你。”', en: '【Isaiah 41:10】“So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.” (NIV)' } },
-      { verse: { zh: '【约翰福音 10:27-29】“我的羊听我的声音,我也认识他们,他们也跟着我。我又赐给他们永生;他们永不灭亡,谁也不能从我手里把他们夺去。”', en: '【John 10:27-29】“My sheep listen to my voice; I know them, and they follow me. I give them eternal life, and they shall never perish; no one will snatch them out of my hand.” (NIV)' } }
+      { verse: { zh: '【以赛亚书 41:10】“你不要害怕,因为我与你同在;不要惊惶,因为我是你的神。我必坚固你,我必帮助你;我必用我公义的右手扶持你。”', en: '【Isaiah 41:10】“Don’t you be afraid, for I am with you. Don’t be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness.” (WEB)' } },
+      { verse: { zh: '【约翰福音 10:27-29】“我的羊听我的声音,我也认识他们,他们也跟着我。我又赐给他们永生;他们永不灭亡,谁也不能从我手里把他们夺去。”', en: '【John 10:27-29】“My sheep hear my voice, and I know them, and they follow me. I give eternal life to them. They will never perish, and no one will snatch them out of my hand. My Father who has given them to me is greater than all. No one is able to snatch them out of my Father’s hand.” (WEB)' } }
     ],
     zh: {
       title: '当你没有安全感',
@@ -163,7 +164,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Insecure',
-      verse: '【Psalm 46:1】“God is our refuge and strength, an ever-present help in trouble.” (NIV)',
+      verse: '【Psalm 46:1】“God is our refuge and strength, a very present help in trouble.” (WEB)',
       explanation: 'Insecurity does not simply mean you are weak. It often reveals that the human heart needs a refuge stronger than circumstances, relationships, money, or self-control. Scripture tells us that God is not a distant observer; He is our refuge and strength. True security does not mean everything is under our control. It means we are held by the unchanging God even when life feels uncertain.',
       reflection: 'What are you most afraid of losing right now? Has that thing become the foundation of your security?',
       nextStep: 'You may slowly read Psalm 46, and then read John chapter 10 to reflect on Jesus as the Good Shepherd who knows, protects, and leads His people.',
@@ -177,8 +178,8 @@ export const qaRegistry = [
     keywordsEn: ['meaning of life','purpose of life','why am i here','why am i alive','why do i exist','life purpose','what is the meaning','reason to live'],
     relatedBooks: ['ecclesiastes','revelation'],
     variants: [
-      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)' } },
-      { verse: { zh: '【约翰福音 17:3】“认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。”', en: '【John 17:3】“Now this is eternal life: that they know you, the only true God, and Jesus Christ, whom you have sent.” (NIV)' } }
+      { verse: { zh: '【传道书 3:11】“神造万物,各按其时成为美好,又将永生安置在世人心里。”', en: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in their hearts, yet so that man can’t find out the work that God has done from the beginning even to the end.” (WEB)' } },
+      { verse: { zh: '【约翰福音 17:3】“认识你独一的真神,并且认识你所差来的耶稣基督,这就是永生。”', en: '【John 17:3】“This is eternal life, that they should know you, the only true God, and him whom you sent, Jesus Christ.” (WEB)' } }
     ],
     zh: {
       title: '探讨人生的意义',
@@ -190,7 +191,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'Exploring the Meaning of Life',
-      verse: '【Ecclesiastes 12:13】“Now all has been heard; here is the conclusion of the matter: Fear God and keep his commandments, for this is the duty of all mankind.” (NIV)',
+      verse: '【Ecclesiastes 12:13】“This is the end of the matter. All has been heard. Fear God and keep his commandments; for this is the whole duty of man.” (WEB)',
       explanation: 'Thank you for asking the ultimate question. The book of Ecclesiastes honestly proves that if you anchor your purpose in things “under the sun” — wealth, pleasure, or career — it all ends in chasing the wind. Yet God has set eternity in the human heart (Ecclesiastes 3:11). The meaning of life is not something we invent; it is something we discover when we reconnect with our Creator. True purpose is found in revering God and aligning our fleeting days with His eternal design.',
       reflection: 'When in your life did you feel a true sense of purpose? Was it tied to something temporary or something eternal?',
       nextStep: 'You may dive into Ecclesiastes chapter 12 for its conclusion on worldly vanity, and John 17:3 to see how Jesus defines eternal life.',
@@ -204,8 +205,8 @@ export const qaRegistry = [
     keywordsEn: ['is god real','does god exist','what is truth','is there a god','is there anything beyond this life','is heaven real'],
     relatedBooks: ['john'],
     variants: [
-      { verse: { zh: '【约翰福音 1:1,4-5】“太初有道,道与神同在,道就是神。……生命在他里头,这生命就是人的光。光照在黑暗里,黑暗却不接受光。”', en: '【John 1:1,4-5】“In the beginning was the Word, and the Word was with God, and the Word was God. … In him was life, and that life was the light of all mankind. The light shines in the darkness, and the darkness has not overcome it.” (NIV)' } },
-      { verse: { zh: '【希伯来书 11:1】“信就是所望之事的实底,是未见之事的确据。”', en: '【Hebrews 11:1】“Now faith is confidence in what we hope for and assurance about what we do not see.” (NIV)' } }
+      { verse: { zh: '【约翰福音 1:1,4-5】“太初有道,道与神同在,道就是神。……生命在他里头,这生命就是人的光。光照在黑暗里,黑暗却不接受光。”', en: '【John 1:1,4-5】“In the beginning was the Word, and the Word was with God, and the Word was God. In him was life, and the life was the light of men. The light shines in the darkness, and the darkness hasn’t overcome it.” (WEB)' } },
+      { verse: { zh: '【希伯来书 11:1】“信就是所望之事的实底,是未见之事的确据。”', en: '【Hebrews 11:1】“Now faith is assurance of things hoped for, proof of things not seen.” (WEB)' } }
     ],
     zh: {
       title: '寻找真实的真理',
@@ -217,7 +218,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'Seeking the Absolute Truth',
-      verse: '【John 14:6】“Jesus answered, ‘I am the way and the truth and the life. No one comes to the Father except through me.’” (NIV)',
+      verse: '【John 14:6】“Jesus said to him, ‘I am the way, the truth, and the life. No one comes to the Father, except through me.’” (WEB)',
       explanation: 'Your question sounds like a deeper search: Is there truly God, truth, eternity, and hope beyond what we can see? Scripture does not begin with a cold theory; it brings a radical revelation. Truth is not a cold philosophical concept or an abstract moral law. Truth is a Person who loved you and broke into history to find you — Jesus Christ. He is the only solid reality that never shifts.',
       reflection: 'In this unstable era, what is the single most “real and unshakeable” foundation in your life right now?',
       nextStep: 'We encourage you to open John chapter 1 to see the Word made flesh, full of grace and truth.',
@@ -231,7 +232,7 @@ export const qaRegistry = [
     keywordsEn: ['lonely','no one understands me','forgotten','feel abandoned'],
     relatedBooks: ['john','psalms'],
     variants: [
-      { verse: { zh: '【马太福音 28:20】“凡我所吩咐你们的,都教训他们遵守,我就常与你们同在,直到世界的末了。”', en: '【Matthew 28:20】“…And surely I am with you always, to the very end of the age.” (NIV)' } }
+      { verse: { zh: '【马太福音 28:20】“凡我所吩咐你们的,都教训他们遵守,我就常与你们同在,直到世界的末了。”', en: '【Matthew 28:20】“Behold, I am with you always, even to the end of the age.” (WEB)' } }
     ],
     zh: {
       title: '当你感到孤独',
@@ -243,8 +244,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel Lonely',
-      verse: '【John 14:18】“I will not leave you as orphans; I will come to you.” (NIV)',
-      explanation: 'Loneliness is often not the absence of people, but the ache that “no one truly knows me.” Scripture never makes light of that pain. Psalm 23 says that even through the darkest valley, a Shepherd walks with you; before He left, Jesus told His disciples, “I will not leave you as orphans,” and after rising He promised, “I am with you always, to the very end of the age” (Matthew 28:20). The presence you long for — to be fully known and never abandoned — is exactly what God holds out to you.',
+      verse: '【John 14:18】“I will not leave you orphans. I will come to you.” (WEB)',
+      explanation: 'Loneliness is often not the absence of people, but the ache that “no one truly knows me.” Scripture never makes light of that pain. Psalm 23 says that even through the darkest valley, a Shepherd walks with you; before He left, Jesus told His disciples, “I will not leave you orphans,” and after rising He promised, “I am with you always, even to the end of the age” (Matthew 28:20). The presence you long for — to be fully known and never abandoned — is exactly what God holds out to you.',
       reflection: 'When you feel most alone, what do you most long for someone to do — to speak, to stay, or simply to let you know they have not left?',
       nextStep: 'You may read Psalm 23 slowly, then John chapter 14, and hear Jesus promise the Comforter who never leaves.',
       prayer: 'Lord, I feel lonely, as if no one truly knows me. Thank You for promising not to leave me as an orphan. Let me truly know, right now, that You are with me, that You know me, and that You will not leave. Amen.'
@@ -266,10 +267,10 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Success Still Leaves You Empty',
-      verse: '【Ecclesiastes 2:11】“Yet when I surveyed all that my hands had done and what I had toiled to achieve, everything was meaningless, a chasing after the wind; nothing was gained under the sun.” (NIV)',
+      verse: '【Ecclesiastes 2:11】“Then I looked at all the works that my hands had worked, and at the labor that I had labored to do; and behold, all was vanity and a chasing after wind, and there was no profit under the sun.” (WEB)',
       explanation: 'The man who wrote these words worked harder and achieved more than you or I — he got all of it, and found that “a little more” never lands. The problem was never that you tried too little. Achievement, by its nature, cannot be kept; it was never built to carry the full weight you rest on it. You are not a failure — you have reached the ceiling every success shares “under the sun.”',
       reflection: 'Have you been waiting for some achievement, believing that “once I get there” you will finally feel satisfied? Did that moment ever truly arrive?',
-      nextStep: 'Read Ecclesiastes 2 and watch the author walk the road you are on. If you want to go a step further, pause on John 4: “Whoever drinks the water I give them will never thirst.”',
+      nextStep: 'Read Ecclesiastes 2 and watch the author walk the road you are on. If you want to go a step further, pause on John 4, where Jesus says, “whoever drinks of the water that I will give him will never thirst again.”',
       prayer: 'Lord, I have worked so long and still feel unsatisfied. Help me see that what I truly thirst for is not more achievement, but You. Amen.'
     }
   },
@@ -289,7 +290,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Your Relationships Hurt',
-      verse: '【Ecclesiastes 4:9-10】“Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up.” (NIV)',
+      verse: '【Ecclesiastes 4:9-10】“Two are better than one, because they have a good reward for their labor. For if they fall, the one will lift up his fellow; but woe to him who is alone when he falls, and doesn’t have another to lift him up.” (WEB)',
       explanation: 'Ecclesiastes speaks of “two being better than one,” but never a fairy-tale marriage — it describes real companionship, where people fall and need to be lifted. Pain in a relationship often hurts so much precisely because we were made for deep connection. Scripture offers no simple “just do this” formula, but it honors that your pain is real, and points to a God willing to enter your burden with you.',
       reflection: 'In this relationship, what is the part of you that most longs to be understood, and lifted back up?',
       nextStep: 'This kind of pain usually also needs real people alongside you — a pastor, counselor, or mature spiritual friend. If you are willing, bring the weight to God in prayer first, then take a step toward seeking help.',
@@ -312,7 +313,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Suffering',
-      verse: '【John 16:33】“I have told you these things, so that in me you may have peace. In this world you will have trouble. But take heart! I have overcome the world.” (NIV)',
+      verse: '【John 16:33】“I have told you these things, that in me you may have peace. In the world you have trouble; but cheer up! I have overcome the world.” (WEB)',
       explanation: 'Scripture never makes light of your pain. Ecclesiastes says there is “a time to mourn” (Ecc 3:4) — it does not rush you to feel better. And Jesus did not go around suffering: he wept, he was abandoned, he died. To those in pain he does not say “it’s nothing,” but names the truth first, then adds: “I have overcome the world.” You do not have to pretend to be strong to come to him.',
       reflection: 'If you could say one completely honest thing to God, with nothing hidden, what would you most want to say right now?',
       nextStep: 'Read John 11 and watch Jesus weep at the grave of his friend — he knows what loss is. (A Job module is planned for the Library, for suffering and unexplained pain.)',
@@ -335,7 +336,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Face the Question of Death',
-      verse: '【John 11:25】“Jesus said to her, ‘I am the resurrection and the life. The one who believes in me will live, even though they die.’” (NIV)',
+      verse: '【John 11:25】“Jesus said to her, ‘I am the resurrection and the life. He who believes in me will still live, even if he dies.’” (WEB)',
       explanation: 'Ecclesiastes is honest to the point of chill: “under the sun,” death levels everyone, and it does not soften that wall. Yet it leaves a crack — “the spirit returns to God who gave it” (Ecc 12:7). And John answers from the other side: Jesus does not say he has a teaching about resurrection — he says, “I am the resurrection.” In the face of death, what he offers is not an explanation, but himself.',
       reflection: 'When you think about death, what exactly is your deepest fear or question?',
       nextStep: 'Read Ecclesiastes 12 first and let it bring you honestly to the wall; then read John 11 and see how Jesus stands before death and the grave.',
@@ -358,7 +359,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Always Thirsty for More',
-      verse: '【John 4:14】“Whoever drinks the water I give them will never thirst. Indeed, the water I give them will become in them a spring of water welling up to eternal life.” (NIV)',
+      verse: '【John 4:14】“but whoever drinks of the water that I will give him will never thirst again; but the water that I will give him will become in him a well of water springing up to eternal life.” (WEB)',
       explanation: 'Ecclesiastes diagnoses the loop of “thirsty again” — you chase something, get it, and soon you are empty once more. John responds: the problem is not that you drank too little, but which water you drank. Jesus says the water he gives becomes “a spring” inside you — not something you keep scooping from outside, but something welling up from within. Real satisfaction is not getting more; it is being connected to the Source.',
       reflection: 'Is there something you got, only to feel thirsty again soon after? What might that repeated thirst be pointing to?',
       nextStep: 'Read the well-side conversation in John 4, then John 6. You will watch Jesus turn people, again and again, from “just a little more” toward “come to me.”',
@@ -381,7 +382,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Not Sure You Believe',
-      verse: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in the human heart.” (NIV)',
+      verse: '【Ecclesiastes 3:11】“He has made everything beautiful in its time. He has also set eternity in their hearts, yet so that man can’t find out the work that God has done from the beginning even to the end.” (WEB)',
       explanation: 'Yes, you can read it — Ecclesiastes may be the book in the Bible most written for you. Its recurring phrase “under the sun” means exactly this: life examined honestly, with no God and no afterlife assumed. You can read it as a skeptic, because it argues from the skeptic’s own premises. Reading the Bible does not require you to “believe” something first; it only asks for honesty.',
       reflection: 'Setting aside the conclusion of “believe or not” for a moment — is there a faint longing for something eternal in you that this world has not filled?',
       nextStep: 'Start with Ecclesiastes 1, reading it as plain observation about work, pleasure, and success — and notice whether it names something true about your life. Everything about faith here is opt-in and clearly labeled.',
@@ -404,7 +405,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Are Lost in the Dark',
-      verse: '【John 8:12】“I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.” (NIV)',
+      verse: '【John 8:12】“Again, therefore, Jesus spoke to them, saying, ‘I am the light of the world. He who follows me will not walk in the darkness, but will have the light of life.’” (WEB)',
       explanation: 'In the dark, what a person needs most is often not more information, but light — something that lets you see the one step in front of you. Jesus did not say “I will point you a direction”; he said “I am the way” (John 14:6). Following the light does not mean the whole road becomes clear at once; it means that in the step you are taking now, you are no longer feeling through the dark alone.',
       reflection: 'What is the one thing, or the one decision, you most want to “see clearly” right now?',
       nextStep: 'Read John 8 and John 14. If you feel lost right now, try seeking to know the Light first — you do not have to see the whole road at once.',
@@ -427,7 +428,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Guilt Won’t Let Go',
-      verse: '【1 John 1:9】“If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.” (NIV)',
+      verse: '【1 John 1:9】“If we confess our sins, he is faithful and righteous to forgive us the sins and to cleanse us from all unrighteousness.” (WEB)',
       explanation: 'There are two kinds of guilt: one leads you toward repair and forgiveness; the other just pins you to the past and shames you on repeat. Confession in the Bible is not endless self-blame — it is naming the wrong honestly and handing it to a God who is “faithful and just.” He forgives not because your sin was small, but because His mercy is large enough. In Psalm 51 David laid his grave failure open the same way, and asked to be washed and remade.',
       reflection: 'Is there something you keep sentencing yourself for, but have never honestly handed to God to ask for forgiveness?',
       nextStep: 'Read 1 John 1:9, then Psalm 51, and see how God “creates a clean heart” after confession.',
@@ -450,8 +451,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Can’t Forgive',
-      verse: '【Matthew 18:21-22】“Lord, how many times shall I forgive my brother or sister who sins against me? Up to seven times? Jesus answered, I tell you, not seven times, but seventy-seven times.” (NIV)',
-      explanation: 'Forgiveness does not mean “you didn’t hurt me,” nor pretending the wound isn’t there. It is a hard decision: to stop letting hatred define and hijack you. Jesus frames it as “seventy-seven times” — not bookkeeping, but a whole new way to live. It is hard, especially when the other person never apologized. But holding bitterness usually poisons you first; and God says “It is mine to avenge” (Rom 12:19) — meaning you can hand the justice to Him and not carry it yourself.',
+      verse: '【Matthew 18:21-22】“Then Peter came and said to him, ‘Lord, how often shall my brother sin against me, and I forgive him? Until seven times?’ Jesus said to him, ‘I don’t tell you until seven times, but, until seventy times seven.’” (WEB)',
+      explanation: 'Forgiveness does not mean “you didn’t hurt me,” nor pretending the wound isn’t there. It is a hard decision: to stop letting hatred define and hijack you. Jesus frames it as “seventy times seven” — not bookkeeping, but a whole new way to live. It is hard, especially when the other person never apologized. But holding bitterness usually poisons you first; and God says “Vengeance belongs to me; I will repay” (Rom 12:19) — meaning you can hand the justice to Him and not carry it yourself.',
       reflection: 'The resentment you can’t put down — who does it weigh on most heavily now: the other person, or you?',
       nextStep: 'Read the parable of the unforgiving servant in Matthew 18, then Ephesians 4:32, and ask God slowly for strength to take one small step.',
       prayer: 'Lord, there is a wound I can’t put down, and I’m not ready to forgive. First I hand You this weight, and my craving to settle the score. Heal me, and in Your time, give me the strength to forgive. Amen.'
@@ -473,8 +474,8 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Have Lost Someone You Love',
-      verse: '【Matthew 5:4】“Blessed are those who mourn, for they will be comforted.” (NIV)',
-      explanation: 'Grief is not weakness, nor unspiritual. Jesus did not say “don’t cry” — He Himself wept at the tomb of His friend Lazarus (John 11:35). God fully knows what loss feels like. Those who mourn are “blessed” not because sorrow itself is good, but because God promises to comfort them Himself, and one day to “wipe every tear from their eyes” (Rev 21:4). You do not have to get better quickly, or pretend to be strong, to come to Him.',
+      verse: '【Matthew 5:4】“Blessed are those who mourn, for they shall be comforted.” (WEB)',
+      explanation: 'Grief is not weakness, nor unspiritual. Jesus did not say “don’t cry” — He Himself wept at the tomb of His friend Lazarus (John 11:35). God fully knows what loss feels like. Those who mourn are “blessed” not because sorrow itself is good, but because God promises to comfort them Himself, and one day to “wipe away every tear from their eyes” (Rev 21:4). You do not have to get better quickly, or pretend to be strong, to come to Him.',
       reflection: 'If you could say the truest sentence inside this missing-them to God, what would it be?',
       nextStep: 'Read Psalm 34, where “the Lord is close to the brokenhearted”; and if you’re willing, John 11, to see how Jesus faces death and tears.',
       prayer: 'Lord, I have lost someone I love, and there is an empty place in me. Thank You that You do not ask me to hurry up and heal. Draw close to my grief, be with me as I weep, and let me hold the promise that one day You will wipe away every tear. Amen.'
@@ -496,7 +497,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You’re Worn Down to Empty',
-      verse: '【Matthew 11:28-30】“Come to me, all you who are weary and burdened, and I will give you rest… For my yoke is easy and my burden is light.” (NIV)',
+      verse: '【Matthew 11:28-30】“Come to me, all you who labor and are heavily burdened, and I will give you rest. Take my yoke upon you and learn from me, for I am gentle and humble in heart; and you will find rest for your souls. For my yoke is easy, and my burden is light.” (WEB)',
       explanation: 'Exhaustion is not only physical. Carrying a weight beyond what you can bear, for too long, hollows a person out. Ecclesiastes said it long ago: toil under the sun, without rest, is chasing the wind. Jesus’ invitation is not “try harder,” but “come to me” — lay the load down and take His “easy yoke.” Real rest is not just a night’s sleep; it is handing the crushing “it all depends on me” back to the God who holds all things together.',
       reflection: 'In the load you’re carrying now, which part was never actually yours to carry alone?',
       nextStep: 'Read Matthew 11:28-30, and Ecclesiastes 2 to see that toil without God ends in chasing the wind; when you’re tired, you can also open the Listen page and let Scripture be read to you.',
@@ -519,7 +520,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When Envy Leaves You Bitter',
-      verse: '【Psalm 73:25-26】“Whom have I in heaven but you? And earth has nothing I desire besides you… God is the strength of my heart and my portion forever.” (NIV)',
+      verse: '【Psalm 73:25-26】“Whom do I have in heaven? There is no one on earth whom I desire besides you. My flesh and my heart fails, but God is the strength of my heart and my portion forever.” (WEB)',
       explanation: 'Envy often begins with a question: “Why them, and not me?” The writer of Psalm 73 felt it too — he saw the wicked thrive and nearly lost his footing. The turn came when he “entered the sanctuary of God” and saw the end and eternity again; the comparison loosened. Envy keeps your eyes fixed on what’s in someone else’s hands; this verse invites you back to “God is my portion,” and to re-measure what you truly have from there.',
       reflection: 'Your latest comparison — honestly, is it the thing itself you envy, or the security or worth you imagine it would give you?',
       nextStep: 'Read all of Psalm 73 and watch the writer move from bitterness to “God is my portion”; and read Ecclesiastes on how what we gain by comparison ends in chasing the wind.',
@@ -542,7 +543,7 @@ export const qaRegistry = [
     },
     en: {
       title: 'When You Feel You Don’t Belong',
-      verse: '【Psalm 139:9-10】“If I rise on the wings of the dawn, if I settle on the far side of the sea, even there your hand will guide me, your right hand will hold me fast.” (NIV)',
+      verse: '【Psalm 139:9-10】“If I take the wings of the dawn, and settle in the uttermost parts of the sea, even there your hand will lead me, and your right hand will hold me.” (WEB)',
       explanation: 'Drifting, homesick, feeling “I don’t belong here” in a foreign place — that ache of not belonging is deep and real. Many people in the Bible were sojourners and strangers too (Heb 11:13), “longing for a better country.” Psalm 139 offers this comfort: however far you fly, wherever you are, God’s hand is already there to guide and hold you. You may have no place on earth that fully belongs to you; but there is a God who is with you wherever you are — and the believer’s true home is in Him.',
       reflection: 'In your drifting or homesickness, the “belonging” you long for most — is it a place, or to be fully accepted and seen by someone?',
       nextStep: 'Read Psalm 139 and see how God is with you everywhere; and if you’re willing, Philippians 3:20, on where the believer’s true “citizenship” is.',
@@ -570,7 +571,7 @@ const CRISIS_CARD = {
   en: {
     id: 'crisis',
     title: 'Please Seek Help Immediately',
-    verse: '【Psalm 34:18】“The Lord is close to the brokenhearted and saves those who are crushed in spirit.” (NIV)',
+    verse: '【Psalm 34:18】“The LORD is near to those who have a broken heart, and saves those who have a crushed spirit.” (WEB)',
     explanation: 'What you are going through matters deeply, and you should not carry it alone. Scripture tells us that God is near to the brokenhearted. Please also contact a trusted family member, friend, pastor, counselor, or local emergency service immediately — this matters more than any single verse.',
     reflection: 'Can you reach out to a trusted person right now?',
     nextStep: 'If you are in immediate danger, contact local emergency services. In the United States, call or text 988 (Suicide & Crisis Lifeline, 24/7, free, confidential), or text HOME to 741741; if you are in immediate danger, call 911.',
@@ -603,7 +604,7 @@ export function getFallbackResponse(lang) {
     en: {
       id: 'fallback',
       title: 'Bring Your Real Question Before God',
-      verse: '【Matthew 11:28】“Come to me, all you who are weary and burdened, and I will give you rest.” (NIV)',
+      verse: '【Matthew 11:28】“Come to me, all you who labor and are heavily burdened, and I will give you rest.” (WEB)',
       explanation: 'Thank you for bringing this question here. Scripture takes seriously the real fears, burdens, loneliness, struggles, and searching of the human heart. Jesus does not ask people to fix themselves before coming to Him. He invites the weary and burdened to come. Your question may become the very place where you begin drawing near to God.',
       reflection: 'If you could honestly bring one sentence from your heart to God, what would it be?',
       nextStep: 'You may sit quietly with Matthew 11:28, and then continue with John chapter 1 to encounter Jesus, who enters our darkness and carries our burdens.',

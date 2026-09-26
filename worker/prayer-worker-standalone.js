@@ -300,7 +300,10 @@ export default {
     if (!allowed.length) allowed = DEFAULT_ORIGINS;
     const cors = corsHeaders(origin, allowed);
 
-    if (origin && !allowed.includes(origin)) return json({ error: 'origin_denied' }, 403, cors);
+    // Require a present, allow-listed Origin. Legitimate browser calls are cross-origin
+    // (site domain ≠ workers.dev) so they always send Origin; a missing/empty Origin
+    // (curl / scripts / server-side callers) is rejected to prevent bypassing this gate.
+    if (!allowed.includes(origin)) return json({ error: 'origin_denied' }, 403, cors);
     if (request.method === 'OPTIONS') return new Response(null, { status: 204, headers: cors });
     if (request.method !== 'POST') return json({ error: 'method_not_allowed' }, 405, cors);
     if (!env.ANTHROPIC_API_KEY || !env.SCRIPTURE_ASSETS || !env.PRAYER_RATE_LIMITER) return json({ error: 'not_configured' }, 503, cors);

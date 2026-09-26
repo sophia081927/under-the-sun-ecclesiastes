@@ -65,7 +65,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Marriage and Family Healing',
-      scripture: 'Ephesians 4:32 — “Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.”',
+      scripture: 'Ephesians 4:32 — “And be kind to one another, tender hearted, forgiving each other, just as God also in Christ forgave you.”',
       prayerBody: 'Heavenly Father, I lift up Your child who brings the burden of marriage and family before You. You see every hidden tear, every weary sigh, and every place where communication has broken down. Bring the love of the cross into this relationship. Remove pride, accusation, coldness, and old wounds. Give kindness, compassion, honest communication, and the strength to forgive. Where restoration is possible, please heal, protect, and guide. Where there has been deep hurt, give wisdom, boundaries, help, and safety. Be the shield over this home and the comfort of this tired heart. In the name of Jesus Christ, Amen.'
     }
   },
@@ -86,7 +86,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Direction and the Future',
-      scripture: 'Psalm 119:105 — “Your word is a lamp for my feet, a light on my path.”',
+      scripture: 'Psalm 119:105 — “Your word is a lamp to my feet, and a light for my path.”',
       prayerBody: 'Abba Father, when the road ahead feels unclear and I feel anxious about school, work, decisions, and the future, I come before You. Do not let fear lead me, and do not let me rely only on my own understanding. Let Your Word be a lamp to my feet and a light to my path. If there is a door You want to open, give me faith to walk through it. If a door is not from You, gently redirect me. Give me wisdom, patience, courage, and clarity, and teach me to trust You even in the unknown. In the name of Jesus Christ, Amen.'
     }
   },
@@ -107,7 +107,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Health and Inner Peace',
-      scripture: 'Psalm 34:18 — “The Lord is close to the brokenhearted and saves those who are crushed in spirit.”',
+      scripture: 'Psalm 34:18 — “The LORD is near to those who have a broken heart, and saves those who have a crushed spirit.”',
       prayerBody: 'Lord, I bring my physical weakness, pain, worry, and uncertainty before You. You know my fear and You see my exhaustion. Draw near to me with healing, strength, and peace. Guide the doctors, tests, treatments, and every decision ahead. Let me know that I am not alone. Even when my body feels weak, strengthen my heart. Even when I do not yet have answers, help me rest in Your presence. In the name of Jesus Christ, Amen.'
     }
   },
@@ -128,7 +128,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Children and Parenting',
-      scripture: 'Proverbs 22:6 — “Start children off on the way they should go, and even when they are old they will not turn from it.”',
+      scripture: 'Proverbs 22:6 — “Train up a child in the way he should go, and when he is old he will not depart from it.”',
       prayerBody: 'Heavenly Father, I place my child in Your hands. You know them better than I do. You see their needs, struggles, gifts, and future. Protect their heart, guide them away from harm and temptation, and give them wisdom, kindness, courage, and a heart that seeks You. Help me become a parent with more patience, wisdom, listening, and grace. Let our home be shaped not by pressure and control, but by truth, love, communication, and mercy. In the name of Jesus Christ, Amen.'
     }
   },
@@ -149,7 +149,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Peace in Anxiety',
-      scripture: 'Philippians 4:6-7 — “Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.”',
+      scripture: 'Philippians 4:6-7 — “In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God. And the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus.”',
       prayerBody: 'Lord, I bring my anxiety, pressure, and restless heart to You. I confess that I often try to gain security by controlling everything, and it leaves me exhausted. Help me bring each worry before You and release the burdens I have been holding tightly. Give me the peace that surpasses understanding, and guard my heart and mind in Christ Jesus. Let fear no longer lead me today; lead me instead into Your rest. In the name of Jesus Christ, Amen.'
     }
   },
@@ -170,7 +170,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for a Heart That Feels Insecure',
-      scripture: 'Psalm 46:1 — “God is our refuge and strength, an ever-present help in trouble.”',
+      scripture: 'Psalm 46:1 — “God is our refuge and strength, a very present help in trouble.”',
       prayerBody: 'Lord, I bring my insecurity, fear, and need for safety before You. So often I try to find security in circumstances, relationships, money, or human approval, but none of these can truly hold my heart. Teach me to know You as my refuge and strength, my ever-present help in trouble. Steady me with Your unchanging love, and help me remember that even when life feels uncertain, I am seen, protected, and held by You. In the name of Jesus Christ, Amen.'
     }
   },
@@ -191,7 +191,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for a Lonely Heart Longing to Be Seen',
-      scripture: 'Psalm 139:1 — “You have searched me, Lord, and you know me.”',
+      scripture: 'Psalm 139:1 — “LORD, you have searched me, and you know me.”',
       prayerBody: 'Lord, I bring before You the heart that feels lonely, unseen, and misunderstood. People may not see my exhaustion, and I may not know how to express the loneliness deep within me, but You know me. You know when I sit and when I rise; You know the words before they are spoken. Let me experience Your presence in loneliness and Your comfort in silence. Please also provide the right people, relationships, and spiritual companionship, so I do not feel I must carry everything alone. In the name of Jesus Christ, Amen.'
     }
   },
@@ -212,7 +212,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'Intercession for Beginning to Know Jesus',
-      scripture: 'John 14:6 — Jesus answered, “I am the way and the truth and the life.”',
+      scripture: 'John 14:6 — Jesus said to him, “I am the way, the truth, and the life. No one comes to the Father, except through me.”',
       prayerBody: 'Lord Jesus, I may not fully know You yet, but I bring my real self before You. Reveal to me who You are. Help me know You as the Way, the Truth, and the Life. Lead me out of confusion, doubt, and darkness—not merely to know facts about You, but to truly know You, trust You, and follow You. If my heart is still afraid or uncertain, guide me with Your gentleness and light. In the name of Jesus Christ, Amen.'
     }
   },
@@ -233,7 +233,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'A Prayer of Thanksgiving',
-      scripture: '1 Thessalonians 5:18 — “Give thanks in all circumstances; for this is God’s will for you in Christ Jesus.”',
+      scripture: '1 Thessalonians 5:18 — “In everything give thanks, for this is the will of God in Christ Jesus toward you.”',
       prayerBody: 'Heavenly Father, thank You. In the rush and worry of life I so often forget to count Your gifts. Today I stop to give thanks: for life, breath, and everything in this day; for the ways You have kept me, seen and unseen; for never leaving me, even in hardship. Give me a contented, grateful heart—one that thanks You not only when things go well, but learns to trust and praise You even before I see the answer. Let my gratitude become worship. In the name of Jesus Christ, Amen.'
     }
   },
@@ -254,7 +254,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'A Prayer in Grief and Loss',
-      scripture: 'Psalm 34:18 — “The Lord is close to the brokenhearted and saves those who are crushed in spirit.”',
+      scripture: 'Psalm 34:18 — “The LORD is near to those who have a broken heart, and saves those who have a crushed spirit.”',
       prayerBody: 'Loving Father, I bring this grieving, aching heart to You. The pain of losing someone loved cannot be brushed aside, and You never make light of it. Draw near to this broken heart, just as You promised to be close to the brokenhearted. Catch every tear. In the sleepless nights when the missing comes flooding back, surround me with Your presence. Give me room to grieve, and give me hope: in Christ, death is not the final word, and You will wipe away every tear. Hold me up, one day at a time, as I walk through this. In the name of Jesus Christ, Amen.'
     }
   },
@@ -275,7 +275,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'A Prayer for Guilt and Forgiveness',
-      scripture: '1 John 1:9 — “If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.”',
+      scripture: '1 John 1:9 — “If we confess our sins, he is faithful and righteous to forgive us the sins and to cleanse us from all unrighteousness.”',
       prayerBody: 'Father, I come with the guilt and self-blame I carry. Some things replay in my mind and grow heavier each time, until I wonder whether I can still be accepted. Thank You that You did not wait for me to become good before loving me—You gave Your Son to die for me. I confess my wrong; I stop hiding it, and I stop trying to pay for it myself. According to Your promise, forgive me, cleanse me, and lift the weight of constant self-accusation from my heart. Give me courage to repair what I can, and by Your grace, to begin again. In the name of Jesus Christ, Amen.'
     }
   },
@@ -296,7 +296,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'A Prayer for Provision and Financial Pressure',
-      scripture: 'Philippians 4:19 — “And my God will meet all your needs according to the riches of his glory in Christ Jesus.”',
+      scripture: 'Philippians 4:19 — “My God will supply every need of yours according to his riches in glory in Christ Jesus.”',
       prayerBody: 'God my provider, I hand You the financial weight pressing on my heart. The numbers, the bills, the debt, and the uncertain future often keep me awake at night. You know every need before I even ask. According to the riches of Your glory, supply what I truly need; and take away the panic inside me, so that money does not rule me and I learn to trust You. Give me wisdom to plan, honesty to face things, and diligence to work—and open the way Yourself: through provision, help, and unexpected grace. Whether in need or plenty, let me find my enough in You. In the name of Jesus Christ, Amen.'
     }
   },
@@ -317,7 +317,7 @@ export const prayerRegistry = [
     },
     en: {
       title: 'A Prayer for Someone You Love',
-      scripture: 'James 5:16 — “…The prayer of a righteous person is powerful and effective.”',
+      scripture: 'James 5:16 — “…The insistent prayer of a righteous person is powerfully effective.”',
       prayerBody: 'Father, I bring before You the people I love—my parents, my family, my friends—those who are on my heart but whose burdens I cannot carry for them. You love them more than I do and are far more able to help them. Guard their bodies, their hearts, and their steps. Hold them up when they are weak, find them when they wander, heal them where they hurt. If they do not yet know You, reveal Your love to them Yourself. I place all I cannot control into Your faithful hands. In the name of Jesus Christ, Amen.'
     }
   }
@@ -337,7 +337,7 @@ export function getGeneralPrayer(lang) {
     en: {
       id: 'general',
       title: 'Bring Your Burden Before God',
-      scripture: 'Matthew 11:28 — “Come to me, all you who are weary and burdened, and I will give you rest.”',
+      scripture: 'Matthew 11:28 — “Come to me, all you who labor and are heavily burdened, and I will give you rest.”',
       prayerBody: 'Lord Jesus, I bring before You the burden that I cannot fully explain, organize, or carry on my own. You do not ask me to become strong before I come near to You; You invite the weary and burdened to come to You. Give me light in my confusion, rest in my exhaustion, and peace in my uncertainty. Lead me step by step, and help me know that I am not facing this alone. In the name of Jesus Christ, Amen.'
     }
   };

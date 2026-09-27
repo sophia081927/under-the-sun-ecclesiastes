@@ -115,6 +115,14 @@
     .pv-chapter-nav a,.pv-nav-soon,.pv-nav-end{color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:24px;padding:11px 18px;min-height:44px;display:inline-flex;align-items:center}
     .pv-nav-soon{color:var(--faint)}
     .pv-nav-end{color:var(--gold2);border-color:rgba(230,199,118,.45);font-weight:600}
+    /* Read / Visual Guide chooser + the visual guide */
+    .pv-modes{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:8px 0 2px}
+    .pv-mode{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:24px;padding:10px 20px;min-height:44px;cursor:pointer;font:inherit}
+    .pv-mode.active{background:var(--gold);color:#17140c;font-weight:700;border-color:var(--gold)}
+    #visual-guide{margin:14px 0 40px}
+    .pv-guide{display:flex;flex-direction:column;gap:14px;margin-top:10px}
+    .pv-guide img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+    .pv-guide-back{margin-top:16px}
     footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:22px 0 40px;text-align:center}
     a:focus-visible,button:focus-visible,.pv-chip:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
     @media(min-width:640px){
@@ -143,13 +151,27 @@
       <p class="tag" id="chapterTag"></p>
     </section>
 
-    <section class="pv-chapter-strip" aria-label="Chapters">
-      <nav class="pv-chip-grid" id="chapterGrid" aria-label="Proverbs chapters"></nav>
-      <p class="pv-strip-note"><span class="zh">《箴言》全书 1–31 章已全部完成。</span><span class="en">All 31 chapters of Proverbs are complete.</span></p>
-    </section>
+    <div class="pv-modes" role="tablist" aria-label="Proverbs view">
+      <button id="modeRead" class="pv-mode active" type="button" role="tab" aria-selected="true" onclick="showRead()"><span class="zh">阅读经文</span><span class="en">Read Proverbs</span></button>
+      <button id="modeGuide" class="pv-mode" type="button" role="tab" aria-selected="false" onclick="showGuide()"><span class="zh">整卷图解</span><span class="en">Visual Guide</span></button>
+    </div>
 
-    <main id="content" aria-live="polite"></main>
-    <div id="footerNav"></div>
+    <div id="read-view">
+      <section class="pv-chapter-strip" aria-label="Chapters">
+        <nav class="pv-chip-grid" id="chapterGrid" aria-label="Proverbs chapters"></nav>
+        <p class="pv-strip-note"><span class="zh">《箴言》全书 1–31 章已全部完成。</span><span class="en">All 31 chapters of Proverbs are complete.</span></p>
+      </section>
+
+      <main id="content" aria-live="polite"></main>
+      <div id="footerNav"></div>
+    </div>
+
+    <section id="visual-guide" hidden aria-labelledby="vg-h">
+      <h2 id="vg-h" class="pv-h"><span class="zh">《箴言》整卷图解</span><span class="en">Proverbs Visual Guide</span></h2>
+      <p class="pv-microdisclaimer"><span class="zh">整卷《箴言》的视觉导览，共 12 页；帮助你把握全书脉络，属辅助理解，不是圣经正文。</span><span class="en">A 12-page visual overview of the whole book of Proverbs — an aid to understanding, not Scripture.</span></p>
+      <div id="guidePages" class="pv-guide"></div>
+      <p class="pv-guide-back"><button class="pv-mode" type="button" onclick="showRead()"><span class="zh">← 返回阅读经文</span><span class="en">← Back to reading</span></button></p>
+    </section>
   </div>
 
   <footer>
@@ -188,6 +210,38 @@
       document.getElementById('footerNav').innerHTML = renderChapterFooterNav(proverbsChapters, chapter);
     }
 
+    // ---- Visual Guide (only the current language is loaded, on demand, lazily) ----
+    // Page counts differ by language: the Chinese guide covers the whole book in 11
+    // pages (the "31 Days of Wisdom" application page was moved to a future feature),
+    // the English guide has 12 pages.
+    const GUIDE_TOTAL = { zh: 11, en: 12 };
+    let guideLang = null; // which language's <img> tags are currently in the DOM
+    const curLang = () => (document.body.classList.contains('lang-zh') ? 'zh' : 'en');
+    function buildGuide(l) {
+      const zh = l === 'zh';
+      const total = GUIDE_TOTAL[l] || 12;
+      document.getElementById('guidePages').innerHTML = Array.from({ length: total }, (_, i) => {
+        const n = i + 1; const nn = String(n).padStart(2, '0');
+        const alt = zh ? `《箴言》整卷图解 — 第 ${n} / ${total} 页` : `Proverbs Visual Guide — page ${n} of ${total}`;
+        return `<img src="images/proverbs-guide/${l}/${nn}.webp" width="1376" height="768" loading="lazy" decoding="async" alt="${alt}">`;
+      }).join('');
+      guideLang = l;
+    }
+    window.showGuide = function () {
+      document.getElementById('read-view').hidden = true;
+      document.getElementById('visual-guide').hidden = false;
+      document.getElementById('modeGuide').classList.add('active'); document.getElementById('modeGuide').setAttribute('aria-selected', 'true');
+      document.getElementById('modeRead').classList.remove('active'); document.getElementById('modeRead').setAttribute('aria-selected', 'false');
+      if (guideLang !== curLang()) buildGuide(curLang()); // build/replace with current language only
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    window.showRead = function () {
+      document.getElementById('visual-guide').hidden = true;
+      document.getElementById('read-view').hidden = false;
+      document.getElementById('modeRead').classList.add('active'); document.getElementById('modeRead').setAttribute('aria-selected', 'true');
+      document.getElementById('modeGuide').classList.remove('active'); document.getElementById('modeGuide').setAttribute('aria-selected', 'false');
+    };
+
     window.setLang = function (l) {
       const zh = l === 'zh';
       document.documentElement.lang = zh ? 'zh-CN' : 'en';
@@ -195,6 +249,8 @@
       document.getElementById('btnZh').classList.toggle('active', zh);
       document.getElementById('btnEn').classList.toggle('active', !zh);
       setTitle();
+      // if the guide is currently open, swap it to the new language (never load both sets)
+      if (!document.getElementById('visual-guide').hidden) buildGuide(l);
       try { localStorage.setItem('bible_lang', l); } catch (e) {}
     };
 

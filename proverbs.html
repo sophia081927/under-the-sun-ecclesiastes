@@ -67,6 +67,7 @@
     .pv-verses{margin-top:6px}
     .pv-verse-line{margin:0 0 10px;font-family:Georgia,"Noto Serif SC",serif;font-size:17.5px;line-height:1.85}
     .pv-vn{display:inline-block;min-width:1.6em;color:var(--gold2);font-size:13px;font-weight:700;vertical-align:2px}
+    .pv-merged{color:var(--faint);font-style:italic;font-size:15px}
     .pv-source{font-size:13px;color:var(--muted);line-height:1.7;border:1px dashed var(--line);border-radius:8px;padding:10px 12px;margin-bottom:14px;background:rgba(0,0,0,.15)}
     .pv-source-title{color:var(--gold);font-weight:600;margin-bottom:2px}
     /* Key verses */
@@ -111,8 +112,9 @@
     .pv-ask-general a:hover{border-color:var(--gold)}
     /* Chapter footer nav */
     .pv-chapter-nav{display:flex;justify-content:space-between;gap:12px;margin:24px 0 10px}
-    .pv-chapter-nav a,.pv-nav-soon{color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:24px;padding:11px 18px;min-height:44px;display:inline-flex;align-items:center}
+    .pv-chapter-nav a,.pv-nav-soon,.pv-nav-end{color:var(--gold);text-decoration:none;border:1px solid var(--line);border-radius:24px;padding:11px 18px;min-height:44px;display:inline-flex;align-items:center}
     .pv-nav-soon{color:var(--faint)}
+    .pv-nav-end{color:var(--gold2);border-color:rgba(230,199,118,.45);font-weight:600}
     footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:22px 0 40px;text-align:center}
     a:focus-visible,button:focus-visible,.pv-chip:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
     @media(min-width:640px){
@@ -143,7 +145,7 @@
 
     <section class="pv-chapter-strip" aria-label="Chapters">
       <nav class="pv-chip-grid" id="chapterGrid" aria-label="Proverbs chapters"></nav>
-      <p class="pv-strip-note"><span class="zh">第 1 章为完整样章；其余章节陆续完善。</span><span class="en">Chapter 1 is the complete sample; other chapters are being developed.</span></p>
+      <p class="pv-strip-note"><span class="zh">《箴言》全书 1–31 章已全部完成。</span><span class="en">All 31 chapters of Proverbs are complete.</span></p>
     </section>
 
     <main id="content" aria-live="polite"></main>

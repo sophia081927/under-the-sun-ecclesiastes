@@ -11,8 +11,8 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(dir, '..');
 const corpus = (lang, ch) => JSON.parse(fs.readFileSync(path.join(ROOT, 'worker/scripture-assets', lang, 'PRO', ch + '.json'), 'utf8'));
 
-// Chapters that are built ("full") and must pass. Extend as P2 adds chapters.
-const BUILT = [1];
+// Chapters that are built ("full") and must pass (Proverbs 1–31).
+const BUILT = Array.from({ length: 31 }, (_, i) => i + 1);
 
 export async function verifyProverbsChapter(n) {
   const mod = await import(`../data/books/proverbs/ch${String(n).padStart(2, '0')}.js`);
@@ -21,19 +21,27 @@ export async function verifyProverbsChapter(n) {
   const zh = corpus('zh', String(n));
   const errors = [];
 
-  const corpusCount = Object.keys(en).length;
-  if (data.verses.length !== corpusCount) errors.push(`verse count ${data.verses.length} != corpus ${corpusCount}`);
+  const unionCount = new Set([...Object.keys(en), ...Object.keys(zh)]).size;
+  if (data.verses.length !== unionCount) errors.push(`verse count ${data.verses.length} != corpus union ${unionCount}`);
 
   const seen = new Set();
   for (const verse of data.verses) {
     const key = String(verse.v);
     seen.add(key);
-    if (!(key in en)) { errors.push(`v${key}: not in EN corpus`); continue; }
-    if (!(key in zh)) { errors.push(`v${key}: not in ZH corpus`); continue; }
-    if (verse.en !== en[key]) errors.push(`v${key} EN not verbatim:\n    got:    ${JSON.stringify(verse.en)}\n    corpus: ${JSON.stringify(en[key])}`);
-    if (verse.zh !== zh[key]) errors.push(`v${key} ZH not verbatim:\n    got:    ${JSON.stringify(verse.zh)}\n    corpus: ${JSON.stringify(zh[key])}`);
+    // EN side. A verse absent from the EN corpus is only allowed when explicitly
+    // marked as merged into the previous verse in that edition (versification diff).
+    if (key in en) {
+      if (verse.en !== en[key]) errors.push(`v${key} EN not verbatim:\n    got:    ${JSON.stringify(verse.en)}\n    corpus: ${JSON.stringify(en[key])}`);
+    } else if (verse.enMergedWithPrev === true && verse.en === '') { /* ok: merged in EN */ }
+    else errors.push(`v${key}: not in EN corpus (and not marked enMergedWithPrev)`);
+    // ZH side, same rule.
+    if (key in zh) {
+      if (verse.zh !== zh[key]) errors.push(`v${key} ZH not verbatim:\n    got:    ${JSON.stringify(verse.zh)}\n    corpus: ${JSON.stringify(zh[key])}`);
+    } else if (verse.zhMergedWithPrev === true && verse.zh === '') { /* ok: merged in ZH */ }
+    else errors.push(`v${key}: not in ZH corpus (and not marked zhMergedWithPrev)`);
   }
-  for (const key of Object.keys(en)) if (!seen.has(key)) errors.push(`v${key}: missing from chapter data`);
+  for (const key of Object.keys(en)) if (!seen.has(key)) errors.push(`v${key}: missing from chapter data (EN corpus)`);
+  for (const key of Object.keys(zh)) if (!seen.has(key)) errors.push(`v${key}: missing from chapter data (ZH corpus)`);
 
   // Study references must point at real verses.
   const vset = new Set(data.verses.map((v) => v.v));

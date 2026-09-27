@@ -34,7 +34,15 @@ export function renderProverbsChapter(data) {
   const scriptureVerse = (v) => {
     const verse = byNum.get(v);
     if (!verse) return '';
-    return `<p class="pv-verse-line"><span class="pv-vn" aria-hidden="true">${verse.v}</span><span class="zh" lang="zh-CN">${esc(verse.zh)}</span><span class="en" lang="en">${esc(verse.en)}</span></p>`;
+    // Versification note: when one edition merges this verse into the previous one,
+    // show a small note in that language instead of empty text (nothing is fabricated).
+    const zhCell = verse.zhMergedWithPrev
+      ? `<span class="zh pv-merged" lang="zh-CN">（和合本与上一节合并）</span>`
+      : `<span class="zh" lang="zh-CN">${esc(verse.zh)}</span>`;
+    const enCell = verse.enMergedWithPrev
+      ? `<span class="en pv-merged" lang="en">(combined with the previous verse in this edition)</span>`
+      : `<span class="en" lang="en">${esc(verse.en)}</span>`;
+    return `<p class="pv-verse-line"><span class="pv-vn" aria-hidden="true">${verse.v}</span>${zhCell}${enCell}</p>`;
   };
 
   // BIG IDEA
@@ -70,7 +78,7 @@ export function renderProverbsChapter(data) {
   // KEY VERSES (Scripture text from verses[]; commentary clearly separate)
   const keyCards = (data.keyVerses || []).map((kv) => {
     const verse = byNum.get(kv.v);
-    const ref = `Proverbs 1:${kv.v}`;
+    const ref = `Proverbs ${data.n}:${kv.v}`;
     return `<article class="pv-key">
       <div class="pv-key-ref">${esc(ref)}</div>
       <blockquote class="pv-key-scripture"><span class="zh" lang="zh-CN">${esc(verse.zh)}</span><span class="en" lang="en">${esc(verse.en)}</span></blockquote>
@@ -131,7 +139,7 @@ export function renderProverbsChapter(data) {
   const oneThing = `<section class="pv-sec pv-onething" aria-labelledby="pv-one-h">
       <h2 id="pv-one-h" class="pv-h">${bi('记住这一句', 'One Thing to Remember')}</h2>
       <p class="pv-one">${bi(data.oneThing.zh, data.oneThing.en)}</p>
-      <p class="pv-microdisclaimer">${bi('（概括句；箴言 1:7 的经文原文见「重点经文」。）', '(A takeaway summary; see Key Verses for the exact text of Proverbs 1:7.)')}</p>
+      <p class="pv-microdisclaimer">${bi('（这是概括句，不是圣经经文；本章经文见上文「读这一章」与「重点经文」。）', '(A takeaway summary, not Scripture; see “Read the Chapter” and “Key Verses” above for the text.)')}</p>
     </section>`;
   const challenge = `<section class="pv-sec pv-challenge" aria-labelledby="pv-ch-h">
       <h2 id="pv-ch-h" class="pv-h">${bi('今日智慧行动', 'Daily Wisdom Challenge')}</h2>
@@ -158,7 +166,16 @@ export function renderProverbsChapter(data) {
 // Prev / Next chapter controls (only links to chapters that are built).
 export function renderChapterFooterNav(chapters, active) {
   const isFull = (n) => chapters.some((c) => c.n === n && c.status === 'full');
+  const maxN = chapters.reduce((m, c) => Math.max(m, c.n), 0); // last chapter of the book
   const prev = active > 1 && isFull(active - 1) ? `<a class="pv-nav-prev" href="${proverbsHref(active - 1)}">${bi('← 上一章', '← Previous')}</a>` : '<span></span>';
-  const next = isFull(active + 1) ? `<a class="pv-nav-next" href="${proverbsHref(active + 1)}">${bi('下一章 →', 'Next →')}</a>` : `<span class="pv-nav-soon">${bi('下一章筹备中', 'Next chapter coming soon')}</span>`;
+  let next;
+  if (active >= maxN) {
+    // Last chapter of Proverbs — show the end-of-book state, not "coming soon".
+    next = `<span class="pv-nav-end">${bi('《箴言》全书读完', 'End of Proverbs')}</span>`;
+  } else if (isFull(active + 1)) {
+    next = `<a class="pv-nav-next" href="${proverbsHref(active + 1)}">${bi('下一章 →', 'Next →')}</a>`;
+  } else {
+    next = `<span class="pv-nav-soon">${bi('下一章筹备中', 'Next chapter coming soon')}</span>`;
+  }
   return `<div class="pv-chapter-nav">${prev}${next}</div>`;
 }

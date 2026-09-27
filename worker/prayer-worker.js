@@ -25,6 +25,7 @@ const DEFAULT_ORIGINS = [
   'https://sophia081927.github.io',
 ];
 const MAX_INPUT = 1000; // characters
+const MAX_BODY = 16000; // hard cap on the raw request body (bytes / characters)
 
 /* The system prompt encodes every requirement the owner specified.
    It is stable (good for prompt caching) — user input & language go in
@@ -126,8 +127,14 @@ export default {
       if (!success) return json({ error: 'rate_limited' }, 429, cors);
     } catch { console.warn('prayer_rate_limiter_unavailable'); return json({ error: 'service_unavailable' }, 503, cors); }
 
+    // Reject an oversized body BEFORE reading it, so a huge payload is never
+    // buffered and never reaches Anthropic. Content-Length can be missing or
+    // untrustworthy, so the authoritative post-read length check below still runs.
+    const declaredLen = Number(request.headers.get('Content-Length'));
+    if (Number.isFinite(declaredLen) && declaredLen > MAX_BODY) return json({ error: 'input_too_long' }, 413, cors);
+
     let body;
-    try { const raw = await request.text(); if (raw.length > 16000) return json({ error: 'input_too_long' }, 413, cors); body = JSON.parse(raw); } catch (e) { return json({ error: 'bad_request' }, 400, cors); }
+    try { const raw = await request.text(); if (raw.length > MAX_BODY) return json({ error: 'input_too_long' }, 413, cors); body = JSON.parse(raw); } catch (e) { return json({ error: 'bad_request' }, 400, cors); }
 
     const lang = body && body.lang === 'en' ? 'en' : 'zh';
     let input = (body && typeof body.input === 'string') ? body.input.trim() : '';

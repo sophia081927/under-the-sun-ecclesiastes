@@ -23,7 +23,7 @@ Homepage question → the *hevel* (vapor, not "vanity") insight → the same-vio
 
 ## Notes
 
-- New Scripture modules use the Chinese Union Version (新标点和合本) and the World English Bible (WEB), both public domain. Earlier Ecclesiastes/John material retains KJV. The Psalms NIV excerpts are a documented legacy item to migrate or license before expansion.
-- 《启示录》采用公共领域的新标点和合本（简体）与 World English Bible（WEB）。传道书与约翰福音暂时保留 KJV；诗篇中的 NIV 精选经文属于待处理的历史遗留，不应扩展到新的完整书卷。
+- Scripture sources: Chinese uses the Chinese Union Version (新标点和合本, public domain). English uses the World English Bible (WEB, public domain) for the Q&A, AI prayer, listen pages, Psalms, and Revelation. Some earlier Ecclesiastes/John reading material still uses KJV or older wording and is pending migration to WEB. English divine-name display is not yet fully consistent across pages (e.g. the Psalms reading page uses the WEB edition that renders “Yahweh”) — a separate follow-up.
+- 经文来源：中文用新标点和合本（简体，公共领域）；英文在问答、AI 祷告、聆听页、诗篇与《启示录》采用 World English Bible（WEB，公共领域）。传道书与约翰福音的部分较早阅读内容仍保留 KJV 或旧措辞，待迁移到 WEB。全站英文神名显示尚未完全统一（例如诗篇阅读页使用显示为“Yahweh”的 WEB 版本），属后续单独处理。
 - The slide images contain text baked in; for web deployment they should be compressed.
 - This is an MVP demo. The "Ask Anything" assistant currently uses a small built-in, verse-grounded set; the production version is a retrieval-augmented model constrained to the Ecclesiastes corpus.

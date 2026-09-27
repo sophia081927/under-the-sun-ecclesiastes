@@ -41,7 +41,7 @@
 ## 当前 Q&A 覆盖（截至诗篇卷 Phase 2）
 
 - **21 个主题**：emptiness · anxiety · godlove · jesus · insecurity · meaning · truth · loneliness · success · marriage · suffering · death · satisfaction · seeker · light · **guilt · forgiving · grief · burnout · envy · belonging**（后 6 个为诗篇卷 Phase 2 新增）
-- 匹配：最长关键词优先 + 唯一 priority 破平局；危机检测最先且立即出卡；温暖 fallback（太 11:28）；经文变体轮换；英文经文标 (NIV)、中文和合本。
+- 匹配：最长关键词优先 + 唯一 priority 破平局；危机检测最先且立即出卡；温暖 fallback（太 11:28）；经文变体轮换；英文经文标 (WEB)、中文和合本。
 - 已挂 `psalms` 的 relatedBooks：anxiety · insecurity · loneliness · suffering · guilt · grief · burnout · envy · belonging。
 
 ## 已知遗留项（不阻塞扩卷）

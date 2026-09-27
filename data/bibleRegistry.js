@@ -314,6 +314,43 @@ export const bibleRegistry = [
     languages: ['zh', 'en'],
     audioEnabled: true,
     features: { read: true, listen: true, ask: true, reflection: true, worship: true, bilingual: true, study: false, deck: true }
+  },
+  {
+    id: 'proverbs',
+    order: 7,
+    slug: 'proverbs',
+    titleZh: '箴言',
+    titleEn: 'Proverbs',
+    status: 'active',
+    safeHash: '#/proverbs',
+    listenHash: null,
+    worshipHash: null,
+    route: '/proverbs',
+    listenRoute: null,
+    worshipRoute: null,
+    page: 'proverbs.html',
+    listen: null,
+    worship: null,
+    study: null,
+    deck: null,
+    bookType: 'Wisdom Literature',
+    bookTypeZh: '智慧书',
+    themeZh: '智慧、敬畏耶和华、言语、金钱、朋友、决策、正直',
+    themeEn: 'Wisdom, the fear of the LORD, speech, money, friends, decisions, and integrity',
+    taglineZh: '日常生活中的属天智慧。',
+    taglineEn: 'Wisdom for everyday life.',
+    descriptionZh: '《箴言》把圣经的智慧带进每天的真实选择：敬畏耶和华、如何说话、交友、看待金钱、面对诱惑与做决定。全 31 章中英对照，附研读、默想、祷告与整卷图解。',
+    descriptionEn: 'Proverbs brings the Bible’s wisdom into everyday choices — the fear of the LORD, speech, friends, money, temptation, and decisions. All 31 chapters, bilingual, with study notes, reflection, prayer, and a visual guide.',
+    keyVerse: {
+      zh: { reference: '箴言 1:7', text: '敬畏耶和华是知识的开端； 愚妄人藐视智慧和训诲。' },
+      en: { reference: 'Proverbs 1:7', text: 'The fear of the LORD is the beginning of knowledge, but the foolish despise wisdom and instruction.' }
+    },
+    bgColor: 'from-[#2A2410] to-[#12161A]',
+    accentColor: '#E6C776',
+    audioPathBase: 'audio/proverbs/',
+    languages: ['zh', 'en'],
+    audioEnabled: false,
+    features: { read: true, listen: false, ask: false, reflection: true, worship: false, bilingual: true, study: false, deck: false }
   }
 ];
 

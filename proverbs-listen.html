@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SHNR24DPH7"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-SHNR24DPH7');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#14161a">
+  <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icons/icon-180.png">
+  <meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="聆听箴言">
+  <title>聆听箴言 · Listen to Proverbs</title>
+  <meta name="description" content="中英双语聆听《箴言》。合成朗读清楚标注；经文选读、默想与祷告分段朗读，可加入真人录音。">
+  <link rel="canonical" href="https://lightoflifebible.org/proverbs-listen.html">
+  <style>
+    :root{--bg:#14161a;--bg2:#1b2228;--ink:#f4f1ea;--muted:#bac2c9;--faint:#8a8f96;--gold:#e6c776;--gold2:#f0dca0;--line:rgba(230,199,118,.24);--soft:rgba(244,241,234,.10)}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+    body{background:radial-gradient(800px 500px at 50% -120px,rgba(230,199,118,.10),transparent 70%),var(--bg);color:var(--ink);font-family:Georgia,"Songti SC","Noto Serif SC",serif;line-height:1.8;padding-bottom:132px}
+    .zh{display:inline}.en{display:none}body:not(.lang-zh) .zh{display:none}body:not(.lang-zh) .en{display:inline}
+    a{color:var(--gold2);text-decoration:none}
+    .top{position:sticky;top:0;z-index:20;display:flex;justify-content:space-between;align-items:center;padding:13px 18px;border-bottom:1px solid var(--soft);background:rgba(20,22,26,.94);backdrop-filter:blur(12px)}
+    .top a{color:var(--gold);font-size:13px;letter-spacing:.1em}
+    .toggle{display:inline-flex;border:1px solid var(--line);border-radius:30px;overflow:hidden}
+    .toggle button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:12px;padding:7px 13px;min-height:36px;cursor:pointer}
+    .toggle button.active{background:var(--gold);color:#14161a;font-weight:700}
+    main{max-width:720px;margin:0 auto;padding:40px 22px 20px}
+    .eyebrow{font-size:12px;color:var(--gold);letter-spacing:.24em;text-transform:uppercase}
+    h1.title{font-size:clamp(27px,6.5vw,40px);font-weight:600;margin-top:10px;line-height:1.2}
+    .tag{color:var(--muted);margin-top:8px;font-size:15px}
+    .badge{display:inline-flex;margin-top:16px;padding:7px 13px;border-radius:30px;background:rgba(230,199,118,.08);border:1px solid var(--line);color:var(--gold2);font-size:12px}
+    .notice{margin-top:22px;color:var(--faint);font-size:12.5px;padding:13px 15px;border:1px solid var(--soft);border-radius:9px;line-height:1.7}
+    .notice b{color:var(--muted)}
+    .transcript{margin-top:26px;display:grid;gap:4px}
+    .seg{padding:6px 12px;border-radius:8px;transition:background .2s}
+    .seg.active{background:rgba(230,199,118,.12)}
+    .seg.label{margin-top:16px;font-size:12px;color:var(--gold);text-transform:uppercase;letter-spacing:.16em;font-family:Inter,system-ui,sans-serif}
+    .seg.ref{font-size:12.5px;color:var(--faint);font-family:Inter,system-ui,sans-serif}
+    .seg.scripture{font-size:18px;color:var(--ink);border-left:2px solid var(--gold);padding-left:14px}
+    .seg.text{font-size:16px;color:var(--muted)}
+    .comingsoon{margin-top:30px;padding:20px;border:1px solid var(--soft);border-radius:12px;color:var(--muted)}
+    .player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(24,28,33,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+    .player .row{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .play{width:52px;height:52px;border:0;border-radius:50%;background:var(--gold);color:#14161a;font-size:20px;cursor:pointer}
+    .btn{border:1px solid var(--soft);background:transparent;color:var(--muted);border-radius:30px;padding:10px 15px;min-height:44px;font:inherit;font-size:13px;cursor:pointer}
+    .status{color:var(--muted);font-size:13px;flex:1;min-width:120px}
+    .progress{height:4px;background:var(--soft);border-radius:4px;overflow:hidden;margin-top:10px;max-width:720px;margin-left:auto;margin-right:auto}
+    .progress i{display:block;width:0;height:100%;background:var(--gold);transition:width .2s}
+    button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    /* html{scroll-behavior:smooth} above is inherited even by scrollBy({behavior:'auto'}),
+       so the reduced-motion preference has to be honoured in CSS as well as in JS. */
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      .seg{transition:none}
+      .progress i{transition:none}
+    }
+  </style>
+</head>
+<body class="lang-zh">
+  <header class="top">
+    <a id="readLink" href="proverbs.html">‹ <span class="zh">返回阅读</span><span class="en">Back to reading</span></a>
+    <div class="toggle" role="group" aria-label="语言 / Language"><button id="btnZh" class="active" lang="zh" aria-pressed="true" onclick="setLang('zh')">中文</button><button id="btnEn" lang="en" aria-pressed="false" onclick="setLang('en')">EN</button></div>
+  </header>
+  <main>
+    <div class="eyebrow"><span class="zh">聆听箴言</span><span class="en">Listen to Proverbs</span></div>
+    <h1 class="title" id="title"></h1>
+    <p class="tag" id="tag"></p>
+    <div class="badge" id="badge"></div>
+    <div class="notice">
+      <span class="zh"><b>朗读经文版本</b> · 中文：《新标点和合本》（简体）；英文：World English Bible（WEB，公共领域）。导读、经文选读、默想与祷告分段朗读；进入每段前会先读出段名（“导读 / 经文选读 / 默想 / 祷告”），不连续的经文组会先报出处。导读、默想与祷告为本站整理，不属于圣经译文。本页使用设备合成语音，非真人录音；真人录音准备好后可无缝替换。<a id="srcZh" href="proverbs.html?ch=1">查看本章经文及来源</a></span>
+      <span class="en"><b>Scripture read here</b> · Chinese: Chinese Union Version (New Punctuation, Simplified); English: World English Bible (WEB, public domain). The introduction, Scripture, reflection, and prayer are read as separate segments; each segment is announced by name (“Introduction / Scripture / Reflection / Prayer”), and non-adjacent Scripture groups announce their reference first. The introduction, reflection, and prayer are prepared for this site and are not part of the Bible translation. This page uses device-generated speech, not a human recording, which can be added later. <a id="srcEn" href="proverbs.html?ch=1">Read this chapter and its sources</a></span>
+    </div>
+    <section class="transcript" id="transcript" aria-live="polite"></section>
+    <div class="comingsoon" id="comingsoon" hidden>
+      <span class="zh">这一章的聆听正在准备中。目前可先聆听<a href="proverbs-listen.html?ch=1">箴言第 1 章</a>，或前往<a href="proverbs.html">阅读全书</a>。</span>
+      <span class="en">Listening for this chapter is in preparation. For now you can listen to <a href="proverbs-listen.html?ch=1">Proverbs 1</a>, or <a href="proverbs.html">read the whole book</a>.</span>
+    </div>
+  </main>
+  <div class="player" id="playerBar" aria-label="Audio player">
+    <div class="row">
+      <button class="play" id="play" aria-label="播放 / Play">▶</button>
+      <button class="btn" id="stop"><span class="zh">停止</span><span class="en">Stop</span></button>
+      <button class="btn" id="replay" aria-label="重播本段 / Replay current segment"><span class="zh">重播本段</span><span class="en">Replay</span></button>
+      <span class="status" id="status" role="status" aria-live="polite"></span>
+    </div>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+  </div>
+
+  <script type="module">
+    import { proverbsListen } from './data/listen/proverbsListen.js';
+    import { proverbsChapters } from './data/books/proverbs/index.js';
+    import { buildSegments, chapterNav, pickVoice, createListenPlayer } from './components/listenPlayer.js';
+
+    const $ = (id) => document.getElementById(id);
+    const params = new URLSearchParams(location.search);
+    let chapter = Number(params.get('ch') || 1);
+    if (!Number.isInteger(chapter) || chapter < 1 || chapter > (proverbsListen.maxChapter || 31)) chapter = 1;
+
+    let lang = 'zh';
+    let voice = null;
+    let segments = [];
+    let chData = null;
+    const session = proverbsListen.sessions.find((s) => s.n === chapter) || null;
+
+    const synth = ('speechSynthesis' in window) ? window.speechSynthesis : null;
+    const ttsOk = !!synth && ('SpeechSynthesisUtterance' in window);
+
+    const T = {
+      zh: { badgeTts: '设备合成朗读 · 可加入真人录音', ready: '准备聆听', playing: '朗读中…', paused: '已暂停', ended: '本段结束', stopped: '已停止', noTts: '此设备暂不支持合成朗读', err: '朗读中断，请重试' },
+      en: { badgeTts: 'Device-synthesized narration · human audio can be added', ready: 'Ready to listen', playing: 'Playing…', paused: 'Paused', ended: 'Finished', stopped: 'Stopped', noTts: 'Synthesized speech is unavailable on this device', err: 'Playback interrupted — please try again' },
+    };
+    const tr = () => T[lang];
+
+    const player = createListenPlayer({
+      synth,
+      makeUtterance: (text) => new SpeechSynthesisUtterance(text),
+      onSegmentStart: (i) => highlight(i),
+      onProgress: (p) => { $('bar').style.width = Math.round(p * 100) + '%'; },
+      onStateChange: (s) => reflectState(s),
+      onError: () => { $('status').textContent = tr().err; },
+    });
+
+    let activeIndex = -1;
+    const prefersReducedMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    // The readable band is what is left between the sticky header and the fixed bottom
+    // player. Both are MEASURED (never hard-coded): the player's height changes with the
+    // language, with row wrapping on narrow phones, and with env(safe-area-inset-bottom),
+    // and the same numbers are mirrored into scroll-padding so that any other scroll
+    // (focus, in-page anchor) also stops clear of the bar.
+    const BAND_GAP = 10;
+    let bandTop = 0;
+    let bandBottom = 0;
+
+    // Height of an element as actually rendered, or 0 when it is not displayed.
+    // offsetParent must NOT be used here: for a position:fixed element (the player bar,
+    // the sticky header once stuck) Chrome reports offsetParent === null even while the
+    // element is plainly on screen, which measured the bar as 0 and left scroll-padding
+    // at 10px — exactly the case where the active Scripture stayed under the bar.
+    // display:none gives an empty client-rect list; visibility:hidden still has a box,
+    // so the computed style is checked too.
+    function visibleHeight(el) {
+      if (!el || typeof el.getBoundingClientRect !== 'function') return 0;
+      if (el.hidden) return 0;
+      const rects = typeof el.getClientRects === 'function' ? el.getClientRects() : null;
+      if (rects && rects.length === 0) return 0;
+      const cs = typeof window.getComputedStyle === 'function' ? window.getComputedStyle(el) : null;
+      if (cs && (cs.display === 'none' || cs.visibility === 'hidden')) return 0;
+      const h = el.getBoundingClientRect().height;
+      return h > 0 ? h : 0;
+    }
+
+    function measureBand() {
+      const headerH = visibleHeight(document.querySelector('.top'));
+      const playerH = visibleHeight($('playerBar'));
+      bandTop = headerH + BAND_GAP;
+      bandBottom = playerH + BAND_GAP;
+      const root = document.documentElement;
+      root.style.scrollPaddingTop = Math.round(bandTop) + 'px';
+      root.style.scrollPaddingBottom = Math.round(bandBottom) + 'px';
+      // Without enough tail padding the LAST segments can never scroll clear of the
+      // player (that is how the closing prayer ended up underneath it). Keep the 132px
+      // of the stylesheet as the floor so the page looks unchanged.
+      document.body.style.paddingBottom = Math.max(132, Math.ceil(playerH) + 20) + 'px';
+    }
+
+    // Bring the active segment into that band. A segment already fully inside it is left
+    // exactly where it is; a segment taller than the band is aligned to its start, which
+    // is the sensible reading position for long Scripture.
+    // mode: 'instant' forces a jump (resize/reflow repositioning, and the reduced-motion
+    // preference). behavior:'auto' is NOT enough — it means "use the element's CSS
+    // scroll-behavior", which is smooth here, so the inline override is what makes it
+    // instant, and it is restored immediately after the synchronous scroll.
+    function scrollSegIntoView(el, mode) {
+      if (!el || typeof el.getBoundingClientRect !== 'function') return;
+      measureBand();
+      const topLimit = bandTop;
+      const bottomLimit = window.innerHeight - bandBottom;
+      const r = el.getBoundingClientRect();
+      if (r.top >= topLimit && r.bottom <= bottomLimit) return;          // fits and is visible
+      const delta = (r.height > (bottomLimit - topLimit) || r.top < topLimit)
+        ? r.top - topLimit                                               // taller than band, or above it → show its start
+        : r.bottom - bottomLimit;                                        // hidden behind the player → lift it clear
+      const instant = mode === 'instant' || prefersReducedMotion();
+      const root = document.documentElement;
+      const prevBehavior = root.style.scrollBehavior;
+      if (instant) root.style.scrollBehavior = 'auto';
+      try {
+        if (typeof window.scrollBy === 'function') window.scrollBy({ top: delta, behavior: instant ? 'auto' : 'smooth' });
+        else window.scrollTo(0, (window.scrollY || 0) + delta);
+      } finally {
+        if (instant) root.style.scrollBehavior = prevBehavior;
+      }
+    }
+
+    // Rotation, on-screen keyboards and URL-bar collapse all resize the band while a
+    // segment is highlighted; re-measure and re-seat it without animating.
+    let bandFrame = 0;
+    function onViewportChange() {
+      if (bandFrame) cancelAnimationFrame(bandFrame);
+      bandFrame = requestAnimationFrame(() => {
+        bandFrame = 0;
+        measureBand();
+        const node = activeIndex >= 0 ? $('transcript').children[activeIndex] : null;
+        if (!node) return;
+        // Only rescue a segment the new layout has pushed under the player (or under the
+        // header). If the reader has scrolled it off-screen on purpose, leave them alone.
+        const r = node.getBoundingClientRect();
+        const underPlayer = r.bottom > (window.innerHeight - bandBottom) && r.top < window.innerHeight;
+        const underHeader = r.top < bandTop && r.bottom > 0;
+        if (underPlayer || underHeader) scrollSegIntoView(node, 'instant');
+      });
+    }
+    window.addEventListener('resize', onViewportChange);
+    window.addEventListener('orientationchange', onViewportChange);
+    if (window.visualViewport && typeof window.visualViewport.addEventListener === 'function') {
+      window.visualViewport.addEventListener('resize', onViewportChange);
+    }
+
+    function highlight(i) {
+      activeIndex = i;
+      const nodes = $('transcript').children;
+      for (let k = 0; k < nodes.length; k++) nodes[k].classList.toggle('active', k === i);
+      scrollSegIntoView(nodes[i]);
+    }
+    function clearHighlight() { activeIndex = -1; for (const n of $('transcript').children) n.classList.remove('active'); }
+
+    // The one round button changes ACTION with the player state, so its accessible name
+    // has to change with it — a screen reader must never be told "Play" while the button
+    // would pause. 'continue' is used for both resuming a pause and retrying after a
+    // failed resume, because in both cases the click carries on from the current segment.
+    const PLAY_LABELS = {
+      zh: { play: '播放', pause: '暂停', continue: '继续', replay: '重播本段' },
+      en: { play: 'Play', pause: 'Pause', continue: 'Continue', replay: 'Replay the current segment' },
+    };
+    let playAction = 'play';          // 'play' | 'pause' | 'continue' — what a click does now
+    function setPlayControl(next) {
+      playAction = next;
+      $('play').textContent = next === 'pause' ? '⏸' : '▶';
+      $('play').setAttribute('aria-label', (PLAY_LABELS[lang] || PLAY_LABELS.zh)[next]);
+    }
+    function reflectState(s) {
+      if (s === 'playing') { setPlayControl('pause'); $('status').textContent = tr().playing; }
+      else if (s === 'paused') { setPlayControl('continue'); $('status').textContent = tr().paused; }
+      else if (s === 'ended') { setPlayControl('play'); $('status').textContent = tr().ended; clearHighlight(); }
+      else if (s === 'stopped') { setPlayControl('play'); $('status').textContent = tr().stopped; clearHighlight(); }
+      // 'error' keeps the current segment highlighted: the click continues from there.
+      else if (s === 'error') { setPlayControl('continue'); $('status').textContent = tr().err; }
+    }
+
+    function renderTranscript() {
+      const box = $('transcript');
+      box.textContent = '';
+      if (!session || !chData) return;
+      try {
+        segments = buildSegments(session, chData, lang);
+      } catch (e) {
+        // e.g. an overlapping/duplicate Scripture selection is rejected before playback.
+        segments = [];
+        console.error('Invalid Proverbs listen session', e);
+        $('status').textContent = lang === 'zh' ? '本章聆听内容有误，暂无法播放' : 'This chapter’s listen content is invalid';
+        $('play').disabled = true;
+        return;
+      }
+      $('play').disabled = false;
+      segments.forEach((seg) => {
+        const el = document.createElement(seg.kind === 'label' ? 'h2' : (seg.kind === 'scripture' ? 'p' : 'div'));
+        el.className = `seg ${seg.kind}`;
+        el.textContent = seg.text;
+        box.appendChild(el);
+      });
+    }
+
+    function refreshVoice() { voice = ttsOk ? pickVoice(synth, lang) : null; }
+
+    function renderMeta() {
+      const zh = lang === 'zh';
+      $('readLink').setAttribute('href', `proverbs.html?ch=${chapter}`);
+      $('srcZh').setAttribute('href', `proverbs.html?ch=${chapter}`);
+      $('srcEn').setAttribute('href', `proverbs.html?ch=${chapter}`);
+      const meta = proverbsChapters.find((c) => c.n === chapter);
+      if (session) {
+        $('title').textContent = zh ? `箴言第 ${chapter} 章 · ${session.titleZh}` : `Proverbs ${chapter} · ${session.titleEn}`;
+        $('tag').textContent = zh ? '经文选读 · 默想 · 祷告' : 'Scripture · Reflection · Prayer';
+        $('badge').textContent = tr().badgeTts;
+        document.title = (zh ? `聆听箴言第 ${chapter} 章` : `Listen to Proverbs ${chapter}`);
+      } else {
+        $('title').textContent = zh ? `箴言第 ${chapter} 章` : `Proverbs ${chapter}`;
+        $('tag').textContent = '';
+        $('badge').textContent = '';
+      }
+    }
+
+    function showComingSoon() {
+      $('comingsoon').hidden = false;
+      $('playerBar').style.display = 'none';
+      $('transcript').hidden = true;
+      $('badge').style.display = 'none';
+    }
+
+    // The toggle is a pair of buttons, so the selected language must be exposed as state
+    // (aria-pressed) — the gold background alone is invisible to a screen reader.
+    function applyLangChrome(l) {
+      document.body.classList.toggle('lang-zh', l === 'zh');
+      document.documentElement.lang = l === 'zh' ? 'zh-CN' : 'en';
+      $('btnZh').classList.toggle('active', l === 'zh');
+      $('btnEn').classList.toggle('active', l === 'en');
+      $('btnZh').setAttribute('aria-pressed', String(l === 'zh'));
+      $('btnEn').setAttribute('aria-pressed', String(l === 'en'));
+    }
+
+    window.setLang = function (l) {
+      player.stop();
+      lang = l;
+      applyLangChrome(l);
+      try { localStorage.setItem('bible_lang', l); } catch (e) { /* ignore */ }
+      refreshVoice();
+      renderMeta();
+      if (session) { renderTranscript(); $('status').textContent = ttsOk ? tr().ready : tr().noTts; }
+      setPlayControl(playAction);        // re-label the button in the new language
+      $('replay').setAttribute('aria-label', (PLAY_LABELS[l] || PLAY_LABELS.zh).replay);
+      measureBand();                     // the player bar's height differs per language
+    };
+
+    $('play').addEventListener('click', () => {
+      if (!ttsOk) { $('status').textContent = tr().noTts; return; }
+      const s = player.state;
+      if (s === 'playing') player.pause();
+      else if (s === 'paused') player.resume();
+      // After a failure (including a resume() the engine refused) the current segment is
+      // still the one to speak, so continue from it rather than restarting the session.
+      else if (s === 'error') player.retry();
+      else player.play(segments, { lang, voice });
+    });
+    $('stop').addEventListener('click', () => player.stop());
+    $('replay').addEventListener('click', () => {
+      if (!ttsOk) { $('status').textContent = tr().noTts; return; }
+      // Conservative recovery: if resume() didn't actually restart the voice on this
+      // platform, the user can replay the current segment. There is no automatic
+      // watchdog, so speech is never duplicated.
+      player.retry();
+    });
+
+    // Voices can load asynchronously; pick again when they arrive.
+    if (synth && typeof synth.addEventListener === 'function') synth.addEventListener('voiceschanged', refreshVoice);
+
+    // Init language from ?lang, saved pref, or browser.
+    let saved = null; try { saved = localStorage.getItem('bible_lang'); } catch (e) { /* ignore */ }
+    const q = params.get('lang');
+    const initLang = (q === 'zh' || q === 'en') ? q : (saved || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'));
+
+    if (!session) {
+      lang = initLang;
+      applyLangChrome(lang);
+      setPlayControl('play');            // keep the accessible name in the initial language
+      renderMeta();
+      showComingSoon();
+      measureBand();                     // player bar is display:none here → header-only band
+    } else {
+      try {
+        const mod = await import(`./data/books/proverbs/ch${String(chapter).padStart(2, '0')}.js`);
+        chData = mod.default;
+        setLang(initLang);
+      } catch (error) {
+        console.error('Unable to load Proverbs chapter data', error);
+        $('status').textContent = lang === 'zh' ? '本章暂时无法载入' : 'This chapter could not be loaded';
+        $('play').disabled = true;
+      }
+    }
+    // Cross-chapter autoplay is intentionally not implemented; playback stops at the end of the session.
+    void chapterNav; // reserved for future chapter-to-chapter navigation UI
+  </script>
+</body>
+</html>

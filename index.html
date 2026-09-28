@@ -208,7 +208,9 @@
     // feature chips (from feature flags) — everything the book offers beyond "Read/Enter"
     const chipFor = (f) => {
       const meta = featureLabels[f];
-      const rawHref = f === 'ask' ? (b.page + '#ask') : (f === 'deck' && b.deckByLanguage ? b.deckByLanguage[lang] : (meta.key ? b[meta.key] : null));
+      const rawHref = f === 'ask' ? (b.page + '#ask')
+        : f === 'guide' ? (b.page + '?view=guide')
+        : (f === 'deck' && b.deckByLanguage ? b.deckByLanguage[lang] : (meta.key ? b[meta.key] : null));
       if (!rawHref) return '';
       const target = new URL(rawHref, location.href); target.searchParams.set('lang', lang);
       const href = target.pathname.split('/').pop() + target.search + target.hash;
@@ -221,7 +223,7 @@
       return `<a href="${href}" class="text-[11px] tracking-wider uppercase text-gray-400 hover:text-[#D4AF37] border border-gray-700/70 hover:border-[#D4AF37]/50 rounded-full px-3 min-h-[36px] inline-flex items-center transition-colors">${esc(featureLabel)}</a>`;
     };
     const chips = active
-      ? ['listen', 'worship', 'study', 'deck', 'ask'].filter(f => b.features && b.features[f]).map(chipFor).join('')
+      ? ['listen', 'guide', 'worship', 'study', 'deck', 'ask'].filter(f => b.features && b.features[f]).map(chipFor).join('')
       : '';
 
     // Uniform per-book button logic:

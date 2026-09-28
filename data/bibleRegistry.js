@@ -324,13 +324,13 @@ export const bibleRegistry = [
     status: 'active',
     safeHash: '#/proverbs',
     listenHash: null,
-    worshipHash: null,
+    worshipHash: '#/proverbs/worship',
     route: '/proverbs',
     listenRoute: null,
-    worshipRoute: null,
+    worshipRoute: '/proverbs/worship',
     page: 'proverbs.html',
     listen: null,
-    worship: null,
+    worship: 'proverbs-worship.html',
     study: null,
     deck: null,
     bookType: 'Wisdom Literature',
@@ -345,12 +345,30 @@ export const bibleRegistry = [
       zh: { reference: '箴言 1:7', text: '敬畏耶和华是知识的开端； 愚妄人藐视智慧和训诲。' },
       en: { reference: 'Proverbs 1:7', text: 'The fear of the LORD is the beginning of knowledge, but the foolish despise wisdom and instruction.' }
     },
+    mediaHub: {
+      zh: {
+        audioTitle: '箴言 · 深度听书解经',
+        audioGuide: '🎧 真人录音制作中，敬请期待。',
+        worshipTitle: '《箴言》敬拜 · 智慧与敬畏',
+        worshipGuide: '🎵 用诗歌把敬畏、信靠与顺服，唱进每天的选择里。',
+        spotifyLink: 'https://open.spotify.com/search/敬畏耶和华%20智慧%20赞美诗',
+        youtubeLink: 'https://www.youtube.com/results?search_query=敬畏耶和华+智慧+赞美诗'
+      },
+      en: {
+        audioTitle: 'Proverbs · Audio Commentary',
+        audioGuide: '🎧 Human narration in production — coming soon.',
+        worshipTitle: 'Proverbs Worship · Wisdom & the Fear of the LORD',
+        worshipGuide: '🎵 Let songs carry the fear of the LORD, trust, and surrender into everyday choices.',
+        spotifyLink: 'https://open.spotify.com/search/fear%20of%20the%20lord%20wisdom%20worship',
+        youtubeLink: 'https://www.youtube.com/results?search_query=fear+of+the+Lord+wisdom+worship'
+      }
+    },
     bgColor: 'from-[#2A2410] to-[#12161A]',
     accentColor: '#E6C776',
     audioPathBase: 'audio/proverbs/',
     languages: ['zh', 'en'],
     audioEnabled: false,
-    features: { read: true, listen: false, ask: false, reflection: true, worship: false, bilingual: true, study: false, deck: false }
+    features: { read: true, listen: false, ask: false, reflection: true, worship: true, bilingual: true, study: false, deck: false, guide: true }
   }
 ];
 
@@ -361,6 +379,7 @@ export const featureLabels = {
   worship: { zh: '敬拜', en: 'Worship', key: 'worship' },
   study:   { zh: '导览', en: 'Study',   key: 'study'   },
   deck:    { zh: '图解', en: 'Deck',    key: 'deck'    },
+  guide:   { zh: '图解', en: 'Visual Guide', key: null  },
   ask:     { zh: '提问', en: 'Ask',     key: null      },
 };
 

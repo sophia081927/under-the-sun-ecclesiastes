@@ -172,6 +172,10 @@
       <div id="guidePages" class="pv-guide"></div>
       <p class="pv-guide-back"><button class="pv-mode" type="button" onclick="showRead()"><span class="zh">← 返回阅读经文</span><span class="en">← Back to reading</span></button></p>
     </section>
+
+    <section id="prayer-care-section" aria-label="Pray with Scripture" style="margin-top:8px">
+      <div id="prayer-care"></div>
+    </section>
   </div>
 
   <footer>
@@ -184,6 +188,7 @@
   <script type="module">
     import { proverbsBook, proverbsChapters } from './data/books/proverbs/index.js';
     import { renderProverbsChapter, renderChapterNav, renderChapterFooterNav } from './components/proverbsReader.js';
+    import { mountPrayerCare } from './components/prayer-care.js';
 
     const params = new URLSearchParams(location.search);
     let chapter = parseInt(params.get('ch') || '1', 10);
@@ -258,6 +263,8 @@
     let saved; try { saved = localStorage.getItem('bible_lang'); } catch (e) {}
     const requested = params.get('lang');
     setLang(requested === 'en' || requested === 'zh' ? requested : (saved || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en')));
+    if (params.get('view') === 'guide') showGuide();
+    mountPrayerCare(document.getElementById('prayer-care'));
   </script>
 </body>
 </html>

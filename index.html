@@ -54,8 +54,8 @@
   .book { transition: border-color .25s, transform .25s, box-shadow .25s; }
   .book.active:hover { border-color: rgba(212,175,55,.5); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.35); }
   .book.upcoming { opacity: .62; cursor: not-allowed; }
-  .entry-section{width:100%;max-width:896px;margin:0 auto;padding:0 24px 24px}.entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.entry-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid #39434b;border-radius:14px;background:#1b2228;text-decoration:none}.entry-card.primary{border-color:#b69a50}.entry-card strong{font-size:19px;color:#f4f1ea}.entry-card span{font-size:13px;color:#bac2c9}.entry-card .entry-number{color:#e6c776;font-family:monospace}.entry-card:hover{border-color:#e6c776}.first-reading{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0 12px}.first-reading strong{color:#e6c776}.first-reading p,.section-intro{color:#bac2c9;font-size:14px;line-height:1.8;margin-top:6px}.first-reading a{flex-shrink:0;color:#e6c776;padding:12px 0}.entry-help{font-size:13px;color:#b9bec5}.section-title{font-size:23px;font-family:Georgia,'Noto Serif SC',serif;margin-top:14px}.book-coverage{margin-top:14px;color:#d2c59d;font-size:13px;line-height:1.7}#books,#prayer-care,#biblical-qa{scroll-margin-top:100px}a:focus-visible,button:focus-visible{outline:2px solid #e6c776;outline-offset:4px}
-  @media(max-width:600px){.entry-grid{grid-template-columns:1fr}.entry-card{padding:15px 18px;display:grid;grid-template-columns:28px 1fr;gap:3px 8px}.entry-number{grid-row:span 2}.entry-card strong{font-size:18px}.entry-card span:last-child{grid-column:2}.first-reading{display:block}.first-reading a{display:inline-block}.entry-section{padding-left:20px;padding-right:20px}}
+  .entry-section{width:100%;max-width:896px;margin:0 auto;padding:0 24px 24px}.entry-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}.entry-card{display:flex;flex-direction:column;gap:8px;padding:20px;border:1px solid #39434b;border-radius:14px;background:#1b2228;text-decoration:none}.entry-card.primary{border-color:#b69a50}.entry-card strong{font-size:19px;color:#f4f1ea}.entry-card span{font-size:13px;color:#bac2c9}.entry-card .entry-number{color:#e6c776;font-family:monospace}.entry-card:hover{border-color:#e6c776}.first-reading{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0 12px}.first-reading strong{color:#e6c776}.first-reading p,.section-intro{color:#bac2c9;font-size:14px;line-height:1.8;margin-top:6px}.first-reading a{flex-shrink:0;color:#e6c776;padding:12px 0}.entry-help{font-size:13px;color:#b9bec5}.needs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.need-card{display:flex;flex-direction:column;gap:8px;padding:18px 20px;border:1px solid #39434b;border-radius:14px;background:#1b2228;text-decoration:none;transition:border-color .2s}.need-card:hover{border-color:#e6c776}.need-q{font-size:16px;color:#f4f1ea;font-weight:600;line-height:1.45}.need-dest{font-size:13px;color:#bac2c9;display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}.section-title{font-size:23px;font-family:Georgia,'Noto Serif SC',serif;margin-top:14px}.book-coverage{margin-top:14px;color:#d2c59d;font-size:13px;line-height:1.7}#books,#prayer-care,#biblical-qa{scroll-margin-top:100px}a:focus-visible,button:focus-visible{outline:2px solid #e6c776;outline-offset:4px}
+  @media(max-width:600px){.entry-grid{grid-template-columns:1fr}.needs-grid{grid-template-columns:1fr}.entry-card{padding:15px 18px;display:grid;grid-template-columns:28px 1fr;gap:3px 8px}.entry-number{grid-row:span 2}.entry-card strong{font-size:18px}.entry-card span:last-child{grid-column:2}.first-reading{display:block}.first-reading a{display:inline-block}.entry-section{padding-left:20px;padding-right:20px}}
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.book{transition:none}}
 </style>
 <link rel="canonical" href="https://lightoflifebible.org/">
@@ -82,22 +82,27 @@
     <span class="text-xs font-mono tracking-[0.3em] text-[#D4AF37] uppercase mb-4 block" data-i18n="kicker"></span>
     <h1 class="font-serif text-3xl md:text-5xl font-bold leading-tight mb-5 tracking-wide text-transparent bg-clip-text bg-gradient-to-b from-[#F4F1EA] to-gray-400" data-i18n="title">圣经书阁</h1>
     <p class="text-gray-400 text-sm md:text-base max-w-2xl mx-auto leading-relaxed font-light" data-i18n="sub">一个中英双语读经空间。不急着说服你相信，只邀请你诚实地读。</p>
+    <p class="font-serif italic text-[#E6C776] text-base md:text-lg mt-5 leading-snug" data-i18n="claim">不只是选择一卷书，从你现在所在的地方开始。</p>
   </section>
 
-  <section class="entry-section" aria-label="Start here / 从这里开始">
-    <h2 class="section-title" data-i18n="startHeading">开始读经</h2>
-    <p class="section-intro" data-i18n="startLead">选择一卷书开始，或从推荐的《约翰福音》第1章开始。不知道从哪里开始？《约翰福音》是认识耶稣很好的起点。</p>
-    <nav class="entry-grid">
-      <a class="entry-card primary" id="startJohn" href="john.html?lang=zh"><span class="entry-number">01</span><strong data-i18n="startRead">开始《约翰福音》第1章</strong><span data-i18n="startReadDesc">推荐起点 · 认识耶稣的好开始</span></a>
-      <a class="entry-card" href="#books"><span class="entry-number">02</span><strong data-i18n="chooseBook">选择其他书卷</strong><span data-i18n="chooseBookDesc">浏览所有已开放的书卷</span></a>
-      <a class="entry-card" id="startListen" href="john-listen.html?lang=zh#chapter-1"><span class="entry-number">03</span><strong data-i18n="startListen">聆听默想</strong><span data-i18n="startListenDesc">从约翰福音第一章导读开始</span></a>
-      <a class="entry-card" href="#biblical-qa"><span class="entry-number">04</span><strong data-i18n="startAsk">带着问题来</strong><span data-i18n="startAskDesc">从人生处境寻找相关经文</span></a>
-    </nav>
-    <div class="first-reading"><div><strong data-i18n="firstTitle">第一次来？先给自己 5 分钟。</strong><p data-i18n="firstDesc">选择一小段经文，慢慢读一遍。留意一句触动你的话，然后问自己：「这段经文今天在对我说什么？」不知道选哪一段？可以从《约翰福音》第1章开始。</p></div><a id="firstRead" href="john.html?lang=zh#prologue" data-i18n="firstCta">从《约翰福音》第1章开始 →</a></div>
-    <p class="entry-help"><a href="#prayer-care" data-i18n="prayerShortcut">我想祷告</a> · <a data-guide-link href="website-guide.html" data-i18n="guideNav">使用指南</a></p>
+  <!-- PATH 1 · New to the Bible? (recommended start — not mandatory) -->
+  <section class="entry-section" aria-labelledby="newHereHeading">
+    <h2 id="newHereHeading" class="section-title" data-i18n="newHereHeading">第一次来？</h2>
+    <div class="first-reading">
+      <div><strong data-i18n="newHereLead">不知道从哪里开始？</strong><p data-i18n="newHereDesc">《约翰福音》是认识耶稣很好的起点——这是推荐起点，不是唯一入口；你随时可以自由选择其他书卷。</p></div>
+      <a id="firstRead" href="john.html?lang=zh#prologue" data-i18n="firstCta">从《约翰福音》第1章开始 →</a>
+    </div>
+    <p class="entry-help"><a href="#prayer-care" data-i18n="prayerShortcut">我想祷告</a> · <a href="#biblical-qa" data-i18n="askShortcut">带着问题来</a> · <a data-guide-link href="website-guide.html" data-i18n="guideNav">使用指南</a></p>
   </section>
 
-  <section class="entry-section" aria-labelledby="booksHeading"><h2 id="booksHeading" class="section-title" data-i18n="booksHeading">选择一卷，开始阅读</h2><p class="section-intro" data-i18n="booksIntro">四个已开放的书卷专区；内容范围见各卷说明。</p></section>
+  <!-- PATH 2 · What do you need right now? (life-situation → Scripture; active books only) -->
+  <section class="entry-section" aria-labelledby="needsHeading">
+    <h2 id="needsHeading" class="section-title" data-i18n="needsHeading">你现在需要什么？</h2>
+    <p class="section-intro" data-i18n="needsIntro">不必先懂圣经。先说说你此刻在哪里，我们带你进入对应的书卷。</p>
+    <nav class="needs-grid" id="needs" aria-label="Start from where you are"></nav>
+  </section>
+
+  <section class="entry-section" aria-labelledby="booksHeading"><h2 id="booksHeading" class="section-title" data-i18n="booksHeading">浏览所有书卷</h2><p class="section-intro" data-i18n="booksIntro">已开放的书卷专区，按人生主题浏览；还不确定？先看上面的「你现在需要什么？」。</p></section>
   <section class="max-w-4xl w-full mx-auto px-5 md:px-6 pb-10 grid gap-5 md:grid-cols-2" id="books"></section>
 
   <!-- Pray with Scripture (Intercessory Prayer Engine · a gentle care room, placed before Q&A) -->
@@ -152,7 +157,7 @@
   window.addEventListener('hashchange', gotoHash);
 
   const UI = {
-    zh: { startHeading: '开始读经', startLead: '选择一卷书开始，或从推荐的《约翰福音》第1章开始。不知道从哪里开始？《约翰福音》是认识耶稣很好的起点。', startRead: '开始《约翰福音》第1章', startReadDesc: '推荐起点 · 认识耶稣的好开始', chooseBook: '选择其他书卷', chooseBookDesc: '浏览所有已开放的书卷', startListen: '聆听默想', startListenDesc: '从约翰福音第一章导读开始', startAsk: '带着问题来', startAskDesc: '从人生处境寻找相关经文', firstTitle: '第一次来？先给自己 5 分钟。', firstDesc: '选择一小段经文，慢慢读一遍。留意一句触动你的话，然后问自己：「这段经文今天在对我说什么？」不知道选哪一段？可以从《约翰福音》第1章开始。', firstCta: '从《约翰福音》第1章开始 →', prayerShortcut: '我想祷告', booksHeading: '选择一卷，开始阅读', booksIntro: '四个已开放的书卷专区；内容范围见各卷说明。', aboutLink: '关于本站 · 内容与隐私说明 · 反馈', guideNav: '使用指南', guideTitle: '第一次来？查看网站使用指南 →', guideDesc: '13 张图带你了解怎样使用网站 · 中英文介绍 · 可下载 PPT', kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
+    zh: { startHeading: '开始读经', startLead: '选择一卷书开始，或从推荐的《约翰福音》第1章开始。不知道从哪里开始？《约翰福音》是认识耶稣很好的起点。', startRead: '开始《约翰福音》第1章', startReadDesc: '推荐起点 · 认识耶稣的好开始', chooseBook: '选择其他书卷', chooseBookDesc: '浏览所有已开放的书卷', startListen: '聆听默想', startListenDesc: '从约翰福音第一章导读开始', startAsk: '带着问题来', startAskDesc: '从人生处境寻找相关经文', firstTitle: '第一次来？先给自己 5 分钟。', firstDesc: '选择一小段经文，慢慢读一遍。留意一句触动你的话，然后问自己：「这段经文今天在对我说什么？」不知道选哪一段？可以从《约翰福音》第1章开始。', firstCta: '从《约翰福音》第1章开始 →', prayerShortcut: '我想祷告', askShortcut: '带着问题来', claim: '不只是选择一卷书，从你现在所在的地方开始。', newHereHeading: '第一次来？', newHereLead: '不知道从哪里开始？', newHereDesc: '《约翰福音》是认识耶稣很好的起点——这是推荐起点，不是唯一入口；你随时可以自由选择其他书卷。', needsHeading: '你现在需要什么？', needsIntro: '不必先懂圣经。先说说你此刻在哪里，我们带你进入对应的书卷。', booksHeading: '浏览所有书卷', booksIntro: '已开放的书卷专区，按人生主题浏览；还不确定？先看上面的「你现在需要什么？」。', aboutLink: '关于本站 · 内容与隐私说明 · 反馈', guideNav: '使用指南', guideTitle: '第一次来？查看网站使用指南 →', guideDesc: '13 张图带你了解怎样使用网站 · 中英文介绍 · 可下载 PPT', kicker: '一次一卷,安静地读圣经', title: '圣经书阁',
           sub: '一个可以慢慢生长的中英双语读经空间。不急着说服你相信,只邀请你诚实地读。',
           more: '更多书卷将陆续加入',
           askEyebrow: '本站核心 · 随便问', askTitle: '用圣经回应我的问题',
@@ -162,7 +167,7 @@
           mapDesc: '第一次接触圣经?一页看懂:全书 66 卷(旧约 39 + 新约 27),分成哪几大类,每一卷主要讲什么。',
           mapCta: '打开圣经地图 →',
           enter: '进入', listen: '聆听', soon: '筹备中', comingType: '书卷筹备中' },
-    en: { startHeading: 'Start Reading', startLead: 'Choose a book to begin, or start with our recommended introduction: John 1. Not sure where to begin? The Gospel of John is a welcoming place to start discovering who Jesus is.', startRead: 'Start with John 1', startReadDesc: 'Recommended start · meet Jesus', chooseBook: 'Choose a Book', chooseBookDesc: 'Browse all available books', startListen: 'Listen & reflect', startListenDesc: 'Begin with a reflection on John 1', startAsk: 'Bring a question', startAskDesc: 'Explore Scripture for everyday life', firstTitle: 'New here? Give yourself five minutes.', firstDesc: 'Choose a short passage and read it slowly. Notice one line that stands out, then ask: “What is this passage saying to me today?” Not sure what to choose? You can start with John 1.', firstCta: 'Start with John 1 →', prayerShortcut: 'I would like to pray', booksHeading: 'Choose a book to begin', booksIntro: 'Four available book spaces; see each card for its content coverage.', aboutLink: 'About · Content & privacy · Feedback', guideNav: 'How to use', guideTitle: 'New here? Explore the website guide →', guideDesc: '13 slides to help you get started · Chinese & English · Download the PPT', kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
+    en: { startHeading: 'Start Reading', startLead: 'Choose a book to begin, or start with our recommended introduction: John 1. Not sure where to begin? The Gospel of John is a welcoming place to start discovering who Jesus is.', startRead: 'Start with John 1', startReadDesc: 'Recommended start · meet Jesus', chooseBook: 'Choose a Book', chooseBookDesc: 'Browse all available books', startListen: 'Listen & reflect', startListenDesc: 'Begin with a reflection on John 1', startAsk: 'Bring a question', startAskDesc: 'Explore Scripture for everyday life', firstTitle: 'New here? Give yourself five minutes.', firstDesc: 'Choose a short passage and read it slowly. Notice one line that stands out, then ask: “What is this passage saying to me today?” Not sure what to choose? You can start with John 1.', firstCta: 'Start with John 1 →', prayerShortcut: 'I would like to pray', askShortcut: 'Bring a question', claim: 'Don’t just choose a book. Start with where you are.', newHereHeading: 'New to the Bible?', newHereLead: 'Not sure where to begin?', newHereDesc: 'The Gospel of John is a welcoming place to meet Jesus — a recommended start, not the only way in. You’re always free to choose another book.', needsHeading: 'What do you need right now?', needsIntro: 'You don’t need to know the Bible first. Start with where you are, and we’ll take you to the book that meets you there.', booksHeading: 'Explore All Books', booksIntro: 'Browse every available book by its life theme — not sure yet? See “What do you need right now?” above.', aboutLink: 'About · Content & privacy · Feedback', guideNav: 'How to use', guideTitle: 'New here? Explore the website guide →', guideDesc: '13 slides to help you get started · Chinese & English · Download the PPT', kicker: 'A quiet reading room, one book at a time', title: 'Bible Library',
           sub: 'A calm, growing bilingual space for reading Scripture. No pressure to believe — only an invitation to read honestly.',
           more: 'More Scripture volumes will be added gradually',
           askEyebrow: 'The heart of this site · Ask', askTitle: 'Ask from Scripture',
@@ -201,8 +206,9 @@
     const active = b.status === 'active';
     const accent = b.accentColor || '#D4AF37';
 
+    const lifeTheme = lang === 'zh' ? (b.lifeThemeZh || '') : (b.lifeThemeEn || '');
     const badge = active
-      ? `<span class="text-[10px] font-mono tracking-[0.2em] uppercase" style="color:${accent}">No. ${b.order}</span>`
+      ? (lifeTheme ? `<span class="text-[10px] font-mono tracking-[0.2em] uppercase" style="color:${accent}">${esc(lifeTheme)}</span>` : '')
       : `<span class="text-[10px] font-mono tracking-[0.18em] uppercase text-gray-500 border border-gray-700 rounded-full px-2.5 py-1">${esc(t.soon)}</span>`;
 
     // feature chips (from feature flags) — everything the book offers beyond "Read/Enter"
@@ -255,11 +261,29 @@
       </article>`;
   }
 
+  // "What do you need right now?" — active books only, curated order (needOrder).
+  function needCardHtml(b) {
+    const need  = lang === 'zh' ? b.needZh : b.needEn;
+    const theme = lang === 'zh' ? b.lifeThemeZh : b.lifeThemeEn;
+    const name  = lang === 'zh' ? b.titleZh : b.titleEn;
+    const accent = b.accentColor || '#D4AF37';
+    return `<a class="need-card" href="${b.page}?lang=${lang}">
+      <span class="need-q">${esc(need)}</span>
+      <span class="need-dest"><span class="arrow" style="color:${accent}">→</span> ${esc(name)} · <span style="color:${accent}">${esc(theme)}</span></span>
+    </a>`;
+  }
+  function renderNeeds() {
+    const el = document.getElementById('needs');
+    if (!el) return;
+    const list = bibleRegistry
+      .filter(b => b.status === 'active' && b.needEn && b.needZh)
+      .sort((a, b) => (a.needOrder || 99) - (b.needOrder || 99));
+    el.innerHTML = list.map(needCardHtml).join('');
+  }
+
   function render() {
     const t = UI[lang];
     document.getElementById('firstRead').href = 'john.html?lang=' + lang + '#prologue';
-    document.getElementById('startJohn').href = 'john.html?lang=' + lang;
-    document.getElementById('startListen').href = 'john-listen.html?lang=' + lang + '#chapter-1';
     document.getElementById('aboutLink').href = 'about.html?lang=' + lang;
     document.getElementById('mapLink').href = 'bible-overview.html?lang=' + lang;
     document.querySelectorAll('[data-guide-link]').forEach(a => { a.href = lang === 'zh' ? 'website-guide.html' : 'website-guide-en.html'; });
@@ -269,6 +293,7 @@
     document.getElementById('btnEn').classList.toggle('text-[#D4AF37]', lang === 'en');
     const books = [...bibleRegistry].sort((a, b) => a.order - b.order);
     document.getElementById('books').innerHTML = books.map(cardHtml).join('');
+    renderNeeds();
     if (window.lucide) lucide.createIcons();
   }
 

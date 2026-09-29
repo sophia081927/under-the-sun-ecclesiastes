@@ -4,6 +4,24 @@ import { verifyProverbsChapter } from './verify-proverbs-corpus.mjs';
 import { proverbsBook, proverbsChapters, proverbsDivisions } from '../data/books/proverbs/index.js';
 import { WISDOM_THEMES, THEME_BY_ID } from '../data/wisdom-taxonomy.js';
 import ch01 from '../data/books/proverbs/ch01.js';
+import fs from 'node:fs';
+import { proverbsWorship } from '../data/worship/proverbsWorship.js';
+
+test('Proverbs worship Scripture connections match complete WEB corpus verses', () => {
+  assert.equal(proverbsWorship.tracks.length, 7);
+  for (const track of proverbsWorship.tracks) {
+    const match = track.scriptureConnectionEn.match(/^(.*) \(Proverbs (\d+):(\d+)(?:-(\d+))?; WEB\)$/);
+    assert.ok(match, 'every connection identifies the WEB verse range');
+    const [, text, chapter, first, last] = match;
+    const corpus = JSON.parse(fs.readFileSync(new URL(`../worker/scripture-assets/en/PRO/${chapter}.json`, import.meta.url), 'utf8'));
+    const expected = [];
+    for (let verse = +first; verse <= +(last || first); verse++) {
+      assert.ok(corpus[verse]);
+      expected.push(corpus[verse]);
+    }
+    assert.equal(text, expected.join(' '));
+  }
+});
 
 const ALL = Array.from({ length: 31 }, (_, i) => i + 1);
 const load = async (n) => (await import(`../data/books/proverbs/ch${String(n).padStart(2, '0')}.js`)).default;

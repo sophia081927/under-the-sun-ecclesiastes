@@ -361,16 +361,16 @@ export const bibleRegistry = [
     },
     mediaHub: {
       zh: {
-        audioTitle: '箴言 · 深度听书解经',
-        audioGuide: '🎧 真人录音制作中，敬请期待。',
+        audioTitle: '箴言 · 经文选读与默想',
+        audioGuide: '🎧 31 章中英双语设备合成朗读，包含经文选读、导读、默想与祷告；暂无真人录音。',
         worshipTitle: '《箴言》敬拜 · 智慧与敬畏',
         worshipGuide: '🎵 用诗歌把敬畏、信靠与顺服，唱进每天的选择里。',
         spotifyLink: 'https://open.spotify.com/search/敬畏耶和华%20智慧%20赞美诗',
         youtubeLink: 'https://www.youtube.com/results?search_query=敬畏耶和华+智慧+赞美诗'
       },
       en: {
-        audioTitle: 'Proverbs · Audio Commentary',
-        audioGuide: '🎧 Human narration in production — coming soon.',
+        audioTitle: 'Proverbs · Scripture Selections & Reflection',
+        audioGuide: '🎧 Device-synthesized listening for all 31 chapters in Chinese and English: Scripture selections, introductions, reflections and prayers. Human recordings are not available.',
         worshipTitle: 'Proverbs Worship · Wisdom & the Fear of the LORD',
         worshipGuide: '🎵 Let songs carry the fear of the LORD, trust, and surrender into everyday choices.',
         spotifyLink: 'https://open.spotify.com/search/fear%20of%20the%20lord%20wisdom%20worship',

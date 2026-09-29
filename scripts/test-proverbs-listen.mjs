@@ -59,7 +59,67 @@ function fakeSynth(opts = {}) {
   return api;
 }
 const fakeUtterance = (text) => ({ text, lang: '', rate: 1, voice: null, onend: null, onerror: null });
-const mkPlayer = (synth, cbs = {}) => createListenPlayer({ synth, makeUtterance: fakeUtterance, ...cbs });
+const mkPlayer = (synth, cbs = {}) => createListenPlayer({ synth, makeUtterance: fakeUtterance, resumeTimeoutMs: 40, ...cbs });
+
+test('delayed resume preserves the same utterance without false error or replay', async () => {
+  const synth = fakeSynth();
+  const resume = synth.resume.bind(synth);
+  synth.resume = () => setTimeout(resume, 10);
+  const p = mkPlayer(synth);
+  p.play([{ text: 'first' }, { text: 'second' }]);
+  const first = synth._last();
+  p.pause(); p.resume();
+  assert.equal(p.state, 'resuming');
+  await new Promise(r => setTimeout(r, 60));
+  assert.equal(p.state, 'playing');
+  assert.equal(synth._calls.speak.length, 1);
+  assert.equal(synth._last(), first);
+  first.onend();
+  assert.equal(synth._last().text, 'second');
+  p.stop();
+});
+
+for (const action of ['stop', 'switch']) {
+  test(`pending resume cannot restart old speech after ${action}`, async () => {
+    const synth = fakeSynth();
+    const resume = synth.resume.bind(synth);
+    synth.resume = () => setTimeout(resume, 10);
+    const p = mkPlayer(synth);
+    p.play([{ text: 'old' }, { text: 'old next' }]);
+    const old = synth._last();
+    p.pause(); p.resume(); p.stop();
+    if (action === 'switch') p.play([{ text: 'new language' }], { lang: 'en' });
+    old.onend(); old.onerror();
+    await new Promise(r => setTimeout(r, 80));
+    assert.equal(p.state, action === 'stop' ? 'stopped' : 'playing');
+    assert.deepEqual(synth._calls.speak.map(u => u.text), action === 'stop' ? ['old'] : ['old', 'new language']);
+    p.stop();
+  });
+}
+
+test('end callback during pending resume advances once only after recovery', async () => {
+  const synth = fakeSynth();
+  const resume = synth.resume.bind(synth);
+  synth.resume = () => setTimeout(resume, 10);
+  const p = mkPlayer(synth);
+  p.play([{ text: 'first' }, { text: 'second' }]);
+  const first = synth._last();
+  p.pause(); p.resume(); first.onend(); first.onend();
+  assert.equal(synth._calls.speak.length, 1);
+  await new Promise(r => setTimeout(r, 60));
+  assert.equal(p.state, 'playing');
+  assert.deepEqual(synth._calls.speak.map(u => u.text), ['first', 'second']);
+  p.stop();
+});
+
+test('synchronous pause error remains an error rather than being overwritten by paused', () => {
+  const synth = fakeSynth();
+  synth.pause = () => synth._last().onerror();
+  const p = mkPlayer(synth);
+  p.play([{ text: 'first' }]); p.pause();
+  assert.equal(p.state, 'error');
+  assert.equal(p.index, 0);
+});
 
 // ---- Ref parsing (whole verses only) ----
 test('parseRef accepts single and range, rejects half/garbage', () => {
@@ -364,7 +424,7 @@ test('retry() clears a stale paused engine before replaying', () => {
 // ---- Blocker: an engine that refuses to un-pause must never be reported as "playing" ----
 // resume() is a no-op on some platforms. Silently accepting that leaves a UI that says
 // "playing" over a mute engine, so the failure has to be explicit and recoverable.
-test('resume() that the engine ignores fails loudly: not playing, nothing enqueued, segment kept', () => {
+test('resume() that the engine ignores fails loudly: not playing, nothing enqueued, segment kept', async () => {
   const synth = fakeSynth({ resume: 'noop' });
   const seen = [];
   const p = mkPlayer(synth, { onError: (seg, info) => seen.push(info.reason) });
@@ -374,6 +434,8 @@ test('resume() that the engine ignores fails loudly: not playing, nothing enqueu
   assert.equal(p.state, 'paused');
   p.resume();
   assert.notEqual(p.state, 'playing', 'must not claim playing over a still-paused engine');
+  assert.equal(p.state, 'resuming', 'wait for an asynchronous engine update');
+  await new Promise(r => setTimeout(r, 80));
   assert.equal(p.state, 'error');
   assert.equal(synth.paused, true, 'the engine really is still paused');
   assert.equal(synth._calls.speak.length, spoken, 'must not enqueue speech into a paused engine');
@@ -381,7 +443,7 @@ test('resume() that the engine ignores fails loudly: not playing, nothing enqueu
   assert.deepEqual(seen, ['resume-failed']);
 });
 
-test('retry() on an engine that ignores resume() also fails loudly instead of faking playback', () => {
+test('retry() on an engine that ignores resume() also fails loudly instead of faking playback', async () => {
   const synth = fakeSynth({ resume: 'noop' });
   const seen = [];
   const p = mkPlayer(synth, { onError: (seg, info) => seen.push(info.reason) });
@@ -389,6 +451,8 @@ test('retry() on an engine that ignores resume() also fails loudly instead of fa
   const spoken = synth._calls.speak.length;
   p.pause();
   p.retry();
+  assert.equal(p.state, 'resuming', 'wait for an asynchronous engine update');
+  await new Promise(r => setTimeout(r, 80));
   assert.equal(p.state, 'error');
   assert.equal(synth.paused, true);
   assert.equal(synth._calls.speak.length, spoken, 'no speech queued behind a paused engine');
@@ -396,7 +460,7 @@ test('retry() on an engine that ignores resume() also fails loudly instead of fa
   assert.deepEqual(seen, ['paused']);
 });
 
-test('play() into an engine stuck paused reports failure instead of a silent "playing"', () => {
+test('play() into an engine stuck paused reports failure instead of a silent "playing"', async () => {
   const synth = fakeSynth({ resume: 'noop' });
   const seen = [];
   const p = mkPlayer(synth, { onError: (seg, info) => seen.push(info.reason) });
@@ -405,6 +469,8 @@ test('play() into an engine stuck paused reports failure instead of a silent "pl
   p.stop();                              // per spec, cancel() leaves paused set
   assert.equal(synth.paused, true);
   p.play([{ text: 'b' }], { lang: 'en' });
+  assert.equal(p.state, 'resuming', 'wait for an asynchronous engine update');
+  await new Promise(r => setTimeout(r, 80));
   assert.equal(p.state, 'error');
   assert.equal(synth._calls.speak.filter((u) => u.text === 'b').length, 0, 'nothing queued while paused');
   assert.deepEqual(seen, ['paused']);
@@ -440,12 +506,14 @@ test('pause() that throws does not claim paused', () => {
 });
 
 // ---- Recovery: the user's explicit retry gets playback going again ----
-test('recovery: after a refused resume, retry replays the current segment and plays on to the end', () => {
+test('recovery: after a refused resume, retry replays the current segment and plays on to the end', async () => {
   const synth = fakeSynth({ resume: 'noop' });
   const p = mkPlayer(synth);
   p.play([{ text: 's0' }, { text: 's1' }], { lang: 'en' });
   p.pause();
   p.resume();
+  assert.equal(p.state, 'resuming', 'wait for an asynchronous engine update');
+  await new Promise(r => setTimeout(r, 80));
   assert.equal(p.state, 'error');
   synth._setResume('ok');                // engine (or the user's voice/app switch) recovers
   p.retry();
@@ -541,6 +609,31 @@ test('reaching the end does not re-enqueue or loop to the first segment', () => 
 // bottom ~802 at 375x812) was left sitting under a bar whose top was at ~686 (zh) / ~721
 // (en). The height must come from the rendered rect + computed display/visibility instead.
 const PAGE = fs.readFileSync(new URL('../proverbs-listen.html', import.meta.url), 'utf8');
+
+for (const lang of ['zh', 'en']) {
+  test(`page ${lang}: visible pause/continue/replay labels and error guidance survive callbacks`, () => {
+    const nodes = new Map();
+    const $ = id => {
+      if (!nodes.has(id)) nodes.set(id, { textContent: '', style: {}, setAttribute() {} });
+      return nodes.get(id);
+    };
+    const controls = PAGE.slice(PAGE.indexOf('    const PLAY_LABELS'), PAGE.indexOf('    function renderTranscript'));
+    const init = PAGE.match(/    const player = createListenPlayer\(\{[\s\S]*?\n    \}\);/)[0];
+    const loadPagePlayer = new Function('createListenPlayer', 'synth', 'SpeechSynthesisUtterance', 'lang', '$', 'tr', 'highlight', 'clearHighlight', 'onViewportChange',
+      controls + '\n' + init + '\nreturn player;');
+    const synth = fakeSynth();
+    const p = loadPagePlayer(createListenPlayer, synth, function (text) { this.text = text; }, lang, $, () => ({ err: 'generic error' }), () => {}, () => {}, () => {});
+    p.play([{ text: 'first' }]);
+    assert.match($('play').textContent, lang === 'zh' ? /暂停/ : /Pause/);
+    p.pause();
+    assert.match($('play').textContent, lang === 'zh' ? /继续/ : /Continue/);
+    p.resume();
+    synth._last().onerror();
+    assert.match($('play').textContent, lang === 'zh' ? /重播本段/ : /Replay segment/);
+    assert.match($('status').textContent, lang === 'zh' ? /从本段开头.*刷新页面/ : /segment over.*refresh/);
+    assert.equal($('play').disabled, false, 'manual recovery remains available');
+  });
+}
 
 // The band helpers live in the page's inline module, so lift visibleHeight() out of the
 // source and exercise it against DOM stubs that reproduce the Chrome behaviour.

@@ -337,13 +337,13 @@ export const bibleRegistry = [
     lifeThemeZh: '活出智慧', lifeThemeEn: 'Live Wisely',
     needZh: '我需要智慧做决定，也想知道怎样面对现实生活。', needEn: 'I need wisdom for a decision or everyday life.', needOrder: 4,
     safeHash: '#/proverbs',
-    listenHash: null,
+    listenHash: '#/proverbs/listen',
     worshipHash: '#/proverbs/worship',
     route: '/proverbs',
-    listenRoute: null,
+    listenRoute: '/proverbs/listen',
     worshipRoute: '/proverbs/worship',
     page: 'proverbs.html',
-    listen: null,
+    listen: 'proverbs-listen.html',
     worship: 'proverbs-worship.html',
     study: null,
     deck: null,
@@ -382,7 +382,7 @@ export const bibleRegistry = [
     audioPathBase: 'audio/proverbs/',
     languages: ['zh', 'en'],
     audioEnabled: false,
-    features: { read: true, listen: false, ask: false, reflection: true, worship: true, bilingual: true, study: false, deck: false, guide: true }
+    features: { read: true, listen: true, ask: false, reflection: true, worship: true, bilingual: true, study: false, deck: false, guide: true }
   }
 ];
 

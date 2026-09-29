@@ -127,14 +127,17 @@ export function pickVoice(synth, lang) {
  *   synth        — a SpeechSynthesis-like object (speak/cancel/pause/resume)
  *   makeUtterance— (text) => SpeechSynthesisUtterance-like ({ text, lang, rate, voice, onend, onerror })
  * Callbacks: onSegmentStart(i,seg), onProgress(fraction), onStateChange(state), onError(seg,event).
- * States: 'idle' | 'playing' | 'paused' | 'stopped' | 'ended' | 'error'.
+ * States: 'idle' | 'playing' | 'paused' | 'resuming' | 'stopped' | 'ended' | 'error'.
  */
-export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onProgress, onStateChange, onError } = {}) {
+export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onProgress, onStateChange, onError, resumeTimeoutMs = 1000 } = {}) {
   let token = 0;        // generation id; bumped on every play()/stop() so stale callbacks are ignored
   let idx = 0;
   let segs = [];
   let opts = {};
   let state = 'idle';
+  let resumeTimer = null;
+  let activeUtterance = null;
+  const clearResumeWait = () => { clearTimeout(resumeTimer); resumeTimer = null; };
 
   const setState = (s) => { state = s; if (onStateChange) onStateChange(s); };
   const cancel = () => { try { if (synth) synth.cancel(); } catch (e) { /* ignore */ } };
@@ -142,25 +145,37 @@ export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onPro
   // engine was left paused (e.g. pause → stop, or pause → language switch), a fresh
   // speak() would be queued but silent. Clear the paused flag before new speech so the
   // UI never claims "playing" over a silent engine.
-  // Returns true only if the engine is (now) NOT paused. Reports failure so callers never
-  // claim "playing" over a silent, still-paused engine: resume() no-ops on some platforms,
-  // or may throw. No automatic replay — recovery is surfaced to the user.
-  const clearPaused = () => {
+  // Wait briefly for engines that update paused asynchronously. This never replays
+  // speech. Stop/switch invalidates the wait; a genuine refusal becomes an error.
+  const clearPaused = (myToken, done, reason) => {
+    clearResumeWait();
     try {
-      if (synth && synth.paused) {
-        synth.resume();
-        return !synth.paused;   // resume no-op → still paused → failure
-      }
-      return true;
+      if (synth && synth.paused) synth.resume();
     } catch (e) {
-      return false;             // resume threw
+      fail(segs[idx], reason, e);
+      return;
     }
+    if (myToken !== token) return;
+    if (!synth?.paused) { done(); return; }
+    // Engine state can update after resume() returns. Wait without replaying.
+    setState('resuming');
+    const deadline = Date.now() + resumeTimeoutMs;
+    const check = () => {
+      resumeTimer = null;
+      if (myToken !== token || state !== 'resuming') return;
+      if (!synth.paused) { done(); return; }
+      if (Date.now() >= deadline) { fail(segs[idx], reason); return; }
+      resumeTimer = setTimeout(check, 20);
+    };
+    resumeTimer = setTimeout(check, 20);
   };
   // Enter the recoverable 'error' state on a real failure: invalidate the generation and
   // cancel so any delayed onend/onerror can no longer advance; keep idx (current segment)
   // so the user can Replay it.
   const fail = (seg, reason, error) => {
     token++;
+    clearResumeWait();
+    activeUtterance = null;
     cancel();
     setState('error');
     if (onError) onError(seg || null, error ? { index: idx, reason, error } : { index: idx, reason });
@@ -178,15 +193,17 @@ export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onPro
     let settled = false;
     try {
       const u = makeUtterance(seg.text);
+      activeUtterance = u;
       u.lang = opts.lang === 'zh' ? 'zh-CN' : 'en-US';
       if (opts.rate) u.rate = opts.rate;
       if (opts.voice) u.voice = opts.voice;
       u.onend = () => {
         if (settled || myToken !== token) return;          // duplicate/late, or stale after stop/switch
         settled = true;
+        activeUtterance = null;
         idx++;
         if (onProgress) onProgress(segs.length ? idx / segs.length : 1);
-        speakNext(myToken);
+        if (state !== 'paused' && state !== 'resuming') speakNext(myToken);
       };
       u.onerror = () => {
         if (settled || myToken !== token) return;          // cancel-induced / stale / duplicate errors ignored
@@ -205,30 +222,33 @@ export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onPro
     play(segments, options = {}) {
       token++;                                             // invalidate any in-flight callbacks first
       const myToken = token;
+      clearResumeWait();
+      activeUtterance = null;
       cancel();
       segs = Array.isArray(segments) ? segments : [];
       opts = options;
       idx = 0;
       if (onProgress) onProgress(0);
-      if (!clearPaused()) { fail(segs[idx], 'paused'); return token; }  // stuck paused → don't claim playing / queue speech
-      setState('playing');
-      speakNext(myToken);
+      clearPaused(myToken, () => { setState('playing'); speakNext(myToken); }, 'paused');
       return myToken;
     },
     pause() {
       if (state !== 'playing') return;
+      setState('paused');
       try {
         if (synth) synth.pause();
       } catch (e) {
         fail(segs[idx], 'pause-failed', e);                // engine threw → do NOT claim paused
         return;
       }
-      setState('paused');
     },
     resume() {
       if (state !== 'paused') return;
-      if (clearPaused()) { setState('playing'); return; }  // resumed the current utterance in place
-      fail(segs[idx], 'resume-failed');                    // no-op / throw → recoverable error; current segment kept
+      const myToken = token;
+      clearPaused(myToken, () => {
+        setState('playing');
+        if (!activeUtterance) speakNext(myToken);
+      }, 'resume-failed');
     },
     // Explicit, user-triggered replay of the CURRENT segment. This is the conservative
     // recovery when resume() proves unreliable on a platform (some engines no-op resume):
@@ -238,16 +258,21 @@ export function createListenPlayer({ synth, makeUtterance, onSegmentStart, onPro
       if (!segs.length) return null;
       token++;
       const myToken = token;
+      clearResumeWait();
+      activeUtterance = null;
       cancel();
       if (idx >= segs.length) idx = segs.length - 1;       // clamp if called after 'ended'
-      if (!clearPaused()) { fail(segs[idx], 'paused'); return token; }  // still stuck paused → report, don't fake play
-      if (onProgress) onProgress(segs.length ? idx / segs.length : 0);
-      setState('playing');
-      speakNext(myToken);
+      clearPaused(myToken, () => {
+        if (onProgress) onProgress(segs.length ? idx / segs.length : 0);
+        setState('playing');
+        speakNext(myToken);
+      }, 'paused');
       return myToken;
     },
     stop() {
       token++;                                             // invalidate in-flight callbacks, then cancel
+      clearResumeWait();
+      activeUtterance = null;
       cancel();
       idx = 0;
       if (onProgress) onProgress(0);

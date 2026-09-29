@@ -137,6 +137,7 @@
       <a class="mark" href="index.html">日光之下 · under the sun</a>
       <nav class="top" aria-label="Primary">
         <a href="index.html"><span class="zh">书阁</span><span class="en">Library</span></a>
+        <a id="listenLink" href="proverbs-listen.html?ch=1&lang=zh"><span class="zh">聆听</span><span class="en">Listen</span></a>
         <a href="ask.html"><span class="zh">提问</span><span class="en">Ask</span></a>
         <div class="lang-toggle"><button id="btnZh" onclick="setLang('zh')">中文</button><button id="btnEn" onclick="setLang('en')">EN</button></div>
       </nav>
@@ -254,6 +255,7 @@
       document.getElementById('btnZh').classList.toggle('active', zh);
       document.getElementById('btnEn').classList.toggle('active', !zh);
       setTitle();
+      document.getElementById('listenLink').href = 'proverbs-listen.html?ch=' + chapter + '&lang=' + l;
       // if the guide is currently open, swap it to the new language (never load both sets)
       if (!document.getElementById('visual-guide').hidden) buildGuide(l);
       try { localStorage.setItem('bible_lang', l); } catch (e) {}

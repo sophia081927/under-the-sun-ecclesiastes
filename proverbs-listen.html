@@ -41,7 +41,7 @@
     .comingsoon{margin-top:30px;padding:20px;border:1px solid var(--soft);border-radius:12px;color:var(--muted)}
     .player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(24,28,33,.97);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
     .player .row{max-width:720px;margin:0 auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-    .play{width:52px;height:52px;border:0;border-radius:50%;background:var(--gold);color:#14161a;font-size:20px;cursor:pointer}
+    .play{min-width:90px;min-height:52px;padding:10px 14px;border:0;border-radius:26px;background:var(--gold);color:#14161a;font-size:16px;cursor:pointer}
     .btn{border:1px solid var(--soft);background:transparent;color:var(--muted);border-radius:30px;padding:10px 15px;min-height:44px;font:inherit;font-size:13px;cursor:pointer}
     .status{color:var(--muted);font-size:13px;flex:1;min-width:120px}
     .progress{height:4px;background:var(--soft);border-radius:4px;overflow:hidden;margin-top:10px;max-width:720px;margin-left:auto;margin-right:auto}
@@ -78,7 +78,7 @@
   </main>
   <div class="player" id="playerBar" aria-label="Audio player">
     <div class="row">
-      <button class="play" id="play" aria-label="播放 / Play">▶</button>
+      <button class="play" id="play" aria-label="播放 / Play">▶ 播放</button>
       <button class="btn" id="stop"><span class="zh">停止</span><span class="en">Stop</span></button>
       <button class="btn" id="replay" aria-label="重播本段 / Replay current segment"><span class="zh">重播本段</span><span class="en">Replay</span></button>
       <span class="status" id="status" role="status" aria-live="polite"></span>
@@ -117,7 +117,6 @@
       onSegmentStart: (i) => highlight(i),
       onProgress: (p) => { $('bar').style.width = Math.round(p * 100) + '%'; },
       onStateChange: (s) => reflectState(s),
-      onError: () => { $('status').textContent = tr().err; },
     });
 
     let activeIndex = -1;
@@ -227,25 +226,34 @@
 
     // The one round button changes ACTION with the player state, so its accessible name
     // has to change with it — a screen reader must never be told "Play" while the button
-    // would pause. 'continue' is used for both resuming a pause and retrying after a
-    // failed resume, because in both cases the click carries on from the current segment.
+    // would pause. Retry explicitly says replay: it restarts the current segment,
+    // whereas Continue resumes an ordinary pause at the engine's saved position.
     const PLAY_LABELS = {
-      zh: { play: '播放', pause: '暂停', continue: '继续', replay: '重播本段' },
-      en: { play: 'Play', pause: 'Pause', continue: 'Continue', replay: 'Replay the current segment' },
+      zh: { play: '播放', pause: '暂停', continue: '继续', replay: '重播本段', waiting: '正在恢复…' },
+      en: { play: 'Play', pause: 'Pause', continue: 'Continue', replay: 'Replay segment', waiting: 'Resuming…' },
     };
-    let playAction = 'play';          // 'play' | 'pause' | 'continue' — what a click does now
+    let playAction = 'play';          // the visible action for the current player state
     function setPlayControl(next) {
       playAction = next;
-      $('play').textContent = next === 'pause' ? '⏸' : '▶';
+      $('play').textContent = (next === 'pause' ? '⏸ ' : '▶ ') + (PLAY_LABELS[lang] || PLAY_LABELS.zh)[next];
+      $('play').disabled = next === 'waiting';
       $('play').setAttribute('aria-label', (PLAY_LABELS[lang] || PLAY_LABELS.zh)[next]);
     }
     function reflectState(s) {
+      $('replay').disabled = s === 'resuming';
       if (s === 'playing') { setPlayControl('pause'); $('status').textContent = tr().playing; }
+      else if (s === 'resuming') { setPlayControl('waiting'); $('status').textContent = PLAY_LABELS[lang].waiting; }
       else if (s === 'paused') { setPlayControl('continue'); $('status').textContent = tr().paused; }
       else if (s === 'ended') { setPlayControl('play'); $('status').textContent = tr().ended; clearHighlight(); }
       else if (s === 'stopped') { setPlayControl('play'); $('status').textContent = tr().stopped; clearHighlight(); }
       // 'error' keeps the current segment highlighted: the click continues from there.
-      else if (s === 'error') { setPlayControl('continue'); $('status').textContent = tr().err; }
+      else if (s === 'error') {
+        setPlayControl('replay');
+        $('status').textContent = lang === 'zh'
+          ? '朗读未能恢复。可重播本段（会从本段开头读起）；若仍无声，请刷新页面或用系统浏览器打开。'
+          : 'Playback could not resume. Replay starts this segment over. If still silent, refresh the page or open it in your system browser.';
+      }
+      onViewportChange(); // visible action/status text can wrap and resize the bar
     }
 
     function renderTranscript() {
@@ -325,6 +333,7 @@
     $('play').addEventListener('click', () => {
       if (!ttsOk) { $('status').textContent = tr().noTts; return; }
       const s = player.state;
+      if (s === 'resuming') return;
       if (s === 'playing') player.pause();
       else if (s === 'paused') player.resume();
       // After a failure (including a resume() the engine refused) the current segment is
